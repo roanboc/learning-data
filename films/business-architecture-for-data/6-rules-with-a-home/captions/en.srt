@@ -1,0 +1,275 @@
+1
+00:00:01,400 --> 00:00:09,238
+Khorasan, in the ninth century. Its towns and fields drank from qanats, tunnels that brought water from under the mountains.
+
+2
+00:00:10,738 --> 00:00:16,130
+A new tunnel dug too close to an old one could take its water, and leave a village's fields dry.
+
+3
+00:00:18,630 --> 00:00:25,073
+In Nishapur, people kept coming to the governor, Abdallah ibn Tahir, with disputes over qanats.
+
+4
+00:00:26,373 --> 00:00:32,048
+But the law books said nothing about qanats, so each dispute was argued with no rule to settle it.
+
+5
+00:00:33,548 --> 00:00:37,982
+People needed to know the rules before they dug, not after a field went dry.
+
+6
+00:00:39,682 --> 00:00:47,522
+So Abdallah gathered the legal scholars of Khorasan, and some from Iraq, to write the rules for qanats in one book.
+
+7
+00:00:49,022 --> 00:00:52,259
+It was called the Kitab-i Qani, the book on qanats.
+
+8
+00:00:53,959 --> 00:00:56,657
+From then on, disputes were judged by what it said.
+
+9
+00:00:57,957 --> 00:01:02,875
+Two hundred years later, a historian wrote that qanats were still judged by that book.
+
+10
+00:01:04,375 --> 00:01:09,124
+The rules had one home, written once, and everyone who needed them knew where to look.
+
+11
+00:01:16,824 --> 00:01:26,176
+Tomás's note asks where each rule belongs. On day one, he was shown one: an estimated reading stands only until the next actual reading.
+
+12
+00:01:27,576 --> 00:01:29,609
+Beside it was a bill, flagged wrong.
+
+13
+00:01:31,109 --> 00:01:38,967
+Farah brings the household behind that bill. In June, they were away for three weeks, and their smart meter stopped sending readings.
+
+14
+00:01:39,667 --> 00:01:44,612
+The bill estimated those weeks from last year: four hundred and twelve dollars eighty.
+
+15
+00:01:46,012 --> 00:01:50,888
+When the meter came back, it sent the readings it had stored. They had used almost nothing.
+
+16
+00:01:51,588 --> 00:01:55,024
+The actual readings arrived. The bill was never corrected.
+
+17
+00:01:58,724 --> 00:02:04,861
+The rule existed. Years ago, an analyst in metering wrote a nightly script, as a stopgap.
+
+18
+00:02:05,561 --> 00:02:10,399
+It found estimates with an actual reading behind them, and queued their bills to be corrected.
+
+19
+00:02:11,699 --> 00:02:18,268
+In March, billing moved to a new system. The script kept writing to the old queue, which nothing reads now.
+
+20
+00:02:19,668 --> 00:02:25,932
+It ran every night, reported no error, and corrected nothing: about nineteen hundred bills since March.
+
+21
+00:02:27,632 --> 00:02:32,098
+It lived on the wall between the network and retail, and belonged to neither side.
+
+22
+00:02:35,598 --> 00:02:38,232
+Tomás finds the rule written four more ways.
+
+23
+00:02:38,932 --> 00:02:45,834
+In the regulator's retail code, the meter system's settings, the billing team's notes and the complaints team's spreadsheet.
+
+24
+00:02:47,334 --> 00:02:53,645
+The regulator's code says why. The others each say how, a little differently. None of them is its home.
+
+25
+00:02:55,245 --> 00:03:00,216
+He wants for rules what Khorasan had for qanats: one home, written once.
+
+26
+00:03:02,916 --> 00:03:06,708
+Day one's rule is really two rules, one on each side of the wall.
+
+27
+00:03:08,208 --> 00:03:16,254
+The network's: an estimate is replaced when the actual reading arrives, and the replacement is sent to the retailer. Grace owns it.
+
+28
+00:03:17,654 --> 00:03:24,162
+Retail's: a bill based on a replaced estimate is corrected on the next bill. The head of retail owns it.
+
+29
+00:03:25,562 --> 00:03:32,218
+Between them, the replaced reading crosses the wall on the agreed list, where the script once reached across unseen.
+
+30
+00:03:37,918 --> 00:03:43,997
+Each rule has a reason: a regulation, a principle, or the service level of the step it serves.
+
+31
+00:03:44,697 --> 00:03:49,748
+Grace's comes from the metering rules; retail's, from the regulator's retail code.
+
+32
+00:03:51,048 --> 00:03:56,170
+A rule with no reason can't be changed safely. One with no owner can't be fixed.
+
+33
+00:03:57,770 --> 00:04:06,905
+Ama corrects day one's draft too. Fair, accurate bills was never one of the utility's goals. It's an obligation, in the regulator's code.
+
+34
+00:04:10,405 --> 00:04:13,310
+A rule builds on facts, and facts on concepts.
+
+35
+00:04:14,010 --> 00:04:20,486
+So it's written in the business's words, about what it governs: a reading, an estimate, a bill, a connection point.
+
+36
+00:04:21,886 --> 00:04:30,087
+Each becomes a data object, in the domain that owns it: readings and connection points on the network's side, bills on retail's.
+
+37
+00:04:31,587 --> 00:04:36,542
+The industry's model gives the starting words, such as usage point for a connection point.
+
+38
+00:04:37,242 --> 00:04:39,933
+The map keeps the utility's own words beside them.
+
+39
+00:04:43,333 --> 00:04:49,007
+Each rule is attached to its step in meter to cash: the network's to reading, retail's to billing.
+
+40
+00:04:49,707 --> 00:04:52,853
+Attached, not inside: a rule isn't the process.
+
+41
+00:04:54,453 --> 00:05:02,487
+The step also says what to expect of the data. Timeliness, from its service level: an estimate replaced within two working days.
+
+42
+00:05:03,887 --> 00:05:13,187
+Completeness, from its steps: every estimate replaced, or explained. Validity, from another rule: every reading marked actual or estimated.
+
+43
+00:05:16,687 --> 00:05:23,152
+In ArchiMate 4, the standard the map follows, a rule is a requirement, one of the motivation elements.
+
+44
+00:05:24,452 --> 00:05:28,155
+The parallelogram on every rule card is the requirement's symbol.
+
+45
+00:05:29,655 --> 00:05:36,338
+ArchiMate has no element called a rule. The map makes data rules and business rules two kinds of requirement.
+
+46
+00:05:38,038 --> 00:05:44,169
+Its reason is a driver, linked by an influence: for retail's rule, the regulator's retail code.
+
+47
+00:05:45,469 --> 00:05:51,311
+Its home is the step that applies it, linked by a realisation: billing, in meter to cash.
+
+48
+00:05:52,611 --> 00:05:57,293
+Its owner, and the data objects it applies to, are linked by an association.
+
+49
+00:05:58,793 --> 00:06:03,707
+ArchiMate says where a rule sits, not how it's checked. The checks come from the rule.
+
+50
+00:06:07,507 --> 00:06:15,910
+Written in a set form, a rule says what it applies to, what must be true, its owner, its reason, its home, and what happens when it fails.
+
+51
+00:06:17,410 --> 00:06:24,572
+A rule about the data, such as every reading marked actual or estimated, gets tests: they check the data is right.
+
+52
+00:06:25,872 --> 00:06:32,933
+They're generated from it, one way: a dbt test, a data contract's quality rule, a shape for linked data.
+
+53
+00:06:34,433 --> 00:06:36,252
+Nobody edits a check by hand.
+
+54
+00:06:37,552 --> 00:06:43,699
+Retail's rule is about what the business does: the data can all be right while a bill goes uncorrected.
+
+55
+00:06:45,499 --> 00:06:51,365
+So a tracking table is generated from it instead, listing every bill not corrected on the next bill.
+
+56
+00:06:52,965 --> 00:06:56,329
+It tracks what the rule promises, not whether a job ran.
+
+57
+00:06:57,629 --> 00:07:01,651
+The first uncorrected bill would have been listed the morning after the move.
+
+58
+00:07:03,251 --> 00:07:07,278
+Each morning, the list goes to the owner's team, not a shared mailbox.
+
+59
+00:07:10,778 --> 00:07:16,878
+Written like this, the concepts, how they relate, and the rules about them are, generally, an ontology.
+
+60
+00:07:17,578 --> 00:07:21,275
+It's ready for OWL, a language machines reason with.
+
+61
+00:07:22,875 --> 00:07:30,575
+As the film Meaning machines can read shows, the glossary, the models, the ontology and the checks are all views of that one map.
+
+62
+00:07:32,075 --> 00:07:38,747
+But OWL reasons only from what is said. To it, a correction that never happened is simply unknown.
+
+63
+00:07:39,447 --> 00:07:43,204
+Finding the uncorrected bill stays the tracking table's job.
+
+64
+00:07:46,904 --> 00:07:53,345
+The household gets a hundred and forty-four dollars forty back, and the nineteen hundred bills are found and corrected.
+
+65
+00:07:54,045 --> 00:07:56,846
+Grace and the head of retail confirm their rules.
+
+66
+00:07:58,246 --> 00:08:02,700
+In Khorasan, whoever needed the rules on qanats looked in one book.
+
+67
+00:08:04,300 --> 00:08:10,529
+Tomás's note has an answer: each rule belongs in the map, written once, at the step where it applies.
+
+68
+00:08:11,229 --> 00:08:15,158
+Each has an owner and a reason, and its checks are generated from it.
+
+69
+00:08:16,758 --> 00:08:21,421
+Next: what the business expects of its data, written down by the people who own it.

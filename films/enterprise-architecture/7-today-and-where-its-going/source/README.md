@@ -1,6 +1,6 @@
 # Rebuilding Today, and where it's going
 
-*Today, and where it's going*, film 7 of 11 of *The map before the data* (a working title), is generated from code like *Day one*: the same engine, components, voice and tools, and the series' own components in [`../../shared/src/`](../../shared/src/), which this film adds to: ArchiMate's glyphs for a resource, a plateau and a gap (`archGlyph` in `ea.js`). Only what is new lives here:
+*Today, and where it's going*, film 7 of 8 of *The map before the data* (a working title), is generated from code like *Day one*: the same engine, components, voice and tools, and the series' own components in [`../../shared/src/`](../../shared/src/), which this film adds to: ArchiMate's glyphs for a resource, a plateau and a gap (`archGlyph` in `ea.js`). Only what is new lives here:
 
 | File | What it holds |
 |---|---|

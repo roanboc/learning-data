@@ -1,6 +1,6 @@
 # Rebuilding Who it serves, and how it pays
 
-*Who it serves, and how it pays*, film 2 of 11 of *The map before the data* (a working title), is generated from code like *Day one*: the same engine, components, voice and tools, and the series' own components in [`../../shared/src/`](../../shared/src/), which this film adds to: Farah, the customer advocate (`people.js`), and a labelled value proposition canvas and a way to place notes in the blocks of a business model canvas (`vpCanvas2`, `VPC.where`, `BMC_AT` in `ea.js`). Only what is new lives here:
+*Who it serves, and how it pays*, film 2 of 8 of *The map before the data* (a working title), is generated from code like *Day one*: the same engine, components, voice and tools, and the series' own components in [`../../shared/src/`](../../shared/src/), which this film adds to: Farah, the customer advocate (`people.js`), and a labelled value proposition canvas and a way to place notes in the blocks of a business model canvas (`vpCanvas2`, `VPC.where`, `BMC_AT` in `ea.js`). Only what is new lives here:
 
 | File | What it holds |
 |---|---|

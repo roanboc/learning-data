@@ -211,5 +211,5 @@ On a qanat, the cycle went down to the minute only where a share was split, and 
 At the utility, every process is drawn to level two, and only the branch that hurt goes deeper, to where an estimate is born.
 
 54
-00:06:56,926 --> 00:07:03,775
-Tomás's next note asks what the business expects of each concept: the rules on it, and how good it must be.
+00:06:56,926 --> 00:07:02,228
+Tomás's next note goes back to the backlog from day one, and asks which questions matter.

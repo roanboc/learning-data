@@ -151,9 +151,9 @@ window.LD_ROUTE = {
      "title": "El mapa antes de los datos",
      "href": "enterprise-architecture/",
      "poster": "day-one-poster.jpg",
-     "kicker": "Serie · 10 películas",
-     "len": "58 min",
-     "min": 58.0,
+     "kicker": "Serie · 8 películas",
+     "len": "44 min",
+     "min": 44.0,
      "films": [
       "ld-day-one",
       "ld-who-it-serves",
@@ -162,14 +162,12 @@ window.LD_ROUTE = {
       "ld-how-value-reaches-people",
       "ld-who-does-it",
       "ld-today-and-where-its-going",
-      "ld-now-the-questions-appear",
-      "ld-rules-with-a-home",
       "ld-when-strategy-moves"
      ],
      "pr": [
       "ld-enterprise-architecture",
-      20,
-      10
+      16,
+      8
      ]
     },
     {
@@ -178,19 +176,21 @@ window.LD_ROUTE = {
      "title": "Arquitectura de negocio para datos",
      "href": "business-architecture-for-data/",
      "poster": "what-the-business-owns-poster.jpg",
-     "kicker": "Serie · 5 películas",
-     "len": "35 min",
-     "min": 35.0,
+     "kicker": "Serie · 7 películas",
+     "len": "51 min",
+     "min": 51.0,
      "films": [
       "ld-what-the-business-owns",
       "ld-what-the-business-needs-to-know",
       "ld-who-creates-it-who-owns-it",
       "ld-processes-as-deep-as-data-needs",
+      "ld-now-the-questions-appear",
+      "ld-rules-with-a-home",
       "ld-rules-and-expectations-the-business-owns"
      ],
      "pr": [
       "ld-business-architecture-for-data",
-      10,
+      14,
       12
      ]
     },

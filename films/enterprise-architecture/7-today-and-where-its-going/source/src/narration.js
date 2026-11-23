@@ -45,5 +45,5 @@ const NARR={
  {"id":"confirm","gap":0.8,"text":"Grace confirms the network's systems as they stand today. The target and the path go to the board, as drafts."},
  {"id":"answer","gap":0.8,"text":"Tomás's note has an answer: today, placed on the map; a target, drawn as carefully; and a path between them, with reasons."},
  {"id":"done","gap":0.8,"text":"The map of how the utility works is drawn, for now."},
- {"id":"next","gap":0.8,"text":"Now, at last, he can open the backlog from day one, and ask which questions matter."}]}
+ {"id":"next","gap":0.8,"text":"Tomás's next note asks what a change in strategy means for the data."}]}
 };

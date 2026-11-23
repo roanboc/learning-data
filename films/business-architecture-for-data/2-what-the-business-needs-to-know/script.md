@@ -1,6 +1,6 @@
 # Business architecture for data · What the business needs to know: script
 
-*The script of *What the business needs to know*, film 2 of 5 of *Business architecture for data*, the second series of the topic *Enterprise architecture*, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 12 November 2026 from the series' proposal, which the author confirmed and merged on 11 November 2026 (PR #318), and this film's row in it: industry reference models, the concepts each capability needs, business objects in the business's words, one definition per domain, and the glossary drawn from the map; and one capability that needs a concept nobody holds.*
+*The script of *What the business needs to know*, film 2 of 7 of *Business architecture for data*, the second series of the topic *Enterprise architecture*, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 12 November 2026 from the series' proposal, which the author confirmed and merged on 11 November 2026 (PR #318), and this film's row in it: industry reference models, the concepts each capability needs, business objects in the business's words, one definition per domain, and the glossary drawn from the map; and one capability that needs a concept nobody holds.*
 
 ## The promise
 
@@ -158,7 +158,7 @@ In Mahan, a share means the same to everyone who holds one, so the water can be 
 At the utility, each concept now means one thing in its domain, in the words of the people who use it.
 Tomás's next note asks who creates each one, and who owns it.
 
-*On screen:* the village again, "Mahan · Iran", with "one day of water in Mahan: fifteen shares", each share lit in its turn, and "a share: the same to everyone who holds one" as one field's gate opens. Then the utility: the wall with every concept confirmed in its domain, its owners named. Tomás's next note: "Who creates it? Who owns it?". The end card: "Each concept, defined once in its domain, in the business's own words." Film 2 of 5.
+*On screen:* the village again, "Mahan · Iran", with "one day of water in Mahan: fifteen shares", each share lit in its turn, and "a share: the same to everyone who holds one" as one field's gate opens. Then the utility: the wall with every concept confirmed in its domain, its owners named. Tomás's next note: "Who creates it? Who owns it?". The end card: "Each concept, defined once in its domain, in the business's own words." Film 2 of 7.
 
 ## Sound
 

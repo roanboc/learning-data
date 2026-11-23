@@ -1,6 +1,6 @@
 # Business architecture for data · Who creates it, who owns it: script
 
-*The script of *Who creates it, who owns it*, film 3 of 5 of *Business architecture for data*, the second series of the topic *Enterprise architecture*, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 12 November 2026 from the series' proposal, which the author confirmed and merged on 11 November 2026 (PR #318), and this film's row in it: the capability × concept matrix (creates, reads, updates, deletes); owners and stewards; the owner always the business, hard to find where metadata is scarce; and two capabilities that both create the same concept, until the business decides which one does, and who owns it.*
+*The script of *Who creates it, who owns it*, film 3 of 7 of *Business architecture for data*, the second series of the topic *Enterprise architecture*, in nine chapters, in English, drawn in the look of *The map before the data*. Written on 12 November 2026 from the series' proposal, which the author confirmed and merged on 11 November 2026 (PR #318), and this film's row in it: the capability × concept matrix (creates, reads, updates, deletes); owners and stewards; the owner always the business, hard to find where metadata is scarce; and two capabilities that both create the same concept, until the business decides which one does, and who owns it.*
 
 ## The promise
 
@@ -156,7 +156,7 @@ On a qanat, every share has a named owner: the owners decide, and the mirab look
 At the utility, every concept now has one capability that creates it, an owner who decides, and a steward who looks after it.
 Tomás's next note asks where each one is born: in which process, and at which step.
 
-*On screen:* the village again, "every share, a named owner", the owners by their fields, "the owners: decide"; the mirab lifts a field's gate and lets the water in, "the mirab: looks after the water". Then the utility: the matrix with one C in every column, "one capability that creates it", each concept's owner, "an owner who decides", and its steward, "a steward who looks after it". Tomás's next note: "Where is it born? In which process, at which step?". The end card: "Each concept: one capability creates it, an owner decides, a steward looks after it." Film 3 of 5.
+*On screen:* the village again, "every share, a named owner", the owners by their fields, "the owners: decide"; the mirab lifts a field's gate and lets the water in, "the mirab: looks after the water". Then the utility: the matrix with one C in every column, "one capability that creates it", each concept's owner, "an owner who decides", and its steward, "a steward who looks after it". Tomás's next note: "Where is it born? In which process, at which step?". The end card: "Each concept: one capability creates it, an owner decides, a steward looks after it." Film 3 of 7.
 
 ## Sound
 

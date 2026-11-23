@@ -1,0 +1,21 @@
+{
+  "key": "now-the-questions-appear",
+  "title": "Now the questions appear",
+  "sub": "Business architecture for data, the second series on enterprise architecture: a backlog of requests traced up to the decisions and goals they serve, or to nothing; goals traced down to decisions, questions and measures; each measure defined once, given a home on the map and an owner; and data products scoped by capability and domain, not by request.",
+  "howto": "Paper on a wall is a draft or a request; glass in the layers' colours is the confirmed model. Purple is motivation, where goals live; amber is strategy, where capabilities live; yellow is the business layer, where decisions are made; peach is information, where questions and measures live. Cyan outlines the technical side, gold the business side. In the desert, blue is the water, and the people of the story are silhouettes.",
+  "src": [
+    "../../../shared/src/ba.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["trial", "trickle", 2.3],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
+    ["\\bqanats\\b", "kah-nahts"],
+    ["\\bqanat\\b", "kah-naht"],
+    ["\\bmuqannis\\b", "moo-kah-neez"],
+    ["\\bFarah\\b", "Fah-rah"]
+  ],
+  "story": ["trial"]
+}

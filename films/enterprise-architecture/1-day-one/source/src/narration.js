@@ -55,9 +55,10 @@ const NARR={
  {"id":"guess","gap":0.8,"text":"Without the map, a rule is a guess, and when it's wrong, nobody knows who should fix it."},
  {"id":"home","gap":0.8,"text":"With the map, the rule has a home."}]},
 "series":{"name":"The series","lead":1.4,"tail":1.6,"vo":[
- {"id":"eleven","gap":0.8,"text":"Over eleven films, Tomás builds the map, one layer at a time."},
+ {"id":"eight","gap":0.8,"text":"Over eight films, Tomás builds the map, one layer at a time."},
  {"id":"seven","gap":0.8,"text":"Seven films to understand the utility: who it serves, why it moves, what it must be able to do, how value reaches people, who does what, and what runs it."},
- {"id":"four","gap":0.8,"text":"Then four on what it means for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read."}]},
+ {"id":"then","gap":0.8,"text":"Then one on a change in strategy, walked down the map."},
+ {"id":"after","gap":0.8,"text":"After it, a series takes each layer further: the business, its data, and the platforms that run it."}]},
 "end":{"name":"The first note","lead":1.0,"tail":1.0,"vo":[
  {"id":"still","gap":0.8,"text":"The surveyors' first questions still work."},
  {"id":"qs","gap":0.8,"text":"What is this place? Who holds it? What is it worth?"},

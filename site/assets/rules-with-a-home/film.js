@@ -406,16 +406,20 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// The map before the data · Rules with a home. One line per id; the film re-times itself to the voice.
+// Business architecture for data · Rules with a home. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
-"tartu":{"name":"Once only","lead":1.4,"tail":1.0,"vo":[
- {"id":"born","gap":0.8,"text":"Tartu, Estonia, today. A baby is born, and the birth is entered once, in the population register."},
- {"id":"email","gap":0.8,"text":"Days later, the parents get an email from the Social Insurance Board. A family benefit is theirs, if they accept it."},
- {"id":"never","gap":0.8,"text":"They never applied."},
- {"id":"asks","gap":0.8,"text":"No office asks the parents again. Each one asks the population register, over X-Road, the exchange Estonia's public offices share."},
- {"id":"law","gap":0.8,"text":"By law, no office may build a second database of the same data, and every database is listed, with the office that owns it."},
- {"id":"link","gap":0.8,"text":"Each fact has one home and one owner. It's asked for once, and everyone who needs it asks there: once only."}]},
+"book":{"name":"The book on qanats","lead":1.4,"tail":1.0,"vo":[
+ {"id":"edge","gap":0.8,"text":"Khorasan, in the ninth century. Its towns and fields drank from qanats, tunnels that brought water from under the mountains."},
+ {"id":"close","gap":0.8,"text":"A new tunnel dug too close to an old one could take its water, and leave a village's fields dry."},
+ {"id":"court","gap":0.8,"text":"In Nishapur, people kept coming to the governor, Abdallah ibn Tahir, with disputes over qanats."},
+ {"id":"books","gap":0.8,"text":"But the law books said nothing about qanats, so each dispute was argued with no rule to settle it."},
+ {"id":"needed","gap":0.8,"text":"People needed to know the rules before they dug, not after a field went dry."},
+ {"id":"gather","gap":0.8,"text":"So Abdallah gathered the legal scholars of Khorasan, and some from Iraq, to write the rules for qanats in one book."},
+ {"id":"called","gap":0.8,"text":"It was called the Kitab-i Qani, the book on qanats."},
+ {"id":"judged","gap":0.8,"text":"From then on, disputes were judged by what it said."},
+ {"id":"later","gap":0.8,"text":"Two hundred years later, a historian wrote that qanats were still judged by that book."},
+ {"id":"home","gap":0.8,"text":"The rules had one home, written once, and everyone who needed them knew where to look."}]},
 "bill":{"name":"The bill from day one","lead":1.0,"tail":1.0,"vo":[
  {"id":"note","gap":0.8,"text":"Tomás's note asks where each rule belongs. On day one, he was shown one: an estimated reading stands only until the next actual reading."},
  {"id":"flag","gap":0.8,"text":"Beside it was a bill, flagged wrong."},
@@ -433,7 +437,7 @@ const NARR={
  {"id":"four","gap":0.8,"text":"Tomás finds the rule written four more ways."},
  {"id":"where","gap":0.8,"text":"In the regulator's retail code, the meter system's settings, the billing team's notes and the complaints team's spreadsheet."},
  {"id":"how","gap":0.8,"text":"The regulator's code says why. The others each say how, a little differently. None of them is its home."},
- {"id":"once","gap":0.8,"text":"He wants for rules what Tartu has for a birth: once only."}]},
+ {"id":"once","gap":0.8,"text":"He wants for rules what Khorasan had for qanats: one home, written once."}]},
 "split":{"name":"Two rules, not one","lead":1.0,"tail":1.0,"vo":[
  {"id":"two","gap":0.8,"text":"Day one's rule is really two rules, one on each side of the wall."},
  {"id":"net","gap":0.8,"text":"The network's: an estimate is replaced when the actual reading arrives, and the replacement is sent to the retailer. Grace owns it."},
@@ -479,23 +483,23 @@ const NARR={
  {"id":"views","gap":0.8,"text":"As the film Meaning machines can read shows, the glossary, the models, the ontology and the checks are all views of that one map."},
  {"id":"open","gap":0.8,"text":"But OWL reasons only from what is said. To it, a correction that never happened is simply unknown."},
  {"id":"job","gap":0.8,"text":"Finding the uncorrected bill stays the tracking table's job."}]},
-"end":{"name":"Back in Tartu","lead":1.0,"tail":1.0,"vo":[
+"end":{"name":"Back in Khorasan","lead":1.0,"tail":1.0,"vo":[
  {"id":"refund","gap":0.8,"text":"The household gets a hundred and forty-four dollars forty back, and the nineteen hundred bills are found and corrected."},
  {"id":"confirm","gap":0.8,"text":"Grace and the head of retail confirm their rules."},
- {"id":"tartu","gap":0.8,"text":"In Tartu, the benefit is paid, and nobody was asked twice."},
+ {"id":"book","gap":0.8,"text":"In Khorasan, whoever needed the rules on qanats looked in one book."},
  {"id":"answer","gap":0.8,"text":"Tomás's note has an answer: each rule belongs in the map, written once, at the step where it applies."},
  {"id":"owner","gap":0.8,"text":"Each has an owner and a reason, and its checks are generated from it."},
- {"id":"next","gap":0.8,"text":"Rules hold while the organisation holds still. Next: when strategy moves."}]}
+ {"id":"next","gap":0.8,"text":"Next: what the business expects of its data, written down by the people who own it."}]}
 };
 
-const VODUR={"tartu/born": 6.555, "tartu/email": 6.873, "tartu/never": 1.044, "tartu/asks": 8.889, "tartu/law": 7.773, "tartu/link": 6.562, "bill/note": 9.252, "bill/flag": 1.933, "bill/away": 7.658, "bill/est": 4.845, "bill/stored": 4.776, "bill/never": 3.336, "script/existed": 6.037, "script/found": 4.738, "script/march": 6.469, "script/clean": 6.164, "script/wall": 4.366, "five/four": 2.578, "five/where": 6.802, "five/how": 6.211, "five/once": 3.373, "split/two": 3.692, "split/net": 7.946, "split/ret": 6.408, "split/cross": 6.556, "why/reason": 5.979, "why/these": 4.951, "why/safe": 5.022, "why/ama": 8.96, "about/words": 2.805, "about/terms": 6.376, "about/objects": 8.101, "about/cim": 4.855, "about/own": 2.591, "expect/step": 5.574, "expect/inside": 3.046, "expect/time": 7.934, "expect/comp": 9.2, "std/req": 6.365, "std/sym": 3.603, "std/kinds": 6.583, "std/drv": 6.031, "std/real": 5.742, "std/assoc": 4.582, "std/where": 4.814, "checks/form": 8.303, "checks/data": 7.062, "checks/gen": 6.961, "checks/hand": 1.719, "checks/biz": 6.047, "checks/track": 5.766, "checks/promise": 3.264, "checks/first": 3.922, "checks/team": 3.927, "onto/onto": 6.0, "onto/owl": 3.597, "onto/views": 7.6, "onto/open": 6.572, "onto/job": 3.657, "end/refund": 6.341, "end/confirm": 2.701, "end/tartu": 3.604, "end/answer": 6.129, "end/owner": 3.829, "end/next": 4.86};
+const VODUR={"book/edge": 7.738, "book/close": 5.292, "book/court": 6.343, "book/books": 5.575, "book/needed": 4.334, "book/gather": 7.74, "book/called": 3.137, "book/judged": 2.598, "book/later": 4.818, "book/home": 4.649, "bill/note": 9.252, "bill/flag": 1.933, "bill/away": 7.758, "bill/est": 4.845, "bill/stored": 4.776, "bill/never": 3.336, "script/existed": 6.037, "script/found": 4.738, "script/march": 6.469, "script/clean": 6.164, "script/wall": 4.366, "five/four": 2.534, "five/where": 6.802, "five/how": 6.211, "five/once": 4.871, "split/two": 3.692, "split/net": 7.946, "split/ret": 6.408, "split/cross": 6.556, "why/reason": 5.979, "why/these": 4.951, "why/safe": 5.022, "why/ama": 9.035, "about/words": 2.805, "about/terms": 6.376, "about/objects": 8.101, "about/cim": 4.855, "about/own": 2.591, "expect/step": 5.574, "expect/inside": 3.046, "expect/time": 7.934, "expect/comp": 9.2, "std/req": 6.365, "std/sym": 3.603, "std/kinds": 6.583, "std/drv": 6.031, "std/real": 5.742, "std/assoc": 4.582, "std/where": 4.814, "checks/form": 8.303, "checks/data": 7.062, "checks/gen": 6.961, "checks/hand": 1.719, "checks/biz": 6.047, "checks/track": 5.766, "checks/promise": 3.264, "checks/first": 3.922, "checks/team": 3.927, "onto/onto": 6.0, "onto/owl": 3.597, "onto/views": 7.6, "onto/open": 6.572, "onto/job": 3.657, "end/refund": 6.341, "end/confirm": 2.701, "end/book": 4.354, "end/answer": 6.129, "end/owner": 3.829, "end/next": 4.563};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Three wordless moments: Tartu's register answering every office that asks, then the title; the two rules settling on their
-   sides of the wall, with the replaced reading crossing between them; and the ending. */
+   Three wordless moments: the book on qanats, open, with everyone who needs it coming to it, then the title; the two rules settling
+   on their sides of the wall, with the replaced reading crossing between them; and the ending. */
 const BREATH={
-"tartu":{"hold":{"born":0.6,"email":0.6,"never":1.0,"asks":0.6,"law":0.8,"link":0.6},"breathe":4.4},
+"book":{"hold":{"edge":0.8,"close":1.65,"court":0.6,"books":0.8,"needed":1.0,"gather":0.8,"called":1.0,"judged":0.6,"later":0.8,"home":0.6},"breathe":4.4},
 "bill":{"hold":{"note":0.7,"flag":0.8,"est":0.7,"never":1.0}},
 "script":{"hold":{"found":0.6,"march":0.7,"clean":1.0,"wall":0.8}},
 "five":{"hold":{"where":0.8,"how":0.9}},
@@ -506,7 +510,7 @@ const BREATH={
 "std":{"hold":{"req":0.6,"sym":0.8,"kinds":1.0,"drv":0.6,"real":0.6,"assoc":0.8,"where":0.9}},
 "checks":{"hold":{"form":0.8,"data":0.6,"gen":0.8,"hand":0.6,"biz":1.1,"track":0.9,"promise":0.6,"first":0.9,"team":0.8}},
 "onto":{"hold":{"owl":0.9,"views":0.8,"job":1.0}},
-"end":{"hold":{"confirm":0.7,"tartu":0.9,"owner":0.9},"breathe":5.0}
+"end":{"hold":{"confirm":0.7,"book":0.9,"owner":0.9},"breathe":5.0}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -2015,249 +2019,553 @@ eaYear=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()
   ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+24,y,6,0,TAU);ctx.fill();T(ctx,s,x+40,y+10,{f:"mono",w:500,size:28,color:rgba(c,1)});});};
 yearTag=function(ctx,x,y,s,col,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const c=col||CLAY,w=tw(ctx,s,20,500,"mono")+40;glass(ctx,x,y-22,w,44,22,c,{glow:14,ea:0.8,fill:EA_PILL});ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x+18,y,5,0,TAU);ctx.fill();T(ctx,s,x+30,y+7,{f:"mono",w:500,size:20,color:rgba(c,1)});});};
 
-/* ===== Rules with a home: the film's own pictures (prefixed d9_) =====
-   Tartu, today, at dawn: the Emajõgi narrowing to its arch bridge, Kaarsild, with the old town behind it and one window lit; the
-   population register, and the offices that ask it over X-Road instead of keeping copies; a parent's phone with the Social
-   Insurance Board's offer; the catalogue that lists every database with its owner. At the utility, on the wall and on the films'
-   dark glass: day one's data rule and the bill of $412.80; the household away in June and its meter's stored readings; the nightly
-   script on the wall between the network and retail, writing to a queue nothing reads; the rule in five places; the rule split in
-   two, one on each side, joined by what crosses; where each comes from; what it's about; the step it's attached to and what that
-   step expects of the data; the rule in a set form, with the checks generated from it; and the concepts, relationships and rules,
-   generally an ontology.
-   Tartu is drawn in the series' own style, not in the style of Estonian art (PLAYBOOK §2): the places are real, the family is
-   illustrative, and the offices' marks are not drawn. */
+/* ===== Business architecture for data: the series' components =====
+   The second series on enterprise architecture, after The map before the data, in its look (films/enterprise-architecture/shared/src/ea.js:
+   paper drafts on a wall, the confirmed model in glass, the six layers in their colours) and its world: the publicly owned energy
+   utility, Tomás and the owners. Each film opens on its part of one true story, the qanats of Iran, drawn here in the series' own style,
+   never in the style of Persian art: the desert from above, with its chain of shafts; the qanat cut away, with its tunnel, shafts and
+   water; the village's fields; and the people of the story as plain silhouettes with no faces, lit at the edge (the shareholders, the
+   water master and the diggers). Then the data practice on the map, the piece that closes every film: the data team's part of the
+   business layer, drawn element by element as ArchiMate draws them, building up film by film, to the series' last.
+   Everything here is shared by the series' films (each bundles it, from film.json's src); a film keeps its own pictures in its own
+   source. Names start with ba (BA for constants). */
+
+/* ---------- colours ---------- */
+// the series' colour (water), the layers it works in, the two sides of the utility's wall (the network in blue, retail in rose),
+// red for what fails, green for a check that passes; the desert's sand, earth and the water underground
+const BAC=[84,212,240];
+const BA_STR=LAY6[1][1],BA_BUS=LAY6[2][1],BA_INF=LAY6[3][1],BA_APP=LAY6[4][1];
+const BA_NET=[132,176,255],BA_RET=[255,150,186],BA_RED=[232,96,84],BA_OK=[132,226,160];
+const BA_SAND=[222,178,120],BA_EARTH=[120,82,56],BA_WATER=[70,204,246],BA_GREEN=[96,196,92],BA_DRY=[176,132,84];
+// the series' seven films, in order (five until 23 November 2026, when Now the questions appear and Rules with a home joined from The
+// map before the data, as films 5 and 6)
+const BA_FILMS=["What the business owns","What the business needs to know","Who creates it, who owns it","Processes, as deep as data needs","Now the questions appear","Rules with a home","Rules and expectations the business owns"];
+// no-break spaces: words a label should keep on one line
+const ba_nb=s=>s.replace(/ /g," ");
+// someone standing at the right of the frame, drawn facing the other way
+function baPersonR(ctx,id,x,y,s,o){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);person(ctx,id,x,y,s,o);ctx.restore();}
+// a tag on something in a scene the camera moves through: placed where (wx, wy) is now on screen, and drawn at the screen's own
+// size, so it reads the same however far the camera has zoomed (o.dy moves it up or down on screen)
+function baTagAt(ctx,S,wx,wy,s,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const p=ctx.getTransform().transformPoint(new DOMPoint(wx,wy));
+  ctx.save();ctx.setTransform(S,0,0,S,0,0);withA(ctx,a,()=>tag(ctx,p.x/S,p.y/S+(o.dy||0),s,col,{align:o.align||"center",size:o.size||30}));ctx.restore();}
+
+/* ---------- titles ---------- */
+// the series' mark: three layers of the map, seen from above, the business layer between the other two lit and filled
+function baMark(ctx,x,y,s,a,p){if(a<=0.01)return;p=p==null?1:p;withA(ctx,a,()=>{[[1,0.35],[2,1],[3,0.35]].forEach(([li,lit],i)=>{const q=clamp(p*3-i,0,1);if(q<=0)return;const col=LAY6[li][1],cy=y-s*1.1+i*s*0.62+(1-spring(q*1.4))*-s*0.5;
+  withA(ctx,clamp(q*2,0,1),()=>{ctx.save();ctx.shadowColor=rgba(col,0.6*lit);ctx.shadowBlur=14*lit;rhomb(ctx,x,cy,s*2.6,s*0.95);ctx.fillStyle=rgba(col,0.06+0.26*lit);ctx.fill();ctx.strokeStyle=rgba(col,0.45+0.55*lit);ctx.lineWidth=s*0.09;ctx.stroke();ctx.restore();});});});}
+// the title card, over whatever the chapter is drawing: the series, the film's title, and where it sits in the series. Its words come
+// in once the picture under them has gone dark, so no words show through each other (the same for the end card)
+function baTitle(ctx,S,t,t0,title,sub,n){const col=BAC,oA=fin(t,t0,0.8),tA=fin(t,t0+0.8,0.8);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
+  withA(ctx,tA,()=>{glow(ctx,960,470,480,col,0.08);baMark(ctx,960,392,30,1,(t-t0-0.5)/1.4);T(ctx,"BUSINESS ARCHITECTURE FOR DATA",960,458,{w:800,size:30,align:"center",color:rgba(col,0.95)});
+    T(ctx,title,960,560,{w:800,size:88,align:"center"});if(sub)T(ctx,sub,960,632,{w:600,size:36,align:"center",color:rgba(SOFT,0.95)});
+    withA(ctx,fin(t,t0+1.2,0.8),()=>tag(ctx,960,712,n||"enterprise architecture, for data",col,{align:"center",size:28}));});}
+function baEnd(ctx,S,t,t0,title,line,n){const col=BAC,oA=fin(t,t0,1.0),tA=fin(t,t0+1.0,0.9);if(oA<=0)return;dark(ctx,S,oA*0.97);setScreen(ctx,S);
+  withA(ctx,tA,()=>{if(line)wrapT(ctx,line,960,388,1300,{w:700,size:44,align:"center",lh:58});baMark(ctx,960,540,20,0.95,1);T(ctx,title,960,622,{w:800,size:44,align:"center",color:rgba(col,1)});
+    T(ctx,"Business architecture for data"+(n?" · "+n:"")+" · Learning Data",960,680,{w:600,size:28,align:"center",color:rgba(SOFT,0.9)});});}
+
+/* ---------- the desert, from above ---------- */
+// The desert seen from high above, in the camera's world (wider than the frame): sand with long ripples, the mountains at the top left,
+// the qanat's chain of shafts running down from their foot to the village, each shaft ringed by the earth dug out of it, and at its end
+// the water coming to light, an open channel, the village's flat roofs and domes, its trees, and its fields in a grid, each green
+// when watered and dry when not. o.flow (0..1) carries the water along the channel; o.wet[i] (0..1) waters field i; o.lit (0..1)
+// lights the chain of shafts; o.warm (0..1) is the low sun of morning or evening.
+const BA_CHAIN=(()=>{const P=[];for(let i=0;i<=19;i++){const u=i/19;P.push([lerp(430,1236,u)+Math.sin(u*Math.PI)*-38,lerp(318,640,u)+Math.sin(u*Math.PI*1.2)*22]);}return P;})();
+const BA_OUT=[1262,652];
+// the fields: a grid of plots beside the village, each [x, y, w, h]; the channel runs along the top and down between them
+const BA_FIELDS=(()=>{const F=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++)F.push([1330+c*124,700+r*92,112,80]);return F;})();
+const BA_HOUSES=[[1386,520,62,46],[1458,508,54,52],[1528,530,70,40],[1610,512,58,48],[1676,536,64,42],[1420,584,58,40],[1500,592,66,38],[1580,586,52,44],[1650,598,60,36],[1736,560,52,46]];
+const BA_DOMES=[[1478,560,20],[1630,566,18],[1712,500,16]];
+function ba_aerial(ctx,t,o){o=o||{};const X0=-1400,X1=3300,Y0=-900,Y1=2000,wm=o.warm||0;
+  // sand: warm, with long low ripples and a few darker patches of gravel
+  const g=ctx.createLinearGradient(0,-200,0,1300);g.addColorStop(0,rgba(mix([180,136,88],[200,144,92],wm),1));g.addColorStop(0.5,rgba(mix([214,170,114],[226,170,112],wm),1));g.addColorStop(1,rgba(mix([164,120,80],[178,118,80],wm),1));
+  ctx.fillStyle=g;ctx.fillRect(X0,Y0,X1-X0,Y1-Y0);
+  ctx.save();ctx.strokeStyle="rgba(255,236,200,0.05)";ctx.lineWidth=10;for(let i=0;i<34;i++){const y=-260+i*52;ctx.beginPath();for(let x=-400;x<=2400;x+=80){const yy=y+Math.sin(x*0.004+i*0.7)*18+x*0.08;x===-400?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}ctx.restore();
+  for(let i=0;i<22;i++){const x=hash(i,601)*2200-140,y=hash(i,602)*1200-60,r=60+hash(i,603)*160,gg=ctx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(80,60,120,"+(0.07+0.06*hash(i,604))+")");gg.addColorStop(1,"rgba(80,60,120,0)");ctx.fillStyle=gg;ctx.fillRect(x-r,y-r,2*r,2*r);}
+  // the mountains, top left, seen from high above: a dark mass, its ridges lit on the side towards the sun and in shadow on the
+  // other, each spine with spurs running down to the plain
+  const mg=ctx.createRadialGradient(-260,-280,80,-260,-280,1000);mg.addColorStop(0,rgba(mix([82,62,104],[104,72,96],wm),0.95));mg.addColorStop(0.55,rgba(mix([130,96,112],[150,100,100],wm),0.62));mg.addColorStop(1,"rgba(150,110,76,0)");
+  ctx.fillStyle=mg;ctx.fillRect(-1400,-900,2400,2000);
+  const ridge=(P,w0)=>{for(let i=1;i<P.length;i++){const[x0,y0]=P[i-1],[x1,y1]=P[i],w=w0*(1-0.55*i/P.length);
+      ctx.strokeStyle="rgba(46,34,90,0.45)";ctx.lineWidth=w*1.7;ctx.beginPath();ctx.moveTo(x0+w*0.55,y0+w*0.65);ctx.lineTo(x1+w*0.55,y1+w*0.65);ctx.stroke();
+      ctx.strokeStyle=rgba(mix([218,174,128],[238,184,130],wm),0.5);ctx.lineWidth=w*0.6;ctx.beginPath();ctx.moveTo(x0-w*0.3,y0-w*0.3);ctx.lineTo(x1-w*0.3,y1-w*0.3);ctx.stroke();}};
+  ctx.save();ctx.lineCap="round";ctx.lineJoin="round";
+  [[[-760,-520],[-520,-360],[-300,-220],[-80,-90],[140,10],[300,96]],[[-300,-660],[-120,-430],[40,-270],[200,-150],[380,-60]],[[-940,-120],[-660,-40],[-430,46],[-220,156]]].forEach((sp,j)=>{
+    for(let i=1;i<sp.length;i++){const[x0,y0]=sp[i-1],[x1,y1]=sp[i],dx=x1-x0,dy=y1-y0,d=Math.hypot(dx,dy),ux=dx/d,uy=dy/d,nx=-uy,ny=ux;
+      for(let k=0;k<3;k++){const u=(k+0.5)/3,bx=lerp(x0,x1,u),by=lerp(y0,y1,u);[-1,1].forEach(sd=>{const L=(80+80*hash(i*7+k+j*31,sd+5))*(1-0.1*i);
+        ridge([[bx,by],[bx+nx*sd*L*0.55+ux*L*0.3,by+ny*sd*L*0.55+uy*L*0.3],[bx+nx*sd*L+ux*L*0.55,by+ny*sd*L+uy*L*0.55]],11);});}}
+    ridge(sp,24);});
+  ctx.restore();
+  // the chain of shafts: each one a ring of dug earth with a dark mouth, its shadow to the lower right; lit as the narration names it
+  const lit=o.lit||0;BA_CHAIN.forEach(([x,y],i)=>{const r=i===0?17:13-4*i/19;ctx.fillStyle="rgba(60,40,26,0.28)";ctx.beginPath();ctx.ellipse(x+4,y+5,r*1.15,r,0,0,TAU);ctx.fill();
+    const rg=ctx.createRadialGradient(x-r*0.3,y-r*0.3,1,x,y,r*1.1);rg.addColorStop(0,"rgba(236,204,160,1)");rg.addColorStop(1,"rgba(184,140,98,1)");ctx.fillStyle=rg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
+    ctx.fillStyle="rgba(34,22,16,0.92)";ctx.beginPath();ctx.arc(x,y,r*0.34,0,TAU);ctx.fill();
+    if(lit>0.01){const v=lit*clamp(((o.litP==null?1:o.litP)*20-i),0,1);if(v>0.01)glow(ctx,x,y,r*2.6,BAC,0.34*v);}});
+  // the water comes to light, and runs in an open channel past the village to the fields
+  const fl=o.flow==null?1:o.flow,CH=[BA_OUT,[1300,676],[1330,690],[1820,690]];
+  ctx.save();ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="rgba(96,64,40,0.6)";ctx.lineWidth=14;ctx.beginPath();CH.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();
+  if(fl>0.01){const L=[0];for(let i=1;i<CH.length;i++)L.push(L[i-1]+Math.hypot(CH[i][0]-CH[i-1][0],CH[i][1]-CH[i-1][1]));let left=L[L.length-1]*fl;
+    ctx.strokeStyle=rgba(BA_WATER,0.95);ctx.lineWidth=8;ctx.shadowColor=rgba(BA_WATER,0.6);ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(CH[0][0],CH[0][1]);
+    for(let i=1;i<CH.length&&left>0;i++){const d=L[i]-L[i-1],f=Math.min(1,left/d);ctx.lineTo(lerp(CH[i-1][0],CH[i][0],f),lerp(CH[i-1][1],CH[i][1],f));left-=d;}ctx.stroke();ctx.shadowBlur=0;
+    // light on the water, moving along it
+    for(let k=0;k<10;k++){const u=((t*0.06+k/10)%1)*fl,x=lerp(1330,1820,u),y=690;ctx.fillStyle="rgba(230,248,255,0.5)";ctx.beginPath();ctx.ellipse(x,y,7,2,0,0,TAU);ctx.fill();}}
+  ctx.restore();
+  // the fields, each fed by a small gate from the channel above it, or from the field before it in its column
+  BA_FIELDS.forEach(([x,y,w,h],i)=>{const wt=clamp(o.wet?o.wet[i]||0:(o.green==null?0.7:o.green),0,1),c=mix(BA_DRY,BA_GREEN,wt);
+    ctx.fillStyle="rgba(60,40,26,0.3)";ctx.fillRect(x+4,y+5,w,h);ctx.fillStyle=rgba(c,1);ctx.fillRect(x,y,w,h);
+    ctx.strokeStyle=rgba(mix(c,[40,30,20],0.4),0.7);ctx.lineWidth=2;for(let k=1;k<5;k++){ctx.beginPath();ctx.moveTo(x+6,y+k*h/5);ctx.lineTo(x+w-6,y+k*h/5);ctx.stroke();}
+    const fw=o.fill?o.fill[i]||0:0;if(fw>0.01){ctx.fillStyle=rgba(BA_WATER,0.5*fw);ctx.fillRect(x,y,w,h*clamp(fw*1.4,0,1));glow(ctx,x+w/2,y+h/2,70,BA_WATER,0.25*fw);}
+    ctx.strokeStyle="rgba(70,48,30,0.6)";ctx.lineWidth=3;ctx.strokeRect(x,y,w,h);});
+  // trees along the channel and the village's edge: round canopies, dark at the bottom, lit at the top, with their shadows
+  [[1296,640,26],[1340,628,22],[1372,650,20],[1800,650,24],[1840,610,20],[1360,470,24],[1760,470,22],[1300,560,22],[1822,540,20],[1700,640,18]].forEach(([x,y,r],i)=>{ctx.fillStyle="rgba(40,30,20,0.32)";ctx.beginPath();ctx.ellipse(x+r*0.4,y+r*0.5,r,r*0.86,0,0,TAU);ctx.fill();
+    const tg=ctx.createRadialGradient(x-r*0.35,y-r*0.4,2,x,y,r);tg.addColorStop(0,"rgba(140,214,100,1)");tg.addColorStop(1,"rgba(36,110,62,1)");ctx.fillStyle=tg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();});
+  // the village: flat roofs of earth brick, each with its shadow; a few domes
+  BA_HOUSES.forEach(([x,y,w,h],i)=>{ctx.fillStyle="rgba(50,34,22,0.34)";ctx.fillRect(x+6,y+7,w,h);const hg=ctx.createLinearGradient(x,y,x+w,y+h);hg.addColorStop(0,"rgba(232,196,150,1)");hg.addColorStop(1,"rgba(196,154,110,1)");ctx.fillStyle=hg;ctx.fillRect(x,y,w,h);
+    ctx.strokeStyle="rgba(120,86,58,0.6)";ctx.lineWidth=2;ctx.strokeRect(x+3,y+3,w-6,h-6);});
+  BA_DOMES.forEach(([x,y,r])=>{ctx.fillStyle="rgba(50,34,22,0.34)";ctx.beginPath();ctx.arc(x+5,y+6,r,0,TAU);ctx.fill();const dg=ctx.createRadialGradient(x-r*0.4,y-r*0.4,1,x,y,r);dg.addColorStop(0,"rgba(246,220,180,1)");dg.addColorStop(1,"rgba(186,144,104,1)");ctx.fillStyle=dg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();});}
+
+/* ---------- the qanat, cut away ---------- */
+// The ground cut open from the mountain's foot to the village: the surface falls faster than the tunnel does, so the tunnel, sloping
+// gently, meets the surface at the outlet. Under the mountain, the groundwater; the tunnel's upper reach runs through it, and water
+// seeps in. A shaft rises from the tunnel to the surface every so often, each with its ring of dug earth; the deepest, the first, is the
+// mother well. ba_ys(x) is the surface, ba_yt(x) the tunnel's floor, ba_yw(x) the top of the groundwater; BA_SH the shafts.
+const BA_SURF=[[-900,-260],[-500,-60],[-250,110],[0,290],[150,404],[260,452],[600,560],[1000,680],[1300,768],[1440,800],[1700,814],[2600,834]];
+function ba_lin(P,x){if(x<=P[0][0])return P[0][1];for(let i=1;i<P.length;i++)if(x<=P[i][0]){const u=(x-P[i-1][0])/(P[i][0]-P[i-1][0]);return lerp(P[i-1][1],P[i][1],u);}return P[P.length-1][1];}
+const ba_ys=x=>ba_lin(BA_SURF,x),ba_yt=x=>770+(x-250)*0.0255,ba_yw=x=>x<250?640-(250-x)*0.25:640+(x-250)*0.35;
+const BA_TH=34,BA_XM=250,BA_XO=1440,BA_SH=(()=>{const S=[];for(let x=BA_XM;x<BA_XO-60;x+=100)S.push(x);return S;})();
+// the sky and the far ridges over the section; o.warm (0..1) warms it, o.dusk (0..1) darkens it towards evening
+function ba_secSky(ctx,o){o=o||{};const wm=o.warm||0,dk=o.dusk||0,X0=-1400,X1=3300,g=ctx.createLinearGradient(0,-600,0,840);
+  g.addColorStop(0,rgba(mix([28,92,184],[20,36,100],dk),1));g.addColorStop(0.45,rgba(mix(mix([96,164,226],[110,86,160],dk),[140,170,220],wm*0.3),1));
+  g.addColorStop(0.66,rgba(mix(mix([160,210,236],[160,104,140],dk),[236,214,196],wm*0.4),1));g.addColorStop(0.8,rgba(mix(mix([226,214,200],[200,132,108],dk),[250,206,162],wm),1));g.addColorStop(1,rgba(mix(mix([246,228,200],[216,150,110],dk),[255,216,170],wm),1));
+  ctx.fillStyle=g;ctx.fillRect(X0,-900,X1-X0,1900);
+  // the low sun's light over the plain, to the right
+  glow(ctx,2400,620,760,mix([255,216,166],[255,160,110],dk),0.32);
+  // two ranges far off, pale with distance; they reach down behind the ground, so no sky shows under them
+  [[0.5,[134,170,208],-70,0],[0.72,[104,138,184],50,1]].forEach(([k,c,dy,i])=>{ctx.fillStyle=rgba(mix(mix(c,[226,170,140],wm*0.35),[64,60,124],dk*0.5),k);ctx.beginPath();ctx.moveTo(X0,1400);
+    for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,440+dy+Math.sin(x*0.0019+i*2.1)*44+Math.sin(x*0.0061+i*0.7)*15+Math.max(0,(300-x)*0.22));ctx.lineTo(X1,1400);ctx.closePath();ctx.fill();});}
+// the cut-away ground, the groundwater, the tunnel and its shafts. o.flow (0..1): how far the water has run down the tunnel; or
+// o.water, the stretches of tunnel that hold water, as [[x0, x1], ...] (a cave-in stops it, and what's below drains away);
+// o.block: x of a cave-in (null for none), o.blockA (0..1) how far it has fallen; o.wet (0..1): the groundwater's light;
+// o.hiSh (0..1): the shafts lit; o.hiT: the tunnel lit; t moves the water
+function ba_section(ctx,t,o){o=o||{};const X0=-1400,X1=3300;
+  // the ground in cut: a warm, dark earth, with strata
+  ctx.save();ctx.beginPath();ctx.moveTo(X0,ba_ys(X0));for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,ba_ys(x));ctx.lineTo(X1,1900);ctx.lineTo(X0,1900);ctx.closePath();
+  const eg=ctx.createLinearGradient(0,300,0,1300);eg.addColorStop(0,"rgba(152,100,62,1)");eg.addColorStop(0.35,"rgba(104,66,46,1)");eg.addColorStop(1,"rgba(28,30,56,1)");ctx.fillStyle=eg;ctx.fill();ctx.clip();
+  // a sandy band along the surface, then layers of earth and gravel that follow the ground's slope, with stones in them
+  ctx.beginPath();ctx.moveTo(X0,ba_ys(X0)-4);for(let x=X0;x<=X1;x+=40)ctx.lineTo(x,ba_ys(x)-4);for(let x=X1;x>=X0;x-=40)ctx.lineTo(x,ba_ys(x)+30);ctx.closePath();ctx.fillStyle="rgba(196,150,100,0.42)";ctx.fill();
+  for(let i=0;i<18;i++){const d=58+i*40+hash(i,716)*14,k=hash(i,717);ctx.strokeStyle="rgba(255,226,180,"+(0.025+0.04*k)+")";ctx.lineWidth=2+k*5;ctx.beginPath();
+    for(let x=X0;x<=X1;x+=40){const y=lerp(ba_ys(x)+d,560+d*0.9,0.35)+Math.sin(x*0.004+i*1.7)*8;x===X0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}
+  for(let i=0;i<170;i++){const x=hash(i,711)*3200-600,y=ba_ys(x)+26+hash(i,712)*760,r=2+hash(i,713)*6;ctx.fillStyle="rgba("+(hash(i,714)>0.5?"58,38,26,":"176,134,98,")+(0.22+0.3*hash(i,715))+")";ctx.beginPath();ctx.ellipse(x,y,r*1.4,r,hash(i,719)*3,0,TAU);ctx.fill();}
+  // the groundwater: earth soaked with it, from the mountain down to where its top passes under the tunnel
+  const wl=o.wet==null?1:o.wet;ctx.beginPath();ctx.moveTo(X0,ba_yw(X0));for(let x=X0;x<=1500;x+=30)ctx.lineTo(x,ba_yw(x));ctx.lineTo(1500,1900);ctx.lineTo(X0,1900);ctx.closePath();
+  const wg=ctx.createLinearGradient(0,600,0,1100);wg.addColorStop(0,rgba(BA_WATER,0.30*wl+0.06));wg.addColorStop(1,rgba([20,96,180],0.5*wl+0.1));ctx.fillStyle=wg;ctx.fill();
+  ctx.fillStyle=rgba([170,220,255],0.22*wl);for(let i=0;i<120;i++){const x=hash(i,721)*1900-400,y=ba_yw(x)+14+hash(i,722)*360;ctx.beginPath();ctx.arc(x,y,1.6+hash(i,723)*1.6,0,TAU);ctx.fill();}
+  ctx.strokeStyle=rgba(BA_WATER,0.55*wl+0.15);ctx.lineWidth=2.5;ctx.setLineDash([12,10]);ctx.beginPath();for(let x=X0;x<=1500;x+=30)x===X0?ctx.moveTo(x,ba_yw(x)):ctx.lineTo(x,ba_yw(x));ctx.stroke();ctx.setLineDash([]);
+  // the shafts: from the tunnel up to the surface; the mother well a little wider
+  BA_SH.forEach((x,i)=>{const w=i===0?12:8,ys=ba_ys(x),yt=ba_yt(x);ctx.fillStyle="rgba(14,12,24,0.96)";ctx.fillRect(x-w/2,ys,w,yt-ys);
+    if(o.hiSh>0.01){ctx.fillStyle=rgba(BAC,0.35*o.hiSh);ctx.fillRect(x-w/2-2,ys,w+4,yt-ys);}});
+  // the tunnel: a dark channel, BA_TH high (a stooping digger's height at the village's scale), sloping gently to the outlet
+  ctx.fillStyle="rgba(16,14,28,0.97)";ctx.beginPath();ctx.moveTo(BA_XM-8,ba_yt(BA_XM)-BA_TH);ctx.lineTo(BA_XO,ba_yt(BA_XO)-BA_TH);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+2);ctx.lineTo(BA_XO+30,ba_ys(BA_XO+30)+8);ctx.lineTo(BA_XO,ba_yt(BA_XO)+3);ctx.lineTo(BA_XM-8,ba_yt(BA_XM)+3);ctx.closePath();ctx.fill();
+  if(o.hiT>0.01){ctx.strokeStyle=rgba(BAC,0.7*o.hiT);ctx.lineWidth=2.5;ctx.stroke();}
+  // the water in it: seeping in along the wet reach, then running on its floor towards the outlet, in each stretch that holds it
+  const fl=o.flow==null?1:o.flow,xb=o.block==null?BA_XO+40:o.block,WS=o.water||[[BA_XM,lerp(BA_XM,BA_XO+30,fl)]];
+  WS.forEach(([x0,x1])=>{x0=Math.max(BA_XM,x0);x1=Math.min(BA_XO+30,x1);if(x1-x0<2)return;
+    ctx.strokeStyle=rgba(BA_WATER,0.95);ctx.lineWidth=5;ctx.shadowColor=rgba(BA_WATER,0.7);ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(x0,ba_yt(x0));ctx.lineTo(x1,ba_yt(x1));ctx.stroke();ctx.shadowBlur=0;
+    for(let k=0;k<26;k++){const u=(t*0.05+k/26)%1,x=lerp(BA_XM,BA_XO,u);if(x<x0||x>x1)continue;ctx.fillStyle="rgba(230,248,255,0.65)";ctx.beginPath();ctx.ellipse(x,ba_yt(x)-1,6,1.6,0.03,0,TAU);ctx.fill();}});
+  // drops seeping in from the groundwater, in the wet reach
+  if(WS.length&&WS[0][1]>BA_XM+20)for(let k=0;k<8;k++){const x=BA_XM+20+k*42,ph=(t*0.7+hash(k,731))%1;if(ba_yw(x)>ba_yt(x)-BA_TH)continue;ctx.fillStyle=rgba([200,236,255],0.7*(1-ph));ctx.beginPath();ctx.arc(x,ba_yt(x)-BA_TH+ph*(BA_TH-2),1.8,0,TAU);ctx.fill();}
+  // a cave-in: earth fallen into the tunnel, and the water pooled behind it
+  if(o.block!=null&&(o.blockA||0)>0.01){const b=o.blockA,yt=ba_yt(xb);ctx.fillStyle=rgba([120,84,58],1);ctx.beginPath();ctx.moveTo(xb-34,yt+3);ctx.quadraticCurveTo(xb-10,yt-(BA_TH+6)*b,xb+4,yt-(BA_TH+2)*b);ctx.quadraticCurveTo(xb+20,yt-(BA_TH-6)*b,xb+36,yt+3);ctx.closePath();ctx.fill();
+    for(let k=0;k<7;k++){const x=xb-26+k*9,y=yt-4-hash(k,741)*(BA_TH-6)*b;ctx.fillStyle="rgba(90,60,40,1)";ctx.beginPath();ctx.arc(x,y,3+hash(k,742)*3,0,TAU);ctx.fill();}
+    ctx.fillStyle=rgba(BA_WATER,0.5*b);ctx.fillRect(xb-150,yt-8*b,116,8*b+3);}
+  ctx.restore();
+  // the surface: a crisp line of light along the ground, and each shaft's ring of dug earth, seen side on as two low humps
+  ctx.save();ctx.strokeStyle="rgba(255,226,180,0.55)";ctx.lineWidth=2.5;ctx.beginPath();for(let x=X0;x<=X1;x+=40)x===X0?ctx.moveTo(x,ba_ys(x)):ctx.lineTo(x,ba_ys(x));ctx.stroke();
+  BA_SH.forEach((x,i)=>{const ys=ba_ys(x),r=i===0?34:26,h=i===0?16:12;[-1,1].forEach(sd=>{const cx=x+sd*(r*0.55+3);ctx.fillStyle="rgba(176,132,92,1)";ctx.beginPath();ctx.moveTo(cx-r*0.5,ys+1);ctx.quadraticCurveTo(cx,ys-h*2,cx+r*0.5,ys+1);ctx.closePath();ctx.fill();
+    ctx.strokeStyle="rgba(255,226,180,0.4)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx-r*0.5,ys+1);ctx.quadraticCurveTo(cx,ys-h*2,cx+r*0.5,ys+1);ctx.stroke();});});
+  ctx.restore();}
+// the water at the outlet, out in the open: a channel along the surface from the outlet towards the village's fields, to x1, holding
+// water from a to b (0..1 along it: from 0 to fl as it fills; from a to 1 as it drains)
+function ba_channel(ctx,t,x1,fl,o){o=o||{};const x0=BA_XO+28,a=o.from||0,b=fl;
+  ctx.save();ctx.strokeStyle="rgba(96,64,40,0.8)";ctx.lineWidth=9;ctx.lineCap="round";ctx.beginPath();for(let x=x0;x<=x1;x+=20)x===x0?ctx.moveTo(x,ba_ys(x)+4):ctx.lineTo(x,ba_ys(x)+4);ctx.stroke();
+  if(b-a>0.005){const xa=lerp(x0,x1,clamp(a,0,1)),xe=lerp(x0,x1,clamp(b,0,1));ctx.strokeStyle=rgba(BA_WATER,0.95);ctx.lineWidth=6;ctx.shadowColor=rgba(BA_WATER,0.7);ctx.shadowBlur=12;
+    ctx.beginPath();for(let x=xa;x<=xe;x+=20)x===xa?ctx.moveTo(x,ba_ys(x)+3):ctx.lineTo(x,ba_ys(x)+3);ctx.lineTo(xe,ba_ys(xe)+3);ctx.stroke();ctx.shadowBlur=0;
+    for(let k=0;k<12;k++){const u=(t*0.08+k/12)%1,x=lerp(x0,x1,u);if(x<xa||x>xe)continue;ctx.fillStyle="rgba(235,250,255,0.6)";ctx.beginPath();ctx.ellipse(x,ba_ys(x)+2,6,1.5,0,0,TAU);ctx.fill();}}ctx.restore();}
+// a small wooden gate in the channel, where the water turns into a field: o (0..1) is how far it's lifted
+function ba_gate(ctx,x,o,a){if(a<=0.01)return;const ys=ba_ys(x);withA(ctx,a,()=>{ctx.save();ctx.fillStyle="rgba(70,48,32,1)";ctx.fillRect(x-14,ys-26,4,30);ctx.fillRect(x+10,ys-26,4,30);
+  const lift=clamp(o,0,1)*16;ctx.fillStyle="rgba(132,94,60,1)";ctx.fillRect(x-10,ys-14-lift,20,18);ctx.strokeStyle="rgba(255,220,170,0.4)";ctx.lineWidth=1.5;ctx.strokeRect(x-10,ys-14-lift,20,18);ctx.restore();});}
+// The village beside the fields, side on. Behind the fields, its houses of earth brick (flat roofs, a few domes), a little paler with
+// the distance, and its trees: date palms and broad fruit trees. In front, the fields: a low bank at each end and rows of crop, green
+// and tall when watered (o.wet[i], 0..1), dry and short when not, with the water spread over the field in its turn (o.fill[i]).
+const BA_VFIELDS=[[1560,150],[1730,150],[1900,150],[2070,150]];
+const BA_VHOUSES=[[1462,96,70],[1556,120,58,1],[1688,86,92],[1782,124,66],[1916,100,78,1],[2026,128,60],[2166,92,88],[2268,132,68,1],[2410,110,80]];
+// a date palm: a tall trunk, leaning a little and ringed, and a crown of fronds that droop from it
+function ba_palm(ctx,x,ys,s,t){ctx.save();ctx.translate(x,ys);ctx.scale(s,s);
+  ctx.fillStyle="rgba(98,72,50,1)";ctx.beginPath();ctx.moveTo(-7,0);ctx.quadraticCurveTo(-4,-90,6,-180);ctx.lineTo(12,-180);ctx.quadraticCurveTo(4,-90,7,0);ctx.closePath();ctx.fill();
+  ctx.strokeStyle="rgba(58,40,28,0.7)";ctx.lineWidth=1.6;for(let k=1;k<18;k++){const u=k/18,yy=-180*u,xx=9*u*u;ctx.beginPath();ctx.moveTo(xx-6,yy);ctx.lineTo(xx+6,yy+2);ctx.stroke();}
+  const sw=Math.sin((t||0)*0.8)*0.03;for(let k=0;k<10;k++){const an=-Math.PI*0.98+k*Math.PI*0.98/9+sw,L=66+16*hash(k,881),mx=9+Math.cos(an)*L*0.5,my=-182+Math.sin(an)*L*0.55,ex=9+Math.cos(an)*L,ey=-180+Math.sin(an)*L*0.55+L*0.36;
+    ctx.fillStyle=rgba(mix([56,96,50],[112,150,80],hash(k,882)),1);ctx.beginPath();ctx.moveTo(9,-183);ctx.quadraticCurveTo(mx,my-15,ex,ey);ctx.quadraticCurveTo(mx,my-1,9,-177);ctx.closePath();ctx.fill();}
+  ctx.restore();}
+// a broad fruit tree: a short trunk, forked, and a canopy of rounded masses, lit at the top
+function ba_tree(ctx,x,ys,s){ctx.save();ctx.translate(x,ys);ctx.scale(s,s);ctx.fillStyle="rgba(86,60,42,1)";ctx.beginPath();ctx.moveTo(-8,0);ctx.quadraticCurveTo(-5,-40,-16,-72);ctx.lineTo(-7,-74);ctx.quadraticCurveTo(0,-52,3,-76);ctx.lineTo(12,-72);ctx.quadraticCurveTo(5,-40,8,0);ctx.closePath();ctx.fill();
+  [[-34,-92,34],[34,-90,32],[0,-114,40],[-14,-80,28],[18,-78,28]].forEach(([cx,cy,r])=>{const g=ctx.createRadialGradient(cx-r*0.4,cy-r*0.5,2,cx,cy,r);g.addColorStop(0,"rgba(156,190,104,1)");g.addColorStop(1,"rgba(50,82,46,1)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fill();});
+  ctx.restore();}
+function ba_village(ctx,t,o){o=o||{};
+  // the houses, behind the fields
+  BA_VHOUSES.forEach(([x,w,h,dome],i)=>{const yb=ba_ys(x+w/2)-14,hg=ctx.createLinearGradient(x,yb-h,x+w,yb);hg.addColorStop(0,"rgba(230,198,158,1)");hg.addColorStop(1,"rgba(184,146,106,1)");
+    if(dome){const dg=ctx.createRadialGradient(x+w*0.4,yb-h-w*0.2,2,x+w/2,yb-h,w*0.34);dg.addColorStop(0,"rgba(236,210,172,1)");dg.addColorStop(1,"rgba(176,138,100,1)");ctx.fillStyle=dg;ctx.beginPath();ctx.ellipse(x+w/2,yb-h+2,w*0.32,w*0.3,0,Math.PI,0);ctx.fill();}
+    ctx.fillStyle=hg;ctx.fillRect(x,yb-h,w,h+16);ctx.fillStyle="rgba(150,112,80,0.7)";ctx.fillRect(x-2,yb-h-4,w+4,5);
+    ctx.fillStyle="rgba(62,42,30,0.85)";ctx.fillRect(x+w*0.18+((i*37)%3)*w*0.12,yb-h*0.48,w*0.16,h*0.48+14);if(h>64)ctx.fillRect(x+w*0.62,yb-h*0.78,w*0.12,h*0.16);});
+  // the trees: broad fruit trees, and date palms in front of the houses
+  [[1610,0.62],[1990,0.7],[2330,0.6]].forEach(([x,s])=>ba_tree(ctx,x,ba_ys(x)-8,s));
+  [[1512,0.62],[1868,0.7],[2236,0.66],[2392,0.58]].forEach(([x,s])=>ba_palm(ctx,x,ba_ys(x)-6,s,t+x));
+  // the fields
+  BA_VFIELDS.forEach(([x,w],i)=>{const wt=clamp(o.wet?o.wet[i]||0:0.8,0,1),fw=o.fill?o.fill[i]||0:0,ys=ba_ys(x+w/2),c=mix([200,164,98],[98,152,70],wt),c2=mix([176,136,82],[72,122,56],wt);
+    ctx.fillStyle=rgba(mix([152,114,78],[92,64,46],Math.max(wt*0.6,fw)),1);ctx.fillRect(x,ys-3,w,7);
+    [x-2,x+w+2].forEach(bx=>{ctx.fillStyle="rgba(152,112,76,1)";ctx.beginPath();ctx.ellipse(bx,ys,8,6,0,Math.PI,0);ctx.fill();});
+    for(let k=0;k<26;k++){const xx=x+5+k*(w-10)/25,hh=(10+22*wt)*(0.82+0.36*hash(k+i*26,751)),sw=Math.sin(t*1.3+k*0.7)*1.5*wt;ctx.strokeStyle=rgba(k%2?c:c2,1);ctx.lineWidth=2.4;ctx.lineCap="round";
+      ctx.beginPath();ctx.moveTo(xx,ys-2);ctx.quadraticCurveTo(xx+sw*0.4,ys-hh*0.6,xx+sw,ys-hh);ctx.stroke();ctx.fillStyle=rgba(mix(c,[228,202,124],0.35),1);ctx.beginPath();ctx.ellipse(xx+sw,ys-hh-3,2.2,4.5,sw*0.05,0,TAU);ctx.fill();}
+    if(fw>0.01){ctx.fillStyle=rgba(BA_WATER,0.9*fw);ctx.fillRect(x,ys-3,w,6);for(let k=0;k<5;k++){const u=(t*0.2+k/5)%1;ctx.fillStyle="rgba(235,250,255,"+(0.6*fw)+")";ctx.beginPath();ctx.ellipse(x+8+u*(w-16),ys,6,1.2,0,0,TAU);ctx.fill();}glow(ctx,x+w/2,ys-8,96,BA_WATER,0.42*fw);}});}
+
+/* ---------- the people of the story ---------- */
+// The story's people as plain silhouettes, never given a face: one path (head, body, both arms, the feet), every part wound the same
+// way and filled once, so a figure fades as one picture, with a warm rim of light down its lit side. Standing, seen from the front with
+// the head turned a little towards f (1 right, -1 left); o.kind "stoop": seen side on, bent over the work in the tunnel.
+// o.dress: "robe" (long, to the ankles), "tunic" (to the knee, over trousers) or "chador" (a cloak from the head to the feet);
+// o.head: "cap" or "turban". Arms hang down; the near hand is only ever on the thing the story is about: o.hold "lamp" or "pick"
+// (stooping) draws it in the hand, and o.reach [x, y], a point in the scene (a gate's board, a windlass's handle), puts the hand there.
+// s: scale (1 is about 300 px tall).
+function ba_poly(p,P){let a=0;for(let i=0;i<P.length;i++){const[x0,y0]=P[i],[x1,y1]=P[(i+1)%P.length];a+=x0*y1-x1*y0;}if(a<0)P=P.slice().reverse();p.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++)p.lineTo(P[i][0],P[i][1]);p.closePath();}
+function ba_disc(p,x,y,rx,ry){p.moveTo(x+rx,y);p.ellipse(x,y,rx,ry,0,0,TAU);}
+// a limb through a, b and c (shoulder, elbow, hand; or hip, knee, ankle), tapering from w0 to w1, rounded at its joints
+function ba_limb(p,a,b,c,w0,w1){const P=[a,b,c],L=[],R=[];P.forEach(([x,y],i)=>{const[xa,ya]=P[Math.max(0,i-1)],[xb,yb]=P[Math.min(2,i+1)],d=Math.hypot(xb-xa,yb-ya)||1,w=lerp(w0,w1,i/2);L.push([x-(yb-ya)/d*w,y+(xb-xa)/d*w]);R.push([x+(yb-ya)/d*w,y-(xb-xa)/d*w]);});
+  ba_poly(p,L.concat(R.reverse()));ba_disc(p,a[0],a[1],w0,w0);const wm=(w0+w1)/2;ba_disc(p,b[0],b[1],wm,wm);}
+function ba_fig(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const f=o.f||1,dr=o.dress||"robe",col=o.col||[40,32,34],rim=o.rim||[255,200,150],p=new Path2D();
+  const hand=o.reach?[(o.reach[0]-x)/(s*f),(o.reach[1]-y)/s]:null;let lamp=null,pick=null;
+  if(o.kind==="stoop"){
+    // bent over the work: legs bent, the back arched forward, the head low, both hands forward on the pick or the lamp
+    ba_limb(p,[-14,-106],[-2,-58],[-20,-10],13,8);ba_limb(p,[4,-108],[30,-64],[22,-10],13,8);ba_disc(p,-14,-5,13,6);ba_disc(p,28,-5,13,6);
+    ba_limb(p,[-6,-112],[14,-162],[46,-190],25,20);ba_limb(p,[44,-190],[54,-194],[62,-196],9,8);ba_disc(p,74,-198,18,21);
+    if(o.head==="cap")ba_disc(p,77,-210,19,11);
+    const H=o.hold==="lamp"?[98,-112]:[94,-128];ba_limb(p,[40,-190],[60,-150],[H[0]-8,H[1]+2],8,6);ba_limb(p,[50,-186],[72,-152],H,8,6);ba_disc(p,H[0],H[1],7,8);
+    if(o.hold==="lamp")lamp=[H[0]+4,H[1]+20];if(o.hold==="pick")pick=H;}
+  else{
+    // standing: head and neck, the body in its dress, both arms down, the near one on what it holds
+    if(dr!=="chador"){ba_disc(p,4,-270,19,23);ba_poly(p,[[-8,-254],[8,-254],[8,-234],[-8,-234]]);
+      if(o.head==="cap")ba_disc(p,4,-284,21,12);if(o.head==="turban"){ba_disc(p,4,-286,26,14);ba_disc(p,4,-277,23,9);}}
+    const R=dr==="chador"?[[0,-298],[14,-294],[25,-278],[28,-254],[44,-222],[48,-190],[46,-150],[48,-100],[52,-42],[56,-4]]
+      :dr==="tunic"?[[9,-240],[24,-236],[38,-228],[42,-214],[39,-190],[35,-165],[31,-135],[34,-112],[38,-92],[28,-90],[24,-50],[21,-8],[5,-8],[3,-72],[0,-80]]
+      :[[9,-240],[24,-236],[38,-228],[42,-214],[39,-190],[35,-165],[31,-135],[33,-110],[37,-70],[41,-35],[45,-6]];
+    ba_poly(p,R.concat(R.slice().reverse().map(([u,v])=>[-u,v])));
+    if(dr==="tunic"){ba_disc(p,-10,-4,13,5);ba_disc(p,18,-4,13,5);}else if(dr==="robe"){ba_disc(p,-12,-3,12,5);ba_disc(p,18,-3,12,5);}
+    const S=[38,-222],H=hand||(o.hold==="lamp"?[58,-148]:[52,-114]),E=[(S[0]+H[0])/2+8,(S[1]+H[1])/2+5];
+    if(dr!=="chador"||hand){ba_limb(p,S,E,H,9,6.5);ba_disc(p,H[0],H[1]+3,7,8);}
+    if(dr!=="chador"){ba_limb(p,[-38,-222],[-47,-166],[-52,-114],9,6.5);ba_disc(p,-52,-111,7,8);}
+    if(o.hold==="lamp")lamp=[H[0]+4,H[1]+30];}
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s*f,s);ctx.fillStyle=rgba(col,1);ctx.fill(p);
+    // the rim of light down the lit side, inside the figure only
+    ctx.save();ctx.clip(p);const rg=ctx.createLinearGradient(-70,0,o.kind==="stoop"?110:70,0);rg.addColorStop(0,rgba(rim,0));rg.addColorStop(0.7,rgba(rim,0));rg.addColorStop(1,rgba(rim,o.rimA==null?0.55:o.rimA));ctx.fillStyle=rg;ctx.fillRect(-140,-320,300,330);ctx.restore();
+    // what the hand holds
+    if(lamp){const[lx,ly]=lamp;ctx.strokeStyle="rgba(40,30,24,1)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(lx-4,ly-24);ctx.lineTo(lx,ly-6);ctx.stroke();ctx.fillStyle="rgba(150,104,60,1)";ctx.beginPath();ctx.ellipse(lx,ly,14,7,0,0,TAU);ctx.fill();
+      const fl=0.85+0.15*Math.sin((o.t||0)*9);ctx.fillStyle="rgba(255,214,140,1)";ctx.beginPath();ctx.ellipse(lx+12,ly-8,4,9*fl,0.3,0,TAU);ctx.fill();}
+    if(pick){const[hx,hy]=pick,ex=hx+46,ey=hy+40;ctx.lineCap="round";ctx.strokeStyle="rgba(84,62,42,1)";ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(hx-14,hy-10);ctx.lineTo(ex,ey);ctx.stroke();
+      ctx.strokeStyle="rgba(120,120,126,1)";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(ex-20,ey-26);ctx.quadraticCurveTo(ex+6,ey-4,ex+14,ey+30);ctx.stroke();}
+    ctx.restore();
+    if(lamp){const gx=x+(lamp[0]+12)*s*f,gy=y+(lamp[1]-8)*s;glow(ctx,gx,gy,160*s,[255,200,120],0.55);glow(ctx,gx,gy,44*s,[255,230,170],0.75);}});}
+// the windlass over a shaft: two posts, a drum with its handle (on the left with o.f -1), the rope down the shaft and a bucket of earth
+// rising; p (0..1) is the bucket's way up, from depth to the top; t turns the handle, and ba_crank says where the handle is
+function ba_crank(x,ys,s,t,f){const an=(t||0)*2.4;return[x+(f||1)*s*(62+Math.cos(an)*20),ys+s*(-119+Math.sin(an)*20)];}
+function ba_windlass(ctx,x,ys,s,p,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,ys);ctx.scale(s*(o.f||1),s);
+  ctx.strokeStyle="rgba(70,48,32,1)";ctx.lineWidth=9;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-64,-8);ctx.lineTo(-52,-118);ctx.moveTo(64,-8);ctx.lineTo(52,-118);ctx.stroke();
+  ctx.fillStyle="rgba(120,84,52,1)";rr(ctx,-56,-132,112,26,10);ctx.fill();ctx.strokeStyle="rgba(255,220,170,0.35)";ctx.lineWidth=2;rr(ctx,-56,-132,112,26,10);ctx.stroke();
+  const an=(t||0)*2.4,hx=62+Math.cos(an)*20,hy=-119+Math.sin(an)*20;ctx.strokeStyle="rgba(90,62,40,1)";ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(56,-119);ctx.lineTo(hx,hy);ctx.stroke();
+  const depth=o.depth||260,by=lerp(depth,-60,clamp(p,0,1));ctx.strokeStyle="rgba(196,170,130,0.9)";ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(0,-106);ctx.lineTo(0,by-22);ctx.stroke();
+  ctx.fillStyle="rgba(96,66,44,1)";ctx.beginPath();ctx.moveTo(-18,by-22);ctx.lineTo(18,by-22);ctx.lineTo(13,by+6);ctx.lineTo(-13,by+6);ctx.closePath();ctx.fill();ctx.fillStyle="rgba(150,112,78,1)";ctx.beginPath();ctx.ellipse(0,by-22,18,5,0,0,TAU);ctx.fill();
+  ctx.restore();});}
+
+/* ---------- shares of time ---------- */
+// one rotation of the water, as a bar of days, divided into its owners' shares; o.n shares, o.days, o.hi the share lit (index),
+// o.p draws it, o.lab its label; returns where share i starts and ends, so a scene can point at it
+function ba_shares(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,n=o.n||15,h=o.h||56,p=o.p==null?1:o.p,R=[];for(let i=0;i<n;i++)R.push([x+w*i/n,x+w*(i+1)/n]);if(a<=0.01)return R;
+  withA(ctx,a,()=>{glass(ctx,x-16,y-16,w+32,h+32,18,BAC,{glow:12,ea:0.7,fill:"rgba(8,14,24,0.9)"});
+    R.forEach(([x0,x1],i)=>{const q=clamp(p*n-i,0,1);if(q<=0)return;const hi=o.hi===i?1:0,c=hi?BA_WATER:mix(BA_SAND,[255,255,255],0.12*(i%2));
+      ctx.fillStyle=rgba(c,(0.28+0.5*hi)*q);ctx.fillRect(x0+2,y,(x1-x0-4)*q,h);if(hi){ctx.strokeStyle=rgba(BA_WATER,1);ctx.lineWidth=3;ctx.strokeRect(x0+1,y-2,x1-x0-2,h+4);glow(ctx,(x0+x1)/2,y+h/2,80,BA_WATER,0.35);}});
+    if(o.lab)T(ctx,o.lab,x,y-36,{w:700,size:30,color:rgba(INK,0.95)});});return R;}
+
+/* ---------- the data practice on the map ---------- */
+// ArchiMate's glyphs for what ea.js's archGlyph doesn't draw: a service (a rounded bar), an interface (a ring on a stalk), a product
+// (a box with a tab at its top left), and a group (a dashed box with its tab)
+function baGlyph(ctx,kind,x,y,s,col){if(kind==="service"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);rr(ctx,x-s*0.85,y-s*0.42,s*1.7,s*0.84,s*0.42);ctx.stroke();ctx.restore();}
+  else if(kind==="interface"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);ctx.beginPath();ctx.arc(x+s*0.3,y,s*0.38,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.85,y);ctx.lineTo(x-s*0.08,y);ctx.stroke();ctx.restore();}
+  else if(kind==="product"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);ctx.strokeRect(x-s*0.8,y-s*0.55,s*1.6,s*1.1);ctx.strokeRect(x-s*0.8,y-s*0.55,s*0.7,s*0.32);ctx.restore();}
+  else if(kind==="group"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.1);ctx.setLineDash([s*0.25,s*0.18]);ctx.strokeRect(x-s*0.8,y-s*0.4,s*1.6,s*0.95);ctx.setLineDash([]);ctx.strokeRect(x-s*0.8,y-s*0.62,s*0.7,s*0.22);ctx.restore();}
+  else archGlyph(ctx,kind,x,y,s,col);}
+// an element of the model, as archEl draws one, with the glyphs above; o.dash: a dashed red outline (no owner); o.owner: a gold tag
+// below it with the owner's name; o.src: a tag above it
+function baEl(ctx,x,y,w,h,name,col,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const r=kind==="service"?h/2:kind==="process"||kind==="capability"?16:6;
+  glass(ctx,x,y,w,h,r,col,{glow:12+14*(o.hi||0),ea:0.85,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.14+0.12*(o.hi||0));rr(ctx,x,y,w,h,r);ctx.fill();
+  if(o.dash){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BA_RED,0.95);ctx.lineWidth=3;rr(ctx,x-5,y-5,w+10,h+10,r+4);ctx.stroke();ctx.restore();}
+  const gs=o.gs||13;baGlyph(ctx,kind,x+w-gs-14-(kind==="service"?h*0.2:0),y+gs+10,gs,col);const sz=o.size||28,ls=wrapT(ctx,name,0,0,w-70,{size:sz,w:700,measure:true});
+  wrapT(ctx,name,x+w/2-10,y+h/2+sz*0.36-(ls.length-1)*sz*0.58,w-70,{size:sz,w:700,align:"center",color:rgba(INK,0.96),lh:sz*1.15,deco:o.deco});
+  if(o.owner)withA(ctx,o.ownerA==null?1:o.ownerA,()=>tag(ctx,x+w/2,y+h+30,o.owner,TRUST,{align:"center",size:28}));});}
+// The data practice's part of the business layer, drawn the same way in every film of the series: who does the work and how it's
+// reached on the left, its processes and products in the middle, the business objects and their domains on the right, with the roles
+// that own them above. Each film adds its own (o.film, 1 to 7; films 5 and 6, which joined from The map before the data, add none);
+// a film shows the ones before it as they were, and brings in its own.
+// Each element: [id, kind, name, film, x, y, w, h, colour]
+const BA_PRACTICE=[
+  ["team","actor","data team",1,120,214,400,96,BA_BUS],
+  ["tickets","interface","tickets",1,120,350,400,84,BA_BUS],
+  ["requests","service","answer data requests",1,120,474,400,96,BA_BUS],
+  ["products","service","provide data products",7,120,610,400,96,BA_BUS],
+  ["p_request","process","answer a data request",4,600,214,400,96,BA_BUS],
+  ["p_build","process","build a data product",4,600,342,400,96,BA_BUS],
+  ["p_source","process","take on a source",4,600,470,400,96,BA_BUS],
+  ["product","product","Meter readings",7,600,610,400,96,BA_BUS],
+  ["contract","contract","its contract",7,600,742,400,84,BA_BUS],
+  ["owner","role","data owner",3,1080,170,330,84,BA_BUS],
+  ["steward","role","data steward",3,1470,170,330,84,BA_BUS],
+  ["net","group","network",2,1080,300,330,470,BA_NET],
+  ["ret","group","retail",2,1470,300,330,330,BA_RET],
+  ["shared","group","shared",2,1470,650,330,190,BAC],
+  ["cp","object","connection point",1,1100,352,290,84,BA_INF],
+  ["reading","object","meter reading",2,1100,466,290,84,BA_INF],
+  ["solar","object","hosting capacity",2,1100,580,290,84,BA_INF],
+  ["account","object","account",1,1490,352,290,84,BA_INF],
+  ["bill","object","bill",2,1490,466,290,84,BA_INF],
+  ["location","object","location",2,1490,690,290,70,BA_INF]];
+// o.film: the film showing it; o.at[id]: when a new element arrives (default: at once); o.hi[id] (0..1): one lit;
+// o.owners: the owners' tags (o.ownersA, 0..1): in film 1 under each business object, from film 2 one for each domain, at the foot of its
+// group, below its last object; o.a: the whole panel; o.deco: names as texture (seen from afar);
+// o.ghost (0..1): the later films' elements, as empty dashed outlines still to fill (o.ghostAt[film]: when each film's arrive);
+// o.pre (0..1): this film's new elements, as the same outlines, until each arrives
+function ba_ghostBox(ctx,kind,x,y,w,h,col){ctx.save();ctx.setLineDash([10,9]);ctx.strokeStyle=rgba(col,0.6);ctx.lineWidth=2.4;rr(ctx,x,y,w,h,kind==="service"?h/2:kind==="process"?16:kind==="group"?14:6);ctx.stroke();ctx.restore();}
+function baPractice(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const F=o.film||1,at=o.at||{},hi=o.hi||{},OWN={cp:"Grace",account:"head of retail",reading:"Grace",solar:"Grace",bill:"head of retail",location:"Grace"},GOWN={net:"Grace",ret:"head of retail",shared:"Grace"};
+  withA(ctx,a,()=>{const gh=o.ghost||0,pre=o.pre||0;if(gh>0.01)BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f<=F)return;const ga=gh*(o.ghostAt&&o.ghostAt[f]!=null?fin(t,o.ghostAt[f],0.6):1);if(ga<=0.01)return;
+      withA(ctx,ga,()=>ba_ghostBox(ctx,kind,x,y,w,h,col));});
+    // this film's own elements, as outlines where each will be drawn, before each arrives
+    if(pre>0.01)BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f!==F||at[id]==null)return;const pa=pre*(1-fin(t,at[id],0.6));if(pa>0.01)withA(ctx,pa,()=>ba_ghostBox(ctx,kind,x,y,w,h,col));});
+    BA_PRACTICE.forEach(([id,kind,name,f,x,y,w,h,col])=>{if(f>F)return;const t0=at[id],v=t0==null?1:fin(t,t0,0.6);if(v<=0.01)return;
+      if(kind==="group"){withA(ctx,v,()=>{ctx.save();ctx.setLineDash([12,9]);ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=2.5;rr(ctx,x,y,w,h,14);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=rgba(col,0.05);rr(ctx,x,y,w,h,14);ctx.fill();ctx.restore();
+        T(ctx,name,x+18,y+38,{w:800,size:28,color:rgba(col,1),deco:o.deco});});
+        if(F>=2&&o.owners&&GOWN[id]){const foot=BA_PRACTICE.reduce((m,e)=>e[1]==="object"&&e[3]<=F&&e[4]>=x&&e[4]<x+w&&e[5]>=y&&e[5]<y+h?Math.max(m,e[5]+e[7]):m,y+52);
+          withA(ctx,v*(o.ownersA==null?1:o.ownersA),()=>tag(ctx,x+w/2,(foot+y+h)/2,GOWN[id],TRUST,{align:"center",size:28}));}
+        return;}
+      const k=t0==null?1:spring((t-t0)/0.75),dy=(1-k)*-14;
+      ctx.save();ctx.translate(0,dy);baEl(ctx,x,y,w,h,name,col,kind,{a:v,hi:hi[id]||0,deco:o.deco,owner:F<2&&o.owners&&OWN[id]?OWN[id]:null,ownerA:o.ownersA==null?1:o.ownersA});ctx.restore();});});}
+// a line between two of the panel's elements, by id: from the right edge of the first to the left edge of the second, or straight
+// down; p draws it
+function baPracticeLine(ctx,ida,idb,p,col,o){o=o||{};if(p<=0.01)return;const A=BA_PRACTICE.find(e=>e[0]===ida),B=BA_PRACTICE.find(e=>e[0]===idb);if(!A||!B)return;
+  const down=Math.abs(A[4]-B[4])<40,x0=down?A[4]+A[6]/2:A[4]+A[6],y0=down?A[5]+A[7]:A[5]+A[7]/2,x1=down?B[4]+B[6]/2:B[4],y1=down?B[5]:B[5]+B[7]/2;
+  ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;ctx.strokeStyle=rgba(col||SOFT,0.8);ctx.lineWidth=2.5;if(o.dash)ctx.setLineDash([8,7]);ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,clamp(p,0,1)),lerp(y0,y1,clamp(p,0,1)));ctx.stroke();ctx.restore();}
+
+// ArchiMate's access line, from a behaviour (a service, a process) to the business object it reads or writes: dashed, from the right
+// edge of the first to the left edge of the second, as a curve that o.lift raises over what lies between; p draws it along the curve
+function baPracticeAccess(ctx,ida,idb,p,o){o=o||{};if(p<=0.01)return;const A=BA_PRACTICE.find(e=>e[0]===ida),B=BA_PRACTICE.find(e=>e[0]===idb);if(!A||!B)return;
+  const P=[[A[4]+A[6],A[5]+A[7]/2],null,null,[B[4],B[5]+B[7]/2]],lift=o.lift||0;P[1]=[P[0][0]+300,P[0][1]];P[2]=[P[3][0]-300,P[3][1]-lift];
+  ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;ctx.setLineDash([9,8]);ctx.strokeStyle=rgba(o.col||BA_INF,0.7);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(P[0][0],P[0][1]);
+  const n=48,m=Math.round(n*clamp(p,0,1));for(let i=1;i<=m;i++){const u=i/n,v=1-u,x=v*v*v*P[0][0]+3*v*v*u*P[1][0]+3*v*u*u*P[2][0]+u*u*u*P[3][0],y=v*v*v*P[0][1]+3*v*v*u*P[1][1]+3*v*u*u*P[2][1]+u*u*u*P[3][1];ctx.lineTo(x,y);}
+  ctx.stroke();ctx.restore();}
+
+/* ---------- the utility's paper and cards ---------- */
+// a ticket, as the data team receives it: a kicker with its number, who asked, what for, and its state
+function baTicket(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const col=o.col||BA_BUS,ls=wrapT(ctx,o.ask||"",0,0,w-56,{size:36,w:700,measure:true}),h=150+ls.length*44+(o.from?50:0);
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,col,{glow:14+12*(o.hi||0),ea:0.85,fill:"rgba(8,12,22,0.95)"});T(ctx,o.kicker||"ticket",x+28,y+48,{f:"mono",w:500,size:28,color:rgba(col,1)});
+    ls.forEach((l,i)=>T(ctx,l,x+28,y+104+i*44,{w:700,size:36}));if(o.from)T(ctx,o.from,x+28,y+110+ls.length*44+8,{w:600,size:28,color:rgba(SOFT,1)});
+    if(o.state)withA(ctx,o.stateA==null?1:o.stateA,()=>tag(ctx,x+28,y+h-36,o.state,o.stateCol||AMBER,{size:28}));});return h;}
+// a count from one source: the number, what it counts, and where it came from
+function baCount(ctx,x,y,w,h,num,what,src,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,col,{glow:12+16*(o.hi||0),ea:0.85,fill:"rgba(8,12,22,0.95)"});
+  T(ctx,src,x+26,y+46,{f:"mono",w:500,size:28,color:rgba(col,1)});T(ctx,num,x+26,y+124,{w:800,size:64});T(ctx,what,x+26,y+172,{w:700,size:30,color:rgba(INK,0.9)});
+  if(o.dash){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BA_RED,0.95);ctx.lineWidth=3;rr(ctx,x-6,y-6,w+12,h+12,22);ctx.stroke();ctx.restore();}
+  if(o.mark>0.01){if(o.ok)kt_gtick(ctx,x+w-34,y+34,18,o.mark);else kt_rcross(ctx,x+w-34,y+34,18,o.mark);}});}
+
+/* ---------- the utility's capabilities ---------- */
+// the eight capabilities of the utility at level 1, as *What it must be able to do* confirmed them on Tomás's map, with their owners
+// (generating power has none yet)
+const BA_CAPS=[["plan the network","Grace"],["operate the network","Grace"],["maintain assets","Grace"],["connect customers","Grace"],
+  ["generate power",null],["sell energy","head of retail"],["serve customers","head of retail"],["meet obligations","Ama"]];
+// a capability, as the map draws one: glass in the strategy layer's colour, ArchiMate's glyph in its corner, its name in the middle;
+// o.hi (0..1) lights it; o.heat, a colour, tints it by how well it works today (o.heatA, 0..1); o.dim (0..1) sets it back
+function baCap(ctx,x,y,w,h,name,o){o=o||{};const a=(o.a==null?1:o.a)*(1-0.6*(o.dim||0));if(a<=0.01)return;const hA=o.heatA==null?(o.heat?1:0):o.heatA,col=o.heat?mix(BA_STR,o.heat,hA):BA_STR;
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,col,{glow:12+18*(o.hi||0)+10*hA,ea:0.85,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.13+0.14*(o.hi||0)+0.1*hA);rr(ctx,x,y,w,h,16);ctx.fill();
+    archGlyph(ctx,"capability",x+w-20,y+20,9,col);const sz=o.size||28,ls=wrapT(ctx,name,0,0,w-44,{size:sz,w:700,measure:true});
+    wrapT(ctx,name,x+w/2,y+h/2+sz*0.36-(ls.length-1)*sz*0.58+4,w-44,{size:sz,w:700,align:"center",color:rgba(INK,0.96),lh:sz*1.15,deco:o.deco});});}
+
+/* ---------- the day of water ---------- */
+// One day of a qanat's water as a dial: the day's ring, cut into shares of time from the top, clockwise (o.n shares, each 24/n
+// hours). o.p draws the ring of shares round; o.cols[i] colours share i, an owner's (o.col for all); o.hi (index) lights one, by
+// o.hiA (0..1); o.full (0..1) lights the whole ring, as the shares add up to the day; o.split (0..1) cuts every share into o.k
+// slivers, each its own owner's; o.sliver [share, sliver] and o.slA (0..1) light one sliver; o.mid, o.sub: the words in the middle
+function ba_day(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const n=o.n||15,p=clamp(o.p==null?1:o.p,0,1),r0=r*0.64,k=o.k||5,sp=clamp(o.split||0,0,1);
+  const ang=u=>-Math.PI/2+u*TAU,seg=(u0,u1,c,al)=>{ctx.fillStyle=rgba(c,al);ctx.beginPath();ctx.arc(x,y,r,ang(u0),ang(u1));ctx.arc(x,y,r0,ang(u1),ang(u0),true);ctx.closePath();ctx.fill();};
+  const OWN=[[222,178,120],[196,150,108],[176,170,118],[214,156,132],[168,150,128],[226,196,150],[190,132,100]];
+  withA(ctx,a,()=>{ctx.save();ctx.shadowColor=rgba(BAC,0.35);ctx.shadowBlur=30;ctx.fillStyle="rgba(10,14,22,0.92)";ctx.beginPath();ctx.arc(x,y,r+16,0,TAU);ctx.fill();ctx.restore();
+    ctx.strokeStyle=rgba(BAC,0.35);ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r+16,0,TAU);ctx.stroke();
+    const gp=0.006;for(let i=0;i<n;i++){const u0=i/n,u1=(i+1)/n,q=clamp(p*n-i,0,1);if(q<=0)break;const c=o.cols?o.cols[i]:(o.col||BA_SAND);
+      if(sp>0.01){for(let j=0;j<k;j++){const v0=u0+(u1-u0)*j/k,v1=u0+(u1-u0)*(j+1)/k;if(v0>u0+(u1-u0)*q)break;const cj=OWN[Math.floor(hash(i*k+j,977)*OWN.length)];
+          seg(v0+gp*0.5,Math.min(v1,u0+(u1-u0)*q)-gp*0.5,mix(c,cj,sp),0.62);}}
+      else seg(u0+gp,u0+(u1-u0)*q-gp,c,0.6);
+      const hi=o.hi===i?(o.hiA==null?1:o.hiA):0;if(hi>0.01){seg(u0+gp,u1-gp,BA_WATER,0.85*hi);const am=ang((u0+u1)/2);glow(ctx,x+Math.cos(am)*(r+r0)/2,y+Math.sin(am)*(r+r0)/2,r*0.36,BA_WATER,0.4*hi);}}
+    if(o.sliver&&(o.slA||0)>0.01){const[i,j]=o.sliver,v0=(i+j/k)/n,v1=(i+(j+1)/k)/n;seg(v0,v1,BA_WATER,o.slA);ctx.save();ctx.strokeStyle=rgba([235,250,255],o.slA);ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.arc(x,y,r+3,ang(v0),ang(v1));ctx.arc(x,y,r0-3,ang(v1),ang(v0),true);ctx.closePath();ctx.stroke();ctx.restore();}
+    // the ring closes: the shares make the whole day
+    const fl=o.full||0;if(fl>0.01){ctx.save();ctx.strokeStyle=rgba(BA_OK,0.9*fl);ctx.lineWidth=5;ctx.shadowColor=rgba(BA_OK,0.7*fl);ctx.shadowBlur=18;ctx.beginPath();ctx.arc(x,y,r+8,0,TAU);ctx.stroke();ctx.restore();}
+    // the hours of the day round the outside, as ticks, and the top of the day marked
+    ctx.strokeStyle=rgba(INK,0.4);ctx.lineWidth=2;for(let h=0;h<24;h++){const an=ang(h/24),l=h%6?6:12;ctx.beginPath();ctx.moveTo(x+Math.cos(an)*(r+16),y+Math.sin(an)*(r+16));ctx.lineTo(x+Math.cos(an)*(r+16+l),y+Math.sin(an)*(r+16+l));ctx.stroke();}
+    if(o.mid)T(ctx,o.mid,x,y+(o.sub?-2:14),{w:800,size:o.midSize||40,align:"center",color:rgba(INK,0.96)});if(o.sub)T(ctx,o.sub,x,y+42,{w:600,size:28,align:"center",color:rgba(SOFT,1)});});}
+// where a share's middle sits on the dial, to point a tag at it
+function ba_dayAt(x,y,r,n,i,f){const an=-Math.PI/2+(i+0.5)/n*TAU,rr_=r*(f==null?0.82:f);return[x+Math.cos(an)*rr_,y+Math.sin(an)*rr_];}
+
+/* ---------- the glossary ---------- */
+// The business glossary as a plain table, drawn from the business objects on the map: a row for each term, with its definition, its
+// domain and its owner, grouped by domain (each row's domain colour runs down its left edge). rows: [term, definition, domain, owner,
+// colour]; o.rowA[i] (0..1): row i, as it arrives; o.col (index) and o.colA (0..1): a column lit; o.hiRow[i] (0..1): a row lit;
+// o.w: the columns' widths. Returns the table's height and each row's top, so a scene can point at one
+const BA_GLOSS_COLS=["term","definition","domain","owner"];
+function baGlossary(ctx,x,y,rows,o){o=o||{};const a=o.a==null?1:o.a,Wc=o.w||[300,700,200,260],rh=o.rh||66,hh=70,wd=Wc.reduce((s,v)=>s+v,0)+40,ht=hh+rows.length*rh+16,top=rows.map((_,i)=>y+hh+i*rh);
+  if(a<=0.01)return{h:ht,top,w:wd};
+  withA(ctx,a,()=>{glass(ctx,x,y,wd,ht,18,BA_INF,{glow:12,ea:0.8,fill:"rgba(12,9,12,0.95)"});
+    let cx=x+24;const cl=o.colA||0;BA_GLOSS_COLS.forEach((c,j)=>{const lit=o.col===j?cl:0,cc=j===3?TRUST:BA_INF;if(lit>0.01){ctx.fillStyle=rgba(cc,0.13*lit);rr(ctx,cx-12,y+12,Wc[j],ht-24,10);ctx.fill();}
+      T(ctx,c,cx,y+46,{f:"mono",w:500,size:28,color:rgba(cc,0.8+0.2*lit)});cx+=Wc[j];});
+    ctx.strokeStyle=rgba(BA_INF,0.35);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+16,y+hh-6);ctx.lineTo(x+wd-16,y+hh-6);ctx.stroke();
+    rows.forEach(([term,def,dom,own,col],i)=>{const ra=o.rowA?o.rowA[i]==null?1:o.rowA[i]:1;if(ra<=0.01)return;const ry=top[i],hr=o.hiRow?o.hiRow[i]||0:0;
+      withA(ctx,ra,()=>{if(hr>0.01){ctx.fillStyle=rgba(col,0.14*hr);rr(ctx,x+12,ry+4,wd-24,rh-8,10);ctx.fill();}
+        ctx.fillStyle=rgba(col,0.95);rr(ctx,x+12,ry+10,6,rh-20,3);ctx.fill();
+        let xx=x+24;const yb=ry+rh/2+10;T(ctx,term,xx,yb,{w:700,size:30});xx+=Wc[0];T(ctx,def,xx,yb,{w:600,size:28,color:rgba(INK,0.88)});xx+=Wc[1];
+        T(ctx,dom,xx,yb,{w:700,size:28,color:rgba(col,1)});xx+=Wc[2];T(ctx,own,xx,yb,{w:700,size:28,color:rgba(TRUST,1)});
+        if(i<rows.length-1){ctx.strokeStyle="rgba(255,255,255,0.07)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+24,ry+rh);ctx.lineTo(x+wd-24,ry+rh);ctx.stroke();}});});});
+  return{h:ht,top,w:wd};}
+
+/* ===== Rules with a home: the film's own pictures (prefixed d9_, from the film's place in The map before the data) =====
+   Khorasan, in the ninth century: the plain from above, with a new qanat dug too close beside an old one, and the old village's fields
+   gone dry; Nishapur, the governor's court, with the law books in a niche, the table where the book on qanats is written, and the
+   book itself. At the utility, on the wall and on the films' dark glass: day one's data rule and the bill of $412.80; the household
+   away in June and its meter's stored readings; the nightly script on the wall between the network and retail, writing to a queue
+   nothing reads; the rule in five places; the rule split in two, one on each side, joined by what crosses; where each comes from;
+   what it's about; the step it's attached to and what that step expects of the data; the rule in a set form, with the checks
+   generated from it; and the concepts, relationships and rules, generally an ontology. */
 
 const MOT=LAY6[0][1],STR=LAY6[1][1],BUS=LAY6[2][1],INF=LAY6[3][1],APL=LAY6[4][1];
 // the two sides of the wall, as in Who does it: the network in blue, retail in rose; red, for what fails; green, for a job that ran
 const D9_NET=[132,176,255],D9_RET=[255,150,186],D9_RED=[232,96,84],D9_OK=[120,210,130];
-// Tartu: the register's glass, pale as frost, and the dawn
-const D9_TAR=[196,222,255],D9_DAWN=[255,196,140];
 // someone standing at the right of the frame, drawn facing the other way: the "explain" gesture then points at what they explain
 function d9_personR(ctx,id,x,y,s,o){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);person(ctx,id,x,y,s,o);ctx.restore();}
 // no-break spaces: words a note should keep on one line
 const d9_nb=s=>s.replace(/ /g," ");
 
-/* ---------- Tartu, at dawn ---------- */
-// Looking down the Emajõgi from its bank: the river narrows to Kaarsild, the arch bridge students walk over the top of, with the
-// old town behind it (Toome Hill's trees and the cathedral's two towers on the left, the town hall's tower at the bridge's end,
-// St John's tower beyond). A sketch, not a survey. u (0..1) brings the light up.
-const D9_LB=[[-60,1010],[180,880],[380,770],[520,694],[612,646],[668,624]],D9_RB=[[1480,1100],[1418,930],[1352,800],[1292,700],[1248,646],[1222,624]];
-function d9_sky(ctx,t,u){const g=ctx.createLinearGradient(0,-200,0,640);g.addColorStop(0,rgba(mix([5,8,22],[26,38,76],u),1));g.addColorStop(0.5,rgba(mix([12,18,40],[78,84,128],u),1));
-  g.addColorStop(0.86,rgba(mix([26,28,52],[204,146,124],u),1));g.addColorStop(1,rgba(mix([34,32,54],[246,182,134],u),1));ctx.fillStyle=g;ctx.fillRect(-600,-400,W+1200,1040);
-  for(let i=0;i<110;i++){const x=hash(i,901)*W*1.3-W*0.15,y=hash(i,902)*460-120,tw_=0.55+0.45*Math.sin(t*1.3+i*2.1);ctx.fillStyle="rgba(232,238,255,"+(0.7*(1-u)*tw_*hash(i,903))+")";ctx.fillRect(x,y,1.8,1.8);}
-  // the sun, still under the far bank: its glow where it will rise, behind the town
-  glow(ctx,1090,640,640,D9_DAWN,0.22*u);glow(ctx,1090,630,240,[255,224,186],0.3*u);
-  // thin clouds, lit from below
-  for(let i=0;i<7;i++){const cx=((hash(i,904)*2200+t*(3+hash(i,905)*4))%2400)-240,cy=200+hash(i,906)*300,cw=260+hash(i,907)*380;ctx.save();ctx.globalAlpha*=0.16+0.18*u;
-    const cg=ctx.createLinearGradient(0,cy-14,0,cy+14);cg.addColorStop(0,"rgba(120,110,150,0)");cg.addColorStop(0.6,rgba(mix([60,64,96],[255,190,160],u),1));cg.addColorStop(1,"rgba(120,110,150,0)");
-    ctx.fillStyle=cg;ctx.beginPath();ctx.ellipse(cx,cy,cw/2,12+hash(i,908)*10,0,0,TAU);ctx.fill();ctx.restore();}}
-// the old town behind the bridge, as silhouettes in two depths, a few windows lit
-function d9_city(ctx,t,u){const base=618,far=mix([16,20,38],[86,72,96],u),mid=mix([12,14,28],[56,46,66],u),lit=[255,206,140],skyc=mix([34,36,64],[214,158,140],u);
-  // Toome Hill, and on it the cathedral's ruin: the nave's empty pointed arches, with the sky through them, and its two towers
-  ctx.fillStyle=rgba(far,1);ctx.beginPath();ctx.moveTo(-200,base);ctx.bezierCurveTo(-40,560,170,500,360,500);ctx.bezierCurveTo(520,500,600,560,720,base);ctx.closePath();ctx.fill();
-  ctx.fillRect(184,456,150,56);for(let k=0;k<4;k++){const ox=194+k*34;ctx.fillStyle=rgba(skyc,0.5);ctx.beginPath();ctx.moveTo(ox,512);ctx.lineTo(ox,478);ctx.quadraticCurveTo(ox,466,ox+9,460);ctx.quadraticCurveTo(ox+18,466,ox+18,478);ctx.lineTo(ox+18,512);ctx.closePath();ctx.fill();}
-  ctx.fillStyle=rgba(far,1);[[332,44],[388,44]].forEach(([x,w])=>{ctx.fillRect(x,416,w,100);for(let k=0;k<4;k++)ctx.fillRect(x+k*(w/4)+1,408,w/8,10);
-    ctx.fillStyle=rgba(mix(far,[0,0,0],0.45),1);[438,474].forEach(wy=>{ctx.beginPath();ctx.moveTo(x+w/2-5,wy+20);ctx.lineTo(x+w/2-5,wy+6);ctx.quadraticCurveTo(x+w/2,wy-2,x+w/2+5,wy+6);ctx.lineTo(x+w/2+5,wy+20);ctx.closePath();ctx.fill();});ctx.fillStyle=rgba(far,1);});
-  // the hill's trees, in front of the ruin's feet
-  for(let i=0;i<46;i++){const x=-170+i*19,top=i<6?560-i*9:i<30?506-6*Math.sin(i*0.7)-8*hash(i,921):500+(i-30)*7,r=14+hash(i,922)*12;if(x>720)break;ctx.fillStyle=rgba(mix(far,[30,40,20],0.15+0.2*hash(i,920)),1);ctx.beginPath();ctx.arc(x,top+r*0.5+(x>180&&x<440?14:0),r,0,TAU);ctx.fill();}
-  // roofs down to the water, in front of the hill
-  ctx.fillStyle=rgba(mid,1);for(let i=0;i<40;i++){const x=40+i*48+hash(i,923)*20,w=54+hash(i,924)*40,h=26+hash(i,925)*36;if(x>880&&x<1040)continue;const y=base-h-(x<700?0:4);
-    ctx.beginPath();ctx.moveTo(x,base);ctx.lineTo(x,y);if(hash(i,926)<0.6){ctx.lineTo(x+w/2,y-18-hash(i,927)*10);}ctx.lineTo(x+w,y);ctx.lineTo(x+w,base);ctx.closePath();ctx.fill();
-    if(hash(i,928)<0.45){const wx=x+8+hash(i,929)*(w-20),wy=y+8+hash(i,930)*(h-18),f=0.6+0.4*Math.sin(t*0.7+i);ctx.fillStyle=rgba(lit,0.55*f*(1-0.5*u));ctx.fillRect(wx,wy,5,7);ctx.fillStyle=rgba(mid,1);}}
-  // the town hall, at the end of the bridge, with its tower and spire
-  ctx.fillStyle=rgba(mid,1);ctx.fillRect(868,540,184,base-540);ctx.beginPath();ctx.moveTo(860,542);ctx.lineTo(960,512);ctx.lineTo(1060,542);ctx.closePath();ctx.fill();
-  ctx.fillRect(947,470,26,60);ctx.beginPath();ctx.moveTo(943,472);ctx.lineTo(960,420);ctx.lineTo(977,472);ctx.closePath();ctx.fill();ctx.fillRect(959,406,2,16);
-  for(let k=0;k<7;k++){const f=0.7+0.3*Math.sin(t*0.5+k*1.3);ctx.fillStyle=rgba(lit,(k%3===1?0.7:0.35)*f*(1-0.4*u));ctx.fillRect(884+k*24,568,8,12);}ctx.fillStyle=rgba(lit,0.6*(1-0.3*u));ctx.beginPath();ctx.arc(960,492,5,0,TAU);ctx.fill();
-  // St John's tower, beyond the roofs on the right
-  ctx.fillStyle=rgba(far,1);ctx.fillRect(1282,450,52,base-450);ctx.beginPath();ctx.moveTo(1276,454);ctx.lineTo(1308,404);ctx.lineTo(1340,454);ctx.closePath();ctx.fill();
-  ctx.fillStyle=rgba(mix(far,[0,0,0],0.4),1);ctx.beginPath();ctx.moveTo(1302,500);ctx.lineTo(1302,480);ctx.quadraticCurveTo(1308,470,1314,480);ctx.lineTo(1314,500);ctx.closePath();ctx.fill();
-  // mist on the water, at the far end
-  for(let i=0;i<5;i++){const mx=((i*420+t*(6+i*2))%2400)-300,my=606+i*6;ctx.save();ctx.globalAlpha*=0.1+0.08*u;const mg=ctx.createRadialGradient(mx,my,10,mx,my,320);mg.addColorStop(0,"rgba(230,226,240,1)");mg.addColorStop(1,"rgba(230,226,240,0)");
-    ctx.fillStyle=mg;ctx.beginPath();ctx.ellipse(mx,my,320,26,0,0,TAU);ctx.fill();ctx.restore();}}
-// trees along both banks, smaller towards the bridge, in their autumn colours
-function d9_bankTrees(ctx,t,u){const along=(B,k)=>{let L=0;const D=[0];for(let i=1;i<B.length;i++){L+=Math.hypot(B[i][0]-B[i-1][0],B[i][1]-B[i-1][1]);D.push(L);}const d=L*k;let i=1;while(i<B.length-1&&D[i]<d)i++;const f=(d-D[i-1])/((D[i]-D[i-1])||1);return[lerp(B[i-1][0],B[i][0],f),lerp(B[i-1][1],B[i][1],f)];};
-  const tree=(x,y,s,i)=>{const sw=Math.sin(t*0.6+i)*2*s,dark=mix([10,12,16],[40,40,36],u);ctx.fillStyle=rgba(dark,1);ctx.fillRect(x-3*s,y-60*s,6*s,60*s);
-    for(let k=0;k<6;k++){const cx=x+(hash(i*7+k,981)-0.5)*44*s+sw,cy=y-70*s-hash(i*7+k,982)*50*s,r=(18+hash(i*7+k,983)*14)*s,warm=hash(i*7+k,984);
-      ctx.fillStyle=rgba(mix(mix([14,18,20],[60,64,40],u),mix([60,46,20],[214,156,60],u),warm*0.6),1);ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fill();}};
-  // drawn far to near, so the near ones overlap
-  for(let k=9;k>=0;k--){const v=k/9,[x,y]=along(D9_LB.slice().reverse(),v*0.85),s=lerp(0.28,1.25,v*v);tree(x-70*s-24,y-6*s,s,k);}
-  for(let k=5;k>=0;k--){const v=k/5,[x,y]=along(D9_RB.slice().reverse(),v*0.5),s=lerp(0.28,0.8,v);tree(x+60*s+20,y-6*s,s,20+k);}}
-// the river, from the bridge to our bank: the sky in it, ripples, the dawn's column of light
-function d9_river(ctx,t,u){ctx.save();ctx.beginPath();ctx.moveTo(D9_LB[0][0],D9_LB[0][1]);D9_LB.forEach(p=>ctx.lineTo(p[0],p[1]));D9_RB.slice().reverse().forEach(p=>ctx.lineTo(p[0],p[1]));ctx.lineTo(1480,1100);ctx.lineTo(-60,1100);ctx.closePath();
-  const g=ctx.createLinearGradient(0,618,0,1080);g.addColorStop(0,rgba(mix([30,30,54],[196,150,140],u),1));g.addColorStop(0.25,rgba(mix([16,20,40],[84,86,124],u),1));g.addColorStop(1,rgba(mix([5,8,18],[16,24,46],u),1));ctx.fillStyle=g;ctx.fill();ctx.clip();
-  // the dawn's light, laid on the water under where the sun will rise
-  const cg=ctx.createLinearGradient(0,620,0,1080);cg.addColorStop(0,rgba(D9_DAWN,0.5*u));cg.addColorStop(1,rgba(D9_DAWN,0));ctx.fillStyle=cg;ctx.beginPath();ctx.moveTo(1050,620);ctx.lineTo(1130,620);ctx.lineTo(1330,1100);ctx.lineTo(850,1100);ctx.closePath();ctx.fill();
-  // ripples: short strokes, closer together towards the bridge, drifting
-  for(let i=0;i<150;i++){const v=hash(i,931),y=622+Math.pow(v,1.7)*470,k=(y-616)/464,x0=lerp(700,-60,k),x1=lerp(1222,1480,k),x=x0+((hash(i,932)*(x1-x0)+t*(8+20*k))%(x1-x0)),len=(10+46*k)*(0.5+hash(i,933));
-    const warm=Math.abs(x-lerp(1090,1090,k))<lerp(40,240,k)?1:0;ctx.strokeStyle=warm?rgba(mix([255,220,180],D9_DAWN,0.4),(0.18+0.4*u)*(0.4+0.6*k)):rgba([170,186,230],0.06+0.1*k);ctx.lineWidth=0.8+1.6*k;
-    ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+len,y+Math.sin(t+i)*0.6);ctx.stroke();}
-  ctx.restore();}
-// Kaarsild: a deck on piers, and its arch over the top, with hangers; its reflection under it
-function d9_bridge(ctx,t,u){const y=626,x0=604,x1=1290,ax0=648,ax1=1246,top=528,col=mix([110,112,136],[244,226,214],u),sh=mix([24,24,40],[96,84,100],u);
-  const arch=(k)=>{const x=lerp(ax0,ax1,k);return[x,y-(y-top)*(1-Math.pow(2*k-1,2))];};
-  // the reflection first, rippled and faint
-  ctx.save();ctx.globalAlpha*=0.32;ctx.strokeStyle=rgba(col,1);ctx.lineWidth=7;ctx.beginPath();for(let i=0;i<=40;i++){const[x,yy]=arch(i/40),ry=2*y+16-yy+Math.sin(i*1.7+t*2)*2;i?ctx.lineTo(x,ry):ctx.moveTo(x,ry);}ctx.stroke();
-  ctx.fillStyle=rgba(col,1);ctx.fillRect(x0,y+12,x1-x0,6);ctx.restore();
-  // the deck and its edge
-  ctx.fillStyle=rgba(sh,1);ctx.fillRect(x0,y,x1-x0,12);ctx.fillStyle=rgba(col,0.9);ctx.fillRect(x0,y-2,x1-x0,4);
-  // hangers, then the arch, catching the light along its top
-  ctx.strokeStyle=rgba(col,0.7);ctx.lineWidth=2;for(let i=1;i<18;i++){const[x,yy]=arch(i/18);ctx.beginPath();ctx.moveTo(x,yy+6);ctx.lineTo(x,y);ctx.stroke();}
-  ctx.strokeStyle=rgba(sh,1);ctx.lineWidth=13;ctx.lineCap="round";ctx.beginPath();for(let i=0;i<=48;i++){const[x,yy]=arch(i/48);i?ctx.lineTo(x,yy):ctx.moveTo(x,yy);}ctx.stroke();
-  ctx.strokeStyle=rgba(col,1);ctx.lineWidth=5;ctx.beginPath();for(let i=0;i<=48;i++){const[x,yy]=arch(i/48);i?ctx.lineTo(x,yy-4):ctx.moveTo(x,yy-4);}ctx.stroke();
-  // lamps along the deck, warm, and their glow
-  for(let i=0;i<9;i++){const x=x0+40+i*(x1-x0-80)/8;glow(ctx,x,y-10,16,[255,214,150],0.5*(1-0.6*u));ctx.fillStyle="rgba(255,226,170,"+(0.9-0.5*u)+")";ctx.fillRect(x-1.5,y-14,3,4);}}
-// the banks: the left with its path, lamps and birches; the right under the near building
-function d9_banks(ctx,t,u){const gnd=mix([8,10,18],[30,28,40],u),path=mix([30,30,44],[110,96,100],u);
-  ctx.fillStyle=rgba(gnd,1);ctx.beginPath();ctx.moveTo(-200,618);ctx.lineTo(700,618);D9_LB.slice().reverse().forEach(p=>ctx.lineTo(p[0],p[1]));ctx.lineTo(-200,1100);ctx.closePath();ctx.fill();
-  ctx.beginPath();ctx.moveTo(1200,618);ctx.lineTo(2200,618);ctx.lineTo(2200,1100);ctx.lineTo(1480,1100);D9_RB.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.closePath();ctx.fill();
-  // the stone edge of the left bank, and its path
-  ctx.strokeStyle=rgba(path,1);ctx.lineWidth=3;ctx.beginPath();D9_LB.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]-2):ctx.moveTo(p[0],p[1]-2));ctx.stroke();
-  ctx.strokeStyle=rgba(mix(path,[0,0,0],0.3),1);ctx.lineWidth=2;ctx.beginPath();D9_LB.forEach((p,i)=>{const q=[p[0]-80*(p[1]-616)/400,p[1]-20*(p[1]-616)/400];i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);});ctx.stroke();
-  // lamps along the path, smaller towards the bridge
-  [[0.15,1],[0.4,0.66],[0.62,0.44],[0.8,0.3]].forEach(([k,s],i)=>{const x=lerp(560,-20,1-k)-60*s,y=lerp(650,1040,s*0.9);ctx.strokeStyle=rgba(mix(gnd,[0,0,0],0.4),1);ctx.lineWidth=5*s;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y-230*s);ctx.stroke();
-    glow(ctx,x,y-236*s,70*s,[255,206,140],0.55*(1-0.5*u));ctx.fillStyle="rgba(255,230,180,0.95)";ctx.beginPath();ctx.arc(x,y-236*s,7*s,0,TAU);ctx.fill();});}
-// a birch, near: a pale trunk with dark marks, tapering branches, the last yellow leaves; it sways a little
-function d9_birch(ctx,x,y,s,t,u){ctx.save();ctx.translate(x,y);const sw=Math.sin(t*0.6)*0.012,bark=mix([120,120,130],[226,220,212],u),mark=mix([10,10,16],[40,34,36],u);
-  const br=(x0,y0,an,len,w,d,seed)=>{if(d>5||len<14)return;const a2=an+Math.sin(t*0.7+seed)*0.01*d+sw*d,x1=x0+Math.cos(a2)*len,y1=y0+Math.sin(a2)*len,cx=(x0+x1)/2+Math.cos(a2+1.57)*len*0.08,cy=(y0+y1)/2+Math.sin(a2+1.57)*len*0.08;
-    ctx.strokeStyle=rgba(d<2?bark:mix(bark,mark,0.5),1);ctx.lineWidth=w;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(cx,cy,x1,y1);ctx.stroke();
-    if(d>=3)for(let k=0;k<3;k++){const lx=lerp(x0,x1,0.5+k*0.25),ly=lerp(y0,y1,0.5+k*0.25)+6,on=hash(seed*7+k,941)<0.6;if(!on)continue;ctx.save();ctx.translate(lx,ly);ctx.rotate(hash(seed+k,942)*3+Math.sin(t+seed)*0.2);
-      ctx.fillStyle=rgba(mix([150,120,40],[250,204,80],u),0.95);ctx.beginPath();ctx.moveTo(0,-7*s);ctx.quadraticCurveTo(6*s,0,0,7*s);ctx.quadraticCurveTo(-6*s,0,0,-7*s);ctx.fill();ctx.restore();}
-    br(x1,y1,a2-0.42-hash(seed,943)*0.2,len*0.72,w*0.62,d+1,seed*2+1);br(x1,y1,a2+0.36+hash(seed,944)*0.2,len*0.66,w*0.6,d+1,seed*2+2);};
-  // the trunk, tapering, with its dark marks
-  ctx.fillStyle=rgba(bark,1);ctx.beginPath();ctx.moveTo(-16*s,0);ctx.bezierCurveTo(-12*s,-200*s,-8*s,-360*s,-4*s,-520*s);ctx.lineTo(4*s,-520*s);ctx.bezierCurveTo(8*s,-360*s,12*s,-200*s,16*s,0);ctx.closePath();ctx.fill();
-  ctx.fillStyle=rgba(mark,0.85);for(let k=0;k<14;k++){const yy=-20*s-k*36*s,ww=(14-k*0.7)*s;ctx.fillRect(-ww*(0.2+hash(k,945)*0.8),yy,ww*(0.6+hash(k,946)*0.6),3+hash(k,947)*4);}
-  br(-2*s,-300*s,-2.2,150*s,7*s,1,1);br(2*s,-380*s,-0.9,140*s,6*s,1,2);br(0,-470*s,-1.8,130*s,5*s,1,3);br(0,-520*s,-1.45,120*s,4*s,2,4);ctx.restore();}
-// leaves falling across the foreground
-function d9_leaves(ctx,t,a,u){if(a<=0.01)return;withA(ctx,a,()=>{for(let i=0;i<10;i++){const sp=22+hash(i,951)*26,y=((hash(i,952)*1300+t*sp)%1300)-120,x=hash(i,953)*1500+Math.sin(t*0.8+i*2)*60-40,s=0.8+hash(i,954)*0.8;
-  ctx.save();ctx.translate(x,y);ctx.rotate(t*(0.6+hash(i,955))+i);ctx.scale(Math.cos(t*1.6+i),1);ctx.fillStyle=rgba(mix([150,110,40],[248,196,70],u),0.9);ctx.beginPath();ctx.moveTo(0,-9*s);ctx.quadraticCurveTo(7*s,0,0,9*s);ctx.quadraticCurveTo(-7*s,0,0,-9*s);ctx.fill();
-  ctx.strokeStyle="rgba(120,80,30,0.6)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,-8*s);ctx.lineTo(0,8*s);ctx.stroke();ctx.restore();}});}
-// the near building on the right bank, its windows dark but one: the family's, warm, the parents holding the baby
-const D9_WIN=[1594,466,170,190];
-function d9_building(ctx,t,u,o){o=o||{};const wall=mix([10,12,22],[38,34,48],u),edge=mix([30,30,46],[104,94,110],u);ctx.fillStyle=rgba(wall,1);ctx.beginPath();ctx.moveTo(1500,1100);ctx.lineTo(1500,236);ctx.lineTo(2100,190);ctx.lineTo(2100,1100);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(edge,1);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(1500,1100);ctx.lineTo(1500,236);ctx.lineTo(2100,190);ctx.stroke();ctx.fillStyle=rgba(edge,0.8);ctx.fillRect(1494,230,14,12);
-  // the other windows: dark glass with the sky in it, a frame and a sill; one or two lit, further in
-  for(let r=0;r<4;r++)for(let c=0;c<2;c++){const x=1594+c*230,y=270+r*196,isW=r===1&&c===0;if(isW)continue;const gg=ctx.createLinearGradient(0,y,0,y+190);gg.addColorStop(0,rgba(mix([28,34,60],[110,104,140],u),1));gg.addColorStop(1,rgba(mix([8,10,20],[30,32,50],u),1));
-    ctx.fillStyle=gg;ctx.fillRect(x,y,170,190);if(hash(r*2+c,961)<0.3){ctx.fillStyle="rgba(255,206,150,0.2)";ctx.fillRect(x+90,y+40,70,140);}
-    ctx.strokeStyle=rgba(edge,0.9);ctx.lineWidth=4;ctx.strokeRect(x,y,170,190);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x+85,y);ctx.lineTo(x+85,y+70);ctx.moveTo(x,y+70);ctx.lineTo(x+170,y+70);ctx.stroke();ctx.fillStyle=rgba(edge,1);ctx.fillRect(x-8,y+190,186,8);}
-  // the family's window: warm light, a curtain, and their shapes against it
-  const[wx,wy,ww,wh]=D9_WIN,lt=o.light==null?1:o.light;glow(ctx,wx+ww/2,wy+wh/2,300,[255,196,120],0.32*lt);ctx.save();rr(ctx,wx,wy,ww,wh,4);ctx.clip();
-  const g=ctx.createRadialGradient(wx+ww*0.6,wy+wh*0.35,10,wx+ww/2,wy+wh/2,ww);g.addColorStop(0,"rgba(255,226,170,1)");g.addColorStop(1,"rgba(214,140,86,1)");ctx.fillStyle=g;ctx.fillRect(wx,wy,ww,wh);
-  ctx.fillStyle="rgba(250,236,214,0.55)";ctx.beginPath();ctx.moveTo(wx,wy);ctx.lineTo(wx+40,wy);ctx.quadraticCurveTo(wx+26,wy+wh*0.6,wx+34,wy+wh);ctx.lineTo(wx,wy+wh);ctx.closePath();ctx.fill();
-  d9_family(ctx,wx+ww*0.55,wy+wh,1,t);ctx.restore();ctx.strokeStyle=rgba(edge,1);ctx.lineWidth=5;ctx.strokeRect(wx,wy,ww,wh);ctx.beginPath();ctx.moveTo(wx+ww/2,wy);ctx.lineTo(wx+ww/2,wy+wh*0.31);ctx.moveTo(wx,wy+wh*0.31);ctx.lineTo(wx+ww,wy+wh*0.31);ctx.lineWidth=3;ctx.stroke();
-  ctx.fillStyle=rgba(edge,1);ctx.fillRect(wx-8,wy+wh,ww+16,8);}
-// the parents, against the light: one holding the baby, swaddled, the other leaning in; they breathe
-function d9_family(ctx,x,y,s,t){ctx.save();ctx.translate(x,y);ctx.scale(s,s);const sil="rgba(70,40,34,0.92)",br=Math.sin(t*1.4)*1.2;
-  // the one holding the baby, on the right
-  ctx.fillStyle=sil;ctx.beginPath();ctx.moveTo(-6,2);ctx.bezierCurveTo(-10,-60,-4,-96+br,18,-104+br);ctx.bezierCurveTo(44,-110+br,60,-92+br,62,-60);ctx.lineTo(66,2);ctx.closePath();ctx.fill();
-  ctx.beginPath();ctx.ellipse(28,-128+br,15,18,0.1,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(20,-114+br);ctx.lineTo(36,-114+br);ctx.lineTo(34,-104+br);ctx.lineTo(22,-104+br);ctx.closePath();ctx.fill();
-  // the baby in their arms: a pale swaddle, a small head
-  ctx.fillStyle="rgba(252,240,226,0.95)";ctx.beginPath();ctx.ellipse(16,-78+br,26,12,-0.25,0,TAU);ctx.fill();ctx.fillStyle="rgba(236,206,180,1)";ctx.beginPath();ctx.arc(-6,-84+br,8,0,TAU);ctx.fill();
-  ctx.fillStyle=sil;ctx.beginPath();ctx.moveTo(-14,-70+br);ctx.quadraticCurveTo(14,-58+br,44,-74+br);ctx.lineTo(46,-66+br);ctx.quadraticCurveTo(14,-50+br,-14,-62+br);ctx.closePath();ctx.fill();
-  // the other, leaning in from the left
-  const lb=Math.sin(t*1.2+1)*1.2;ctx.beginPath();ctx.moveTo(-96,2);ctx.bezierCurveTo(-100,-50,-88,-86+lb,-62,-94+lb);ctx.bezierCurveTo(-40,-98+lb,-26,-80+lb,-24,-52);ctx.lineTo(-20,2);ctx.closePath();ctx.fill();
-  ctx.beginPath();ctx.ellipse(-46,-116+lb,14,17,0.35,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(-30,-84+lb);ctx.quadraticCurveTo(-18,-80+lb,-10,-86+lb);ctx.lineTo(-10,-80+lb);ctx.quadraticCurveTo(-20,-72+lb,-32,-76+lb);ctx.closePath();ctx.fill();ctx.restore();}
-// the whole view: sky, town, river, bridge, banks, the birch, the near building; o.u, the light; o.dim, darker behind the glass
-function d9_tartu(ctx,t,o){o=o||{};const u=o.u==null?0.5:o.u;d9_sky(ctx,t,u);d9_city(ctx,t,u);d9_river(ctx,t,u);d9_bridge(ctx,t,u);d9_banks(ctx,t,u);d9_bankTrees(ctx,t,u);d9_building(ctx,t,u,o);d9_birch(ctx,214,1060,1.15,t,u);d9_leaves(ctx,t,o.leaves==null?1:o.leaves,u);
-  if(o.dim>0.01){ctx.fillStyle="rgba(4,6,14,"+clamp(o.dim,0,1)*0.8+")";ctx.fillRect(-600,-400,W+1200,H+800);}}
+/* ---------- Khorasan, in the ninth century ---------- */
+// The plain from above, as the series draws a qanat (ba_aerial), with a second one beside the first: a new tunnel, its head dug close
+// beside the old one's, running close beside it before it turns down to an outlet of its own and four new fields, below the old
+// village's. Its shafts as the kit draws them, a ring of dug earth and a dark mouth, dug from the outlet up.
+const D9_CH2=(()=>{const p=[[404,384],[640,480],[860,560],[930,800]],P=[];for(let i=0;i<=15;i++){const u=i/15,v=1-u;P.push([0,1].map(k=>v*v*v*p[0][k]+3*v*v*u*p[1][k]+3*v*u*u*p[2][k]+u*u*u*p[3][k]));}return P;})();
+const D9_F2=[[958,826,108,78],[1078,826,108,78],[958,914,108,78],[1078,914,108,78]];
+// the lamps' warm light, in the governor's court
+const D9_LAMP=[255,204,140];
+// one shaft: a ring of dug earth, its shadow to the lower right, and a dark mouth
+function d9_shaft(ctx,x,y,r){if(r<=0.5)return;ctx.fillStyle="rgba(60,40,26,0.28)";ctx.beginPath();ctx.ellipse(x+4,y+5,r*1.15,r,0,0,TAU);ctx.fill();
+  const rg=ctx.createRadialGradient(x-r*0.3,y-r*0.3,1,x,y,r*1.1);rg.addColorStop(0,"rgba(236,204,160,1)");rg.addColorStop(1,"rgba(184,140,98,1)");ctx.fillStyle=rg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
+  ctx.fillStyle="rgba(34,22,16,0.92)";ctx.beginPath();ctx.arc(x,y,r*0.34,0,TAU);ctx.fill();}
+// the water under the plain, running down a chain of shafts to its outlet: the tunnel's line in blue, with lights moving down it (a)
+function d9_seep(ctx,t,P,a){if(a<=0.01)return;const L=[0];for(let i=1;i<P.length;i++)L.push(L[i-1]+Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]));const D=L[L.length-1];
+  const at=d=>{let i=1;while(i<L.length-1&&L[i]<d)i++;const f=clamp((d-L[i-1])/((L[i]-L[i-1])||1),0,1);return[lerp(P[i-1][0],P[i][0],f),lerp(P[i-1][1],P[i][1],f)];};
+  withA(ctx,a,()=>{ctx.save();ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=rgba(BA_WATER,0.45);ctx.lineWidth=4;ctx.beginPath();P.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();ctx.restore();
+    const n=Math.round(D/64);for(let k=0;k<n;k++){const[x,y]=at((t*44+k*D/n)%D);glow(ctx,x,y,13,BA_WATER,0.6);}});}
+// the new qanat: its fields and channel (o.dug brings them in, dry; o.flow waters them), then its shafts, dug from the outlet up to
+// o.dug; o.hi lights its head and the old one's, side by side
+function d9_chain2(ctx,t,o){o=o||{};const dug=o.dug||0,n=D9_CH2.length,fl=o.flow||0,fa=clamp(dug*3,0,1);if(dug<=0)return;
+  withA(ctx,fa,()=>{const CH=[D9_CH2[n-1],[946,812],[1196,812]];ctx.save();ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="rgba(96,64,40,0.6)";ctx.lineWidth=12;ctx.beginPath();CH.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();
+    if(fl>0.01){const L=[0];for(let i=1;i<CH.length;i++)L.push(L[i-1]+Math.hypot(CH[i][0]-CH[i-1][0],CH[i][1]-CH[i-1][1]));let left=L[L.length-1]*fl;ctx.strokeStyle=rgba(BA_WATER,0.95);ctx.lineWidth=7;ctx.shadowColor=rgba(BA_WATER,0.6);ctx.shadowBlur=10;
+      ctx.beginPath();ctx.moveTo(CH[0][0],CH[0][1]);for(let i=1;i<CH.length&&left>0;i++){const d=L[i]-L[i-1],f=Math.min(1,left/d);ctx.lineTo(lerp(CH[i-1][0],CH[i][0],f),lerp(CH[i-1][1],CH[i][1],f));left-=d;}ctx.stroke();}
+    ctx.restore();
+    D9_F2.forEach(([x,y,w,h],i)=>{const wt=clamp(fl*1.6-0.15*i,0,1),c=mix(BA_DRY,BA_GREEN,0.9*wt);ctx.fillStyle="rgba(60,40,26,0.3)";ctx.fillRect(x+4,y+5,w,h);ctx.fillStyle=rgba(c,1);ctx.fillRect(x,y,w,h);
+      ctx.strokeStyle=rgba(mix(c,[40,30,20],0.4),0.7);ctx.lineWidth=2;for(let k=1;k<5;k++){ctx.beginPath();ctx.moveTo(x+6,y+k*h/5);ctx.lineTo(x+w-6,y+k*h/5);ctx.stroke();}
+      ctx.strokeStyle="rgba(70,48,30,0.6)";ctx.lineWidth=3;ctx.strokeRect(x,y,w,h);});});
+  for(let i=n-1;i>=0;i--){const q=clamp(dug*n-(n-1-i),0,1);if(q<=0)break;const[x,y]=D9_CH2[i];d9_shaft(ctx,x,y,(i===0?16:12.5-4*i/n)*ease(Math.min(1,q*1.5)));}
+  const hi=o.hi||0;if(hi>0.01){[[BA_CHAIN[0],17],[D9_CH2[0],16]].forEach(([[x,y],r])=>{glow(ctx,x,y,r*3.4,BA_RED,0.4*hi);ring(ctx,x,y,r+9,BA_RED,0.9*hi,3);});}}
 
-/* ---------- the register, the offices, X-Road ---------- */
-// The population register: glass, pale as frost, with its name and rows of records (texture), one lit (o.row: what it says, o.lit 0..1)
-function d9_register(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,22,D9_TAR,{glow:18+18*(o.hi||0),ea:0.9,fill:"rgba(8,14,30,0.92)"});ctx.fillStyle=rgba(D9_TAR,0.06+0.06*(o.hi||0));rr(ctx,x,y,w,h,22);ctx.fill();
-  dbGlyph(ctx,x+46,y+54,D9_TAR,0.9);T(ctx,"population register",x+84,y+64,{w:800,size:32,color:rgba(D9_TAR,1)});
-  const rows=Math.floor((h-110)/38);for(let i=0;i<rows;i++){const yy=y+104+i*38;if(o.row&&i===rows-1)continue;ctx.fillStyle=rgba(D9_TAR,0.14);rr(ctx,x+30,yy,w-60,26,8);ctx.fill();
-    for(let k=0;k<5;k++){ctx.fillStyle=rgba(D9_TAR,0.28);ctx.fillRect(x+44+k*((w-100)/5),yy+11,(w-100)/5*(0.4+0.4*hash(i*5+k,971)),5);}}
-  if(o.row){const yy=y+104+(rows-1)*38,l=o.lit||0;withA(ctx,clamp(l*2,0,1),()=>{glow(ctx,x+w/2,yy+13,w*0.5,D9_DAWN,0.35*pulse_(l));ctx.fillStyle=rgba(mix(D9_TAR,D9_DAWN,0.6),0.22);rr(ctx,x+24,yy-8,w-48,42,10);ctx.fill();
-    T(ctx,o.row,x+44,yy+24,{w:700,size:28,color:rgba(mix(INK,D9_DAWN,0.3),1)});});}});}
-const pulse_=l=>0.6+0.4*Math.sin(l*Math.PI);
-// a public office: a glass card with a building's glyph and its name; o.copy (0..1): the place its own copy would be, empty and crossed
-function d9_office(ctx,x,y,w,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=90;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,D9_TAR,{glow:12+14*(o.hi||0),ea:0.8,fill:"rgba(8,14,30,0.93)"});
-  d9_bldg(ctx,x+38,y+h/2,1,D9_TAR);const nl=wrapT(ctx,name,0,0,w-92,{size:28,w:700,measure:true}).length;wrapT(ctx,name,x+74,y+h/2+10-(nl-1)*16,w-92,{size:28,w:700,color:rgba(INK,0.96),lh:32});});}
-// a public building, as a glyph: a pediment on four columns
-function d9_bldg(ctx,gx,gy,s,col){ctx.save();ctx.translate(gx,gy);ctx.scale(s,s);ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.2/s;ctx.beginPath();ctx.moveTo(-18,-6);ctx.lineTo(0,-18);ctx.lineTo(18,-6);ctx.closePath();ctx.stroke();
-  [-12,-4,4,12].forEach(d=>{ctx.beginPath();ctx.moveTo(d,-3);ctx.lineTo(d,12);ctx.stroke();});ctx.beginPath();ctx.moveTo(-20,16);ctx.lineTo(20,16);ctx.stroke();ctx.restore();}
-// another office that asks the register, unnamed: the register has many users
-function d9_officeS(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-34,y-34,68,68,34,D9_TAR,{glow:10+14*(o.hi||0),ea:0.7,fill:"rgba(8,14,30,0.93)"});d9_bldg(ctx,x,y+1,0.9,D9_TAR);});}
-// points along a cubic curve, for a road
-function d9_bez(p0,p1,p2,p3,n){const P=[];for(let i=0;i<=(n||24);i++){const u=i/(n||24),v=1-u;P.push([v*v*v*p0[0]+3*v*v*u*p1[0]+3*v*u*u*p2[0]+u*u*u*p3[0],v*v*v*p0[1]+3*v*v*u*p1[1]+3*v*u*u*p2[1]+u*u*u*p3[1]]);}return P;}
-// X-Road, between an office and the register: a road of two lines with a dashed middle, drawn to p; asks go out along it and answers
-// come back (o.ask, o.ans: 0..1 along it, or none)
-function d9_road(ctx,pts,p,o){o=o||{};if(p<=0)return;const a=o.a==null?1:o.a;withA(ctx,a,()=>{const L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));const D=L[L.length-1]*clamp(p,0,1);
-  const at_=d=>{let i=1;while(i<L.length-1&&L[i]<d)i++;const f=clamp((d-L[i-1])/((L[i]-L[i-1])||1),0,1);return[lerp(pts[i-1][0],pts[i][0],f),lerp(pts[i-1][1],pts[i][1],f),Math.atan2(pts[i][1]-pts[i-1][1],pts[i][0]-pts[i-1][0])];};
-  const path=(off)=>{ctx.beginPath();for(let d=0;d<=D;d+=6){const[x,y,an]=at_(d);const px=x-Math.sin(an)*off,py=y+Math.cos(an)*off;d?ctx.lineTo(px,py):ctx.moveTo(px,py);}};
-  ctx.save();ctx.shadowColor=rgba(D9_TAR,0.6);ctx.shadowBlur=10+10*(o.hi||0);ctx.strokeStyle=rgba(D9_TAR,0.75+0.25*(o.hi||0));const hw=7*(o.lw==null?1:o.lw);ctx.lineWidth=2.2;path(-hw);ctx.stroke();path(hw);ctx.stroke();ctx.shadowBlur=0;
-  ctx.setLineDash([10,12]);ctx.lineDashOffset=-(o.t||0)*24;ctx.strokeStyle=rgba(D9_TAR,0.4);ctx.lineWidth=1.6;path(0);ctx.stroke();ctx.restore();
-  const pk=(u,col,dir)=>{if(u==null||u<0||u>1)return;const[x,y]=at_(L[L.length-1]*u);glow(ctx,x,y,22,col,0.7);ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);ctx.fillStyle=rgba(mix(col,[255,255,255],0.5),1);ctx.fillRect(-6,-6,12,12);ctx.restore();};
-  if(p>=1){pk(o.ask,D9_TAR);pk(o.ans,D9_DAWN);}});}
-// a catalogue of every database, with the office that owns it: rows of [database, owner], the first legible, the rest texture
-function d9_catalogue(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=118+rows.length*46;withA(ctx,a,()=>{glass(ctx,x,y,w,h,20,D9_TAR,{glow:12,ea:0.75,fill:"rgba(8,14,30,0.94)"});
-  T(ctx,o.title||"every database, and who owns it",x+28,y+50,{w:800,size:30,color:rgba(D9_TAR,1)});ctx.strokeStyle=rgba(D9_TAR,0.3);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+24,y+72);ctx.lineTo(x+w-24,y+72);ctx.stroke();
-  rows.forEach(([db,own],i)=>{const q=o.p==null?1:clamp(o.p*rows.length-i,0,1);if(q<=0)return;const yy=y+110+i*46,big=i===0;withA(ctx,q,()=>{
-    T(ctx,db,x+28,yy,{w:700,size:big?28:20,color:rgba(INK,big?0.96:0.5),deco:big?0:1});T(ctx,own,x+w-28,yy,{w:700,size:big?28:20,align:"right",color:rgba(TRUST,big?1:0.5),deco:big?0:1});});});});return h;}
-
-/* ---------- the parents' phone ---------- */
-// A parent's hand holding a phone, close up, in the warm room behind the window: the screen shows the Social Insurance Board's
-// email, offering the family benefit (o.paid: the benefit paid, instead). o.tap (0..1) lights the button.
-function d9_phone(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-8,y-8,w+16,h+16,24,D9_DAWN,{glow:18,ea:0.7,fill:"rgba(8,12,24,0.95)"});
-  ctx.save();rr(ctx,x,y,w,h,18);ctx.clip();ctx.translate(x,y);
-  // the room: a lamp's warmth, the window with the dawn in it, out of focus
-  let g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,"#3a2a26");g.addColorStop(1,"#1a1214");ctx.fillStyle=g;ctx.fillRect(0,0,w,h);glow(ctx,w*0.12,h*0.26,w*0.55,[255,190,120],0.45);
-  g=ctx.createLinearGradient(0,h*0.06,0,h*0.6);g.addColorStop(0,"#3b4d7e");g.addColorStop(1,"#d99b82");ctx.fillStyle=g;rr(ctx,w*0.6,h*0.06,w*0.34,h*0.54,6);ctx.fill();ctx.fillStyle="rgba(30,22,26,0.85)";ctx.fillRect(w*0.765,h*0.06,10,h*0.54);ctx.fillRect(w*0.6,h*0.3,w*0.34,8);
-  ctx.fillStyle="rgba(40,34,52,0.7)";ctx.fillRect(w*0.6,h*0.5,w*0.34,h*0.1);
-  // the phone, in a hand: palm and fingertips behind it, the thumb in front
-  const pw=380,ph=700,px=w*0.5,py=h*0.53+Math.sin(t*1.1)*3;ctx.save();ctx.translate(px,py);ctx.rotate(-0.045+Math.sin(t*0.7)*0.008);
-  const skin=[228,186,160],skL=[246,212,190],skD=[176,128,104];
-  const skinG=(x0,x1)=>{const gg=ctx.createLinearGradient(x0,0,x1,0);gg.addColorStop(0,rgba(skL,1));gg.addColorStop(1,rgba(skD,1));return gg;};
-  ctx.fillStyle=skinG(-pw*0.6,pw*0.6);ctx.beginPath();ctx.moveTo(-pw*0.56,ph*1.1);ctx.bezierCurveTo(-pw*0.6,ph*0.6,-pw*0.52,ph*0.3,-pw*0.36,ph*0.24);ctx.lineTo(pw*0.4,ph*0.26);ctx.bezierCurveTo(pw*0.56,ph*0.32,pw*0.6,ph*0.6,pw*0.54,ph*1.1);ctx.closePath();ctx.fill();
-  [[-0.06,0],[0.07,1],[0.2,2],[0.32,3]].forEach(([fy,k])=>{const yy=ph*fy,len=46-k*3;ctx.save();ctx.translate(pw/2-6,yy);ctx.rotate(0.12+k*0.05);ctx.fillStyle=skinG(0,len);ctx.beginPath();ctx.moveTo(-10,-16);ctx.lineTo(len-14,-15);
-    ctx.quadraticCurveTo(len+2,-14,len+2,0);ctx.quadraticCurveTo(len+2,14,len-14,15);ctx.lineTo(-10,16);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(skD,0.7);ctx.lineWidth=1.4;ctx.stroke();
-    ctx.fillStyle=rgba(mix(skL,[255,236,226],0.4),0.65);ctx.beginPath();ctx.ellipse(len-12,-2,7,9,0,0,TAU);ctx.fill();ctx.restore();});
-  ctx.save();ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=24;ctx.shadowOffsetX=6;ctx.shadowOffsetY=10;ctx.fillStyle="#16181d";rr(ctx,-pw/2,-ph/2,pw,ph,52);ctx.fill();ctx.restore();
-  ctx.strokeStyle="rgba(255,255,255,0.18)";ctx.lineWidth=2;rr(ctx,-pw/2+2,-ph/2+2,pw-4,ph-4,50);ctx.stroke();
-  // the screen
-  const sx=-pw/2+14,sy=-ph/2+14,sw_=pw-28,shh=ph-28,L=sx+28,R=sx+sw_-28;ctx.save();rr(ctx,sx,sy,sw_,shh,40);ctx.clip();g=ctx.createLinearGradient(0,sy,0,sy+shh);g.addColorStop(0,"#f7f8fb");g.addColorStop(1,"#e8ebf1");ctx.fillStyle=g;ctx.fillRect(sx,sy,sw_,shh);
-  ctx.fillStyle="#16181d";rr(ctx,-46,sy+14,92,26,13);ctx.fill();
-  if(!o.paid){T(ctx,"Inbox",L,sy+96,{w:800,size:28,color:"rgba(30,34,44,0.9)"});ctx.fillStyle="rgba(30,34,44,0.12)";ctx.fillRect(sx,sy+118,sw_,2);
-    // the sender: a round mark with a building, its name over two lines; then the subject, the text, the button
-    ctx.fillStyle="rgba(58,96,156,1)";ctx.beginPath();ctx.arc(L+26,sy+170,26,0,TAU);ctx.fill();ctx.save();ctx.strokeStyle="#fff";ctx.lineWidth=2;const gx=L+26,gy=sy+170;ctx.beginPath();ctx.moveTo(gx-12,gy-3);ctx.lineTo(gx,gy-12);ctx.lineTo(gx+12,gy-3);ctx.closePath();ctx.stroke();
-      [-7,0,7].forEach(d=>{ctx.beginPath();ctx.moveTo(gx+d,gy);ctx.lineTo(gx+d,gy+9);ctx.stroke();});ctx.beginPath();ctx.moveTo(gx-13,gy+12);ctx.lineTo(gx+13,gy+12);ctx.stroke();ctx.restore();
-    T(ctx,"Social Insurance",L+66,sy+164,{w:800,size:28,color:"rgba(30,34,44,0.95)"});T(ctx,"Board",L+66,sy+198,{w:800,size:28,color:"rgba(30,34,44,0.95)"});
-    T(ctx,"A family benefit",L,sy+272,{w:800,size:32,color:"rgba(18,22,32,1)"});T(ctx,"for your child",L,sy+312,{w:800,size:32,color:"rgba(18,22,32,1)"});
-    for(let k=0;k<4;k++){ctx.fillStyle="rgba(30,34,44,0.16)";ctx.fillRect(L,sy+350+k*26,(R-L)*(k===3?0.55:0.94-0.06*hash(k,975)),10);}
-    const bt=o.tap||0,by=sy+478;ctx.save();if(bt>0.01){ctx.shadowColor="rgba(60,110,200,0.9)";ctx.shadowBlur=26*bt;}ctx.fillStyle=rgba(mix([58,96,156],[74,134,226],bt),1);rr(ctx,L,by,R-L,68,20);ctx.fill();ctx.restore();
-    T(ctx,"Accept",(L+R)/2,by+45,{w:800,size:32,align:"center",color:"#fff"});}
-  else{ctx.fillStyle="rgba(64,148,94,1)";ctx.beginPath();ctx.arc(0,sy+250,58,0,TAU);ctx.fill();tick_(ctx,0,sy+252,64,[255,255,255],1);
-    T(ctx,"Family benefit",0,sy+374,{w:800,size:32,align:"center",color:"rgba(18,22,32,1)"});T(ctx,"paid",0,sy+418,{w:800,size:32,align:"center",color:"rgba(36,120,70,1)"});
-    for(let k=0;k<3;k++){ctx.fillStyle="rgba(30,34,44,0.14)";ctx.fillRect(L+20,sy+468+k*26,R-L-40,10);}}
-  // a little glare across the glass
-  const gl=ctx.createLinearGradient(sx,sy,sx+sw_,sy+shh*0.6);gl.addColorStop(0,"rgba(255,255,255,0.0)");gl.addColorStop(0.5,"rgba(255,255,255,0.10)");gl.addColorStop(0.56,"rgba(255,255,255,0.0)");ctx.fillStyle=gl;ctx.fillRect(sx,sy,sw_,shh);ctx.restore();
-  // the thumb, along the left edge, its tip over the glass; and a sleeve at the wrist
-  ctx.fillStyle=skinG(-pw*0.7,-pw*0.3);ctx.beginPath();ctx.moveTo(-pw*0.64,ph*0.5);ctx.bezierCurveTo(-pw*0.7,ph*0.32,-pw*0.6,ph*0.16,-pw*0.47,ph*0.07);ctx.bezierCurveTo(-pw*0.42,ph*0.035,-pw*0.35,ph*0.05,-pw*0.36,ph*0.1);
-  ctx.bezierCurveTo(-pw*0.37,ph*0.17,-pw*0.42,ph*0.3,-pw*0.4,ph*0.52);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(skD,0.6);ctx.lineWidth=1.5;ctx.stroke();
-  ctx.fillStyle=rgba(mix(skL,[255,240,232],0.45),0.7);ctx.beginPath();ctx.ellipse(-pw*0.405,ph*0.075,10,14,-0.5,0,TAU);ctx.fill();
-  ctx.fillStyle="#60708e";ctx.beginPath();ctx.moveTo(-pw*0.66,ph*0.62);ctx.quadraticCurveTo(0,ph*0.56,pw*0.6,ph*0.64);ctx.lineTo(pw*0.64,ph*1.2);ctx.lineTo(-pw*0.7,ph*1.2);ctx.closePath();ctx.fill();
-  ctx.strokeStyle="rgba(255,255,255,0.08)";ctx.lineWidth=2;for(let k=0;k<8;k++){ctx.beginPath();ctx.moveTo(-pw*0.6+k*pw*0.15,ph*0.6);ctx.lineTo(-pw*0.62+k*pw*0.15,ph*1.2);ctx.stroke();}
-  ctx.restore();ctx.restore();});}
-// an application never filled in: a form on paper, its fields blank
-function d9_form(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{sheet(ctx,x,y,w,h,{rot:o.rot==null?0.02:o.rot,plain:true});ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot==null?0.02:o.rot);ctx.translate(-w/2,-h/2);
-  T(ctx,"application",28,56,{w:800,size:30,color:"rgba(60,56,60,0.9)"});T(ctx,"family benefit",28,92,{w:700,size:28,color:"rgba(90,84,86,0.85)"});
-  for(let k=0;k<5;k++){const yy=150+k*58;ctx.fillStyle="rgba(60,56,60,0.35)";ctx.fillRect(28,yy-16,90,8);ctx.strokeStyle="rgba(60,56,60,0.35)";ctx.lineWidth=1.5;ctx.strokeRect(134,yy-30,w-162,38);}
-  ctx.strokeStyle="rgba(60,56,60,0.4)";ctx.strokeRect(28,h-64,30,30);T(ctx,"sign here",72,h-40,{w:700,size:20,color:"rgba(90,84,86,0.6)",deco:1});ctx.restore();});}
+/* ---------- Nishapur: the governor's court ---------- */
+// The governor's court, seen from its courtyard as the afternoon goes: the sky, and the town's roofs and domes in the haze beyond the
+// court's wall; the court's tall portal of brick, lit from the left, and in it a pointed arch over a hall in shade, lit by two lamps;
+// the dais, a step up, where the governor stands; and in the portal's piers two niches, the left with the law books on its shelves,
+// the right with a lamp. Drawn in the series' own style, not in the style of Persian art (PLAYBOOK §2): the city, the governor and
+// the book are real; the people around them, the court's look and its furniture are illustrative.
+const D9_FL=868,D9_DS=812,D9_DESK=[900,836];
+// a pointed arch: from (xl, yb) up to where it springs (ys), over to its point (ya), and down to (xr, yb); closed unless open is set
+function d9_arch(p,xl,xr,ys,ya,yb,open){const hw=(xr-xl)/2,ri=ys-ya,r=(hw*hw+ri*ri)/(2*hw),a=Math.acos(clamp((r-hw)/r,-1,1));
+  p.moveTo(xl,yb);p.lineTo(xl,ys);p.arc(xl+r,ys,r,Math.PI,Math.PI+a);p.arc(xr-r,ys,r,2*Math.PI-a,2*Math.PI);p.lineTo(xr,yb);if(!open)p.closePath();}
+// the law books on the shelves of the left niche (x0 to x1): spines of leather in a few colours, some lying flat; o.hi lights them
+const D9_LEATHER=[[120,62,42],[92,58,40],[150,96,54],[108,44,40],[132,104,70],[84,66,52]];
+function d9_lawBooks(ctx,x0,x1,hi){[668,730,792].forEach((sy,r)=>{ctx.fillStyle="rgba(70,46,32,1)";ctx.fillRect(x0+6,sy,x1-x0-12,7);let x=x0+12,k=0;
+    while(x<x1-18){const h_=hash(r*31+k,931),flat=h_>0.86;const c=D9_LEATHER[Math.floor(hash(r*31+k,932)*D9_LEATHER.length)];
+      if(flat){const w=34,h=8;ctx.fillStyle=rgba(c,1);ctx.fillRect(x,sy-h,w,h);ctx.fillRect(x+3,sy-2*h,w-4,h);x+=w+4;}
+      else{const w=9+Math.round(hash(r*31+k,933)*7),h=38+Math.round(hash(r*31+k,934)*14);ctx.fillStyle=rgba(c,1);ctx.fillRect(x,sy-h,w,h);ctx.fillStyle="rgba(230,196,140,0.35)";ctx.fillRect(x+2,sy-h+8,w-4,2);ctx.fillRect(x+2,sy-12,w-4,2);x+=w+2;}k++;}});
+  if(hi>0.01)glow(ctx,(x0+x1)/2,730,120,D9_LAMP,0.35*hi);}
+function d9_court(ctx,t,o){o=o||{};const dk=o.dusk||0;
+  let g=ctx.createLinearGradient(0,-400,0,720);g.addColorStop(0,rgba(mix([62,94,150],[44,48,96],dk),1));g.addColorStop(0.62,rgba(mix([158,168,198],[150,114,136],dk),1));g.addColorStop(1,rgba(mix([242,208,166],[238,164,120],dk),1));
+  ctx.fillStyle=g;ctx.fillRect(-1000,-800,3920,1520);
+  // the town beyond the wall, in the haze
+  ctx.fillStyle=rgba(mix([176,146,130],[132,98,104],dk),0.85);for(let i=0;i<30;i++){const x=-560+i*112+hash(i,961)*50,w=70+hash(i,962)*80,h=24+hash(i,963)*40;ctx.fillRect(x,640-h,w,h+60);
+    if(hash(i,964)>0.7){ctx.beginPath();ctx.arc(x+w/2,640-h,w*0.3,Math.PI,0);ctx.fill();}}
+  // the court's wall, either side of the portal, and the courtyard's packed earth
+  g=ctx.createLinearGradient(0,600,0,D9_FL);g.addColorStop(0,"#c79f78");g.addColorStop(1,"#a98060");ctx.fillStyle=g;ctx.fillRect(-1000,600,3920,D9_FL-600);ctx.fillStyle="rgba(244,220,184,0.6)";ctx.fillRect(-1000,598,3920,6);
+  g=ctx.createLinearGradient(0,D9_FL-6,0,1300);g.addColorStop(0,"#d6af84");g.addColorStop(1,"#9c7656");ctx.fillStyle=g;ctx.fillRect(-1000,D9_FL-6,3920,900);
+  // the portal: brick, lit from the left, its courses as texture, a band round its face
+  const X0=470,X1=1450,Y0=110;g=ctx.createLinearGradient(X0,0,X1,0);g.addColorStop(0,"#e2bb8e");g.addColorStop(1,"#b98f67");ctx.fillStyle=g;ctx.fillRect(X0,Y0,X1-X0,D9_FL-Y0);
+  ctx.save();ctx.strokeStyle="rgba(120,84,56,0.16)";ctx.lineWidth=1.5;ctx.beginPath();for(let y=Y0+24;y<D9_FL;y+=24){ctx.moveTo(X0,y);ctx.lineTo(X1,y);}
+    for(let y=Y0,r=0;y<D9_FL-6;y+=24,r++)for(let x=X0+(r%2?24:48);x<X1;x+=48){ctx.moveTo(x,y);ctx.lineTo(x,y+24);}ctx.stroke();ctx.restore();
+  ctx.strokeStyle="rgba(250,228,194,0.55)";ctx.lineWidth=6;ctx.strokeRect(X0+26,Y0+26,X1-X0-52,D9_FL-Y0-56);
+  // the arch, and the hall inside it in shade, its back wall lit by the lamps
+  const p=new Path2D();d9_arch(p,700,1220,470,150,D9_FL);ctx.save();ctx.clip(p);g=ctx.createLinearGradient(0,150,0,D9_FL);g.addColorStop(0,"#563a2c");g.addColorStop(1,"#7c5842");ctx.fillStyle=g;ctx.fillRect(700,150,520,D9_FL-150);
+  glow(ctx,980,600,380,D9_LAMP,0.32+0.03*Math.sin(t*3.1));const q=new Path2D();d9_arch(q,840,1120,580,380,D9_DS);ctx.fillStyle="rgba(160,118,86,0.5)";ctx.fill(q);ctx.restore();
+  const e=new Path2D();d9_arch(e,700,1220,470,150,D9_FL,1);ctx.strokeStyle="rgba(252,230,196,0.8)";ctx.lineWidth=5;ctx.stroke(e);
+  // two lamps on chains
+  [[846,350],[1074,350]].forEach(([x,y],i)=>{ctx.strokeStyle="rgba(60,44,32,0.9)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y-150);ctx.lineTo(x,y-8);ctx.stroke();
+    ctx.fillStyle="rgba(176,128,70,1)";ctx.beginPath();ctx.ellipse(x,y,16,7,0,0,TAU);ctx.fill();const fl=0.85+0.15*Math.sin(t*8+i*2);ctx.fillStyle="rgba(255,228,164,1)";ctx.beginPath();ctx.ellipse(x+10,y-9,3.6,8*fl,0.3,0,TAU);ctx.fill();
+    glow(ctx,x+10,y-8,90,D9_LAMP,0.5);glow(ctx,x+10,y-8,22,[255,236,190],0.8);});
+  // the dais, a step up from the courtyard, with a plain rug along its edge
+  ctx.fillStyle="#8a6246";ctx.fillRect(760,D9_DS,400,D9_FL-D9_DS);ctx.fillStyle="rgba(244,214,174,0.4)";ctx.fillRect(760,D9_DS,400,4);ctx.fillStyle="rgba(146,54,46,0.92)";ctx.fillRect(800,D9_DS-5,320,7);
+  // the niches in the piers: the law books on the left one's shelves, a lamp in the right one
+  [[518,662],[1258,1402]].forEach(([xl,xr])=>{const n=new Path2D();d9_arch(n,xl,xr,600,520,808);ctx.fillStyle="rgba(98,68,50,0.94)";ctx.fill(n);ctx.strokeStyle="rgba(252,230,196,0.6)";ctx.lineWidth=3;ctx.stroke(n);});
+  d9_lawBooks(ctx,518,662,o.books||0);
+  const lx=1330,ly=780;ctx.fillStyle="rgba(176,128,70,1)";ctx.beginPath();ctx.ellipse(lx,ly,18,7,0,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,228,164,1)";ctx.beginPath();ctx.ellipse(lx+11,ly-9,3.6,8*(0.85+0.15*Math.sin(t*7.3)),0.3,0,TAU);ctx.fill();glow(ctx,lx+10,ly-8,80,D9_LAMP,0.55);}
+// a low table in front of the dais, where the book lies
+function d9_table(ctx,x,y){ctx.fillStyle="#5c3e2e";ctx.fillRect(x-70,y,140,9);ctx.fillRect(x-62,y+9,8,D9_FL-y-9);ctx.fillRect(x+54,y+9,8,D9_FL-y-9);ctx.fillStyle="rgba(244,214,174,0.35)";ctx.fillRect(x-70,y,140,2);}
+// the book on qanats, open on its table: two pages over leather boards, their lines written in up to o.p (texture); o.old: years on it
+function d9_codex(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=w*0.3,p=o.p==null?1:o.p,old=o.old||0;withA(ctx,a,()=>{
+  ctx.fillStyle=rgba(mix([128,62,42],[88,50,38],old),1);ctx.beginPath();ctx.moveTo(x-w/2-5,y+3);ctx.lineTo(x-w/2+2,y-h-2);ctx.lineTo(x+w/2-2,y-h-2);ctx.lineTo(x+w/2+5,y+3);ctx.closePath();ctx.fill();
+  const pg=mix([246,234,206],[226,204,164],old);[-1,1].forEach(sd=>{const g=ctx.createLinearGradient(x,0,x+sd*w/2,0);g.addColorStop(0,rgba(mix(pg,[150,120,90],0.35),1));g.addColorStop(0.25,rgba(pg,1));g.addColorStop(1,rgba(mix(pg,[255,255,255],0.15),1));
+    ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(x,y);ctx.quadraticCurveTo(x+sd*w*0.22,y+3,x+sd*(w/2-1),y-1);ctx.lineTo(x+sd*(w/2-4),y-h+2);ctx.quadraticCurveTo(x+sd*w*0.22,y-h-3,x,y-h+3);ctx.closePath();ctx.fill();});
+  // its lines, written in turn: left page, then right
+  const n=7;ctx.strokeStyle=rgba(mix([70,46,34],[96,70,52],old),0.8);ctx.lineWidth=Math.max(1,w/110);ctx.lineCap="round";
+  for(let k=0;k<2*n;k++){const q=clamp(p*2*n-k,0,1);if(q<=0)break;const sd=k<n?-1:1,r=k%n,yy=y-h+h*0.18+r*h*0.72/(n-1),xa=x+sd*w*0.06,xb=x+sd*w*(0.44-0.03*hash(k,935)),xe=lerp(xa,xb,q);
+    ctx.beginPath();for(let i=0;i<=10;i++){const xx=lerp(xa,xe,i/10);i?ctx.lineTo(xx,yy+Math.sin(i*1.9+k)*w/220):ctx.moveTo(xx,yy);}ctx.stroke();}
+  if(o.hi>0.01)glow(ctx,x,y-h/2,w*0.9,D9_LAMP,0.45*o.hi);});}
+// someone in the story, as the series draws them, standing at (x, y) with a soft shadow at their feet; o.f may pass between -1 and 1
+// as they turn round, the silhouette narrowing through its edge
+function d9_fig(ctx,x,y,s,o){const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const g=ctx.createRadialGradient(x,y,2,x,y,110*s);g.addColorStop(0,"rgba(30,18,10,0.32)");g.addColorStop(1,"rgba(30,18,10,0)");ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x,y,110*s,16*s,0,0,TAU);ctx.fill();});
+  const f=o.f==null?1:o.f;ba_fig(ctx,x,y,s,Object.assign({t:0,rimA:0.6},o,{f:Math.abs(f)<0.1?(f<0?-0.1:0.1):f}));}
+// someone walking from x0 to x1, setting off at t0 and taking d seconds: where they are, and the bob of their steps
+function d9_go(t,x0,x1,t0,d){const u=clamp((t-t0)/d,0,1);return[lerp(x0,x1,sstep(0,1,u)),u>0&&u<1?-Math.abs(Math.sin((t-t0)*6))*2.4:0];}
+// the book, small, with everyone who needs a rule coming to it: one home, written once
+function d9_bookMini(ctx,cx,cy,t,a){if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,cx-150,cy-74,300,148,18,D9_LAMP,{glow:14,ea:0.8,fill:"rgba(20,14,10,0.94)"});
+  d9_codex(ctx,cx,cy+18,150,{p:1,hi:0.4+0.2*Math.sin(t*1.6)});[[-118,40],[118,40],[-92,-40],[92,-40]].forEach(([dx,dy],i)=>{const k=((t*0.35+i*0.25)%1);ctx.fillStyle=rgba(D9_LAMP,0.85);ctx.beginPath();ctx.arc(cx+dx*(1-0.55*k),cy+dy*(1-0.55*k),4,0,TAU);ctx.fill();});});}
+// Khorasan, on a card: the book on qanats, open, and what it gave: the rules for qanats in one book, where everyone looked. The small
+// drawing is texture; the words are full size
+function d9_bookCard(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,D9_LAMP,{glow:12+14*(o.hi||0),ea:0.8,fill:"rgba(20,14,10,0.95)"});
+  d9_codex(ctx,x+86,y+h/2+20,132,{p:1,old:0.5,hi:0.3*(o.open||0)});const tx=x+172;T(ctx,"Khorasan",tx,y+52,{f:"mono",w:600,size:28,color:rgba(D9_LAMP,1)});
+  withA(ctx,o.open||0,()=>{tick_(ctx,tx+14,y+98,24,D9_OK,1);T(ctx,"one book of rules",tx+40,y+108,{w:800,size:30,color:rgba(D9_OK,1)});});
+  withA(ctx,o.once||0,()=>T(ctx,"everyone looked there",tx,y+156,{w:700,size:30,color:rgba(D9_LAMP,1)}));});}
 // a line traced through points, drawn up to p, with a bright head while it's drawing
 function d9_trace_(ctx,pts,p,col,o){o=o||{};if(p<=0)return;const L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));const d=L[L.length-1]*clamp(p,0,1);
   ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;ctx.strokeStyle=rgba(col,1);ctx.lineWidth=o.lw||3;ctx.lineCap="round";ctx.lineJoin="round";if(o.dash)ctx.setLineDash(o.dash);ctx.shadowColor=rgba(col,0.7);ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);let hx=pts[0][0],hy=pts[0][1];
   for(let i=1;i<pts.length;i++){if(L[i]<=d){ctx.lineTo(pts[i][0],pts[i][1]);hx=pts[i][0];hy=pts[i][1];}else{const f=(d-L[i-1])/((L[i]-L[i-1])||1);hx=lerp(pts[i-1][0],pts[i][0],f);hy=lerp(pts[i-1][1],pts[i][1],f);ctx.lineTo(hx,hy);break;}}ctx.stroke();ctx.restore();
   if(p<1&&!o.nohead){glow(ctx,hx,hy,22,col,0.8);ctx.fillStyle=rgba(mix(col,[255,255,255],0.6),1);ctx.beginPath();ctx.arc(hx,hy,4.5,0,TAU);ctx.fill();}}
-// a second copy of a register, as an office might start one: a dashed outline with a database and what it would hold
-function d9_ghostDb(ctx,x,y,w,h,what){ctx.save();ctx.setLineDash([9,7]);ctx.strokeStyle=rgba(D9_TAR,0.75);ctx.lineWidth=2.4;rr(ctx,x,y,w,h,16);ctx.stroke();ctx.restore();ctx.fillStyle=rgba(D9_TAR,0.06);rr(ctx,x,y,w,h,16);ctx.fill();
-  dbGlyph(ctx,x+42,y+h/2+4,D9_TAR,0.8);T(ctx,what,x+76,y+h/2+10,{w:700,size:28,color:rgba(D9_TAR,0.85)});}
-
 /* ---------- the utility: its two businesses, the wall between them, and the rules ---------- */
 // the rules, in the business's words: day one's, the two it really is, and the validity rule
 const D9_R0="an estimated reading stands only until the next actual reading";
 const D9_R21="An estimate is replaced when the actual reading arrives, and the replacement is sent to the retailer.";
 const D9_R22="A bill based on a replaced estimate is corrected on the next bill.";
 const D9_R20="Every reading is marked actual or estimated.";
-const D9_Q="Where does each rule belong?",D9_NEXT="What does a change in strategy mean for the data?";
+const D9_Q="Where does each rule belong?",D9_NEXT="What does the business expect of its data?";
 const D9_A="In the map: written once, at the step where it applies, with an owner and a reason, and its checks generated from it.";
 // the network's side tinted blue and retail's rose, with their names (as in Who does it); o.ly: where the names sit
 function d9_sides(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const lg=ctx.createLinearGradient(0,0,960,0);lg.addColorStop(0,rgba(D9_NET,0.0));lg.addColorStop(1,rgba(D9_NET,0.08));ctx.fillStyle=lg;ctx.fillRect(0,0,960,H);
@@ -2418,10 +2726,6 @@ function d9_doc(ctx,kind,x,y,w,h,title,line,o){o=o||{};const a=o.a==null?1:o.a;i
 // a dashed place where something should be, empty: with a question mark, or a few words
 function d9_slot(ctx,x,y,w,h,col,a,label){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(col,0.8);ctx.lineWidth=2.5;rr(ctx,x,y,w,h,12);ctx.stroke();ctx.restore();
   if(label)T(ctx,label,x+w/2,y+h/2+11,{w:700,size:30,align:"center",color:rgba(col,0.95)});else T(ctx,"?",x+w/2,y+h/2+18,{w:800,size:52,align:"center",color:rgba(col,0.95)});});}
-// Tartu's register, small, with roads from the offices that ask it: once only
-function d9_regMini(ctx,cx,cy,t,a){if(a<=0.01)return;withA(ctx,a,()=>{const R=[[-150,-90],[150,-90],[-180,40],[180,40]];R.forEach(([dx,dy],i)=>{d9_road(ctx,[[cx+dx,cy+dy],[cx+dx*0.5,cy+dy*0.5],[cx,cy]],1,{t,lw:0.5,ask:((t*0.4+i*0.25)%1)});d9_officeS(ctx,cx+dx,cy+dy,{});});
-  glass(ctx,cx-118,cy-40,236,80,16,D9_TAR,{glow:16,ea:0.85,fill:"rgba(8,14,30,0.95)"});dbGlyph(ctx,cx-82,cy+4,D9_TAR,0.7);T(ctx,"one register",cx-54,cy+12,{w:700,size:28,color:rgba(INK,0.96)});});}
-
 /* ---------- where a rule comes from, and what it's about ---------- */
 // an influence, as ArchiMate draws it: a dashed line with an open arrowhead, drawn up to p
 function d9_infl(ctx,x0,y0,x1,y1,col,p,a){if(p<=0||a<=0.01)return;withA(ctx,a,()=>{const q=ease(clamp(p,0,1)),xe=lerp(x0,x1,q),ye=lerp(y0,y1,q);ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.6;ctx.setLineDash([9,7]);
@@ -2560,20 +2864,11 @@ function d9_view(ctx,x,y,w,h,title,sub,g,o){o=o||{};const a=o.a==null?1:o.a;if(a
     else{ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=1.5;ctx.strokeRect(px+17,yy-9,22,18);ctx.beginPath();ctx.moveTo(px+17,yy-3);ctx.lineTo(px+39,yy-3);ctx.moveTo(px+25,yy-9);ctx.lineTo(px+25,yy+9);ctx.stroke();}
     ctx.fillStyle=rgba(col,0.35);ctx.fillRect(px+50,yy-2,200-i*30,4);});});}
 
-/* ---------- back in Tartu ---------- */
+/* ---------- back in Khorasan ---------- */
 // the 1,900 bills, found and corrected: the count as it rises (n), and a row of ticks
 function d9_count(ctx,x,y,w,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,160,18,D9_OK,{glow:12+14*(o.hi||0),ea:0.8,fill:"rgba(8,16,12,0.95)"});
   T(ctx,Math.round(n).toLocaleString("en-US"),x+30,y+82,{w:800,size:64,color:rgba(D9_OK,1)});T(ctx,"bills found and corrected",x+30,y+128,{w:700,size:28,color:rgba(mix(D9_OK,INK,0.4),1)});
   const tk=o.tk||0;for(let i=0;i<5;i++){const q=clamp(tk*5-i,0,1);if(q>0)tick_(ctx,x+w-150+i*28,y+52,22,D9_OK,q);}});}
-// Tartu, today, on a card: the register with the offices that ask it, the benefit paid and nobody asked twice. The small drawing is
-// texture; the words are full size
-function d9_tartuCard(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,D9_TAR,{glow:12+14*(o.hi||0),ea:0.8,fill:"rgba(8,14,30,0.95)"});
-  const cx=x+110,cy=y+h/2+6,R=[[-70,-48],[70,-48],[-80,40],[80,40]];R.forEach(([dx,dy],i)=>{d9_road(ctx,[[cx+dx,cy+dy],[cx+dx*0.5,cy+dy*0.5],[cx,cy]],1,{t,lw:0.4,ask:((t*0.4+i*0.25)%1)});ctx.fillStyle="rgba(10,16,32,1)";ctx.beginPath();ctx.arc(cx+dx,cy+dy,13,0,TAU);ctx.fill();ring(ctx,cx+dx,cy+dy,13,D9_TAR,1,2);});
-  glass(ctx,cx-34,cy-22,68,44,8,D9_TAR,{glow:10,ea:0.9,fill:"rgba(10,18,36,1)"});ctx.fillStyle=rgba(D9_TAR,0.6);for(let i=0;i<3;i++)ctx.fillRect(cx-22,cy-10+i*9,44,3);
-  const tx=x+236;T(ctx,"Tartu · today",tx,y+52,{f:"mono",w:600,size:28,color:rgba(D9_TAR,1)});
-  withA(ctx,o.paid||0,()=>{tick_(ctx,tx+14,y+98,24,D9_OK,1);T(ctx,"benefit paid",tx+40,y+108,{w:800,size:30,color:rgba(D9_OK,1)});});
-  withA(ctx,o.once||0,()=>T(ctx,"nobody asked twice",tx,y+156,{w:700,size:30,color:rgba(D9_DAWN,1)}));});}
-
 /* ---------- a rule in ArchiMate 4 ---------- */
 // The motivation elements ArchiMate 4 lists (Linked.Archi's comparison of 3.2 and 4.0, read 20 October 2026), as chips: [name,
 // glyph]; the requirement in the middle. The film doesn't say whether the list is complete, and doesn't need to.
@@ -2605,73 +2900,109 @@ function d9_checks(ctx,x,y,w,h,f,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>
 
 
 /* ===== Rules with a home: scenes =====
-   Twelve chapters, as in ../script.md. Tartu today: a birth entered once in the population register, a benefit offered to parents
-   who never applied, and no office asking the parents again, each asking the register over X-Road; then day one's data rule
+   Twelve chapters, as in ../script.md. Khorasan, in the ninth century: a new qanat dug too close to an old one, disputes over
+   qanats brought to the governor in Nishapur with no rule to settle them, and the rules written in one book; then day one's data rule
    and the bill of $412.80 beside it; the household away in June, whose meter stored its readings; the nightly script on the wall
    between the network and retail, writing since March to a queue nothing reads; the rule in five places, none of them its home;
    the rule split in two, one on each side, joined by what crosses; where each comes from, and the goal that was an obligation;
    what a rule is about; the step it's attached to and what that step expects of the data; where ArchiMate 4 puts a rule, a
    requirement, with what it's linked to; the rule in a set form and the checks generated from it; generally, an ontology; and
-   back in Tartu.
+   back in Khorasan.
    Made to read on a phone (tools/legible.py): text is at least 28 px in the frame; what's drawn small is texture. Motion: every
    shot drifts slowly and things arrive with a spring. Sound: every effect in tools/score.py fires at the same moment as the thing
    it belongs to here, so keep the two in step. */
 
-/* ---------- 1. Once only ---------- */
-// The offices that ask the register: two named, over it, and others like them on each side, unnamed (the register has many users).
-// Named: [name, x, y], each 440 wide; the others: their centres. Each has a road, X-Road, to the register.
-const D9_OFF=[["Health Insurance Fund",520,70],["Social Insurance Board",980,70]];
-const D9_OTH=[[330,282],[220,382],[330,482],[1590,282],[1700,382],[1590,482]];
-const D9_REG=[700,330,520,236];
-const D9_ROADS=[d9_bez([740,160],[740,250],[830,240],[830,330]),d9_bez([1200,160],[1200,250],[1090,240],[1090,330])].concat(D9_OTH.map(([x,y],i)=>{const L=x<960,sx=L?x+34:x-34,ex=L?700:1220,ey=[396,448,500][i%3],mx=lerp(sx,ex,0.5);return d9_bez([sx,y],[mx,y],[mx,ey],[ex,ey]);}));
-// the camera on Tartu: keys of [time, x, y, zoom], eased over d seconds, as ea.js's focus() moves it; and where a point of the view
-// lands on screen, with the scene's drift
-function d9_cam(t,keys,d){let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}return{x,y,z};}
-function d9_onScreen(c,t,sc,px,py,dz,dy){const zd=1+dz*ease(clamp(t/Math.max(1,sc.dur),0,1)),X=960+(px-c.x)*c.z,Y=540+(py-c.y)*c.z;return[960+(X-960)*zd,dy+(Y-dy)*zd];}
-scene("tartu",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);
-  const tA=c("asks"),tK=c("link"),u=lerp(0.18,0.66,clamp(t/sc.dur,0,1));
-  // Tartu at dawn: the camera pushes towards the family's window, then lifts to the sky over the town, where the offices are
-  const tIn=w("email","Days later")-0.6,tOut=w("asks","No office")-0.5,net=ease(fin(t,tOut,1.6)),cam=d9_cam(t,[[0,960,540,1.0],[tIn,1400,560,1.2],[tOut,960,270,1.0]],1.8);
-  ctx.save();drift(ctx,t,sc,{z:0.03,y:520});ctx.translate(960,540);ctx.scale(cam.z,cam.z);ctx.translate(-cam.x,-cam.y);
-  d9_tartu(ctx,t,{u,dim:0.45*ease(fin(t,tIn,1.4))*(1-net)+0.62*net,light:1+0.4*pulseAt(t,w("born","born"),1.6)});ctx.restore();
-  const win=d9_onScreen(cam,t,sc,1679,476,0.03,520);
-  ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
-  // the register: first in the sky, then in the middle of the offices
-  const r0=[150,150,560,236],r1=D9_REG,rk=ease(fin(t,tOut+0.2,1.6)),rx=lerp(r0[0],r1[0],rk),ry=lerp(r0[1],r1[1],rk),rw=lerp(r0[2],r1[2],rk),rh=lerp(r0[3],r1[3],rk);
-  const tR=w("born","population register")-0.5,ent=w("born","entered"),rec=clamp((t-ent)/1.6,0,1),regA=1-0.85*fin(t,tIn+0.4,0.6)*(1-rk);
-  const tHome=w("link","one home"),tOwn=w("link","one owner"),tOnce=w("link","asked for once"),tOnly=w("link","once only");
-  arrive(ctx,rx+rw/2,ry+rh/2,t,tR,()=>d9_register(ctx,rx,ry,rw,rh,{a:regA,row:"a birth · Tartu · today",lit:clamp((t-ent-1.5)/0.6,0,1),hi:pulseAt(t,ent+1.6,1.4)+0.7*fin(t,tHome,0.6)+0.5*pulseAt(t,B+0.4,2.2)}),{dy:-16});
-  // the birth, entered once: a record rising from the window to the register
-  if(rec>0&&rec<1){const sx=1679,sy=530,ex=r0[0]+r0[2]/2,ey=r0[1]+r0[3]-30,q=ease(rec),P=q2=>[lerp(sx,ex,q2),lerp(sy,ey,q2)-Math.sin(q2*Math.PI)*170];
-    for(let k=0;k<14;k++){const[x2,y2]=P(Math.max(0,q-k*0.018));glow(ctx,x2,y2,14-k*0.8,D9_DAWN,0.3*(1-k/14));}
-    const[x,y]=P(q);glass(ctx,x-74,y-24,148,48,24,D9_DAWN,{glow:18,ea:0.95,fill:"rgba(30,20,12,0.92)"});T(ctx,"a birth",x,y+10,{w:800,size:28,align:"center",color:rgba(D9_DAWN,1)});}
-  // the phone, close up: the offer; then the application they never made
-  const tP=w("email","the parents")-0.4,ph=fin(t,tP,0.7),sh=ease(fin(t,tOut-0.1,0.9)),tN=c("never");
-  if(ph>0.01&&sh<0.999){const k=lerp(1,0.16,sh),px=lerp(900,1152,sh),py=lerp(90,52,sh);ctx.save();ctx.translate(px,py);ctx.scale(k,k);d9_phone(ctx,0,0,600,780,t,{a:ph*(1-sh*sh),tap:pulseAt(t,w("email","accept it"),1.4)});ctx.restore();}
-  arrive(ctx,530,490,t,tN-0.2,()=>withA(ctx,1-fin(t,tOut-0.3,0.5),()=>{d9_form(ctx,340,230,380,520,{rot:-0.03});tag(ctx,530,800,"no application",D9_DAWN,{align:"center",size:30});}),{dy:-20,from:1.04});
-  // the offices, named and not; the parents aren't asked again; then each office's road to the register, with asks going out and
-  // answers coming back
-  const tPa=w("asks","parents"),tAsk=w("asks","Each one asks"),tX=w("asks","over X-Road"),tLw=w("law","second database"),tLs=w("law","listed");
-  D9_OFF.forEach(([nm,x,y],i)=>arrive(ctx,x+220,y+45,t,tOut+[0.5,0.8][i],()=>d9_office(ctx,x,y,440,nm,{hi:pulseAt(t,tAsk+0.9+i*0.25,1.2)+0.5*pulseAt(t,tOnly+i*0.15,1.4)}),{dy:-12}));
-  D9_OTH.forEach(([x,y],i)=>arrive(ctx,x,y,t,tOut+1.0+(i%3)*0.12+(i>2?0.06:0),()=>d9_officeS(ctx,x,y,{hi:pulseAt(t,tAsk+1.4+i*0.18,1.2)+0.5*pulseAt(t,tOnly+0.3+i*0.1,1.4)}),{dy:-10}));
-  D9_ROADS.forEach((rd,i)=>{const k=i<2?i:2+(i-2)*0.5,rp=clamp((t-tAsk-0.1-k*0.22)/0.9,0,1),cyc=(t-tAsk-1.3-i*0.41)/2.4,ph_=cyc-Math.floor(cyc),live=t>tAsk+1.2;
-    d9_road(ctx,rd,rp,{t,lw:i<2?1:0.6,ask:live&&ph_<0.5?ph_*2:null,ans:live&&ph_>=0.5?1-(ph_-0.5)*2:null,hi:pulseAt(t,tX+0.2,1.4)+0.6*pulseAt(t,tOnly+i*0.15,1.4)+0.5*pulseAt(t,B+0.4+i*0.2,1.6)});});
-  arrive(ctx,960,236,t,tX-0.1,()=>tag(ctx,960,236,"X-Road",D9_TAR,{align:"center",size:30}),{dy:8});
-  if(t>tPa-0.4&&t<tLw+1){const[wx,wy]=win;arrive(ctx,wx-230,wy+16,t,tPa-0.2,()=>withA(ctx,1-fin(t,c("law")-0.3,0.6),()=>tag(ctx,wx-230,wy+16,"not asked again",D9_DAWN,{align:"center",size:30})),{dy:8});}
-  // the law: no second database of the same data; and every database listed, with the office that owns it
-  arrive(ctx,270,190,t,tLw-0.3,()=>withA(ctx,1-fin(t,tLs-0.4,0.5),()=>{d9_ghostDb(ctx,160,148,220,84,"births");cross_(ctx,202,194,70,D9_RED,fin(t,tLw+0.5,0.3));tag(ctx,270,104,"no second database",D9_RED,{align:"center",size:30});}),{dy:-12});
-  const cat=fin(t,tLs-0.3,0.5)*(1-fin(t,tOwn+0.8,0.6));
-  arrive(ctx,360,728,t,tLs-0.3,()=>d9_catalogue(ctx,40,600,640,[["population register","Ministry of the Interior"],["health insurance database","Health Insurance Fund"],["social insurance database","Social Insurance Board"]],{a:cat,p:clamp((t-tLs)/1.4,0,1)}),{dy:-14});
-  // each fact has one home and one owner; it's asked for once, and everyone who needs it asks there
-  arrive(ctx,960,300,t,tHome-0.1,()=>tag(ctx,960,300,"one home",D9_TAR,{align:"center",size:30}),{dy:8});
-  arrive(ctx,960,614,t,tOwn-0.1,()=>tag(ctx,960,614,"owner · Ministry of the Interior",TRUST,{align:"center",size:30}),{dy:8});
-  const ln=clamp((t-tOnce+0.2)/0.9,0,1);if(ln>0){const[wx,wy]=win;d9_trace_(ctx,[[wx,wy],[lerp(wx,1180,0.5),lerp(wy,570,0.5)-30],[1180,570]],ln,D9_DAWN);
-    arrive(ctx,lerp(wx,1180,0.5),lerp(wy,570,0.5)-34,t,tOnce+0.3,()=>tag(ctx,lerp(wx,1180,0.5),lerp(wy,570,0.5)-34,"asked once",D9_DAWN,{align:"center",size:28}),{dy:8});}
-  arrive(ctx,960,760,t,tOnly-0.2,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.9)";ctx.shadowBlur=24;T(ctx,"once only",960,790,{w:800,size:84,align:"center",color:rgba(TRUST,1)});ctx.restore();},{dy:16,from:0.9});
-  ctx.restore();
-  eaYear(ctx,90,90,"today · Tartu, Estonia",D9_DAWN,fin(t,0.6,0.6)*(1-fin(t,tOut,0.5)));
+/* ---------- 1. The book on qanats ---------- */
+// Khorasan, in the ninth century, from high above: the qanats' shafts running down from the mountains to a town's fields, green, with
+// the water underground; then a new qanat dug from its own outlet up, its head close beside the old one's, which takes the old one's
+// water: its new fields turn green as the old village's go dry. Then, through a moment of dark, Nishapur, the governor's court: people
+// who keep coming two by two with disputes over qanats; the law books in their niche, with nothing on qanats; an empty place on the
+// table where the rules should be, and the field gone dry. The legal scholars of Khorasan and of Iraq gather at the table, and the
+// rules are written in one book: the Kitab-i Qani. From then on a judge reads each dispute's answer in it; two hundred years later,
+// a historian writes that qanats are still judged by it; and everyone who needs the rules comes to it, their one home.
+// The people of the court, at one scale, nearer the lower they stand: the pairs who bring disputes, where each waits (front first)
+// and how they're dressed; the scholars of Iraq, at the table's left (the nearer one stays, as the judge), and of Khorasan, at its
+// right; and, at the end, those who need the rules: [x, y, dress, from the left (-1) or the right (1)]
+const D9_S=0.66,D9_PAIRS=[[1160,1232],[1360,1432],[1560,1632],[1760,1832]];
+const D9_DRESS=[[{dress:"robe",head:"turban"},{dress:"tunic",head:"cap"}],[{dress:"chador"},{dress:"robe",head:"cap"}],[{dress:"tunic",head:"cap"},{dress:"robe",head:"turban"}],[{dress:"robe",head:"turban"},{dress:"chador"}],
+  [{dress:"tunic"},{dress:"robe",head:"turban"}],[{dress:"chador"},{dress:"tunic",head:"cap"}],[{dress:"robe",head:"cap"},{dress:"tunic"}],[{dress:"tunic",head:"cap"},{dress:"chador"}]];
+const D9_IRAQ=[716,806],D9_KHOR=[1110,1190,1270],D9_JUDGE=[1156,1228];
+const D9_ALL=[[300,900,{dress:"tunic",head:"cap"},-1],[420,930,{dress:"chador"},-1],[1330,912,{dress:"robe",head:"turban"},1],[1450,886,{dress:"tunic"},1],[1570,936,{dress:"chador"},1],[1690,898,{dress:"robe",head:"cap"},1]];
+scene("book",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);
+  const tC=c("court"),tNd=c("needed"),tCa=c("called"),tJ=c("judged"),tL=c("later"),tH=c("home"),tSw=tC-0.75,tSa=w("gather","So Abdallah");
+  // the plain, until the moment of dark that takes us to the court
+  if(t<tSw+0.6){const tQ=w("edge","qanats"),tNw=w("close","new tunnel"),tTc=w("close","too close"),tTk=w("close","take its water"),tDr=w("close","fields dry");
+    const tDn=tTc+0.2,dug=clamp((t-tNw+0.4)/(tDn-tNw+0.4),0,1),take=fin(t,tTk-0.3,1.4),dry=fin(t,tDr-0.9,1.8),out=1-fin(t,tSw-0.15,0.35);
+    ctx.save();focus(ctx,t,[[0,900,440,0.8],[tNw-0.6,700,520,1.25],[tDr-1.0,1160,700,0.98]],1.9);
+    ba_aerial(ctx,t,{flow:1-0.82*take,wet:BA_FIELDS.map((_,i)=>lerp(0.86,0.1,clamp(dry*1.4-0.4*hash(i,977),0,1))),warm:0.35,lit:pulseAt(t,tQ,2.2),litP:clamp((t-tQ+0.3)/1.4,0,1)});
+    d9_seep(ctx,t,BA_CHAIN,fin(t,w("edge","tunnels")-0.3,0.8)*(1-0.85*take));
+    d9_chain2(ctx,t,{dug,flow:clamp((t-tTk-0.4)/2.0,0,1),hi:pulseAt(t,tDn+0.1,2.0)});d9_seep(ctx,t,D9_CH2,take);
+    baTagAt(ctx,S,900,440,"an old qanat",BAC,{a:fin(t,w("close","old one")-0.2,0.5)*out,dy:-24});
+    baTagAt(ctx,S,560,540,"a new one, too close",BA_RED,{a:fin(t,tTc-0.2,0.5)*out,dy:30});
+    baTagAt(ctx,S,1574,700,"fields dry",BA_RED,{a:fin(t,tDr,0.5)*out,dy:-60});
+    ctx.restore();eaYear(ctx,90,90,"Khorasan · the 9th century",CLAY,fin(t,0.6,0.6)*(1-fin(t,tSw,0.4)));}
+  else{const tAb=w("court","Abdallah"),tDs=w("court","disputes"),tLb=w("books","law books"),tSn=w("books","said nothing"),tNr=w("books","no rule"),tKr=w("needed","know the rules"),tWd=w("needed","went dry");
+    const tKh=w("gather","Khorasan"),tIq=w("gather","Iraq"),tOb=w("gather","one book"),tSj=w("judged","judged"),tHi=w("later","historian"),tSt=w("later","still judged"),tWl=w("home","where to look");
+    const late=fin(t,tL-0.2,1.6);
+    ctx.save();focus(ctx,t,[[0,1110,640,1.2],[tLb-0.8,930,640,1.2],[tSa-0.4,980,620,1.15],[tCa-0.3,900,790,2.3],[tJ-0.2,1000,640,1.2],[tH-0.3,980,600,1.0]],1.8);
+    d9_court(ctx,t,{books:fin(t,tLb-0.3,0.5)*(1-fin(t,tNd,0.6))+0.6*pulseAt(t,tSn,1.4),dusk:0.2+0.5*late});
+    // who's in the court, drawn from the furthest to the nearest: the governor on the dais, who turns from the people who come to the
+    // table as the scholars gather (gone, two hundred years on); then the table and its book; then everyone in the courtyard
+    const Q=[[D9_DS,()=>d9_fig(ctx,1046,D9_DS,0.58,{dress:"robe",head:"turban",f:lerp(1,-1,ease(fin(t,tSa+0.6,0.4))),a:1-late,rimA:0.75,t})]];
+    Q.push([D9_FL-0.5,()=>{d9_table(ctx,D9_DESK[0],D9_DESK[1]);d9_slot(ctx,D9_DESK[0]-92,D9_DESK[1]-58,184,50,BA_RED,fin(t,tKr-0.2,0.5)*(1-fin(t,tOb-0.4,0.4)),"rules?");
+      arrive(ctx,D9_DESK[0],D9_DESK[1]-16,t,tOb-0.2,()=>d9_codex(ctx,D9_DESK[0],D9_DESK[1]-2,124,{p:clamp((t-tOb)/3.2,0,1),old:late,hi:pulseAt(t,tCa+0.4,2.0)+0.7*fin(t,tH-0.2,0.8)}),{dy:-10});}]);
+    // the disputes, two by two: each pair comes in from the right and waits its turn, facing the governor; as the scholars are called,
+    // the pairs turn and go, the furthest back first
+    const tA=[-9,tSw+0.4,tAb-0.6,tDs-0.6];
+    D9_PAIRS.forEach((xs,k)=>xs.forEach((x1,j)=>{const t0=tA[k]+j*0.3,x0=2080+j*70,[xa,ba]=d9_go(t,x0,x1,t0,(x0-x1)/250),tl=tSa-0.3+(3-k)*0.3+(1-j)*0.15,turn=ease(fin(t,tl,0.4)),[xb,bb]=d9_go(t,x1,x1+1100,tl+0.3,4.2);
+      if(t<t0||xb>2200)return;const on=t>=tl+0.3;Q.push([D9_FL,()=>d9_fig(ctx,on?xb:xa,D9_FL+(on?bb:ba),D9_S,Object.assign({f:lerp(-1,1,turn),t},D9_DRESS[k][j]))]);}));
+    // the scholars: of Khorasan from the right and of Iraq from the left, to the table. From then on, only the judge stays, his hand on
+    // the book; two hundred years on, another judge
+    const gone=fin(t,tJ-0.6,0.5);
+    D9_KHOR.forEach((x1,j)=>{const t0=tKh-2.6+j*0.35,x0=2080+j*80,[x,b]=d9_go(t,x0,x1,t0,(x0-x1)/250);if(t<t0)return;Q.push([D9_FL+20,()=>d9_fig(ctx,x,D9_FL+20+b,D9_S,{dress:"robe",head:j===1?"cap":"turban",f:-1,a:1-gone,t})]);});
+    D9_IRAQ.forEach((x1,j)=>{const t0=tIq-3.0+j*0.35,x0=-200-j*80,[x,b]=d9_go(t,x0,x1,t0,(x1-x0)/250);if(t<t0)return;const judge=j===1,a=judge?1-fin(t,tL-0.3,0.5):1-gone,k=judge?ease(fin(t,tJ-0.4,0.45)):0;
+      const hand=[x+52*D9_S,D9_FL+20-114*D9_S],to=[D9_DESK[0]-34,D9_DESK[1]-12];Q.push([D9_FL+20,()=>d9_fig(ctx,x,D9_FL+20+b,D9_S,{dress:"robe",head:"turban",f:1,a,t,reach:k>0.01?[lerp(hand[0],to[0],k),lerp(hand[1],to[1],k)]:null})]);});
+    const nj=fin(t,tL+0.4,0.5);if(nj>0.01)Q.push([D9_FL+20,()=>d9_fig(ctx,D9_IRAQ[1],D9_FL+20,D9_S,{dress:"robe",head:"cap",f:1,a:nj,t,reach:[D9_DESK[0]-36,D9_DESK[1]-12]})]);
+    // the disputes judged by what the book says: a pair at a time before the judge, each settled
+    [0,1,2,3].forEach(i=>{const t0=i<3?tJ+0.1+i*1.35:tL+0.9,t1=i<3?t0+1.25:tH-0.3,a=fin(t,t0,0.4)*(1-fin(t,t1,0.4));if(a<=0.01)return;
+      D9_JUDGE.forEach((x,j)=>Q.push([D9_FL,()=>d9_fig(ctx,x,D9_FL,D9_S,Object.assign({f:-1,a,t},D9_DRESS[4+i][j]))]));
+      if(i<3)Q.push([D9_FL+1,()=>{const g=fin(t,t0+0.6,0.3)*(1-fin(t,t1,0.4));if(g>0.01)kt_gtick(ctx,(D9_JUDGE[0]+D9_JUDGE[1])/2,628,20,g);}]);});
+    // a historian, two hundred years on, with the book he writes
+    const ha=fin(t,tHi-0.5,0.5);if(ha>0.01)Q.push([D9_FL+36,()=>{d9_fig(ctx,580,D9_FL+36,D9_S,{dress:"robe",head:"turban",f:1,a:ha,t,reach:[636,D9_FL+36-114]});withA(ctx,ha,()=>{ctx.fillStyle="rgba(238,224,196,1)";ctx.fillRect(628,D9_FL+36-130,40,18);ctx.fillStyle="rgba(120,62,42,1)";ctx.fillRect(626,D9_FL+36-113,44,4);});}]);
+    // and everyone who needs the rules, coming to the book from both sides
+    D9_ALL.forEach(([x1,y,o,sd],i)=>{const t0=tH-0.2+i*0.3,x0=sd<0?-200:2160,[x,b]=d9_go(t,x0,x1,t0,Math.abs(x1-x0)/260);if(t<t0)return;
+      Q.push([y,()=>{d9_fig(ctx,x,y+b,D9_S*(y/D9_FL),Object.assign({f:sd<0?1:-1,t},o));const lk=clamp((t-tWl+0.4-i*0.12)/0.9,0,1);
+        if(lk>0)d9_trace_(ctx,[[x,y-240*D9_S],[lerp(x,D9_DESK[0],0.5),Math.min(y,D9_DESK[1])-150],[D9_DESK[0],D9_DESK[1]-24]],lk,D9_LAMP,{dash:[6,9],a:0.75*(1-fin(t,B+2.5,1.0)),lw:2.5,nohead:1});}]);});
+    Q.sort((p,q)=>p[0]-q[0]).forEach(q=>q[1]());
+    // what the narration names, where it is
+    const off=1-fin(t,tNd-0.2,0.5);
+    baTagAt(ctx,S,1046,604,"Abdallah ibn Tahir · governor",TRUST,{a:fin(t,tAb-0.2,0.5)*(1-fin(t,tLb-0.6,0.5)),dy:-18});
+    baTagAt(ctx,S,1480,640,"disputes over qanats",BA_RED,{a:fin(t,tDs-0.2,0.5)*(1-fin(t,tLb-0.6,0.5)),dy:-18});
+    baTagAt(ctx,S,590,474,"the law books",CLAY,{a:fin(t,tLb-0.2,0.5)*off});
+    baTagAt(ctx,S,590,474,"nothing on qanats",BA_RED,{a:fin(t,tSn-0.1,0.5)*off,dy:52});
+    arrive(ctx,1196,616,t,tNr-0.2,()=>withA(ctx,1-fin(t,tNd+0.6,0.5),()=>{glass(ctx,1162,582,68,68,34,BA_RED,{glow:14,ea:0.8,fill:"rgba(24,12,10,0.94)"});T(ctx,"?",1196,632,{w:800,size:44,align:"center",color:rgba(BA_RED,1)});}),{dy:-10});
+    baTagAt(ctx,S,1190,640,"scholars of Khorasan",CLAY,{a:fin(t,tKh+0.2,0.5)*(1-fin(t,tCa-0.6,0.4)),dy:-18});
+    baTagAt(ctx,S,761,640,"from Iraq",CLAY,{a:fin(t,tIq+0.2,0.5)*(1-fin(t,tCa-0.6,0.4)),dy:-18});
+    baTagAt(ctx,S,1191,580,"judged by the book",BA_OK,{a:fin(t,tSj-0.2,0.5)*(1-fin(t,tL-0.3,0.4)),dy:-24});
+    baTagAt(ctx,S,580,690,"a historian",CLAY,{a:fin(t,tHi-0.2,0.5)*(1-fin(t,tH-0.4,0.4)),dy:-18});
+    baTagAt(ctx,S,900,700,"still judged by it",BA_OK,{a:fin(t,tSt-0.2,0.5)*(1-fin(t,tH-0.4,0.4)),dy:-60});
+    ctx.restore();
+    eaYear(ctx,90,90,"Nishapur · the 9th century",CLAY,fin(t,tSw+0.9,0.6)*(1-fin(t,tL-0.3,0.4)));eaYear(ctx,90,90,"about 1050",CLAY,fin(t,tL+0.2,0.5)*(1-fin(t,tH-0.3,0.4)));
+    // the field gone dry, beside the court, as the narration says why the rules were needed
+    const ia=fin(t,tWd-0.6,0.5)*(1-fin(t,tSa-0.3,0.5));if(ia>0.01)withA(ctx,ia,()=>{const x=1400,y=110,ww=440,hh=256;glass(ctx,x,y,ww,hh,18,BA_RED,{glow:12,ea:0.8,fill:"rgba(20,12,10,0.95)"});
+      ctx.save();rr(ctx,x+10,y+10,ww-20,hh-76,12);ctx.clip();ctx.translate(x+10,y+10);ctx.scale(0.44,0.44);ctx.translate(-1180,-560);ba_aerial(ctx,t,{flow:0.18,wet:BA_FIELDS.map(()=>0.1),warm:0.35});d9_chain2(ctx,t,{dug:1,flow:1});ctx.restore();
+      T(ctx,"a field gone dry",x+ww/2,y+hh-24,{w:700,size:30,align:"center",color:rgba(BA_RED,1)});});
+    // the book's name, as the camera comes close
+    const nA=fin(t,tCa+0.5,0.5)*(1-fin(t,tJ-0.5,0.4));if(nA>0.01)withA(ctx,nA,()=>{glass(ctx,640,140,640,176,22,D9_LAMP,{glow:16,ea:0.85,fill:"rgba(20,14,10,0.93)"});
+      T(ctx,"Kitab-i Qani",960,224,{w:800,size:58,align:"center",color:rgba(INK,0.98)});T(ctx,"the book on qanats",960,280,{w:700,size:32,align:"center",color:rgba(D9_LAMP,1)});});
+    // one home, written once
+    const tOh=w("home","one home"),tWo=w("home","written once");
+    const oh=fin(t,tOh-0.3,0.6)*(1-fin(t,B+1.0,0.8));if(oh>0.01){const g=ctx.createRadialGradient(960,490,10,960,490,340);g.addColorStop(0,"rgba(14,8,4,"+(0.6*oh)+")");g.addColorStop(1,"rgba(14,8,4,0)");ctx.fillStyle=g;ctx.fillRect(620,150,680,680);}
+    arrive(ctx,960,440,t,tOh-0.2,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.9)";ctx.shadowBlur=22;T(ctx,"one home",960,462,{w:800,size:76,align:"center",color:rgba(TRUST,1)});ctx.restore();},{dy:14,from:0.9});
+    arrive(ctx,960,520,t,tWo-0.2,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.9)";ctx.shadowBlur=18;T(ctx,"written once",960,530,{w:700,size:40,align:"center",color:rgba(D9_LAMP,1)});ctx.restore();},{dy:10});}
+  dark(ctx,S,fin(t,tSw,0.6)*(1-fin(t,tSw+0.6,0.7)));
   fadeIn(ctx,S,t,1.4);vign(ctx,S);
-  eaTitle(ctx,S,t,B+1.0,"Rules with a home","objects, owners and rules",EAC,"Film 9 of 11 · enterprise architecture, for data");});
+  baTitle(ctx,S,t,B+1.0,"Rules with a home","objects, owners and rules","Film 6 of 7");});
 // a pose held between two moments, eased in and out: for person()'s pose mix
 const d9_pz=(t,a,b)=>fin(t,a,0.5)*(1-fin(t,b,0.5));
 
@@ -2754,9 +3085,9 @@ scene("script",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 
 /* ---------- 4. Five places, no home ---------- */
 // Back at the wall: the rule written five ways, the regulator's code saying why and the rest how, a little differently; and an empty
-// place where its home should be, beside Tartu's register, asked once.
+// place where its home should be, beside Khorasan's book on qanats.
 scene("five",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");wallBg(ctx,S,t);
-  const tFo=w("four","four more"),tW=[0.5,w("where","retail code"),w("where","settings"),w("where","notes"),w("where","spreadsheet")],tWhy=w("how","says why"),tHow=w("how","each say how"),tDif=w("how","differently"),tNone=w("how","None of them"),tO=c("once"),tTa=w("once","Tartu"),tOo=w("once","once only");
+  const tFo=w("four","four more"),tW=[0.5,w("where","retail code"),w("where","settings"),w("where","notes"),w("where","spreadsheet")],tWhy=w("how","says why"),tHow=w("how","each say how"),tDif=w("how","differently"),tNone=w("how","None of them"),tO=c("once"),tTa=w("once","Khorasan"),tOo=w("once","one home");
   ctx.save();drift(ctx,t,sc,{z:0.025,y:440});
   person(ctx,"tomas",230,1030,0.78,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,0.6,3.2)+d9_pz(t,tO-0.2,tO+2.6),expr:t>tNone-0.3&&t<tO?"concerned":"calm"});
   const dW=332,dH=262,dx=i=>84+i*352,dy=176;
@@ -2765,9 +3096,9 @@ scene("five",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   // none of them is its home
   const sl=fin(t,tNone-0.1,0.6);d9_slot(ctx,700,606,420,140,TRUST,sl,"its home?");
   D9_DOCS.forEach((_,i)=>{const p=clamp((t-tNone-0.1-i*0.08)/0.7,0,1);if(p<=0)return;const x0=dx(i)+dW/2,y0=dy+dH+70,x1=lerp(740,1080,i/4),y1=600;ctx.save();ctx.globalAlpha*=0.5*(1-fin(t,tO,0.6));ctx.setLineDash([6,8]);ctx.strokeStyle=rgba(TRUST,0.8);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,0.82*ease(p)),lerp(y0,y1,0.82*ease(p)));ctx.stroke();ctx.restore();});
-  // what Tartu has for a birth: one register, asked once
-  arrive(ctx,1460,668,t,tTa-0.3,()=>d9_regMini(ctx,1460,668,t,1),{dy:-14});
-  arrive(ctx,1460,812,t,tOo-0.2,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.85)";ctx.shadowBlur=18;T(ctx,"once only",1460,846,{w:800,size:52,align:"center",color:rgba(TRUST,1)});ctx.restore();},{dy:12,from:0.9});
+  // what Khorasan had for qanats: one book, where everyone looked
+  arrive(ctx,1460,668,t,tTa-0.3,()=>d9_bookMini(ctx,1460,668,t,1),{dy:-14});
+  arrive(ctx,1460,812,t,tOo-0.2,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.85)";ctx.shadowBlur=18;T(ctx,"one home",1460,846,{w:800,size:52,align:"center",color:rgba(TRUST,1)});ctx.restore();},{dy:12,from:0.9});
   ctx.restore();vign(ctx,S);});
 /* ---------- 5. Two rules, not one ---------- */
 // Day one's rule, set down on the wall, splits in two: the network's and retail's, each with its owner. The replaced reading crosses
@@ -2919,7 +3250,7 @@ scene("std",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   ctx.save();drift(ctx,t,sc,{z:0.02,y:440});
   // from the three rules to retail's, in the middle: what was about all three leaves as it moves
   const tB=tD-1.4,m=ease(fin(t,tB+0.2,1.5)),gA=1-fin(t,tB-0.2,0.6);
-  arrive(ctx,186,96,t,tA4-0.2,()=>T(ctx,"ArchiMate 4",80,108,{f:"mono",w:600,size:32,color:rgba(EAC,1)}),{dy:8});
+  arrive(ctx,186,96,t,tA4-0.2,()=>T(ctx,"ArchiMate 4",80,108,{f:"mono",w:600,size:32,color:rgba(BAC,1)}),{dy:8});
   const MW=D9_MOTS.map(([l])=>tw(ctx,l,30,700)+86);
   // the three rules: each card lights as its kind is named, and its parallelogram as the symbol is; then each card's rises to the
   // requirement's chip
@@ -3009,10 +3340,11 @@ scene("checks",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // the readings it's about, each marked actual or estimate; a test passes every mark
   const rA=1-fin(t,tG-0.5,0.5);if(rA>0.01)withA(ctx,rA*tA,()=>arrive(ctx,1435,333,t,tEr-0.3,()=>d9_readings(ctx,1010,150,850,{hi:D9_ROWS.map((_,i)=>fin(t,tEr+0.3+i*0.15,0.4)),ok:clamp((t-tRt+0.1)/0.9,0,1)}),{dy:-14}));
   const cl=ease(fin(t,tAr-0.3,0.9)),pw=D9_TP.map(l=>tw(ctx,l,30,700)+86),pX=pw.map((w_,i)=>1012+pw.slice(0,i).reduce((a,b)=>a+b,0)+28*i+w_/2);
+  // the tests dim to half before they fold into their pills, so none of their words is read smaller than it's drawn
   D9_GEN.forEach(([ti,ls],i)=>{const y=D9_GY[i],t0=tGn[i],my=y+111,pl=D9_TP[i],px=pX[i];
     d9_feed(ctx,D9_PY,my,clamp((t-t0+0.2)/0.6,0,1),1-cl);
     if(cl<0.99){ctx.save();const k=lerp(1,0.25,cl);ctx.translate(lerp(1435,px,cl),lerp(my,D9_PY,cl));ctx.scale(k,k);ctx.translate(-1435,-my);
-      withA(ctx,1-cl,()=>arrive(ctx,1435,my,t,t0-0.1,()=>d9_gen(ctx,1010,y,850,222,ti,ls,{p:clamp((t-t0-0.1)/1.4,0,1),hi:pulseAt(t,t0+0.3,1.4),lock:i===0?pulseAt(t,tBh,1.6):0}),{dy:-14}));ctx.restore();}
+      withA(ctx,(1-cl)*(1-0.45*fin(t,tAr-0.65,0.3)),()=>arrive(ctx,1435,my,t,t0-0.1,()=>d9_gen(ctx,1010,y,850,222,ti,ls,{p:clamp((t-t0-0.1)/1.4,0,1),hi:pulseAt(t,t0+0.3,1.4),lock:i===0?pulseAt(t,tBh,1.6):0}),{dy:-14}));ctx.restore();}
     // every test passes: the data is right
     withA(ctx,tA*cl,()=>d9_pill(ctx,px,D9_PY,pl,TECH,"ok",{hi:pulseAt(t,tAr+0.3+i*0.15,1.2)}));});
   d9_feed(ctx,D9_PY,D9_PY,1,tA*cl);
@@ -3065,9 +3397,9 @@ scene("onto",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the map, the one source; each view drawn from it as it's named
   const vA=fin(t,tV-0.1,0.6)*(1-gone);
   if(vA>0.01)withA(ctx,vA,()=>{layerStack(ctx,110,250,520,{sh:56,gap:16,size:28,p:clamp((t-tV)/1.4,0,1),hi:[0,0,0,0,0,0].map((_,i)=>0.5*pulseAt(t,tOm+i*0.08,1.4))});
-    tag(ctx,370,196,"one map",EAC,{align:"center",size:30});withA(ctx,fin(t,tOm-0.2,0.5),()=>tag(ctx,1350,100,"one map, many views",EAC,{align:"center",size:28}));});
+    tag(ctx,370,196,"one map",BAC,{align:"center",size:30});withA(ctx,fin(t,tOm-0.2,0.5),()=>tag(ctx,1350,100,"one map, many views",BAC,{align:"center",size:28}));});
   D9_VW.forEach(([ti,sub,g],i)=>{const y=vy0+i*(vh+vg),t0=[tGl,tMo,tOt,tCh][i],q=fin(t,t0-0.3,0.5)*(1-gone);if(q<=0.01)return;const fp=clamp((t-t0+0.3)/0.6,0,1);
-    withA(ctx,q,()=>{ctx.save();ctx.strokeStyle=rgba(EAC,0.8);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(716,466);ctx.lineTo(lerp(716,vx-6,ease(fp)),lerp(466,y+vh/2,ease(fp)));ctx.stroke();ctx.restore();});
+    withA(ctx,q,()=>{ctx.save();ctx.strokeStyle=rgba(BAC,0.8);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(716,466);ctx.lineTo(lerp(716,vx-6,ease(fp)),lerp(466,y+vh/2,ease(fp)));ctx.stroke();ctx.restore();});
     arrive(ctx,vx+vw/2,y+vh/2,t,t0-0.2,()=>d9_view(ctx,vx,y,vw,vh,ti,sub,g,{a:1-gone,hi:pulseAt(t,t0+0.2,1.4)+0.6*pulseAt(t,tOm+0.3,1.4)}),{dy:-10});});
   // the graph: the concepts, then how they relate, then the rules about them; then it shrinks into the ontology's view of the map
   if(gone<0.99){ctx.save();ctx.translate(gx,gy);ctx.scale(k,k);ctx.translate(-975,-455);withA(ctx,1-gone,()=>{
@@ -3090,13 +3422,13 @@ scene("onto",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
     arrive(ctx,495,770,t,tUnk-0.6,()=>d9_verdict(ctx,90,700,810,140,"OWL","was it corrected?","unknown",[176,186,206],"?",{v:fin(t,tUnk-0.1,0.5),hi:pulseAt(t,tUnk,1.4)}),{dy:-12});
     arrive(ctx,1425,770,t,tFind-0.3,()=>d9_verdict(ctx,1020,700,810,140,"the tracking table","was it corrected?","no",D9_RED,"x",{v:fin(t,tJob-0.5,0.5),hi:pulseAt(t,tJob,1.4)}),{dy:-12});}
   ctx.restore();vign(ctx,S);});
-/* ---------- 12. Back in Tartu ---------- */
+/* ---------- 12. Back in Khorasan ---------- */
 // The wall again, toured left to right: the household's bill corrected and the 1,900 found; the two rules, confirmed by their owners;
-// Tartu, where the benefit is paid and nobody was asked twice; Tomás's note answered; then the whole wall, and the next question.
+// Khorasan's book, where everyone looked for the rules on qanats; Tomás's note answered; then the whole wall, and the next question.
 const D9_E21=[590,110,560],D9_E22=[590,400,560],D9_ETC=[590,676,560,186];
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");wallBg(ctx,S,t);
   const tBk=w("refund","forty back"),t19=w("refund","nineteen hundred"),tFc=w("refund","found and corrected"),tC=c("confirm"),tG=w("confirm","Grace"),tHr=w("confirm","head of retail"),
-    tT=c("tartu"),tPd=w("tartu","is paid"),tTw=w("tartu","asked twice"),tA=c("answer"),tAn=w("answer","an answer"),tGf=w("owner","generated from it"),tN=c("next"),tNx=w("next","Next:");
+    tT=c("book"),tPd=w("book","looked"),tTw=w("book","one book"),tA=c("answer"),tAn=w("answer","an answer"),tGf=w("owner","generated from it"),tN=c("next"),tNx=w("next","Next:");
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});focus(ctx,t,[[0,330,330,1.3],[tC-0.9,840,385,1.25],[tT-0.9,870,560,1.1],[tA-0.9,1420,450,1.15],[tN-0.4,960,520,1.0]],1.6);
   // what the camera leaves behind dims as it goes, and comes back for the whole wall (the bill and the count once they are back in frame)
   const back=fin(t,tN-0.4,0.8),zB=1-0.7*fin(t,tT-0.9,0.8)*(1-fin(t,tN+0.7,0.7)),zR=1-0.7*fin(t,tA-0.9,0.8)*(1-back);
@@ -3109,15 +3441,15 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     const h=d9_rule(ctx,0,0,w_,"",txt,null,{a:0,size:28}),g=fin(t,t0+0.2,0.5);
     arrive(ctx,x+w_/2,y+h/2,t,tC-0.4+i*0.2,()=>d9_rule(ctx,x,y,w_,id,txt,side,{size:28,a:zR,hi:pulseAt(t,t0+0.3,1.4)}),{dy:-12});
     if(g>0)withA(ctx,g*zR,()=>{kt_gtick(ctx,x+22,y+h+30,18,1);T(ctx,"confirmed · "+who,x+52,y+h+40,{w:700,size:28,color:rgba(TRUST,1)});});});
-  // Tartu: the benefit paid, and nobody asked twice
-  arrive(ctx,D9_ETC[0]+D9_ETC[2]/2,D9_ETC[1]+D9_ETC[3]/2,t,tT-0.6,()=>d9_tartuCard(ctx,...D9_ETC,t,{a:zR,paid:fin(t,tPd-0.2,0.5),once:fin(t,tTw-0.4,0.5),hi:pulseAt(t,tPd,1.4)}),{dy:-14});
+  // Khorasan: the rules on qanats in one book, where everyone looked
+  arrive(ctx,D9_ETC[0]+D9_ETC[2]/2,D9_ETC[1]+D9_ETC[3]/2,t,tT-0.6,()=>d9_bookCard(ctx,...D9_ETC,t,{a:zR,open:fin(t,tPd-0.2,0.5),once:fin(t,tTw-0.4,0.5),hi:pulseAt(t,tPd,1.4)}),{dy:-14});
   // Tomás's note, and its answer; then the next question
   person(ctx,"tomas",1790,1030,0.74,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,tA,tA+2.6)});
   arrive(ctx,1480,150,t,tA-1.0,()=>sticky(ctx,1480,150,500,120,D9_Q,{col:NOTEC[0],size:32,st:fin(t,tAn+0.4,0.5),rot:-0.03}),{dy:-20});
   arrive(ctx,1480,440,t,tAn-0.2,()=>sticky(ctx,1480,440,540,300,D9_A,{col:NOTEC[0],size:30,p:clamp((t-tAn)/(tGf-tAn+0.8),0,1),rot:0.012}),{dy:-30,from:1.06});
   arrive(ctx,1460,770,t,tNx-0.1,()=>sticky(ctx,1460,770,460,150,D9_NEXT,{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
-  eaEnd(ctx,S,t,B+0.8,"Rules with a home",EAC,"Write each rule once, where it applies, with an owner and a reason.","Film 9 of 11");});
+  baEnd(ctx,S,t,B+0.8,"Rules with a home","Write each rule once, where it applies, with an owner and a reason.","Film 6 of 7");});
 
 // where the chapters meet (From words to data's joins.js): the five questions go from the screen to the wall, with the script in
 // another place, so they open on a cut; why carries on from the split, so the camera carries on; the standard's three rules and the

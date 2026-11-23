@@ -450,7 +450,6 @@ const NARR={
  {"id":"rods","gap":0.8,"text":"Rod's brain did something like it, matching ten rough signals to the voices it remembered."},
  {"id":"stops","gap":0.8,"text":"But the copy stops somewhere."},
  {"id":"levels","gap":0.8,"text":"A brain guesses at many levels at once, from the next word to where the story is going."},
- {"id":"cell","gap":0.8,"text":"To imitate one kind of brain cell, researchers needed a network five to eight layers deep."},
  {"id":"nobody","gap":0.8,"text":"And how a brain learns from its errors, nobody knows yet."}
 ]},
 "mixing":{"name":"Mixing, or making?","lead":1.4,"tail":1.2,"vo":[
@@ -528,7 +527,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"rough/place": 2.634, "rough/lost": 2.912, "rough/lips": 3.485, "rough/aid": 5.705, "rough/cut": 4.497, "rough/doubt": 8.424, "rough/foreign": 1.763, "rough/change": 1.288, "rough/father": 3.318, "rough/years": 3.941, "rough/implant": 5.999, "rough/august": 3.168, "rough/sang": 3.059, "rough/december": 3.071, "rough/roughwas": 7.094, "rough/rest": 4.111, "rough/y2019": 4.766, "rough/same": 2.67, "rough/copies": 3.477, "rough/keep": 4.699, "five/today": 1.581, "five/counted": 7.262, "five/signed": 3.166, "five/coffee": 1.931, "five/jun": 2.333, "five/mei": 2.087, "five/noor": 2.717, "five/sam": 1.594, "five/yusuf": 2.26, "five/noanswer": 2.671, "taught/first": 2.621, "taught/perceptron": 8.335, "taught/senses": 3.242, "taught/descend": 4.113, "taught/y2022": 5.568, "taught/before": 3.05, "taught/friston": 6.436, "taught/rods": 4.938, "taught/stops": 1.414, "taught/levels": 4.822, "taught/cell": 5.207, "taught/nobody": 3.114, "mixing/second": 4.445, "mixing/others": 3.11, "mixing/lovelace": 8.135, "mixing/boden": 5.088, "mixing/ways": 4.45, "mixing/model": 2.892, "mixing/brings": 5.096, "mixing/reason": 1.641, "mixing/science": 5.904, "mixing/choice": 3.503, "wire/third": 3.841, "wire/worm": 5.697, "wire/openworm": 5.73, "wire/wriggles": 4.947, "wire/fly": 7.699, "wire/sugar": 3.712, "wire/billion": 1.637, "wire/act": 2.538, "wire/ear": 3.889, "wire/speech": 4.769, "wire/exactly": 2.585, "wire/searle": 6.57, "wire/others": 3.981, "wire/who": 1.386, "feels/fourth": 3.427, "feels/pulses": 2.087, "feels/didnt": 1.097, "feels/roddid": 0.751, "feels/chalmers": 4.734, "feels/why": 3.913, "feels/theories": 1.351, "feels/one": 4.003, "feels/another": 3.18, "feels/test": 9.709, "feels/science": 1.336, "machine/then": 1.272, "machine/llinas": 7.616, "machine/ties": 3.184, "machine/sleep": 1.345, "machine/penrose": 7.755, "machine/critics": 4.674, "machine/disagree": 3.099, "machine/y2001": 4.868, "machine/y2007": 4.722, "machine/filaments": 2.873, "machine/y2023": 7.812, "machine/none": 5.767, "machine/whether": 3.108, "human/last": 1.751, "human/descartes": 6.326, "human/dullest": 3.758, "human/today": 1.239, "human/ifnot": 1.519, "human/body": 1.26, "human/life": 1.319, "human/feelings": 0.673, "human/choosing": 2.204, "human/settled": 1.235, "human/heard": 4.526, "human/building": 6.737, "human/helps": 4.278, "human/answers": 1.448, "human/wonder": 0.862};
+const VODUR={"rough/place": 2.634, "rough/lost": 2.912, "rough/lips": 3.485, "rough/aid": 5.705, "rough/cut": 4.497, "rough/doubt": 8.424, "rough/foreign": 1.763, "rough/change": 1.288, "rough/father": 3.318, "rough/years": 3.941, "rough/implant": 5.999, "rough/august": 3.168, "rough/sang": 3.059, "rough/december": 3.071, "rough/roughwas": 7.094, "rough/rest": 4.111, "rough/y2019": 4.766, "rough/same": 2.67, "rough/copies": 3.477, "rough/keep": 4.699, "five/today": 1.581, "five/counted": 7.262, "five/signed": 3.166, "five/coffee": 1.931, "five/jun": 2.333, "five/mei": 2.087, "five/noor": 2.717, "five/sam": 1.594, "five/yusuf": 2.26, "five/noanswer": 2.671, "taught/first": 2.621, "taught/perceptron": 8.335, "taught/senses": 3.242, "taught/descend": 4.113, "taught/y2022": 5.568, "taught/before": 3.05, "taught/friston": 6.436, "taught/rods": 4.938, "taught/stops": 1.414, "taught/levels": 4.822, "taught/nobody": 3.114, "mixing/second": 4.445, "mixing/others": 3.11, "mixing/lovelace": 8.135, "mixing/boden": 5.088, "mixing/ways": 4.45, "mixing/model": 2.892, "mixing/brings": 5.096, "mixing/reason": 1.641, "mixing/science": 5.904, "mixing/choice": 3.503, "wire/third": 3.841, "wire/worm": 5.697, "wire/openworm": 5.73, "wire/wriggles": 4.947, "wire/fly": 7.699, "wire/sugar": 3.712, "wire/billion": 1.637, "wire/act": 2.538, "wire/ear": 3.889, "wire/speech": 4.769, "wire/exactly": 2.585, "wire/searle": 6.57, "wire/others": 3.981, "wire/who": 1.386, "feels/fourth": 3.427, "feels/pulses": 2.087, "feels/didnt": 1.097, "feels/roddid": 0.751, "feels/chalmers": 4.734, "feels/why": 3.913, "feels/theories": 1.351, "feels/one": 4.003, "feels/another": 3.18, "feels/test": 9.709, "feels/science": 1.336, "machine/then": 1.272, "machine/llinas": 7.616, "machine/ties": 3.184, "machine/sleep": 1.345, "machine/penrose": 7.755, "machine/critics": 4.674, "machine/disagree": 3.099, "machine/y2001": 4.868, "machine/y2007": 4.722, "machine/filaments": 2.873, "machine/y2023": 7.812, "machine/none": 5.767, "machine/whether": 3.108, "human/last": 1.751, "human/descartes": 6.326, "human/dullest": 3.758, "human/today": 1.239, "human/ifnot": 1.519, "human/body": 1.26, "human/life": 1.319, "human/feelings": 0.673, "human/choosing": 2.204, "human/settled": 1.235, "human/heard": 4.526, "human/building": 6.737, "human/helps": 4.278, "human/answers": 1.448, "human/wonder": 0.862};
 
 /* Pauses, used sparingly: the film is longer and slower than the series' others, as the plan allows, and stops where an idea needs a
    moment to land. hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture
@@ -536,7 +535,7 @@ const VODUR={"rough/place": 2.634, "rough/lost": 2.912, "rough/lips": 3.485, "ro
 const BREATH={
 "rough":{"hold":{"lost":0.4,"lips":0.4,"aid":0.6,"cut":1.4,"foreign":0.4,"change":0.6,"father":1.0,"implant":1.0,"august":0.8,"sang":1.6,"december":0.8,"roughwas":0.6,"rest":1.0,"y2019":0.8,"copies":0.4},"breathe":4.6},
 "five":{"hold":{"counted":0.8,"signed":0.6,"coffee":0.6,"jun":0.3,"mei":0.3,"noor":0.3,"sam":0.3,"yusuf":0.6,"noanswer":0.8}},
-"taught":{"hold":{"first":0.6,"senses":0.6,"descend":0.8,"y2022":0.4,"before":0.8,"friston":0.6,"rods":0.8,"levels":0.6,"cell":0.6,"nobody":2.0}},
+"taught":{"hold":{"first":0.6,"senses":0.6,"descend":0.8,"y2022":0.4,"before":0.8,"friston":0.6,"rods":0.8,"levels":0.6,"nobody":2.0}},
 "mixing":{"hold":{"second":0.6,"others":1.2,"lovelace":0.8,"ways":0.8,"model":0.6,"brings":0.8,"reason":1.2,"science":0.4,"choice":1.6}},
 "wire":{"hold":{"third":0.6,"worm":0.6,"wriggles":0.6,"sugar":0.8,"billion":0.8,"act":0.4,"speech":0.8,"exactly":0.6,"searle":0.6,"others":0.4,"who":1.6}},
 "feels":{"hold":{"fourth":0.6,"pulses":0.4,"didnt":1.2,"roddid":1.6,"why":0.5,"one":0.4,"another":0.4,"test":0.4,"science":0.4}},
@@ -2866,7 +2865,7 @@ scene("five",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({counted:wAt(s
 
 scene("taught",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({rough:wAt(sc,"perceptron","rough copy"),sense:wAt(sc,"senses","senses"),rem:wAt(sc,"senses","remembers"),
     act:wAt(sc,"senses","acts"),guess:wAt(sc,"descend","guessing"),predict:wAt(sc,"friston","predict"),errors:wAt(sc,"friston","errors"),ten:wAt(sc,"rods","ten rough signals"),
-    voices:wAt(sc,"rods","voices"),next:wAt(sc,"levels","the next word"),story:wAt(sc,"levels","where the story"),five:wAt(sc,"cell","five to eight"),nk:wAt(sc,"nobody","nobody knows"),
+    voices:wAt(sc,"rods","voices"),next:wAt(sc,"levels","the next word"),story:wAt(sc,"levels","where the story"),nk:wAt(sc,"nobody","nobody knows"),
     end:sc.dur-2.8}));
   const words=["Once","upon","a","time,","in","a","town","by","the","sea,","there","lived","a","girl","who","kept","a","lighthouse,","and","every","night","she"];
   const lt0=c.y2022+0.9,rodE=tt_ear(1250,700,0.85,true);
@@ -2900,10 +2899,6 @@ scene("taught",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({rough:wAt(s
     {at:c.stops-0.4,place:"tt_labQuiet",keys:[[c.stops-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
       ag_person(x,TT_LISTEN,560,640,1.05,{t:tt,covered:true,gaze:[3,0]});tt_headGuess(x,590,410,140,0.5+0.3*Math.sin(tt*3));
       tt_levels(x,860,330,tt,{rows:[ag_in(tt,P.next-0.2,0.5),ag_in(tt,P.next+0.9,0.5),ag_in(tt,P.story-0.2,0.5)]});}},
-    // one kind of brain cell, and the network it took to imitate it
-    {at:c.cell-0.4,place:"tt_labQuiet",keys:[[c.cell-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
-      tt_neuron(x,600,440,0.95,{grow:tt_on(tt,c.cell,1.6)});tt_layers(x,1090,430,5+3*tt_on(tt,P.five+0.4,1.8),{a:ag_in(tt,P.five-0.4,0.5)});
-      const q=tt_pop(tt,P.five+0.6);tt_tag(x,960,820,"1 brain cell · a network 5 to 8 layers deep",{a:q.a,k:q.k});}},
     // how a brain learns from its errors: the loop's way back turns to a dotted line, and a question mark
     {at:c.nobody-0.4,place:"tt_labQuiet",keys:[[c.nobody-0.4,960,540,1.0]],d:2,push:0.015,draw:(x,tt)=>tt_miniLoop(x,960,460,190,{p:1,dotted:tt_on(tt,P.nk-0.4,1.2)})},
     tt_closeShot(0,P.end)];

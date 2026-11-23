@@ -46,7 +46,6 @@ const NARR={
  {"id":"rods","gap":0.8,"text":"Rod's brain did something like it, matching ten rough signals to the voices it remembered."},
  {"id":"stops","gap":0.8,"text":"But the copy stops somewhere."},
  {"id":"levels","gap":0.8,"text":"A brain guesses at many levels at once, from the next word to where the story is going."},
- {"id":"cell","gap":0.8,"text":"To imitate one kind of brain cell, researchers needed a network five to eight layers deep."},
  {"id":"nobody","gap":0.8,"text":"And how a brain learns from its errors, nobody knows yet."}
 ]},
 "mixing":{"name":"Mixing, or making?","lead":1.4,"tail":1.2,"vo":[

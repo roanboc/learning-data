@@ -477,9 +477,8 @@ const NARR={
 ]},
 "never":{"name":"What never changes","lead":0.9,"tail":1.0,"vo":[
  {"id":"under","gap":0.8,"text":"Under every stage, some things never change."},
- {"id":"owner","gap":0.8,"text":"A person owns the agent, answers for its work, and stays in every critical loop."},
- {"id":"second","gap":0.8,"text":"Every change to production is approved by a person who didn't make it, for agents as for people."},
- {"id":"review","gap":0.8,"text":"Agents never approve: an agent's review is only for reference."},
+ {"id":"rules","gap":0.3,"text":"The rules of Why we govern them hold: a person owns the agent and stays in every critical loop;"},
+ {"id":"rules2","gap":0.8,"text":"another person approves every change to production; and agents never approve."},
  {"id":"self","gap":0.8,"text":"And an agent never approves its own change, never weakens a check to pass it, and never grants itself rights."},
  {"id":"levels","gap":0.8,"text":"Researchers describe five levels of autonomy by what the person does, from operator to observer."},
  {"id":"here","gap":0.8,"text":"Here, a person always approves production, so no stage leaves people only watching."},
@@ -497,7 +496,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"licence/nz": 2.067, "licence/fifteen": 4.367, "licence/alone": 4.131, "licence/crashed": 6.423, "licence/hurt": 2.105, "licence/switch": 5.733, "licence/change": 3.495, "licence/stages87": 5.536, "licence/learner": 5.468, "licence/restricted": 6.597, "licence/passengers": 4.207, "licence/full": 3.774, "licence/last": 3.361, "licence/fell": 6.832, "licence/notall": 5.908, "licence/worked": 7.075, "licence/first": 4.736, "licence/uni": 3.573, "licence/anil": 7.319, "licence/risk": 3.296, "licence/risk2": 4.792, "licence/harm": 4.138, "licence/stage": 6.102, "stages/road": 4.988, "stages/three": 7.049, "stages/s1": 5.17, "stages/s2": 5.075, "stages/s3": 4.851, "stages/s3b": 2.744, "stages/s4": 6.567, "stages/s5": 8.127, "stages/s5b": 4.587, "stages/gates": 3.886, "stages/g1": 3.662, "stages/g2": 2.745, "stages/g3": 3.032, "stages/g4": 2.385, "stages/g5": 2.88, "stages/decide": 1.84, "stages/notswitch": 1.637, "tasks/own": 4.007, "tasks/notone": 3.274, "tasks/word": 5.155, "tasks/question": 7.86, "tasks/fix": 7.535, "tasks/night": 7.266, "tasks/prod": 6.706, "tasks/rerun": 3.538, "tasks/driver": 6.778, "tasks/rule": 5.495, "down/oct": 5.82, "down/other": 6.521, "down/test": 4.26, "down/moved": 4.072, "down/four": 5.486, "down/only": 3.59, "down/back": 2.348, "down/folders": 3.379, "down/limits": 3.865, "down/nights": 2.227, "down/signed": 4.712, "down/keeps": 6.021, "never/under": 2.54, "never/owner": 4.855, "never/second": 5.814, "never/review": 3.968, "never/self": 6.397, "never/levels": 6.212, "never/here": 5.078, "never/law": 5.828, "never/iso": 7.626, "close/nz": 5.415, "close/earned": 7.398, "close/map": 4.184, "close/monday": 7.64, "close/next": 2.424, "close/count": 4.582, "close/takeaway": 2.675};
+const VODUR={"licence/nz": 2.067, "licence/fifteen": 4.367, "licence/alone": 4.131, "licence/crashed": 6.423, "licence/hurt": 2.105, "licence/switch": 5.733, "licence/change": 3.495, "licence/stages87": 5.536, "licence/learner": 5.468, "licence/restricted": 6.597, "licence/passengers": 4.207, "licence/full": 3.774, "licence/last": 3.361, "licence/fell": 6.832, "licence/notall": 5.908, "licence/worked": 7.075, "licence/first": 4.736, "licence/uni": 3.573, "licence/anil": 7.319, "licence/risk": 3.296, "licence/risk2": 4.792, "licence/harm": 4.138, "licence/stage": 6.102, "stages/road": 4.988, "stages/three": 7.049, "stages/s1": 5.17, "stages/s2": 5.075, "stages/s3": 4.851, "stages/s3b": 2.744, "stages/s4": 6.567, "stages/s5": 8.127, "stages/s5b": 4.587, "stages/gates": 3.886, "stages/g1": 3.662, "stages/g2": 2.745, "stages/g3": 3.032, "stages/g4": 2.385, "stages/g5": 2.88, "stages/decide": 1.84, "stages/notswitch": 1.637, "tasks/own": 4.007, "tasks/notone": 3.274, "tasks/word": 5.155, "tasks/question": 7.86, "tasks/fix": 7.535, "tasks/night": 7.266, "tasks/prod": 6.706, "tasks/rerun": 3.538, "tasks/driver": 6.778, "tasks/rule": 5.495, "down/oct": 5.82, "down/other": 6.521, "down/test": 4.26, "down/moved": 4.072, "down/four": 5.486, "down/only": 3.59, "down/back": 2.348, "down/folders": 3.379, "down/limits": 3.865, "down/nights": 2.227, "down/signed": 4.712, "down/keeps": 6.021, "never/under": 2.54, "never/rules": 5.989, "never/rules2": 4.558, "never/self": 6.397, "never/levels": 6.212, "never/here": 5.078, "never/law": 5.828, "never/iso": 7.626, "close/nz": 5.415, "close/earned": 7.398, "close/map": 4.184, "close/monday": 7.64, "close/next": 2.424, "close/count": 4.582, "close/takeaway": 2.675};
 
 /* Pauses: the film stops where an idea needs a moment to land, or a picture needs time to be read.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -512,7 +511,7 @@ const BREATH={
 "stages":{"hold":{"road":1.0,"three":1.2,"s1":1.4,"s2":1.4,"s3b":1.4,"s4":1.4,"s5b":1.6,"gates":0.6,"g1":0.4,"g2":0.4,"g3":0.4,"g4":0.4,"g5":1.0,"decide":0.4,"notswitch":1.0}},
 "tasks":{"hold":{"own":0.6,"notone":0.8,"word":1.2,"question":1.4,"fix":1.4,"night":1.4,"prod":1.2,"rerun":0.8,"driver":1.2,"rule":1.4}},
 "down":{"hold":{"oct":1.6,"other":1.6,"test":1.6,"moved":1.6,"four":1.6,"only":1.6,"back":0.5,"folders":0.5,"limits":0.5,"nights":1.6,"signed":1.6,"keeps":2.8}},
-"never":{"hold":{"under":0.6,"second":0.6,"self":0.8,"here":0.8,"iso":1.0}},
+"never":{"hold":{"under":0.6,"rules2":0.8,"self":0.8,"here":0.8,"iso":1.0}},
 "close":{"hold":{"nz":0.8,"earned":0.6,"map":0.8,"monday":0.6,"count":0.6,"takeaway":1.2},"breathe":6.2}
 };
 
@@ -2307,7 +2306,7 @@ scene("down",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({alone:wAt(sc,
   ],0.6);});
 
 /* ---------------------------------------------------------------- 5 · What never changes */
-scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({never:wAt(sc,"under","never change"),loop:wAt(sc,"owner","every critical loop"),
+scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({never:wAt(sc,"under","never change"),loop:wAt(sc,"rules","every critical loop"),own:wAt(sc,"rules","a person owns"),apr:wAt(sc,"rules2","another person"),nev:wAt(sc,"rules2","agents never approve"),
     op:wAt(sc,"levels","from operator"),obs:wAt(sc,"levels","to observer"),always:wAt(sc,"here","always approves"),watching:wAt(sc,"here","only watching"),
     stop:wAt(sc,"law","stop it"),resp:wAt(sc,"iso","who is responsible")}));
   const lay=tt=>fs_layout(1-clamp((tt-0.9)/1.8,0,1));
@@ -2317,8 +2316,8 @@ scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({never:wAt(sc
       const R=fs_stages(x,L.x,L.y,L.w,{short:1-ag_in(tt,1.9,0.8),gates:[0,0,0,0,go],passed:[0,0,0,0,1],
         lit:[0,1,2,3,4].map(i=>ag_io(tt,P.never+0.12*i,P.never+1.4+0.12*i,0.4)),col:[null,null,null,null,ag_in(tt,P.always,0.5)>0.5?AG.green:null]});
       fs_agent(x,tt,{a:go});fs_tasks(x,R.stages,{all:go});
-      fs_list(x,150,128,660,"What never changes",[{t:"A person owns the agent, and answers for it",a:ag_in(tt,c.owner+0.2,0.4)},
-        {t:"A second person approves production",a:ag_in(tt,c.second+0.2,0.4)},{t:"Agents never approve",a:ag_in(tt,c.review+0.2,0.4)},
+      fs_list(x,150,128,660,"What never changes",[{t:"A person owns the agent, and answers for it",a:ag_in(tt,P.own,0.4)},
+        {t:"A second person approves production",a:ag_in(tt,P.apr,0.4)},{t:"Agents never approve",a:ag_in(tt,P.nev,0.4)},
         {t:"Never its own change, a weaker check,",a:ag_in(tt,c.self+0.2,0.4)},{t:"or rights it gave itself",a:ag_in(tt,c.self+0.2,0.4)}],
         {a:ag_io(tt,P.never,c.levels-0.2,0.5),k:ag_spr(tt,P.never)});
       // the researchers' five levels, by what the person does; here a person always approves production

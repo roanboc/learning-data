@@ -117,6 +117,28 @@ class Reads(unittest.TestCase):
             big.unlink()
 
 
+class Parent(unittest.TestCase):
+    """a session that starts in the folder holding both repositories: install writes its settings, dispatch runs every guard"""
+
+    def test_install_points_every_hook_at_dispatch(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            subprocess.run([sys.executable, str(HERE / "guard.py"), "install", d], check=True, capture_output=True)
+            settings = json.loads((pathlib.Path(d) / ".claude" / "settings.json").read_text())
+            commands = [h["command"] for groups in settings["hooks"].values() for g in groups for h in g["hooks"]]
+            self.assertTrue(commands)
+            self.assertTrue(all(" dispatch " in c and c.startswith('python "/') for c in commands), commands)
+
+    def test_dispatch_joins_the_guards(self):
+        r = subprocess.run([sys.executable, str(HERE / "guard.py"), "dispatch", "pre-bash"],
+                           input=json.dumps({"tool_input": {"command": "git push --force origin x"}, "cwd": str(G.ROOT.parent)}),
+                           capture_output=True, text=True)
+        self.assertEqual(json.loads(r.stdout)["hookSpecificOutput"]["permissionDecision"], "deny")
+        r = subprocess.run([sys.executable, str(HERE / "guard.py"), "dispatch", "pre-bash"],
+                           input=json.dumps({"tool_input": {"command": "ls"}, "cwd": str(G.ROOT.parent)}), capture_output=True, text=True)
+        self.assertEqual((r.returncode, r.stdout.strip()), (0, ""))
+
+
 class Local(unittest.TestCase):
     """this repository's own rules"""
 

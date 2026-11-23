@@ -14,6 +14,10 @@ Claude Code runs it from .claude/settings.json, with the hook's JSON on stdin:
     guard.py session-start  a few lines of state and rules
     guard.py stop           before a turn ends: commits not pushed, and the repository's own reminders
 
+A session that starts in the folder holding both repositories loads neither's settings, so the cloud environment's setup script
+runs `guard.py install .` there: that folder's .claude/settings.json then calls `guard.py dispatch <event>`, which runs every
+repository's guard and joins their answers.
+
 GitHub runs it on every pull request and push to main (.github/workflows/guards.yml):
 
     guard.py ci --base REF [--main]   the same file checks on every changed file, and the commit messages
@@ -385,6 +389,73 @@ def ci(base, main_push=False):
     return 1 if fails else 0
 
 
+# ---------------------------------------------------------------- a folder that holds both repositories
+# Claude Code reads .claude/settings.json from the folder a session starts in. This project's cloud sessions start in the folder
+# that holds both repositories, so the environment's setup script runs `guard.py install .` there: it writes that folder's
+# .claude/settings.json from this repository's own, each hook calling `guard.py dispatch <event>`, which runs the guard of every
+# repository beside it and joins their answers. Each guard already leaves alone a path, a cwd or a GitHub repository not its own.
+def install(parent):
+    parent = pathlib.Path(parent).resolve()
+    mine = json.loads((ROOT / ".claude" / "settings.json").read_text(encoding="utf-8"))
+    me = (HERE / "guard.py").as_posix()
+
+    def point(hook):
+        m = re.search(r"guard\.py (\S+)$", hook.get("command", ""))
+        return dict(hook, command=f'python "{me}" dispatch {m.group(1)}') if m else hook
+
+    hooks = {event: [dict(group, hooks=[point(h) for h in group.get("hooks", [])]) for group in groups]
+             for event, groups in mine["hooks"].items()}
+    target = parent / ".claude" / "settings.json"
+    try:
+        settings = json.loads(target.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        settings = {}
+    settings["hooks"] = hooks
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(settings, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {target}: hooks for {', '.join(r.name for r in repos(ROOT.parent))}")
+    return 0
+
+
+def repos(parent):
+    return [d for d in sorted(pathlib.Path(parent).iterdir()) if (d / ".github" / "hooks" / "guard.py").is_file()]
+
+
+def dispatch(event, raw):
+    """run `event` in every repository's guard beside this one and join the answers: a deny wins, then an ask, then a rewrite"""
+    answers = []
+    for repo in repos(ROOT.parent):
+        try:
+            r = subprocess.run([sys.executable, str(repo / ".github" / "hooks" / "guard.py"), event], input=raw,
+                               capture_output=True, text=True, timeout=45)
+        except subprocess.TimeoutExpired:
+            continue
+        try:
+            o = json.loads(r.stdout) if r.stdout.strip().startswith("{") else None
+        except ValueError:
+            o = None
+        answers.append((r.returncode, o, r.stdout, r.stderr))
+    if event.startswith("pre-"):
+        for want in ("deny", "ask", "allow"):
+            for _, o, _, _ in answers:
+                if o and o.get("hookSpecificOutput", {}).get("permissionDecision") == want:
+                    out(o)
+        return 0
+    if event == "post-edit":
+        errs = [e.strip() for code, _, _, e in answers if code == 2 and e.strip()]
+        if errs:
+            print("\n".join(errs), file=sys.stderr)
+            return 2
+        return 0
+    if event == "stop":
+        reasons = [o["reason"] for _, o, _, _ in answers if o and o.get("decision") == "block"]
+        if reasons:
+            out({"decision": "block", "reason": "\n".join(reasons)})
+        return 0
+    print("\n".join(text.strip() for _, _, text, _ in answers if text.strip()))
+    return 0
+
+
 # ---------------------------------------------------------------- entry
 def main(argv):
     if not argv:
@@ -394,6 +465,10 @@ def main(argv):
     if cmd == "trim":
         trim()
         return 0
+    if cmd == "install":
+        return install(argv[1] if len(argv) > 1 else ROOT.parent)
+    if cmd == "dispatch":
+        return dispatch(argv[1], sys.stdin.read())
     if cmd == "ci":
         base = argv[argv.index("--base") + 1] if "--base" in argv else "origin/main"
         return ci(base, "--main" in argv)

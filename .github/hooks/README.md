@@ -27,5 +27,8 @@ Run the tests: `python -m unittest discover -s .github/hooks -p 'test_*.py'`. Tr
 `echo '{"tool_input":{"command":"git push origin main"}}' | python3 .github/hooks/guard.py pre-bash`.
 
 **Where the hooks load.** Claude Code reads `.claude/settings.json` from the folder a session starts in. A session started in
-this repository (a local clone, or a cloud session with this one repository) runs them. A session that starts in a parent folder
-with both repositories beside each other doesn't load either repository's hooks; GitHub's *Guards* check still holds every change.
+this repository (a local clone, or a cloud session with this one repository) runs them from this repository's settings. This
+project's cloud sessions start in the folder that holds both repositories, so the cloud environment's setup script runs
+`python3 learning-data/.github/hooks/guard.py install . </dev/null` there (or the same from `learning-data-project`): it writes
+that folder's `.claude/settings.json` from this one, each hook calling `guard.py dispatch <event>`, which runs every
+repository's guard and joins their answers (a refusal wins). GitHub's *Guards* check holds every change either way.

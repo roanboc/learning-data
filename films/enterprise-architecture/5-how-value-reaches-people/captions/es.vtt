@@ -66,86 +66,65 @@ Como con las loncheras de los dabbawalas, el detalle va donde el trabajo cambia 
 00:02:28.556 --> 00:02:33.622
 Un flujo de valor muestra lo que le llega al cliente; un proceso, cómo se hace el trabajo.
 
-00:02:34.922 --> 00:02:40.028
-Grace le muestra el mapa de procesos de la empresa. Cada proceso está en uno de cuatro grupos.
+00:02:34.922 --> 00:02:41.735
+Grace le muestra el mapa de procesos de la empresa. Restablecer el suministro es uno de los procesos que entregan a los clientes.
 
-00:02:41.228 --> 00:02:50.852
-Los procesos estratégicos marcan el rumbo. Los operativos entregan a los clientes. Los de apoyo sostienen el resto. Los de evaluación miden y mejoran.
+00:02:42.935 --> 00:02:49.837
+Arquitectura de negocio para datos dibuja un mapa así completo: sus cuatro grupos, sus niveles, y lo que entra y sale.
 
-00:02:52.352 --> 00:02:59.992
-Restablecer el suministro es operativo. La evaluación lo mide: cuánto tiempo, y con qué frecuencia, los clientes se quedan sin luz.
+00:02:51.337 --> 00:02:55.201
+Aquí importa un proceso: restablecer el suministro, en siete pasos.
 
-00:03:02.692 --> 00:03:05.263
-Como las capacidades, los procesos tienen niveles.
+00:02:56.301 --> 00:03:02.851
+Atender la llamada. Localizar la falla. Decidir quién va primero. Enviar la cuadrilla. Reparar. Reconectar. Confirmar.
 
-00:03:06.363 --> 00:03:10.916
-El nivel uno es el mapa. El nivel dos es un proceso: restablecer el suministro.
-
-00:03:12.216 --> 00:03:20.838
-El nivel tres son sus pasos. Atender la llamada. Localizar la falla. Decidir quién va primero. Enviar la cuadrilla. Reparar. Reconectar. Confirmar.
-
-00:03:22.338 --> 00:03:25.478
+00:03:04.351 --> 00:03:07.491
 Para la mayoría de estos pasos, un recuadro y una flecha bastan.
 
-00:03:28.178 --> 00:03:31.003
-Antes de profundizar, Tomás dibuja sus bordes.
-
-00:03:32.303 --> 00:03:37.534
-Quién lo abastece, qué entra, qué sale y para quién: un SIPOC, en términos de Seis Sigma.
-
-00:03:39.034 --> 00:03:42.848
-Entran llamadas, alarmas de los medidores inteligentes y dónde está cada cuadrilla.
-
-00:03:44.248 --> 00:03:48.696
-Sale la luz de vuelta, una hora para avisar a los clientes y un registro de la falla.
-
-00:03:50.196 --> 00:03:54.144
-El registro de la falla, con su inicio, su fin y su causa, va al regulador.
-
-00:03:56.844 --> 00:04:00.883
+00:03:10.191 --> 00:03:14.230
 Solo un paso necesita más detalle: decidir qué cuadrilla va primero.
 
-00:04:02.083 --> 00:04:05.632
+00:03:15.430 --> 00:03:18.979
 Esta noche la tormenta causó tres fallas, y hay dos cuadrillas libres.
 
-00:04:06.832 --> 00:04:15.318
+00:03:20.179 --> 00:03:28.665
 En la calle Hill, hay un cable caído. En Riverside, doce hogares, uno con una persona electrodependiente. En el lado este, mil doscientos hogares.
 
-00:04:16.818 --> 00:04:20.004
+00:03:30.165 --> 00:03:33.351
 Por costumbre, las dos cuadrillas irían a la falla más grande.
 
-00:04:21.304 --> 00:04:28.808
+00:03:34.651 --> 00:03:42.155
 La regla dice otra cosa: primero, los cables caídos, por seguridad. Luego, los electrodependientes. Luego, lo que devuelva la luz a más hogares.
 
-00:04:30.308 --> 00:04:37.431
+00:03:43.655 --> 00:03:50.778
 Orden y estado: ahí es donde un proceso merece detalle, paso a paso, en una notación como BPMN.
 
-00:04:43.331 --> 00:04:45.861
+00:03:56.678 --> 00:03:59.208
 A las dos de la madrugada, la regla necesita tres datos.
 
-00:04:47.261 --> 00:04:49.402
+00:04:00.608 --> 00:04:02.749
 Qué cables están caídos: de las llamadas.
 
-00:04:50.702 --> 00:04:53.098
+00:04:04.049 --> 00:04:06.445
 Quién es electrodependiente: de un registro.
 
-00:04:54.398 --> 00:05:00.940
+00:04:07.745 --> 00:04:14.287
 Cuántos hogares deja sin luz cada falla: del modelo de la red, que no sabe con certeza qué hogares cuelgan de qué transformador.
 
-00:05:02.440 --> 00:05:06.420
+00:04:15.787 --> 00:04:19.767
 Donde importan el orden, el estado o el momento, ahí están las reglas de datos.
 
-00:05:09.120 --> 00:05:15.067
+00:04:22.467 --> 00:04:28.414
 A las tres y cuarenta, vuelve la luz a la calle Hill, con un mensaje: una rama sobre la línea, ya retirada.
 
-00:05:16.567 --> 00:05:19.523
+00:04:29.914 --> 00:04:32.870
 Farah confirma las etapas, y Grace los pasos.
 
-00:05:20.623 --> 00:05:24.609
+00:04:33.970 --> 00:04:37.956
 La regla de quién va primero por fin queda escrita, y Grace es su responsable.
 
-00:05:25.909 --> 00:05:32.714
+00:04:39.256 --> 00:04:46.061
 La nota de Tomás tiene una respuesta: el valor llega a las personas en unas pocas etapas; el detalle va en un solo paso.
 
-00:05:34.214 --> 00:05:38.419
+00:04:47.561 --> 00:04:51.766
 Después, se pregunta quién hace cada paso y qué significa «cliente» para cada uno.

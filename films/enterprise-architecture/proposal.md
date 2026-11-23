@@ -217,7 +217,7 @@ Chapter by chapter, with narration: [the script](4-what-it-must-do/script.md).
 
 **Story.** A household reports that the power is out. Tomás follows the value stream from the call to the restored supply, and finds that the detail matters at one step only: deciding which crew goes first.
 
-**Ideas.** Value streams from the customer's view; their stages mapped to capabilities. Processes at levels 1 to 4, grouped into strategic, operational, support and evaluation. SIPOC for a process's edges. Going deeper only where a rule depends on order, state or timing.
+**Ideas.** Value streams from the customer's view; their stages mapped to capabilities. Processes at levels 1 to 4, grouped into strategic, operational, support and evaluation. SIPOC for a process's edges. Going deeper only where a rule depends on order, state or timing. Since 23 November 2026, the groups, the levels and SIPOC are taught in *Business architecture for data*, film 4, and this film shows the map and opens one process into its steps.
 
 **On screen.** Restore supply and meter to cash as value streams; one process opened to its activities.
 

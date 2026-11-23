@@ -3,7 +3,7 @@
    dabbawalas in white (on a bicycle, sorting on a platform, carrying a crate of tins on the head), the tins themselves, and a lid with
    its painted marks. Hill Street: a night street in a storm, its tree, its poles and line, a branch that falls, a wire down, windows
    that go dark and come back. On the wall: the value stream's stages as chevrons (amber paper while drafts, glass once confirmed),
-   swimlanes for three teams, a process map in four groups, process steps, a SIPOC, a BPMN diagram for who goes first, fault cards,
+   swimlanes for three teams, a process map in four groups, process steps, a BPMN diagram for who goes first, fault cards,
    crew vans, and data objects. People and lunches are drawn in the series' own style, not in the style of Indian art (PLAYBOOK §2). */
 
 const STR=LAY6[1][1],BUS=LAY6[2][1],INF=LAY6[3][1],CAPP=[255,224,170],CAPD=[150,98,36],INFP=[255,212,188],INFD=[150,76,48];
@@ -286,8 +286,6 @@ function d5_pmap(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
       ps.forEach((p,i)=>{const bx=bx0+i*(bw+24);pos[p]=[bx,by,bw,bhh];archEl(ctx,bx,by,bw,bhh,p,BUS,"process",{size:o.size||28,gs:12,hi:hi[p]||0,deco:o.deco});});});
     yy+=bh[k]+12;});});
   return pos;}
-// a column of a SIPOC: its letter and name, over its items
-function d5_sipocHead(ctx,cx,y,letter,name,a){withA(ctx,a,()=>{T(ctx,letter,cx,y,{w:800,size:64,align:"center",color:rgba(BUS,1)});T(ctx,name,cx,y+44,{f:"mono",w:600,size:28,align:"center",color:rgba(SOFT,1)});});}
 
 /* ---------- who goes first ---------- */
 // a fault, on a glass card: its place, an icon (wire, life, homes) and two lines

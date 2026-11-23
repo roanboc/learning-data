@@ -96,5 +96,9 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "better-every-week", "line": "The team's Friday half-hour: one measure, one small change a week, kept or dropped out loud", "line_es": "La media hora de los viernes: una medida, un cambio pequeño por semana, que se mantiene o se deja en voz alta"},
+    {"key": "small-every-week", "line": "Fifteen minutes every Thursday on one list of data faults, the data quality team's own rhythm", "line_es": "Quince minutos cada jueves sobre una lista de fallas de datos, el ritmo propio del equipo de calidad de datos"}
+  ],
   "tile": [380, 300, 560]
 }

@@ -48,8 +48,8 @@
   "elsewhere": {
     "h": "Go further",
     "h_es": "Para ir más allá",
-    "p": "The standard and the docs behind the film's words, descriptions and agents.",
-    "p_es": "La norma y la documentación detrás de las palabras, las descripciones y los agentes de la película.",
+    "p": "The standard and the docs behind the film's words, descriptions and agents, and the AI agents films that go further.",
+    "p_es": "La norma y la documentación detrás de las palabras, las descripciones y los agentes de la película, y las películas de agentes de IA que van más allá.",
     "links": [
       {
         "title": "The data quality model, ISO/IEC 25012",
@@ -74,6 +74,22 @@
         "line_es": "Como un miembro nuevo del equipo, un agente depende de descripciones claras de tablas y columnas, consultas de ejemplo y pruebas.",
         "href": "https://docs.databricks.com/aws/en/genie-agents/best-practices",
         "href_es": "https://docs.databricks.com/aws/en/genie-agents/best-practices"
+      },
+      {
+        "title": "It feels like understanding",
+        "title_es": "La sensación de entender",
+        "line": "The AI agents film where a fluent answer, check passed, counted the wrong thing, and nobody asked what it had counted.",
+        "line_es": "La película de agentes de IA donde una respuesta segura, con la verificación superada, contó otra cosa, y nadie preguntó qué había contado.",
+        "href": "https://data.learn-all.org/what-an-agent-is/it-feels-like-understanding/",
+        "href_es": "https://data.learn-all.org/es/what-an-agent-is/it-feels-like-understanding/"
+      },
+      {
+        "title": "Context engineering",
+        "title_es": "Ingeniería de contexto",
+        "line": "The AI agents film where nothing the agent reads says what a word means, so it guesses, until someone writes the meaning down once.",
+        "line_es": "La película de agentes de IA donde nada de lo que lee el agente dice qué significa una palabra, así que adivina, hasta que alguien escribe el significado una vez.",
+        "href": "https://data.learn-all.org/agents-at-work-on-data/context-engineering/",
+        "href_es": "https://data.learn-all.org/es/agents-at-work-on-data/context-engineering/"
       }
     ]
   },

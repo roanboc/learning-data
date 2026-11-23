@@ -70,5 +70,8 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "for-this-purpose-only", "line": "Each role's purposes written beside its data, and a person's wishes kept with the person", "line_es": "Los propósitos de cada rol escritos junto a sus datos, y los deseos de una persona guardados con ella"}
+  ],
   "tile": [980, 360, 520]
 }

@@ -34,5 +34,8 @@
     "La residencia alterna, Japón, desde 1635",
     "El viaje de cada señor a Edo se planeaba antes de partir, con un aviso enviado por delante a cada posta, así los cargadores y caballos de las postas servían a todos, y cada comitiva encontraba lo que necesitaba."
   ],
+  "seen_before": [
+    {"key": "when-strategy-moves", "line": "The social tariff walked down every layer: who must agree, three rules each with a home, and who the match would miss", "line_es": "La tarifa social, capa por capa: quién debe estar de acuerdo, tres reglas cada una con un hogar, y a quién dejaría fuera el cruce"}
+  ],
   "tile": [420, 470, 360]
 }

@@ -88,5 +88,10 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "governed-in-unity-catalog", "line": "Every table in one catalog, with groups as its readers", "line_es": "Cada tabla en un catálogo, con grupos como lectores"},
+    {"key": "network-storage-and-keys", "line": "Each catalog bound to its own workspace, reached by one private path", "line_es": "Cada catálogo atado a su propio espacio de trabajo, con un solo camino privado"},
+    {"key": "from-a-branch-to-production", "line": "Test first, then production, once a release approver says yes", "line_es": "Primero pruebas, luego producción, cuando quien aprueba la versión dice que sí"}
+  ],
   "tile": [800, 400, 640]
 }

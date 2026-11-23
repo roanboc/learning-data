@@ -89,5 +89,8 @@
       }
     ]
   },
+  "seen_before": [
+    {"key": "walls-doors-and-keys", "line": "Backups nobody can delete, and one restored every month to prove it works", "line_es": "Copias que nadie puede borrar, y una restaurada cada mes para probar que funciona"}
+  ],
   "tile": [400, 400, 520]
 }

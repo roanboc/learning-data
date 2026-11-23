@@ -87,5 +87,8 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "know-what-you-hold", "line": "A class for every column, by what it tells about a person, and a level for the table", "line_es": "Una clase para cada columna, según lo que dice de una persona, y un nivel para la tabla"}
+  ],
   "tile": [800, 300, 520]
 }

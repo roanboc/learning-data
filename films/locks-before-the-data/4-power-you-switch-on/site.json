@@ -63,5 +63,8 @@
     ]
   },
   "draft": false,
+  "seen_before": [
+    {"key": "walls-doors-and-keys", "line": "Few ways in, each one watched, and the back door to the files shut", "line_es": "Pocas entradas, cada una vigilada, y la puerta trasera a los archivos cerrada"}
+  ],
   "tile": [820, 330, 480]
 }

@@ -39,5 +39,29 @@
   },
   "past": ["The Nautical Almanac, 1766", "Computed twice, and compared, before anything is printed."],
   "past_es": ["El Almanaque Náutico, 1766", "Calculado dos veces, y comparado, antes de imprimir nada."],
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The AI agents films that teach in full what this film's agent relies on.",
+    "p_es": "Las películas de agentes de IA que enseñan completo lo que usa el agente de esta película.",
+    "links": [
+      {
+        "title": "A model, reasoning, hands and a loop",
+        "title_es": "Un modelo, razonamiento, manos y un bucle",
+        "line": "The AI agents film on what an agent is: it plans, uses tools, checks its answer against a source, and tries again.",
+        "line_es": "La película de agentes de IA sobre qué es un agente: planifica, usa herramientas, compara su respuesta con una fuente y vuelve a intentarlo.",
+        "href": "https://data.learn-all.org/what-an-agent-is/a-model-reasoning-hands-and-a-loop/",
+        "href_es": "https://data.learn-all.org/es/what-an-agent-is/a-model-reasoning-hands-and-a-loop/"
+      },
+      {
+        "title": "Every change through review",
+        "title_es": "Cada cambio pasa por revisión",
+        "line": "The AI agents film where an agent's pull request hands in its evidence, a person reviews the code, and another approves the release.",
+        "line_es": "La película de agentes de IA donde el pull request de un agente entrega su evidencia, una persona revisa el código y otra aprueba la versión.",
+        "href": "https://data.learn-all.org/from-helper-to-colleague/every-change-through-review/",
+        "href_es": "https://data.learn-all.org/es/from-helper-to-colleague/every-change-through-review/"
+      }
+    ]
+  },
   "tile": [1040, 340, 400]
 }

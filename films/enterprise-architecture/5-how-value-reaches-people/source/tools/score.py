@@ -144,34 +144,23 @@ paper(W(T, 'three', 'three teams', -0.2), 0.03, 0.0, 0.6)
 soft(40, W(T, 'sees', 'go wrong', -0.3), 0.036, 0.0); thud(W(T, 'sees', 'go wrong', -0.3), 0.05)
 for k in range(4):
     tock(C(T, 'tins', 0.2 + k * 0.15), 0.026, -0.6 + k * 0.4)
-# 5. Four kinds of process: paper as the map goes up; a knock as each group is named; a nylon note for restore supply, a felt note
-#    as evaluation measures it
+# 5. One process, seven steps: paper as the map goes up; a nylon note for restore supply; a knock as each group lights, while the
+#    film that draws them in full is named, and paper for its card; a knock for the one process; a note for each step, rising; soft
+#    taps for the ticks, and a low note for the one step that needs more
 P = 'map'
-bed(P, [EBMAJ7, BBMAJ9, DM7, FSUS])
+bed(P, [EBMAJ7, BBMAJ9, DM7, GM9, FSUS])
 paper(W(P, 'grace', 'process map', -0.2), 0.04, 0.0, 0.8)
-for k, word in enumerate(['Strategic', 'Operational', 'Support', 'Evaluation']):
-    knock(W(P, 'groups', word, -0.1), 0.024, -0.3 + k * 0.2)
-nylon(62, W(P, 'restore', 'Restoring'), 0.026); soft(50, W(P, 'restore', 'Evaluation'), 0.028)
-# 6. Levels, again: paper for the small map; a knock for the process; a tap for each step, rising; soft taps for the ticks, and a low
-#    note for the one step that needs more
-V = 'levels'
-bed(V, [BBMAJ9, GM9, FSUS])
-paper(W(V, 'two', 'Level one', -0.1), 0.03, -0.4, 0.4); knock(W(V, 'two', 'Level two', 0.1), 0.026, -0.2)
+nylon(62, W(P, 'grace', 'Restore'), 0.026)
+paper(C(P, 'full', 0.1), 0.03, 0.0, 0.5)
+for k in range(4):
+    knock(W(P, 'full', 'four groups', -0.1 + k * 0.35), 0.022, -0.3 + k * 0.2)
+knock(W(P, 'here', 'restore supply', -0.1), 0.026, -0.2)
 for k, word in enumerate(['Take', 'Find', 'Decide', 'Send', 'Repair', 'Switch', 'Confirm']):
-    nylon(58 + [0, 2, 4, 5, 7, 9, 10][k], W(V, 'three', word, -0.1), 0.018, -0.7 + k * 0.23)
+    nylon(58 + [0, 2, 4, 5, 7, 9, 10][k], W(P, 'steps', word, -0.1), 0.018, -0.7 + k * 0.23)
 for k in range(6):
-    tap(C(V, 'enough', 0.2 + k * 0.08), 0.01, -0.6 + k * 0.24)
-soft(43, C(V, 'enough', 0.8), 0.03, -0.2)
-# 7. The edges: a knock as each letter of the SIPOC lands; paper for its items; a tap and a nylon note for the fault record, and a
-#    felt note as it goes to the regulator
-E = 'edges'
-bed(E, [DM7, BBMAJ9, EBMAJ7, FSUS])
-for k, (lid, word) in enumerate([('sipoc', 'Who supplies'), ('sipoc', 'what comes in'), ('edges', 'edges'), ('sipoc', 'what goes out'), ('sipoc', 'to whom')]):
-    knock(W(E, lid, word, -0.1), 0.024, -0.6 + k * 0.3)
-for lid, word in [('in', 'calls'), ('in', 'alarms'), ('in', 'where each crew'), ('out', 'power back'), ('out', 'a time'), ('out', 'fault record')]:
-    paper(W(E, lid, word, -0.1), 0.02, 0.0, 0.25)
-tap(W(E, 'record', 'start'), 0.02, 0.2); nylon(65, W(E, 'record', 'start', 0.1), 0.022, 0.2); soft(46, W(E, 'record', 'regulator'), 0.028, 0.5)
-# 8. Who goes first: a knock and a low note for each fault; a knock as the two crews appear; a stamp for habit; soft taps as the rule
+    tap(C(P, 'enough', 0.2 + k * 0.08), 0.01, -0.6 + k * 0.24)
+soft(43, C(P, 'enough', 0.8), 0.03, -0.2)
+# 6. Who goes first: a knock and a low note for each fault; a knock as the two crews appear; a stamp for habit; soft taps as the rule
 #    is drawn; a nylon note as each fault reaches its answer; the crews driving off, low
 F = 'first'
 bed(F, [GM, EBMAJ7, CM7, FSUS, BBMAJ9], 0, cq(F, 'breath'))
@@ -186,7 +175,7 @@ for k, (word, dur, m) in enumerate([('wires down', 2.0, 58), ('Then life', 2.4, 
 knock(W(F, 'rule', 'wires down', 2.0), 0.022, -0.5); knock(W(F, 'rule', 'Then life', 2.4), 0.022, 0.0)
 wind(G(F, 'breath', 0.2), 1.6, 0.02, 0.2); wind(G(F, 'breath', 0.8), 1.6, 0.02, 0.4)
 bed(F, [BBMAJ9], cq(F, 'breath'), None, g=0.032)
-# 9. What the rule needs: paper for each fact as it's pinned to the rule; a low note for the number nobody is sure of; a swell for
+# 7. What the rule needs: paper for each fact as it's pinned to the rule; a low note for the number nobody is sure of; a swell for
 #    where the data rules are
 N = 'needs'
 bed(N, [GM9, EBMAJ7, CM7, FSUS])
@@ -194,7 +183,7 @@ for lid in ['wires', 'life', 'homes']:
     paper(C(N, lid), 0.03, 0.0, 0.35)
 soft(41, W(N, 'homes', "isn't sure"), 0.032, 0.4)
 swell([46, 53, 57, 62], W(N, 'where', 'order'), 3.0, 0.026)
-# 10. Back on: the lights come back on rising felt notes and a swell; the phone, twice; paper as the wall comes back; a thud as each
+# 8. Back on: the lights come back on rising felt notes and a swell; the phone, twice; paper as the wall comes back; a thud as each
 #     owner confirms; paper for the rule, the answer and the next question; the mark under the end card
 Z = 'end'
 bed(Z, [GM9, BBMAJ9, EBMAJ7], 0, cq(Z, 'breath'))

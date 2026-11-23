@@ -26,5 +26,8 @@
   "past_es": ["Lunes, en la oficina de registro: las palabras nuevas de título", "Un solo significado, leído por personas, informes y agentes."],
   "next_h": "You've seen one meaning reach the work: one page, copies checked against it, one setting and one count.",
   "next_h_es": "Viste un solo significado llegar al trabajo: una página, copias que se comparan con ella, un parámetro y un conteo.",
+  "seen_before": [
+    {"key": "one-word-one-home", "line": "Five glossaries made one, which every tool reads, and a change that reaches everyone it touches", "line_es": "Cinco glosarios convertidos en uno, que leen todas las herramientas, y un cambio que llega a todo lo que toca"}
+  ],
   "tile": [300, 330, 420]
 }

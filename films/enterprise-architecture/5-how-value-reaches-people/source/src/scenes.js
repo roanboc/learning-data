@@ -1,8 +1,8 @@
 /* ===== How value reaches people: scenes =====
-   Ten chapters, as in ../script.md. Mumbai's dabbawalas: a lunch crosses the city by bicycle, train and on foot, with the detail at the
+   Eight chapters, as in ../script.md. Mumbai's dabbawalas: a lunch crosses the city by bicycle, train and on foot, with the detail at the
    hand-offs and three stages from the customer's side; a storm on Hill Street and one household's call; the night drawn from the
    household's side, as a value stream; the capabilities under its stages, and three teams in swimlanes, where the hand-offs hurt; the
-   process map in four groups; process levels, down to seven steps; the process's edges, as a SIPOC; who goes first, drawn in BPMN, and
+   process map, drawn in full in Business architecture for data, and one process in seven steps; who goes first, drawn in BPMN, and
    three faults put through it; the facts the rule needs, and where each comes from; and the lights back on, confirmed.
    Made to read on a phone (tools/legible.py): text is at least 28 px in the frame. The camera moves in on the kitchen and the first
    hand-off in chapter 1, then pulls back to the whole route. Motion (In the weeds of data crafting's helpers): every shot drifts slowly and
@@ -131,70 +131,49 @@ scene("teams",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,960,405,t,w("tins","detail"),()=>tag(ctx,960,405,"the detail belongs where the work changes hands",D5_WARM,{align:"center",size:30}),{dy:8});
   vign(ctx,S);});
 
-/* ---------- 5. Four kinds of process ---------- */
+/* ---------- 5. One process, seven steps ---------- */
+// Grace's process map, as a picture: how such a map is drawn, its groups, its levels and what goes in and out, is Business
+// architecture for data's film 4, so the film points there (23 November 2026; it had three chapters on them). Then the same map,
+// small at the top left, one process, and its seven steps, hung from it by a bracket that grows as each step arrives.
+const D5_SX=150,D5_SP=232,D5_SW=214;
 scene("map",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
-  const tG=c("grace"),tR=c("restore"),mp=clamp((t-w("grace","process map")+0.2)/1.6,0,1),rh=fin(t,w("restore","Restoring"),0.5),mh=fin(t,w("restore","Evaluation"),0.5);
+  const tG=c("grace"),tF=c("full"),tH=c("here"),tE=c("enough"),tM=w("grace","process map"),mp=clamp((t-tM+0.2)/1.6,0,1),rh=fin(t,w("grace","Restore"),0.5);
   arrive(ctx,1810,800,t,tG-0.3,()=>person(ctx,"grace",1810,1030,0.72,{t,pose:t>tG&&t<tG+2.4?"explain":"stand"}),{dy:20,from:0.96});
   // what each one shows: the value stream, carried from the last chapter, stays where it was while that fades, then moves down beside a
   // process, and their names come in
-  const mv=ease(fin(t,0.5,1.2)),go=1-fin(t,w("grace","process map")-0.4,0.5),vs=fin(t,1.2,0.5)*go;
+  const mv=ease(fin(t,0.5,1.2)),go=1-fin(t,tM-0.4,0.5),vs=fin(t,1.2,0.5)*go;
   if(go>0)withA(ctx,go,()=>d5_stream(ctx,t,lerp(80,400,mv),lerp(110,250,mv),lerp(410,300,mv),lerp(110,100,mv),D5_STAGES,{size:Math.round(lerp(30,28,mv))}));
   if(vs>0)withA(ctx,vs,()=>{T(ctx,"a value stream: what reaches the customer",900,400,{w:700,size:30,align:"center",color:rgba(STR,1)});
     D5_STEPS.forEach((s_,i)=>{if(i>4)return;d5_step(ctx,400+i*250,600,230,110,s_,{});});T(ctx,"a process: how the work gets done",900,710,{w:700,size:30,align:"center",color:rgba(BUS,1)});});
-  const band=["Strategic","Operational","Support","Evaluation"].map(k=>pulseAt(t,w("groups",k)-0.1,1.6));
-  const pos=d5_pmap(ctx,200,100,1360,700,{a:fin(t,w("grace","process map")-0.2,0.5),p:mp,band,hi:{"restore supply":rh,"measure reliability":mh}});
-  if(mp>0)withA(ctx,mp,()=>{[["customer needs",40],["customer served",1575]].forEach(([s_,x])=>{glass(ctx,x,330,150,150,16,[200,210,230],{glow:8,ea:0.6,fill:"rgba(10,14,26,0.94)"});wrapT(ctx,s_,x+75,393,130,{size:28,w:700,align:"center",lh:32});});});
-  if(pos&&mh>0){const[a,b,c_,d]=pos["restore supply"],[e,f,g,h]=pos["measure reliability"];arrowTo(ctx,a+c_/2,b+d,e+g/2,f-6,BUS,0.8*mh,{p:mh,lw:3,head:12,dash:[8,7],bend:-0.15});}
+  // the map, whole; its four groups light in turn as the film that draws them in full is named; then, from "here", it goes small to
+  // the top left, its words texture there, while the customer's need and the customer served leave
+  const k=ease(fin(t,tH-0.2,1.4)),z=lerp(1,0.42,k),ox=lerp(200,260,k),oy=lerp(100,90,k);
+  const band=[0,1,2,3].map(i=>pulseAt(t,w("full","four groups")-0.1+i*0.35,1.6));
+  ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);
+  const pos=d5_pmap(ctx,0,0,1360,700,{a:fin(t,tM-0.2,0.5),p:mp,band,hi:{"restore supply":rh},deco:k>0});
   ctx.restore();
-  arrive(ctx,880,850,t,w("restore","how long"),()=>tag(ctx,880,850,"measured: how long, and how often, customers are without power",BUS,{align:"center",size:28}),{dy:10});
-  vign(ctx,S);});
-
-/* ---------- 6. Levels, again ---------- */
-scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
-  ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
-  const t1=w("two","Level one"),t2=w("two","Level two"),t3=w("three","Level three"),tE=c("enough");
-  [["level 1",210,t1],["level 2",470,t2],["level 3",538,t3]].forEach(([s_,y,t0])=>arrive(ctx,120,y,t,t0-0.2,()=>T(ctx,s_,60,y,{f:"mono",w:600,size:30,color:rgba(BUS,1)}),{dy:8}));
-  // level 1: the whole map, small; level 2: one process; level 3: its steps
-  let rs=null;arrive(ctx,545,240,t,t1-0.1,()=>{ctx.save();ctx.translate(260,90);ctx.scale(0.42,0.42);const pos=d5_pmap(ctx,0,0,1360,700,{deco:true,hi:{"restore supply":fin(t,t2-0.3,0.4)}});ctx.restore();
-    const[a,b,c_,d]=pos["restore supply"];rs=[260+a*0.42,90+b*0.42,c_*0.42,d*0.42];},{dy:-12});
+  const side=mp*(1-fin(t,tH-0.3,0.5));
+  if(side>0)withA(ctx,side,()=>{[["customer needs",40],["customer served",1575]].forEach(([s_,x])=>{glass(ctx,x,330,150,150,16,[200,210,230],{glow:8,ea:0.6,fill:"rgba(10,14,26,0.94)"});wrapT(ctx,s_,x+75,393,130,{size:28,w:700,align:"center",lh:32});});});
+  // one process, larger, with dashed lines from where it sits in the small map
+  const rp=pos&&pos["restore supply"],rs=rp?(([a,b,c_,d])=>[ox+a*z,oy+b*z,c_*z,d*z])(rp):null,t2=w("here","restore supply")-0.1,t3=w("steps","Take")-0.1;
   const z2=fin(t,t2,0.6);if(z2>0&&rs)withA(ctx,z2,()=>{ctx.strokeStyle=rgba(BUS,0.45);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(rs[0],rs[1]+rs[3]);ctx.lineTo(260,410);ctx.moveTo(rs[0]+rs[2],rs[1]+rs[3]);ctx.lineTo(700,410);ctx.stroke();ctx.setLineDash([]);});
-  arrive(ctx,480,460,t,t2+0.1,()=>archEl(ctx,260,410,440,100,"restore supply",BUS,"process",{size:34,gs:15,hi:fin(t,t3-0.3,0.4)*0.6}),{dy:-12});
-  // level 3 hangs from level 2: a bracket from the process down to each of its steps, drawn as the steps arrive
-  const z3=fin(t,t3,0.5),TS=["Take","Find","Decide","Send","Repair","Switch","Confirm"].map(k=>w("three",k)-0.1);if(z3>0)withA(ctx,z3,()=>{ctx.save();ctx.strokeStyle=rgba(BUS,0.6);ctx.lineWidth=2.5;ctx.lineCap="round";const yb=560;
-    let xr=480,xl=480;TS.forEach((t0,i)=>{const q=ease(clamp((t-t0+0.15)/0.45,0,1));if(q>0){const x=186+i*258;xl=Math.min(xl,lerp(480,x,q));xr=Math.max(xr,lerp(480,x,q));}});
-    ctx.beginPath();ctx.moveTo(480,512);ctx.lineTo(480,yb);ctx.moveTo(xl,yb);ctx.lineTo(xr,yb);TS.forEach((t0,i)=>{const q=clamp((t-t0)/0.3,0,1);if(q>0){const x=186+i*258;ctx.moveTo(x,yb);ctx.lineTo(x,yb+26*q);}});ctx.stroke();ctx.restore();});
-  D5_STEPS.forEach((s_,i)=>{const x=186+i*258,t0=w("three",["Take","Find","Decide","Send","Repair","Switch","Confirm"][i])-0.1;
-    if(i>0){const q=fin(t,t0,0.4);if(q>0)arrowTo(ctx,x-258+122,650,x-124,650,BUS,0.7,{p:q,lw:2.5,head:10});}
-    arrive(ctx,x,650,t,t0,()=>{d5_step(ctx,x,650,236,120,s_,{hi:i===2?fin(t,tE+0.8,0.5):0,hiCol:[232,110,96]});
-      if(i!==2)tick_(ctx,x+92,610,26,[120,210,130],fin(t,tE+0.2+i*0.08,0.3));else withA(ctx,fin(t,tE+0.8,0.5),()=>T(ctx,"?",x+96,624,{w:800,size:44,align:"center",color:"rgba(232,110,96,1)"}));},{dy:-14});});
+  arrive(ctx,480,460,t,t2,()=>archEl(ctx,260,410,440,100,"restore supply",BUS,"process",{size:34,gs:15,hi:fin(t,t3-0.2,0.4)*0.6}),{dy:-12});
+  // its steps hang from it: a bracket from the process down to each step, drawn as the steps arrive
+  const SW=["Take","Find","Decide","Send","Repair","Switch","Confirm"],TS=SW.map(k_=>w("steps",k_)-0.1),X=i=>D5_SX+i*D5_SP;
+  const z3=fin(t,t3,0.5);if(z3>0)withA(ctx,z3,()=>{ctx.save();ctx.strokeStyle=rgba(BUS,0.6);ctx.lineWidth=2.5;ctx.lineCap="round";const yb=560;
+    let xr=480,xl=480;TS.forEach((t0,i)=>{const q=ease(clamp((t-t0+0.15)/0.45,0,1));if(q>0){xl=Math.min(xl,lerp(480,X(i),q));xr=Math.max(xr,lerp(480,X(i),q));}});
+    ctx.beginPath();ctx.moveTo(480,512);ctx.lineTo(480,yb);ctx.moveTo(xl,yb);ctx.lineTo(xr,yb);TS.forEach((t0,i)=>{const q=clamp((t-t0)/0.3,0,1);if(q>0){ctx.moveTo(X(i),yb);ctx.lineTo(X(i),yb+26*q);}});ctx.stroke();ctx.restore();});
+  D5_STEPS.forEach((s_,i)=>{const x=X(i),t0=TS[i];
+    if(i>0){const q=fin(t,t0,0.4);if(q>0)arrowTo(ctx,x-D5_SP+D5_SW/2+4,650,x-D5_SW/2-4,650,BUS,0.7,{p:q,lw:2.5,head:10});}
+    arrive(ctx,x,650,t,t0,()=>{d5_step(ctx,x,650,D5_SW,120,s_,{hi:i===2?fin(t,tE+0.8,0.5):0,hiCol:[232,110,96]});
+      if(i!==2)tick_(ctx,x+86,610,26,[120,210,130],fin(t,tE+0.2+i*0.08,0.3));else withA(ctx,fin(t,tE+0.8,0.5),()=>T(ctx,"?",x+88,624,{w:800,size:44,align:"center",color:"rgba(232,110,96,1)"}));},{dy:-14});});
   ctx.restore();
+  arrive(ctx,880,850,t,tF+0.1,()=>withA(ctx,1-fin(t,tH-0.3,0.4),()=>tag(ctx,880,850,"drawn in full in Business architecture for data, film 4",BUS,{align:"center",size:28})),{dy:10});
   arrive(ctx,960,820,t,w("enough","a box"),()=>tag(ctx,960,820,"for most steps, a box and an arrow say enough",BUS,{align:"center",size:30}),{dy:10});
   vign(ctx,S);});
 
-/* ---------- 7. The edges ---------- */
-// a SIPOC's columns: letter, name, x, and its items [text, the word that brings it]
-const D5_SIPOC=[["S","suppliers",240,[["households","in","calls"],["smart meters","in","alarms"],["crew vans","in","where each crew"]],NOTEC[2]],
-  ["I","inputs",600,[["calls","in","calls"],["meter alarms","in","alarms"],["crew locations","in","where each crew"]],INFP],
-  ["P","process",960,[],null],
-  ["O","outputs",1320,[["power back on","out","power back"],["a time to tell customers","out","a time"],["a fault record","out","fault record"]],INFP],
-  ["C","customers",1680,[["households","out","power back"],["the contact centre","out","a time"],["the regulator","out","fault record"]],NOTEC[2]]];
-scene("edges",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
-  ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
-  const tR=c("record"),fr=fin(t,w("record","fault record")-0.1,0.5);
-  const TH=[w("sipoc","Who supplies"),w("sipoc","what comes in"),w("edges","edges"),w("sipoc","what goes out"),w("sipoc","to whom")];
-  D5_SIPOC.forEach(([L,n,x,items,col],k)=>{arrive(ctx,x,170,t,TH[k]-0.1,()=>d5_sipocHead(ctx,x,170,L,n,1),{dy:-10});
-    if(k<4){const q=fin(t,Math.max(TH[k],TH[k+1])+0.2,0.4);if(q>0)arrowTo(ctx,x+60,150,x+300,150,SOFT,0.6,{p:q,lw:2.5,head:11});}
-    items.forEach(([s_,lid,word],j)=>{const t0=w(lid,word)-0.1,y=330+j*130,isRec=k===3&&j===2;arrive(ctx,x,y,t,t0,()=>sticky(ctx,x,y,320,104,s_,{col,size:28,rot:(j-1)*0.015}),{dy:-14});
-      if(isRec&&fr>0)withA(ctx,fr,()=>{ctx.save();ctx.strokeStyle=rgba(INF,0.95);ctx.lineWidth=4;ctx.shadowColor=rgba(INF,0.8);ctx.shadowBlur=14;rr(ctx,x-168,y-60,336,120,12);ctx.stroke();ctx.restore();});});});
-  arrive(ctx,960,460,t,TH[2],()=>{archEl(ctx,800,380,320,150,"restore supply",BUS,"process",{size:32,gs:15});T(ctx,"seven steps",960,575,{w:700,size:28,align:"center",color:rgba(SOFT,1)});},{dy:-14});
-  // the fault record, and where it goes
-  arrive(ctx,1120,750,t,w("record","start"),()=>{const h=ruleCard(ctx,860,690,520,"start 2:10 · end 3:40 · cause: a branch",{kicker:"fault record",col:INF,size:28});
-    arrowTo(ctx,1380,720,1600,650,INF,0.8*fin(t,w("record","regulator"),0.5),{p:fin(t,w("record","regulator"),0.5),lw:3,head:12,bend:0.15});},{dy:14});
-  ctx.restore();
-  vign(ctx,S);});
-
-/* ---------- 8. Who goes first ---------- */
+/* ---------- 6. Who goes first ---------- */
 const D5_FAULT=[["Hill Street","wire down","40 homes","wire",340,[255,150,110]],["Riverside","life support","12 homes","life",960,[255,130,170]],["East side","1,200 homes",null,"homes",1580,[255,206,120]]];
 scene("first",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
@@ -218,7 +197,7 @@ scene("first",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   arrive(ctx,1420,860,t,w("order","Order"),()=>tag(ctx,1420,860,"order and state: where a process earns its detail",[200,214,240],{align:"center",size:30}),{dy:10});
   vign(ctx,S);});
 
-/* ---------- 9. What the rule needs ---------- */
+/* ---------- 7. What the rule needs ---------- */
 scene("needs",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const tW=c("wires"),tL=c("life"),tHm=c("homes"),tWh=c("where");
@@ -232,7 +211,7 @@ scene("needs",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,1100,870,t,w("where","order"),()=>tag(ctx,1100,870,"order, state, timing: where the data rules are",INF,{align:"center",size:30}),{dy:8});
   vign(ctx,S);});
 
-/* ---------- 10. Back on ---------- */
+/* ---------- 8. Back on ---------- */
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tX=c("confirm")-0.7,xA=fin(t,tX,0.8),tB=w("back","lights")-0.3,tF=w("confirm","Farah")+0.2,tG=w("confirm","Grace"),tRu=w("rule","written"),cA=c("answer");
   // Hill Street: the lights come back, and the household gets its message
@@ -260,5 +239,5 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   eaEnd(ctx,S,t,B+0.8,"How value reaches people",EAC,"See it from the customer's side. Go deep only where it matters.","Film 5 of 8");});
 
 // where the chapters meet (From words to data's joins.js): the value stream carries on from one chapter to the next, so the camera
-// carries on
-const CHAPTER_JOINS={glide:["teams","map"]};
+// carries on; and "decide who goes first" ends one chapter and opens the next, close up, so the next opens on a cut
+const CHAPTER_JOINS={glide:["teams","map"],cut:["first"]};

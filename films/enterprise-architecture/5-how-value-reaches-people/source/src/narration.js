@@ -26,22 +26,13 @@ const NARR={
  {"id":"three","gap":0.8,"text":"The work itself passes through three teams: the contact centre, the control room and the field crews."},
  {"id":"sees","gap":0.8,"text":"The household sees none of them, and feels only the hand-offs that go wrong."},
  {"id":"tins","gap":0.8,"text":"As with the dabbawalas' tins, the detail belongs where the work changes hands."}]},
-"map":{"name":"Four kinds of process","lead":1.0,"tail":1.0,"vo":[
+"map":{"name":"One process, seven steps","lead":1.0,"tail":1.0,"vo":[
  {"id":"how","gap":0.8,"text":"A value stream shows what reaches the customer; a process, how the work gets done."},
- {"id":"grace","gap":0.8,"text":"Grace shows him the utility's process map. Every process sits in one of four groups."},
- {"id":"groups","gap":0.8,"text":"Strategic processes set direction. Operational ones deliver to customers. Support keeps the rest running. Evaluation measures and improves."},
- {"id":"restore","gap":0.8,"text":"Restoring supply is operational. Evaluation measures it: how long, and how often, customers are without power."}]},
-"levels":{"name":"Levels, again","lead":1.0,"tail":1.0,"vo":[
- {"id":"like","gap":0.8,"text":"Like capabilities, processes have levels."},
- {"id":"two","gap":0.8,"text":"Level one is the map. Level two is one process: restore supply."},
- {"id":"three","gap":0.8,"text":"Level three is its steps. Take the call. Find the fault. Decide who goes first. Send the crew. Repair. Switch back on. Confirm."},
+ {"id":"grace","gap":0.8,"text":"Grace shows him the utility's process map. Restore supply is one of the processes that deliver to customers."},
+ {"id":"full","gap":0.8,"text":"Business architecture for data draws such a map in full: its four groups, its levels, and what goes in and out."},
+ {"id":"here","gap":0.8,"text":"Here, one process matters: restore supply, in seven steps."},
+ {"id":"steps","gap":0.8,"text":"Take the call. Find the fault. Decide who goes first. Send the crew. Repair. Switch back on. Confirm."},
  {"id":"enough","gap":0.8,"text":"For most of these steps, a box and an arrow say enough."}]},
-"edges":{"name":"The edges","lead":1.0,"tail":1.0,"vo":[
- {"id":"edges","gap":0.8,"text":"Before going deeper, Tomás draws its edges."},
- {"id":"sipoc","gap":0.8,"text":"Who supplies it, what comes in, what goes out, to whom: a SIPOC, in Six Sigma's terms.","say":"Who supplies it, what comes in, what goes out, to whom: a sigh-pock, in Six Sigma's terms."},
- {"id":"in","gap":0.8,"text":"In come calls, alarms from smart meters, and where each crew is."},
- {"id":"out","gap":0.8,"text":"What comes out: power back on, a time to tell customers, and a fault record."},
- {"id":"record","gap":0.8,"text":"The fault record, with its start, end and cause, goes to the regulator."}]},
 "first":{"name":"Who goes first","lead":1.0,"tail":1.0,"vo":[
  {"id":"one","gap":0.8,"text":"Only one step needs more detail: deciding which crew goes first."},
  {"id":"tonight","gap":0.8,"text":"Tonight the storm has caused three faults, and two crews are free."},

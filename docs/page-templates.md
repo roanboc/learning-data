@@ -34,8 +34,8 @@ The site has four levels: **Topics › topic › series › film**. Labs and the
    - a topic leads to the previous and next topic on the route;
    - a lab leads to the next lab, and the last lab leads to the evaluation;
    - the evaluation's result leads to the next series.
-5. **Extras are folded.** The example project's files and *Go further* open on a tap, each under one heading. They are never shown open.
-6. **The same headings everywhere,** in this order and with these words: *Try it*, *In the example project*, *Go further*, *Up next*. In Spanish they get one fixed translation each.
+5. **Extras are folded.** *Seen before*, the example project's files and *Go further* open on a tap, each under one heading. They are never shown open.
+6. **The same headings everywhere,** in this order and with these words: *Try it*, *Seen before*, *In the example project*, *Go further*, *Up next*. In Spanish they get one fixed translation each.
 7. **Show a section only when it has something to show.** For example, *Coming next* and *Films to come* show only while series or films are being made. No empty headings.
 8. **No recaps.** No story summary, no people cards and no film-by-film table: the films hold them (#504).
 9. **Four icons for progress, on every page:** play for films watched, flask for labs, speech bubble for situations answered, check circle for right answers. A page shows the key once. Progress uses bars and rings, not long sentences.
@@ -67,9 +67,10 @@ The numbers match the numbered blocks in each HTML template.
 1. **Hero.** Breadcrumb, *Film 2 of 4* with the series bar, the title, one line, and *Mark watched*.
 2. **Watch.** The player, its chapters, and small links (video, captions, script). When the film ends, the menu is always: *Try the first lab* · *Next film* (or *Next series*, or the topic) · *Watch again*.
 3. **Try it.** The film's 2 to 4 labs as tiles, and its situations.
-4. **In the example project,** folded: the files each chapter shows.
-5. **Go further,** folded, always under this one heading.
-6. **Previous and next.** Two cards. At the series' end: the next series, or the topic.
+4. **Seen before,** folded. Only when the film recalls, in a line, a lesson another film teaches in full: a link to each such film, with one line on what it teaches (site.json `seen_before`; the author, 23 November 2026: link films to each other rather than teach a lesson twice).
+5. **In the example project,** folded: the files each chapter shows.
+6. **Go further,** folded, always under this one heading.
+7. **Previous and next.** Two cards. At the series' end: the next series, or the topic.
 
 ### Labs page
 
@@ -126,3 +127,4 @@ No page adds its own links to the header.
 | 20 November 2026 | The four progress icons are used on every page. Progress is the Topics page's third view. The Learning route and Topics list stay as they are (the author). |
 | 20 November 2026 | "Topic", never "module", on the site (the author). |
 | 20 November 2026 | Topics views in this order: Topics list, Learning route, Progress. A chosen route filters Progress to its own results, is the same on both views, and can hide the topics not on it on Learning route; the two views link to each other (the author). |
+| 23 November 2026 | A film that recalls in a line what another film teaches in full links to it under *Seen before*, folded, after *Try it* (the author: link films to each other rather than teach a lesson twice). |

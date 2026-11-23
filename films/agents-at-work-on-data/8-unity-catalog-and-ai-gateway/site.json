@@ -31,5 +31,22 @@
   "next_h": "You've seen why agents work under the same rules as people, kept where the data and the models live. Next: the team's context and memory, governed like any data.",
   "next_h_es": "Viste por qué los agentes trabajan con las mismas reglas que las personas, guardadas donde viven los datos y los modelos. Después: el contexto y la memoria del equipo, gobernados como cualquier dato.",
   "draft": false,
-  "tile": [820, 330, 380]
+  "tile": [820, 330, 380],
+  "seen_before": [
+    {
+      "key": "why-we-govern-them",
+      "line": "The four rules: an owner, a name of its own, the fewest rights, a person approves",
+      "line_es": "Las cuatro reglas: un dueño, un nombre propio, los mínimos derechos, una persona aprueba"
+    },
+    {
+      "key": "tools-are-hands",
+      "line": "Rules ask, rights hold: each tool with the fewest rights",
+      "line_es": "Las reglas piden, los derechos sostienen: cada herramienta con los mínimos derechos"
+    },
+    {
+      "key": "agents-on-databricks",
+      "line": "Tool servers any agent can use on Databricks",
+      "line_es": "Servidores de herramientas que cualquier agente puede usar en Databricks"
+    }
+  ]
 }

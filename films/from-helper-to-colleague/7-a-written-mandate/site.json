@@ -57,5 +57,17 @@
   "next_h": "You've seen what an agent may do alone, written in a mandate and held in every tool, and the series' seven lessons. Next: a colleague that isn't a person.",
   "next_h_es": "Viste lo que un agente puede hacer solo, escrito en un mandato y aplicado en cada herramienta, y las siete lecciones de la serie. Después: un colega que no es una persona.",
   "draft": false,
-  "tile": [300, 300, 440]
+  "tile": [300, 300, 440],
+  "seen_before": [
+    {
+      "key": "five-stages",
+      "line": "The five stages, each with its gate",
+      "line_es": "Las cinco etapas, cada una con su puerta"
+    },
+    {
+      "key": "every-change-through-review",
+      "line": "Who approves: an agent proposes, a person releases",
+      "line_es": "Quién aprueba: un agente propone, una persona libera"
+    }
+  ]
 }

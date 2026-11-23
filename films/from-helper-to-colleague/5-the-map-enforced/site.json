@@ -52,5 +52,17 @@
   "next_h": "You've seen an agent's place on the map written into every tool, under its own name. Next: every change through review.",
   "next_h_es": "Viste el lugar de un agente en el mapa escrito en cada herramienta, con su propio nombre. Después: cada cambio pasa por revisión.",
   "draft": false,
-  "tile": [560, 330, 480]
+  "tile": [560, 330, 480],
+  "seen_before": [
+    {
+      "key": "unity-catalog-and-ai-gateway",
+      "line": "A service principal: the agent's own name on Databricks",
+      "line_es": "Una entidad de servicio: el nombre propio del agente en Databricks"
+    },
+    {
+      "key": "borrowed-rights",
+      "line": "Why an agent on a person's sign-in is a confused deputy",
+      "line_es": "Por qué un agente con el acceso de una persona es un delegado confundido"
+    }
+  ]
 }

@@ -38,5 +38,17 @@
   "next_h": "You've seen what a helper borrows on your sign-in, and how to narrow it. Next: the place on the map an agent of the team is given.",
   "next_h_es": "Viste lo que toma prestado un ayudante con tu acceso, y cómo acotarlo. Después: el lugar en el mapa que recibe un agente del equipo.",
   "draft": false,
-  "tile": [580, 280, 440]
+  "tile": [580, 280, 440],
+  "seen_before": [
+    {
+      "key": "why-we-govern-them",
+      "line": "The four rules: an owner, a name of its own, the fewest rights, a person approves",
+      "line_es": "Las cuatro reglas: un dueño, un nombre propio, los mínimos derechos, una persona aprueba"
+    },
+    {
+      "key": "unity-catalog-and-ai-gateway",
+      "line": "A service principal: the agent's own name on Databricks",
+      "line_es": "Una entidad de servicio: el nombre propio del agente en Databricks"
+    }
+  ]
 }

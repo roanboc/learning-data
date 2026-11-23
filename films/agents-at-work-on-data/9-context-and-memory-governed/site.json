@@ -29,5 +29,17 @@
   "next_h": "You've seen what agents must get right governed first, with memory second, and the series' nine lessons. Next: from helper to colleague, an agent with a role of its own.",
   "next_h_es": "Viste lo que los agentes deben acertar gobernado primero, con la memoria después, y las nueve lecciones de la serie. Después: de ayudante a colega, un agente con un rol propio.",
   "draft": false,
-  "tile": [220, 240, 440]
+  "tile": [220, 240, 440],
+  "seen_before": [
+    {
+      "key": "context-engineering",
+      "line": "The four kinds of context an agent reads",
+      "line_es": "Los cuatro tipos de contexto que lee un agente"
+    },
+    {
+      "key": "memory-for-the-team",
+      "line": "Team memory, reviewed by a person",
+      "line_es": "La memoria del equipo, revisada por una persona"
+    }
+  ]
 }

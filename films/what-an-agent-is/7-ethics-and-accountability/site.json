@@ -31,5 +31,17 @@
   ],
   "next_h": "You've seen why a person answers for every agent. Next: why we govern them, because they're capable, not because they're bad.",
   "next_h_es": "Viste por qué una persona responde por cada agente. Sigue: por qué los gobernamos, porque son capaces, no porque sean malos.",
-  "tile": [600, 460, 480]
+  "tile": [600, 460, 480],
+  "seen_before": [
+    {
+      "key": "why-we-govern-them",
+      "line": "The four rules: an owner, a name of its own, the fewest rights, a person approves",
+      "line_es": "Las cuatro reglas: un dueño, un nombre propio, los mínimos derechos, una persona aprueba"
+    },
+    {
+      "key": "tools-are-hands",
+      "line": "Rules ask, rights hold: each tool with the fewest rights",
+      "line_es": "Las reglas piden, los derechos sostienen: cada herramienta con los mínimos derechos"
+    }
+  ]
 }

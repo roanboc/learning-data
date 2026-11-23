@@ -134,12 +134,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un paso abajo en una tarea, no un interruptor apagado: el equipo conservó su ayuda mientras se ganaba la tarea de nuevo.",
 "Under every stage, some things never change.":
 "Bajo cada etapa, algunas cosas nunca cambian.",
-"A person owns the agent, answers for its work, and stays in every critical loop.":
-"Una persona es dueña del agente, responde por su trabajo, y está en cada ciclo crítico.",
-"Every change to production is approved by a person who didn't make it, for agents as for people.":
-"Cada cambio en producción lo aprueba una persona que no lo hizo, para agentes como para personas.",
-"Agents never approve: an agent's review is only for reference.":
-"Los agentes nunca aprueban: la revisión de un agente es solo de referencia.",
+"The rules of Why we govern them hold: a person owns the agent and stays in every critical loop;":
+"Las reglas de Por qué los gobernamos se mantienen: una persona es dueña del agente y está en cada ciclo crítico;",
+"another person approves every change to production; and agents never approve.":
+"otra persona aprueba cada cambio en producción; y los agentes nunca aprueban.",
 "And an agent never approves its own change, never weakens a check to pass it, and never grants itself rights.":
 "Y un agente nunca aprueba su propio cambio, nunca debilita una verificación para pasarla, y nunca se da permisos a sí mismo.",
 "Researchers describe five levels of autonomy by what the person does, from operator to observer.":

@@ -329,8 +329,6 @@ ten, voices = tw('rods', 'ten rough signals'), tw('rods', 'voices')
 tenband([60, 64], ten - 0.1, stops - 0.05, 0.8, op=voices - 0.2, od=1.4)
 for k in range(3):
     knock(tw('levels', ('the next word', 'the next word', 'where the story')[k], (-0.2, 0.9, -0.2)[k]), 0.01, px(860))
-for k in range(3):
-    tap(tw('cell', 'five to eight', 0.4 + 0.6 * k), 0.008, px(1090))
 mel(74, tw('nobody', 'nobody knows', -0.2), tw('nobody', 'nobody knows', 2.4), 0.6)
 closes('taught', 0)
 

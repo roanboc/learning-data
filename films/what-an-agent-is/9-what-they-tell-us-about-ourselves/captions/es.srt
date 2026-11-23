@@ -159,261 +159,257 @@ Pero la copia se detiene en algún punto.
 Un cerebro adivina en muchos niveles a la vez, desde la siguiente palabra hasta adónde va la historia.
 
 41
-00:03:36,022 --> 00:03:41,329
-Para imitar un tipo de célula cerebral, los investigadores necesitaron una red de cinco a ocho capas.
-
-42
-00:03:42,629 --> 00:03:45,843
+00:03:36,022 --> 00:03:39,236
 Y cómo aprende un cerebro de sus errores, nadie lo sabe todavía.
 
-43
-00:03:51,143 --> 00:03:55,688
+42
+00:03:44,536 --> 00:03:49,081
 Segundo: cuando un modelo escribe un poema, ¿está creando, o mezclando lo que aprendió?
 
-44
-00:03:56,988 --> 00:04:00,198
+43
+00:03:50,381 --> 00:03:53,591
 Nosotros también aprendemos de otros, y mezclamos lo aprendido de formas nuevas.
 
-45
-00:04:02,098 --> 00:04:10,333
+44
+00:03:55,491 --> 00:04:03,726
 En 1843, Ada Lovelace escribió que el primer diseño de una computadora solo podía hacer ‘lo que sepamos ordenarle que haga’.
 
-46
-00:04:11,833 --> 00:04:17,021
+45
+00:04:05,226 --> 00:04:10,414
 En 1990, la filósofa Margaret Boden describió tres maneras de ser creativo:
 
-47
-00:04:17,221 --> 00:04:21,771
+46
+00:04:10,614 --> 00:04:15,164
 combinar ideas, explorar un estilo, y cambiar las propias reglas del estilo.
 
-48
-00:04:23,271 --> 00:04:26,263
+47
+00:04:16,664 --> 00:04:19,656
 Un modelo puede combinar ideas y explorar un estilo.
 
-49
-00:04:27,563 --> 00:04:32,759
+48
+00:04:20,956 --> 00:04:26,152
 Pero una persona aporta lo que una mezcla quizá no: una vida, una intención, una razón para hacerlo.
 
-50
-00:04:34,259 --> 00:04:36,000
+49
+00:04:27,652 --> 00:04:29,393
 La razón de Clark fue su padre.
 
-51
-00:04:37,900 --> 00:04:43,904
+50
+00:04:31,293 --> 00:04:37,297
 Boden dijo que si una computadora puede ser de verdad creativa no es algo que la ciencia pueda resolver sola.
 
-52
-00:04:45,004 --> 00:04:48,607
+51
+00:04:38,397 --> 00:04:42,000
 En parte depende de lo que queremos decir, y en parte es una decisión que tendremos que tomar.
 
-53
-00:04:53,507 --> 00:04:57,448
+52
+00:04:46,900 --> 00:04:50,841
 Tercero: si copiáramos un cerebro, cable por cable, ¿tendríamos una mente?
 
-54
-00:04:58,748 --> 00:05:04,545
+53
+00:04:52,141 --> 00:04:57,938
 Para 1986, ya se habían mapeado las conexiones de las 302 neuronas de un gusano diminuto.
 
-55
-00:05:05,845 --> 00:05:11,675
+54
+00:04:59,238 --> 00:05:05,068
 Desde 2011, un proyecto abierto, OpenWorm, trabaja en una copia de él en una computadora.
 
-56
-00:05:12,375 --> 00:05:17,422
+55
+00:05:05,768 --> 00:05:10,815
 Se retuerce, pero poco más: un mapa no dice cómo funciona cada conexión, ni cuándo.
 
-57
-00:05:18,722 --> 00:05:26,521
+56
+00:05:12,115 --> 00:05:19,914
 En 2024, se mapeó el cerebro completo de una mosca, 139,255 neuronas,
 
-58
-00:05:26,721 --> 00:05:30,533
+57
+00:05:20,114 --> 00:05:23,926
 y un modelo hecho a partir del mapa predijo cuáles responden al azúcar.
 
-59
-00:05:32,033 --> 00:05:33,770
+58
+00:05:25,426 --> 00:05:27,163
 Nosotros tenemos unos 86 mil millones.
 
-60
-00:05:35,270 --> 00:05:37,908
+59
+00:05:28,663 --> 00:05:31,301
 Y una copia puede actuar como nosotros sin funcionar como nosotros.
 
-61
-00:05:39,008 --> 00:05:42,997
+60
+00:05:32,401 --> 00:05:36,390
 El implante de Rod hacía parte del trabajo de un oído, pero no como lo hace un oído:
 
-62
-00:05:43,197 --> 00:05:48,066
+61
+00:05:36,590 --> 00:05:41,459
 estaba hecho para el habla, y a muchas personas con implantes la música todavía les suena pobre.
 
-63
-00:05:49,566 --> 00:05:52,251
+62
+00:05:42,959 --> 00:05:45,644
 ¿Una copia que funcionara exactamente como nosotros sería una mente?
 
-64
-00:05:53,551 --> 00:06:00,221
+63
+00:05:46,944 --> 00:05:53,614
 El filósofo John Searle escribió que nadie supone que una tormenta simulada ‘nos dejará a todos empapados’.
 
-65
-00:06:01,521 --> 00:06:05,602
+64
+00:05:54,914 --> 00:05:58,995
 Otros dicen que una mente es lo que hace un cerebro, así que una copia perfecta lo sería.
 
-66
-00:06:06,702 --> 00:06:08,188
+65
+00:06:00,095 --> 00:06:01,581
 Nadie sabe quién tiene razón.
 
-67
-00:06:13,088 --> 00:06:16,615
+66
+00:06:06,481 --> 00:06:10,008
 Cuarto, y lo más difícil: ¿por qué ser nosotros se siente como algo?
 
-68
-00:06:18,015 --> 00:06:20,202
+67
+00:06:11,408 --> 00:06:13,595
 El implante convertía el sonido en pulsos.
 
-69
-00:06:21,302 --> 00:06:22,499
+68
+00:06:14,695 --> 00:06:15,892
 No oía nada.
 
-70
-00:06:24,399 --> 00:06:25,250
+69
+00:06:17,792 --> 00:06:18,643
 Rod sí.
 
-71
-00:06:27,550 --> 00:06:32,384
+70
+00:06:20,943 --> 00:06:25,777
 En 1995, el filósofo David Chalmers llamó a esto el problema difícil:
 
-72
-00:06:32,584 --> 00:06:36,597
+71
+00:06:25,977 --> 00:06:29,990
 ‘¿Por qué el procesamiento físico habría de dar lugar a una rica vida interior?’
 
-73
-00:06:37,797 --> 00:06:39,248
+72
+00:06:31,190 --> 00:06:32,641
 Los científicos tienen teorías.
 
-74
-00:06:39,848 --> 00:06:43,951
+73
+00:06:33,241 --> 00:06:37,344
 Una dice que la experiencia viene de cuán unidas trabajan las partes de un sistema.
 
-75
-00:06:44,951 --> 00:06:48,231
+74
+00:06:38,344 --> 00:06:41,624
 Otra, de noticias compartidas por todo el cerebro a la vez.
 
-76
-00:06:49,331 --> 00:06:59,140
+75
+00:06:42,724 --> 00:06:52,533
 En 2025, una prueba de ambas, con 256 personas y reglas acordadas antes por los dos bandos, cuestionó partes clave de cada una.
 
-77
-00:07:00,240 --> 00:07:01,676
+76
+00:06:53,633 --> 00:06:55,069
 La ciencia todavía no lo sabe.
 
-78
-00:07:04,976 --> 00:07:06,348
+77
+00:06:58,369 --> 00:06:59,741
 ¿Podría sentir una máquina, entonces?
 
-79
-00:07:07,648 --> 00:07:15,364
+78
+00:07:01,041 --> 00:07:08,757
 El neurocientífico colombiano Rodolfo Llinás descubrió que, despierto y soñando, el cerebro oscila unas cuarenta veces por segundo.
 
-80
-00:07:16,864 --> 00:07:20,148
+79
+00:07:10,257 --> 00:07:13,541
 Pensaba que este ritmo une lo que percibimos en un solo momento.
 
-81
-00:07:21,148 --> 00:07:22,593
+80
+00:07:14,541 --> 00:07:15,986
 En el sueño profundo, se apaga.
 
-82
-00:07:24,093 --> 00:07:31,948
+81
+00:07:17,486 --> 00:07:25,341
 Roger Penrose y Stuart Hameroff miran más hondo, a efectos cuánticos en los microtúbulos, tubos diminutos dentro de nuestras neuronas.
 
-83
-00:07:33,448 --> 00:07:38,222
+82
+00:07:26,841 --> 00:07:31,615
 Los críticos dicen que un cerebro tibio y húmedo borraría esos efectos demasiado rápido para que importen.
 
-84
-00:07:39,222 --> 00:07:42,421
+83
+00:07:32,615 --> 00:07:35,814
 Penrose y Hameroff no están de acuerdo, y las pruebas siguen.
 
-85
-00:07:43,721 --> 00:07:48,689
+84
+00:07:37,114 --> 00:07:42,082
 En 2001, Llinás escribió que dudaba sinceramente de la idea cuántica.
 
-86
-00:07:49,689 --> 00:07:54,511
+85
+00:07:43,082 --> 00:07:47,904
 Pero en 2007, dijo que no sabía qué en nuestras células produce el sentir.
 
-87
-00:07:54,911 --> 00:07:57,884
+86
+00:07:48,304 --> 00:07:51,277
 ‘¿Filamentos? ¿Microtúbulos? ¿Mecánica cuántica?’
 
-88
-00:07:59,584 --> 00:08:07,496
+87
+00:07:52,977 --> 00:08:00,889
 En 2023, diecinueve investigadores buscaron en la IA actual catorce señales de conciencia, tomadas de las principales teorías.
 
-89
-00:08:08,496 --> 00:08:14,363
+88
+00:08:01,889 --> 00:08:07,756
 Ningún sistema parecía consciente, pero nada evidente impide construir sistemas que muestren esas señales.
 
-90
-00:08:15,863 --> 00:08:19,071
+89
+00:08:09,256 --> 00:08:12,464
 Si mostrarlas significa sentir algo, nadie lo sabe.
 
-91
-00:08:24,171 --> 00:08:26,022
+90
+00:08:17,564 --> 00:08:19,415
 Por último: ¿qué nos hace humanos, entonces?
 
-92
-00:08:27,322 --> 00:08:33,748
+91
+00:08:20,715 --> 00:08:27,141
 En 1637, René Descartes escribió que una máquina nunca podría ordenar sus palabras de distintas maneras,
 
-93
-00:08:33,948 --> 00:08:37,806
+92
+00:08:27,341 --> 00:08:31,199
 para responder a lo que se le diga, como puede hacerlo hasta la persona más torpe.
 
-94
-00:08:39,106 --> 00:08:40,445
+93
+00:08:32,499 --> 00:08:33,838
 Hoy, las máquinas lo hacen.
 
-95
-00:08:41,945 --> 00:08:43,564
+94
+00:08:35,338 --> 00:08:36,957
 Si no es el lenguaje, ¿entonces qué?
 
-96
-00:08:44,564 --> 00:08:45,924
+95
+00:08:37,957 --> 00:08:39,317
 ¿Un cuerpo que puede sufrir daño?
 
-97
-00:08:46,624 --> 00:08:48,043
+96
+00:08:40,017 --> 00:08:41,436
 ¿Una vida vivida con otros?
 
-98
-00:08:48,743 --> 00:08:49,516
+97
+00:08:42,136 --> 00:08:42,909
 ¿Los sentimientos?
 
-99
-00:08:50,216 --> 00:08:52,520
+98
+00:08:43,609 --> 00:08:45,913
 ¿Elegir lo que importa, y responder por ello?
 
-100
-00:08:53,820 --> 00:08:55,155
+99
+00:08:47,213 --> 00:08:48,548
 Nadie lo ha resuelto.
 
-101
-00:08:56,655 --> 00:09:01,281
+100
+00:08:50,048 --> 00:08:54,674
 Rod volvió a oír la voz de Margaret, con diez electrodos y un cerebro que aprendió.
 
-102
-00:09:03,581 --> 00:09:10,418
+101
+00:08:56,974 --> 00:09:03,811
 Construir copias nos sigue enseñando sobre nosotros: en qué se parecen a nosotros, en qué no, y cuánto aún no sabemos.
 
-103
-00:09:11,718 --> 00:09:16,096
+102
+00:09:05,111 --> 00:09:09,489
 Ver eso ayuda al equipo de Jun a decidir qué encargarle al agente, y qué conservar.
 
-104
-00:09:17,396 --> 00:09:18,944
+103
+00:09:10,789 --> 00:09:12,337
 Todavía no tenemos las respuestas.
 
-105
-00:09:19,944 --> 00:09:20,906
+104
+00:09:13,337 --> 00:09:14,299
 Sigue preguntándote.

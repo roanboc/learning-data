@@ -746,8 +746,8 @@ window.LD_ROUTE = {
      "href": "what-an-agent-is/",
      "poster": "decades-in-the-making-poster.jpg",
      "kicker": "Series · 10 films",
-     "len": "81 min",
-     "min": 81.0,
+     "len": "80 min",
+     "min": 80.0,
      "films": [
       "ld-decades-in-the-making",
       "ld-borrowed-from-the-brain",

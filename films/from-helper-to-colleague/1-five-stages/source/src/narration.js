@@ -73,9 +73,8 @@ const NARR={
 ]},
 "never":{"name":"What never changes","lead":0.9,"tail":1.0,"vo":[
  {"id":"under","gap":0.8,"text":"Under every stage, some things never change."},
- {"id":"owner","gap":0.8,"text":"A person owns the agent, answers for its work, and stays in every critical loop."},
- {"id":"second","gap":0.8,"text":"Every change to production is approved by a person who didn't make it, for agents as for people."},
- {"id":"review","gap":0.8,"text":"Agents never approve: an agent's review is only for reference."},
+ {"id":"rules","gap":0.3,"text":"The rules of Why we govern them hold: a person owns the agent and stays in every critical loop;"},
+ {"id":"rules2","gap":0.8,"text":"another person approves every change to production; and agents never approve."},
  {"id":"self","gap":0.8,"text":"And an agent never approves its own change, never weakens a check to pass it, and never grants itself rights."},
  {"id":"levels","gap":0.8,"text":"Researchers describe five levels of autonomy by what the person does, from operator to observer."},
  {"id":"here","gap":0.8,"text":"Here, a person always approves production, so no stage leaves people only watching."},

@@ -74,5 +74,12 @@
     ]
   },
   "draft": false,
-  "tile": [640, 360, 560]
+  "tile": [640, 360, 560],
+  "seen_before": [
+    {
+      "key": "decades-in-the-making",
+      "line": "Rosenblatt's perceptron of 1958, and the road to today's models",
+      "line_es": "El perceptrón de Rosenblatt de 1958, y el camino hasta los modelos de hoy"
+    }
+  ]
 }

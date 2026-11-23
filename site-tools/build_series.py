@@ -51,7 +51,8 @@ A series can instead have labs and scenarios of its own, for all its films ("lea
 site/assets/<dir>/learn.en.js): they get their own pages (site/<slug>/labs/ and site/<slug>/scenarios/), the series' page
 gets their course bar, and each film's page links to its own lab and situations among them. series_learn() below says what
 the words must keep; each series draws them with its own engine (site/assets/<dir>/learn.js).
-A film's page can also link to another site that shows its idea, from its site.json's "elsewhere" (elsewhere_section()).
+A film's page can also link to another site that shows its idea, from its site.json's "elsewhere" (elsewhere_section()),
+and to the films that teach in full what it only recalls, from its "seen_before" (seen_section()).
 A series or a film its author hasn't reviewed yet is a draft ("draft": true in its series.json or site.json): its pages say so
 under their title (DRAFT, is_draft() and draft_note() below).
 Never edit the generated pages by hand: change the words, and run this again. check_site.py and smoke.py read every series
@@ -985,6 +986,30 @@ def project_section(lg, f):
                 T(lg, f"{n} chapter{'s' * (n != 1)} show its files", f"{n} capítulo{'s' * (n != 1)} muestra{'n' * (n != 1)} sus archivos"))
 
 
+def seen_section(lg, f, R):
+    """Seen before: the films that teach in full a lesson this film only recalls, so a film points to them rather than teach
+    it twice (the author, 23 November 2026). Optional: the film's site.json, "seen_before": [{"key": film key, "line", "line_es"}],
+    each line saying what that film teaches. Folded, under Try it (docs/page-templates.md)."""
+    rows = f["site"].get("seen_before")
+    if not rows:
+        return ""
+    by = {x["key"]: x for x in all_films()}
+    miss = [x["key"] for x in rows if x["key"] not in by]
+    if miss:
+        raise SystemExit(f'{f["key"]}: site.json seen_before names films not on the site: {miss}')
+    base = R if lg == "en" else R[3:]
+    lis = []
+    for x in rows:
+        g = by[x["key"]]
+        nm = E(g["title"] if lg == "en" else g["site"]["title_es"])
+        where = f'{num(lg, g)} · {SN(lg, g["series"])}'
+        lis.append(f'<li><b><a href="{base}{g["path"]}">{nm}</a></b><span>{E(x["line"] if lg == "en" else x["line_es"])} <small>{E(where)}</small></span></li>')
+    inner = (f'<p>{T(lg, "This film recalls these lessons in a line. Each film here teaches one in full.", "Esta película recuerda estas lecciones en una línea. Cada película de aquí enseña una completa.")}</p>\n'
+             f'<ul class="repo-list">\n' + "\n".join(lis) + '\n</ul>')
+    n = len(rows)
+    return fold(lg, "seen-before", T(lg, "Seen before", "Visto antes"), inner, T(lg, f"{n} film{'s' * (n != 1)}", f"{n} película{'s' * (n != 1)}"))
+
+
 def elsewhere_section(lg, f):
     """Elsewhere: another site that shows the film's idea, such as a lab on another learn-all.org site, linked from the film's
     page (the film itself names no site). Optional: the film's site.json, "elsewhere": {"h", "p", "links": [{"title", "line",
@@ -1057,6 +1082,7 @@ def film_page(lg, f, films_, series):
             f'<div class="mhead"><div><h2 id="watch-h">{T(lg, "Watch the film", "Mira la película")}</h2><p>{watch_p}</p></div></div>\n'
             f'{player}\n<div class="chapters" id="chapters" aria-label="{T(lg, "Chapters", "Capítulos")}"></div>\n{links}\n{nextp}\n</section>\n\n'
             + (film_learn_section(lg, f, SL) if SL else "")
+            + seen_section(lg, f, R)
             + project_section(lg, f)
             + elsewhere_section(lg, f)
             + series_nav(lg, f, films_, R, "" if alone else "../") + '</main>\n'

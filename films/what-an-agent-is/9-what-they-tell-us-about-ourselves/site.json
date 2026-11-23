@@ -31,5 +31,17 @@
   ],
   "next_h": "You've seen what building agents teaches us about ourselves, and five questions still open. Next: many agents together, and what emerges.",
   "next_h_es": "Viste lo que construir agentes nos enseña sobre nosotros, y cinco preguntas aún abiertas. Después: muchos agentes juntos, y lo que surge.",
-  "tile": [820, 380, 400]
+  "tile": [820, 380, 400],
+  "seen_before": [
+    {
+      "key": "decades-in-the-making",
+      "line": "Rosenblatt's perceptron of 1958, and the road to today's models",
+      "line_es": "El perceptrón de Rosenblatt de 1958, y el camino hasta los modelos de hoy"
+    },
+    {
+      "key": "borrowed-from-the-brain",
+      "line": "Why a model writes likely words, so it can be sure and wrong",
+      "line_es": "Por qué un modelo escribe palabras probables, y puede estar seguro y equivocarse"
+    }
+  ]
 }

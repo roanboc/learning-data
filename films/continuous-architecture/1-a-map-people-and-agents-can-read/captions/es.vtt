@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:09.724
+Babilonia, 652 a. C. Cada noche, uno de los eruditos de la ciudad observa el cielo y anota lo que ve.
+
+00:00:11.324 --> 00:00:17.929
+Para el rey de Babilonia y sus templos, el cielo enviaba señales. Un eclipse de luna podía anunciar la muerte del rey.
+
+00:00:19.529 --> 00:00:27.246
+Pero el cielo se repite despacio: algunos planetas, solo cada setenta u ochenta años, más que la vida laboral de un observador.
+
+00:00:28.646 --> 00:00:35.932
+Lo que sabía un observador se perdía al dejar de observar. Necesitaban un registro que durara más que él: que el siguiente leyera, y continuara.
+
+00:00:37.532 --> 00:00:45.901
+Así que los eruditos llevaron un diario del cielo, noche tras noche, siempre en el mismo orden: la luna, los planetas entre las estrellas, el clima.
+
+00:00:47.501 --> 00:00:54.346
+Al final de cada mes, el nivel del río, los precios de seis productos, de la cebada a la lana, y lo que había pasado en la ciudad.
+
+00:00:55.946 --> 00:00:59.979
+Cuando las nubes tapaban el cielo, el observador también lo anotaba: no observé.
+
+00:01:01.679 --> 00:01:06.030
+Cada tablilla guardaba medio año, y el siguiente observador seguía desde la anterior.
+
+00:01:07.430 --> 00:01:17.391
+Lo llevaron durante casi seiscientos años, bajo reyes babilonios, persas, griegos y partos. El diario más reciente que tenemos es del 61 a. C.
+
+00:01:18.991 --> 00:01:27.817
+Con él, otros eruditos usaron los ciclos del cielo, ocho años para Venus, ochenta y tres para Júpiter, para predecir planetas y eclipses del año siguiente.
+
+00:01:29.217 --> 00:01:38.583
+Hoy, los astrónomos todavía leen los registros de eclipses de Babilonia. Muestran que el día se alarga, unas 1.8 milésimas de segundo por siglo.
+
+00:01:40.183 --> 00:01:46.520
+En la empresa, el mapa de Tomás tiene la misma debilidad: si solo él puede mantenerlo, se detiene con él.
+
+00:01:47.820 --> 00:01:51.238
+Llevado de un solo modo, por todos, podría durar más que cualquier puesto.
+
+00:01:52.438 --> 00:01:55.672
+La prueba del observador: ¿podría el siguiente leerlo, y continuar?
+
+00:02:02.472 --> 00:02:05.342
+La nota de Tomás pregunta cómo mantener vivo el mapa.
+
+00:02:06.842 --> 00:02:12.225
+Ahora se usa cada semana: para ordenar pedidos, dar un hogar a las reglas y responderle al ministro.
+
+00:02:13.925 --> 00:02:15.408
+Ahí es cuando un mapa se desactualiza.
+
+00:02:16.608 --> 00:02:20.674
+Vive en diapositivas, y en una herramienta de modelado que solo Tomás edita.
+
+00:02:21.974 --> 00:02:28.441
+Sus aplicaciones se copiaron a mano de la herramienta de gestión de servicios de TI, y muchas cambiaron desde entonces.
+
+00:02:29.941 --> 00:02:36.159
+Sus vistas se copian en presentaciones, y las copias se desfasan. El glosario y el catálogo guardan sus propias palabras.
+
+00:02:37.859 --> 00:02:41.095
+Un mapa desactualizado es peor que ninguno: la gente confía en él.
+
+00:02:42.795 --> 00:02:47.861
+Si Tomás se fuera mañana, nadie podría continuarlo. No pasa la prueba del observador.
+
+00:02:50.561 --> 00:02:57.267
+Así que lleva el mapa a una herramienta de arquitectura empresarial que todos pueden usar, con una base de datos y un grafo.
+
+00:02:58.967 --> 00:03:01.633
+Mucho de lo que contiene ya se guarda en otra parte.
+
+00:03:02.933 --> 00:03:11.966
+La estrategia, en documentos; objetivos e iniciativas, en la herramienta de gestión de proyectos; aplicaciones y servidores, en la de gestión de servicios de TI.
+
+00:03:13.866 --> 00:03:19.599
+La herramienta trae cada uno con el ID de su fuente y lo mantiene al día, así que nadie lo vuelve a escribir.
+
+00:03:21.299 --> 00:03:27.758
+El resto se escribe en el propio mapa: capacidades, reglas, decisiones y los vínculos entre todo.
+
+00:03:29.458 --> 00:03:35.465
+Hasta el glosario de negocio cabe: cada término es un objeto de negocio, definido una vez por el negocio.
+
+00:03:37.065 --> 00:03:41.849
+Así que mantener fiel un mapa es un trabajo de integración de datos, además de modelado.
+
+00:03:45.349 --> 00:03:51.812
+Cada elemento se guarda una vez: una capacidad, un paso, un dominio, un objeto de negocio, una regla, una medida.
+
+00:03:53.412 --> 00:03:59.412
+Cada uno tiene un ID estable. Los nombres cambian, pero los ID no, así que todo lo demás apunta al ID.
+
+00:04:01.012 --> 00:04:07.164
+Luego su nombre, su definición, su responsable y sus relaciones, con los nombres que usa ArchiMate.
+
+00:04:08.664 --> 00:04:15.551
+Y sus dos reglas del primer día, en cada elemento: su evidencia, con fecha, y si su responsable lo confirmó.
+
+00:04:17.151 --> 00:04:19.599
+Las decisiones también se guardan, con su porqué.
+
+00:04:20.899 --> 00:04:26.440
+Un mapa pequeño podría guardar todo esto en archivos de texto, en un repositorio: el enfoque más simple.
+
+00:04:28.040 --> 00:04:34.969
+Con muchas fuentes, y muchas personas en sus roles, la empresa necesita la herramienta. De un modo u otro, las ideas son las mismas.
+
+00:04:40.869 --> 00:04:44.496
+Se guarda cada versión del mapa: quién cambió qué, y cuándo.
+
+00:04:45.796 --> 00:04:50.377
+Un cambio se propone como borrador, y nada cambia hasta que se aprueba.
+
+00:04:51.877 --> 00:04:57.237
+Lo aprueba quien es responsable de esa parte: Grace, lo de la red; Ama, las obligaciones.
+
+00:04:58.737 --> 00:05:01.364
+Los controles corren sobre el propio mapa, en cada cambio.
+
+00:05:02.064 --> 00:05:07.724
+Cada elemento tiene un responsable. Cada regla, una razón y un hogar. Cada medida, una definición.
+
+00:05:09.324 --> 00:05:13.700
+Generar energía sigue sin responsable, y el control lo dice, cada vez.
+
+00:05:16.400 --> 00:05:19.971
+Todo lo que la gente lee se genera del mapa, en un solo sentido.
+
+00:05:21.471 --> 00:05:28.421
+Las vistas de ArchiMate, el glosario, el modelo conceptual, la ontología, las pruebas y las tablas de seguimiento, y el mapa de calor.
+
+00:05:30.121 --> 00:05:33.089
+Cada una responde las preguntas de quienes la leen.
+
+00:05:34.389 --> 00:05:40.257
+En dbt, cada modelo lleva su responsable, su dominio y los ID de sus reglas.
+
+00:05:41.757 --> 00:05:47.660
+En Databricks, cada tabla muestra su responsable, sus etiquetas y su descripción, junto a su linaje.
+
+00:05:49.160 --> 00:05:53.399
+Nadie edita una vista. La corrección va al mapa, y todas las vistas la siguen.
+
+00:05:56.099 --> 00:05:57.841
+Ahora un agente puede leer el mapa.
+
+00:05:59.141 --> 00:06:06.911
+Ante un pedido, pregunta quién decidirá qué con la respuesta, y luego encuentra la decisión, la capacidad y el responsable, o nada.
+
+00:06:08.811 --> 00:06:15.812
+Ante un cambio, recorre las capas, como hizo Tomás con la tarifa social, y nombra a los responsables que deben estar de acuerdo.
+
+00:06:17.812 --> 00:06:23.464
+Ante una columna del catálogo, encuentra la regla que hay detrás, con su responsable y su razón.
+
+00:06:25.264 --> 00:06:29.303
+Cada respuesta cita ID y evidencia, para que una persona pueda comprobarla.
+
+00:06:32.603 --> 00:06:39.417
+El agente está en el propio mapa: software que ocupa un rol, con sus atribuciones por escrito, como las del agente de cortes.
+
+00:06:40.917 --> 00:06:44.911
+Puede leer todo y redactar cambios. No puede confirmar ninguno.
+
+00:06:46.411 --> 00:06:50.229
+Donde dos fuentes no coinciden, no elige. Le pregunta al responsable.
+
+00:06:51.729 --> 00:06:53.165
+Su responsable es Tomás.
+
+00:06:54.265 --> 00:07:01.297
+Los agentes redactan, las personas confirman y se guarda cada versión: la regla que mantiene al día los modelos de datos, aplicada al mapa.
+
+00:07:03.997 --> 00:07:09.365
+Luego el regulador cambia el código de comercialización, que todo comercializador de energía debe cumplir.
+
+00:07:10.865 --> 00:07:17.616
+Cuando una lectura real reemplaza una estimación, la factura debe corregirse en diez días hábiles, no en la siguiente.
+
+00:07:19.516 --> 00:07:25.036
+El agente halla la única regla cuya razón es esa cláusula: la mitad de comercialización de la regla del primer día.
+
+00:07:26.936 --> 00:07:33.215
+Redacta el nuevo texto de la regla y lista lo que toca: la tabla de seguimiento del equipo de facturación y dos vistas.
+
+00:07:35.115 --> 00:07:38.029
+Lo confirma quien dirige comercialización, a cargo de la regla.
+
+00:07:39.729 --> 00:07:45.123
+Desde la mañana siguiente, la tabla de seguimiento muestra cada factura no corregida en diez días hábiles.
+
+00:07:48.223 --> 00:07:51.236
+En primavera, Zofia empieza como ingeniera de datos.
+
+00:07:52.536 --> 00:07:58.026
+Su primer día, como el de Tomás, trae una credencial, una página de siglas y una lista de sistemas.
+
+00:07:59.626 --> 00:08:01.409
+Esta vez, también hay un mapa.
+
+00:08:02.709 --> 00:08:06.990
+Le pregunta al agente quién es responsable de los datos de lecturas, y qué reglas cumplen.
+
+00:08:08.290 --> 00:08:13.225
+Vuelven una responsable, Grace, y dos reglas, cada una con su razón, y enlaces para comprobarlas.
+
+00:08:14.825 --> 00:08:19.274
+Por la tarde, ya redactó su primer cambio, para que Grace lo confirme.
+
+00:08:21.974 --> 00:08:27.931
+En Babilonia, nadie llevaba el diario solo. Cada observador leía la última tablilla, y continuaba.
+
+00:08:29.531 --> 00:08:34.425
+Escrito de un solo modo, sobrevivió a cada observador que lo llevó, y a cada rey al que sirvieron.
+
+00:08:36.225 --> 00:08:41.485
+En la empresa, Grace confirma el cambio de Zofia. El mapa pasa la prueba del observador.
+
+00:08:43.085 --> 00:08:48.344
+Para el verano, treinta personas mantienen sus partes del mapa, y sus responsables confirman cada cambio.
+
+00:08:49.744 --> 00:08:52.610
+Si Tomás se fuera mañana, el mapa continuaría.
+
+00:08:55.210 --> 00:09:01.408
+Guarda cada elemento una vez, en una herramienta, con un ID, un responsable y su evidencia, y genera de ahí cada vista.
+
+00:09:03.108 --> 00:09:07.737
+Revisa cada cambio; que los agentes lean y redacten, y los responsables confirmen.
+
+00:09:09.437 --> 00:09:12.033
+Luego: un primer borrador, no una página en blanco.

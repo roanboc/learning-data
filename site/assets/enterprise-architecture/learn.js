@@ -14,6 +14,10 @@
    and "quiz" (answers by scenario number); path.js paints the course bar. */
 (()=>{"use strict";
 const L=window.EA,app=document.getElementById("series-labs")||document.getElementById("series-quiz");if(!L||!app)return;
+// A film that moved to another series took its labs and situations with it (L.moved: film 11, 23 November 2026): an old link to
+// them goes on to their new page
+if(L.moved){const hs=(location.hash||"").slice(1),fm=hs.match(/^film-(\d+)$/),to=app.id==="series-labs"?(L.moved.labs||{})[hs]:fm&&(L.moved.films||{})[fm[1]];
+  if(to){location.replace(to);return;}}
 const U=L.ui,P=app.dataset.store||"ld-enterprise-architecture";
 let FILMS={};try{FILMS=JSON.parse(app.dataset.films||"{}");}catch(e){}
 const get=(k,d)=>{try{const v=localStorage.getItem(P+":"+k);return v==null?d:JSON.parse(v);}catch(e){return d;}};

@@ -1,0 +1,19 @@
+{
+  "key": "a-map-people-and-agents-can-read",
+  "title": "A map people and agents can read",
+  "sub": "Continuous architecture: Tomás's map is used every week, so it goes stale, and only he can keep it; it moves into an enterprise architecture tool that brings in what other systems already keep, each element kept once with a stable ID, an owner and its evidence; every change reviewed and versioned; every view made from it; and agents that read it, draft changes and never confirm one.",
+  "howto": "Clay and night are Babylon, from 652 BCE: the roof a scholar watches the sky from, and the diary the watchers kept, half a year to a tablet, for nearly six hundred years. In the present, paper on a wall is a draft; glass in the layers' colours is the confirmed model; a window with a side panel is the map's tool, and lines of text are the same map kept as files, the simplest approach. Sand marks what other systems already keep. Cyan outlines the technical side, gold the business side, and a gold tick is an owner's confirmation. The small glass figure with a ring is the map's agent.",
+  "src": [
+    "../../../../ai-and-continuous-architecture/shared/src/aca.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["watch", "need", 6.5],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahss's"],
+    ["\\bTomás\\b", "Toh-mahss"],
+    ["\\bAma\\b", "Ah-mah"],
+    ["\\bArchiMate\\b", "Arky-mate"],
+    ["\\bIT\\b", "I T"]
+  ]
+}

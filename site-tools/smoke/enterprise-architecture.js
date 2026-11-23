@@ -51,8 +51,6 @@ lab: async (id) => {
     await seg(2, 1); await press(W.moveB); await press(W.plantB, 900);
   } else if (id === "walk") {
     await seg(0, 0); await seg(0, 1); await seg(1, 1); for (let i = 0; i < 6; i++) await press(W.downB, 400);
-  } else if (id === "navigator") {
-    await seg(0, 3); await press(W.fixB); await press(W.runB); await seg(0, 2); await press(W.fixB); await seg(0, 0, 600);
   } else out.push("no play written for playground " + id);
   const ticked = qa(".ea-goals li.ok").length;
   if (ticked !== W.goals.length) out.push(ticked + " of " + W.goals.length + " experiments ticked once played: "

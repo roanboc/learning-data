@@ -791,7 +791,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     ctx.restore();
     p8_tags(ctx,t,1260,120,[[tK-0.2,tEa-0.4,"a data practice isn't built once either",SOFT],[tEa-0.2,tDa-0.4,"so it's kept",PSC],[tDa-0.2,sc.dur+1,"the next end: planned, not forced",PS_OK]]);
     p8_under(ctx,t,1260,186,[[w("data","utility's own")-0.2,sc.dur+1,"and what's the utility's own goes with it",PSC]]);
-    withA(ctx,fin(t,tNx-0.1,0.6),()=>tag(ctx,1260,552,"Next: AI and continuous architecture",PSC,{align:"center",size:34}));}]]);
+    withA(ctx,fin(t,tNx-0.1,0.6),()=>tag(ctx,1260,552,"Next: Continuous architecture",PSC,{align:"center",size:34}));}]]);
   vign(ctx,S);
   psaEnd(ctx,S,t,B+0.6,"Built to change","Every part with a date and a way out, and what's yours goes with you.","film 8 of 8");});
 

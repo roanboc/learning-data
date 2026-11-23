@@ -2725,7 +2725,7 @@ scene("found",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     bab_tag(cx,960,214,"on the exact spot, to the same measures",fin(t,w("rose","exact spot")-0.3,0.7)*(1-fin(t,tHo-0.3,0.6)));
     bab_tag(cx,960,214,"their god's house, where they believed it belonged",fin(t,w("home","house")-0.2,0.7)*(1-fin(t,tNow-0.6,0.6)));
   });
-  acaTitle(ctx,S,t,B+1.0,"A first draft, not a blank page","start from what exists; keep only what's confirmed","Film 1 of 3 · Continuous architecture");});
+  acaTitle(ctx,S,t,B+1.0,"A first draft, not a blank page","start from what exists; keep only what's confirmed","Film 2 of 4 · Continuous architecture");});
 
 /* ---------- 2. What do you do? ---------- */
 // a person's name, over their head: at the left of the frame or (right) at the right
@@ -2986,7 +2986,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   // the design, confirmed, small, under the note
   withA(ctx,fin(t,1.0,1.0),()=>a4_mini(ctx,760,470,0.25,t,{}));
   ctx.restore();vign(ctx,S);
-  acaEnd(ctx,S,t,B,"A first draft, not a blank page","Start from a draft. Keep only what's confirmed.","Film 1 of 3 · Continuous architecture");});
+  acaEnd(ctx,S,t,B,"A first draft, not a blank page","Start from a draft. Keep only what's confirmed.","Film 2 of 4 · Continuous architecture");});
 
 /* ---------- where the chapters meet ---------- */
 // The wall holds four chapters: Where each came from, What's missing, what's wrong and Only what's confirmed each glide on from where

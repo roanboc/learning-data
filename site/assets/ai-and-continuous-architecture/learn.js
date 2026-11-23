@@ -18,6 +18,15 @@ const get=(k,d)=>{try{const v=localStorage.getItem(P+":"+k);return v==null?d:JSO
 const put=(k,v)=>{try{localStorage.setItem(P+":"+k,JSON.stringify(v));}catch(e){}
   // path.js repaints the course bar on "storage", which only other tabs fire: fire it here too
   try{window.dispatchEvent(new StorageEvent("storage",{key:P+":"+k}));}catch(e){}};
+// A pack whose films moved (L.renum: Continuous architecture, 23 November 2026) carries a visitor's progress over once: its own old
+// situation numbers to the new ones (quiz), then, from another series' store (from), the situations, a playground's experiments and
+// its visit, under their new numbers and ids, never over an answer already given here
+if(L.renum&&get("renum",0)<L.renum.v){const R=L.renum,q=get("quiz",{})||{},nq={},goals=get("goals",{})||{},vis=get("visited",[])||[];
+  Object.keys(q).forEach(k=>{const t=R.quiz&&R.quiz[k]!=null?R.quiz[k]:k;nq[t]=q[k];});
+  (R.from||[]).forEach(F=>{const g=k=>{try{const v=localStorage.getItem(F.store+":"+k);return v==null?null:JSON.parse(v);}catch(e){return null;}};
+    const oq=g("quiz")||{};Object.keys(F.quiz||{}).forEach(k=>{if(oq[k]&&nq[F.quiz[k]]==null)nq[F.quiz[k]]=oq[k];});
+    const og=g("goals")||{},ov=g("visited")||[];Object.keys(F.labs||{}).forEach(k=>{const to=F.labs[k];if(og[k]&&!goals[to])goals[to]=og[k];if(ov.includes(k)&&!vis.includes(to))vis.push(to);});});
+  put("quiz",nq);put("goals",goals);put("visited",vis);put("renum",R.v);}
 function h(tag,attrs,...kids){const e=document.createElement(tag);for(const k in attrs||{}){const v=attrs[k];if(v==null||v===false)continue;if(k.startsWith("on"))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v===true?"":v);}
   kids.flat().forEach(c=>{if(c!=null&&c!==false)e.append(c.nodeType?c:document.createTextNode(c));});return e;}
 const fill=(s,o)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:m);
@@ -282,6 +291,31 @@ PLAY.place=(Lb,api)=>{const W=Lb.w,IT=W.items,S={at:{},ev:{}};const res=(k,at)=>
       y=rowW(ctx,o,{t:x.t,v:W.wheres.find(w=>w[0]===k)[1],c:lvC[k],ic:(c,xx,yy)=>IC[k==="signin"?"key":k==="never"?"lock":k](c,xx,yy,lvC[k]),hot:d&&e.r==="bad",mark:d?(e.r==="ok"?"ok":"no"):null},y,o.rh);});};
   return{lay,draw,readouts:[[W.read.inPlace,()=>String(IT.filter(x=>S.at[x.k]==="place").length)],[W.read.restricted,()=>String(IT.filter(x=>x.lv==="restricted"&&(S.at[x.k]==="place"||S.at[x.k]==="signin")).length)]]};};
 
+/* ---------- Continuous architecture 1 · A map people and agents can read: the watcher's test ---------- */
+// From The map before the data (its film 11's navigator's test, until 23 November 2026). Six elements of the map, each with its ID,
+// name and owner. The map's checks mark what's missing; fixing confirms what has an owner, and CAP-009 stays flagged. The map's agent
+// answers four questions, citing the element it read, or saying what it can't know.
+PLAY.watcher=(Lb,api)=>{const W=Lb.w,E=W.els,S={ran:false,fixed:false,q:null,t:-1e5};
+  const miss=e=>!e[3]?null:(S.fixed&&e[3]!=="owner")?null:e[3],fails=()=>S.ran?E.filter(miss).length:null;
+  const ansK=k=>k==="code"&&!S.fixed?"codeNo":k==="use"&&!S.fixed?"useNo":k,honest=a=>a==="gen"||a==="codeNo"||a==="useNo";
+  const r1=api.group();api.btn(r1,W.runB,()=>{S.ran=true;S.t=performance.now();api.kick(900);api.say(S.fixed?W.msg.fixed:W.msg.ran,S.fixed?"ok":"warn");api.reach("checks");},"go");
+  api.btn(r1,W.fixB,()=>{if(!S.ran){api.say(W.msg.fixNo,"warn");return;}S.fixed=true;S.t=performance.now();api.kick(900);api.say(W.msg.fixed,"ok");api.reach("fixed");});
+  const r2=api.group(W.askL);api.seg(r2,W.qs.map(q=>[q[0],q[1]]),null,k=>{S.q=k;S.t=performance.now();api.kick(900);const a=ansK(k);
+    api.say(W.ans[a],honest(a)?null:"ok");api.reach(honest(a)?"honest":"cite");},W.askL);
+  const lay=lw=>{const m=12,o={lw,m};o.ey=10;o.rh=76;o.ay=o.ey+E.length*(o.rh+6)+8;o.h=o.ay+88+8;return o;};
+  const draw=(ctx,o,now)=>{ground(ctx,o.lw,o.h,K.net);const m=o.m,W2=o.lw-m*2,t=eo(since(now,S.t)/700),q=S.q?W.qs.find(x=>x[0]===S.q):null,cited=q?q[2]:null;
+    E.forEach((e,i)=>{const y=o.ey+i*(o.rh+6),ms=S.ran?miss(e):null,hot=cited===e[0],col=ms?K.bad:hot?K.gold:S.ran?K.good:K.lay[4];
+      card(ctx,m,y,W2,o.rh,col,null,{glow:hot?14:ms?8:3});pill(ctx,m+10,y+8,e[0],col,{size:12.5});
+      const tg=ms?fill(W.missing,{m:W.mtypes[ms]}):"",tw2=ms?TW(ctx,tg,12.5,800)+4:0;
+      if(ms)line1(ctx,tg,m+W2-18-tw2,y+23,tw2,12.5,{w:800,align:"right",color:rgbaS(K.bad,1)});
+      line1(ctx,e[1],m+12,y+46,W2-24,13,{w:700,color:rgbaS(K.ink,0.96)});line1(ctx,W.ownerL+": "+e[2],m+12,y+66,W2-24,12.5,{w:600,color:rgbaS(K.soft,1)});
+      if(S.ran)mark(ctx,m+W2-4,y+4,ms?"no":"ok");});
+    card(ctx,m,o.ay,W2,88,K.lay[0],W.agent,{glow:q?10:3,size:12.5});
+    lines(ctx,q?q[1]:"–",m+12,o.ay+42,W2-24,{size:13,max:2,color:rgbaS(K.ink,q?0.4+0.6*t:0.5)});
+    if(q){const hon=honest(ansK(q[0]));line1(ctx,(hon?"? ":"→ ")+(hon?"":cited),m+12,o.ay+78,W2-24,12.5,{w:800,color:rgbaS(hon?K.gold:K.good,t)});}
+    if(t<1)api.kick(60);};
+  return{S,lay,draw,readouts:[[W.read.fail,()=>S.ran?String(fails()):"–"],[W.read.cited,()=>{if(!S.q)return"–";return honest(ansK(S.q))?"–":W.qs.find(x=>x[0]===S.q)[2];}]]};};
+
 /* ---------- 4 · A first draft, not a blank page: draft, ask, confirm ---------- */
 // The battery's design: start from a blank page or the agent's draft, ask whether it's right or what's missing and wrong, mark the
 // guesses, choose who confirms; then run the five weeks, and see the 58 elements come out.
@@ -503,6 +537,13 @@ VIS.place=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.lv.public);const P2=PK.place,v
   chip(ctx,x,y,cw,ch,v.hi,c,{size:12.5,max:to==="in"?1:2,glow:14,dash:!S.done||to==="sign-in",strike:to==="out"&&a>0.4,
     badge:to==="sign-in"?[IC.key,c,end?1:0]:null,mark:end?(to==="in"?"ok":to==="out"?"no":null):null});};
 VIS.place.h=()=>PLC.by+PLC.top+4+4*PLC.row+10+34+14;
+// Continuous architecture 1 · one map, many views: the map, the views generated from it and the agent that reads it, each a step in,
+// then the film's key line, drawn in gold once the situation is answered (as The map before the data drew it, until 23 November 2026)
+VIS.watcher=(ctx,o,now,q,S)=>{const P2=PK.watcher,c=K.net,m=14,a=after(now,S),w=o.lw-m*2;ground(ctx,o.lw,o.h,c);ttl(ctx,o,P2.title,c);
+  P2.rows.forEach((r,i)=>{const y=40+i*46,x=m+i*12,cw=w-i*12;card(ctx,x,y,cw,36,c,null,{glow:4});
+    line1(ctx,r,x+12,y+22.5,cw-24,13,{w:800,color:rgbaS(mixC(c,K.ink,0.3),1)});if(i)arrow(ctx,x-4,y-9,x+6,y,K.soft,0.7,{head:5});});
+  line1(ctx,P2.key,m,40+P2.rows.length*46+16,w,13.5,{w:800,color:rgbaS(a>0?K.gold:K.soft,a>0?0.4+0.6*a:0.85)});};
+VIS.watcher.h=()=>40+3*46+30;
 // 4 · a first draft: elements on paper, each with its source and its owner. vis.hi: the line the situation is about; vis.guess: that
 // line is the agent's own guess; vis.join: two sources joined in one step, struck out once it's answered. On a wide picture each
 // line has its owner in a column at the right; on a narrow one, under its source, beside an owner's tag

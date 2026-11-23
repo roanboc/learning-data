@@ -311,5 +311,5 @@ So it's kept: every part with a stage and a date, a way out tested each year, an
 At the utility, the next end is planned, not forced, and what's the utility's own goes with it.
 
 79
-00:09:16,868 --> 00:09:22,572
-Next, the last series on enterprise architecture: AI and continuous architecture.
+00:09:16,868 --> 00:09:22,295
+Next, Continuous architecture: a map people and agents can read, and kept alive.

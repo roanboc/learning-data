@@ -1,0 +1,74 @@
+/* A series' labs page and evaluation page, on their template (docs/page-templates.md): the layout of what each series' engine
+   draws, the same for every series. Everything is under main.pr, which only those pages have (site-tools/build_series.py);
+   assets/learn/practice.js adds the marks used here (.pr-first, .pr-full, --f, .pr-now, .pr-fold, .pr-done). */
+
+/* 1. the short hero: breadcrumb, title, one line, and the practice as icons */
+.pr-head.cine.page-head{padding-top:clamp(20px,3vw,32px);padding-bottom:clamp(16px,2.4vw,24px)}
+.pr-head h1{font-size:clamp(26px,3.4vw,38px);margin:4px 0 2px}
+.pr-head .lead{margin:0 0 14px;font-size:clamp(16px,1.6vw,18px);max-width:72ch}
+.pr-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
+.pr-strip .pmx{--r-share:#ffc860;--r-agents:#b9a2ff;--good:#5fe0a0;margin:0;padding:8px 14px;border-radius:999px;background:rgba(6,10,20,.55);border:1px solid rgba(255,255,255,.16);color:#eef3fb}
+.pr-strip .pmx small{color:#b9c4d6}.pr-strip .pmx .mx-ic{stroke:#b9c4d6}
+.pr-strip .pmx .mx-ls .mx-ic{stroke:var(--r-share)}.pr-strip .pmx .mx-an .mx-ic{stroke:var(--r-agents)}.pr-strip .pmx .mx-ok .mx-ic{stroke:var(--good)}
+.pr-go{display:inline-flex;align-items:center;min-height:36px;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;font-size:15px;text-decoration:none;background:rgba(6,10,20,.35)}
+.pr-go:hover,.pr-go:focus-visible{background:rgba(255,255,255,.16);border-color:#fff}
+.pr .pr-app{margin-top:6px}
+
+/* 2. the labs as circles by film: a ring that fills with the experiments done, a tick when all are */
+.pr .stops{flex-wrap:wrap;overflow:visible;gap:26px 8px;padding:30px 2px 4px;margin:0;align-items:center}
+.pr .stops button{position:relative;width:40px;height:40px;padding:0;gap:0;justify-content:center;border:0;border-radius:50%;font-size:0;box-shadow:none;
+  background:conic-gradient(var(--good) calc(var(--f,0)*1turn),color-mix(in srgb,var(--fg) 16%,transparent) 0)}
+.pr .stops button i{width:32px;height:32px;font-size:13px;background:var(--card);color:var(--fg);box-shadow:none}
+.pr .stops button.done i{background:color-mix(in srgb,var(--c) 26%,var(--card));box-shadow:none}
+.pr .stops button.pr-full i{background:var(--good);color:var(--on-accent);font-size:0}
+.pr .stops button.pr-full i::after{content:"✓";content:"✓"/"";font-size:16px}
+.pr .stops button[aria-selected=true]{border:0;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+.pr .stops button:hover{box-shadow:0 0 0 2px var(--bg),0 0 0 4px color-mix(in srgb,var(--accent) 55%,transparent)}
+.pr .stops button.pr-first{margin-left:16px}.pr .dots button.pr-first{margin-left:22px}
+.pr .stops button.pr-first:first-child,.pr .dots button.pr-first:first-child{margin-left:0}
+.pr .stops button.pr-first::before,.pr .dots button.pr-first::before{content:attr(data-fl);position:absolute;left:1px;bottom:calc(100% + 5px);font-size:11px;line-height:1;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+/* a phone: one row to swipe along, the open lab in view */
+@media (max-width:700px){.pr .stops{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding:30px 6px 10px;margin:0 -6px}}
+.pr-now{margin:12px 2px 0;font-size:15px;color:var(--muted)}.pr-now b{color:var(--fg)}
+
+/* 3. the playground first, full width, under the lab's name and its one line; 4. its ideas folded; 5. one button on */
+.pr .stop{grid-template-columns:minmax(0,1fr);gap:0;margin-top:4px}
+.pr .stop-text{display:contents}
+.pr .stop-text>.kicker,.pr .stop-text>p[class$="-film"]{display:none}
+.pr .stop-text>h3{order:1;margin:10px 0 2px;font-size:clamp(22px,2.4vw,28px)}
+.pr .stop-text>.idea{order:2;margin:0 0 14px;font-size:16.5px;color:var(--muted);max-width:86ch}
+.pr .stop>:not(.stop-text){order:3;min-width:0}
+.pr .stop-text>ul,.pr .stop-text>details.real,.pr .stop-text>.pr-fold{order:4}
+.pr .stop-text>.stop-nav{order:5;margin-top:16px}
+.pr .pr-fold{margin-top:16px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.pr .pr-fold>summary{cursor:pointer;list-style:none;position:relative;padding:13px 46px 13px 18px;font-size:16px}
+.pr .pr-fold>summary::-webkit-details-marker{display:none}
+.pr .pr-fold>summary small{color:var(--muted);font-size:14px;font-weight:500}
+.pr .pr-fold>summary::after{content:"+";content:"+"/"";position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:24px;line-height:1;color:var(--accent)}
+.pr .pr-fold[open]>summary::after{content:"−";content:"−"/""}
+.pr .pr-in{padding:2px 18px 16px;max-width:90ch}
+.pr .pr-in>ul{padding-left:0;list-style:none;margin:0 0 12px}
+.pr .pr-in>p[class$="-film"]{margin:10px 0 0;font-weight:700;color:var(--muted)}
+.pr .pr-watch{margin:12px 0 0}
+.pr [class$="-gh"] .pr-n{margin-left:6px;color:inherit;font-variant-numeric:tabular-nums}
+/* a wide screen: the picture on the left, what to try and what to press beside it, so nothing to press is below the fold */
+@media (min-width:1000px){
+  .pr .stop>div:not(.stop-text):has(>:first-child:is(canvas,.mr-pic)){display:flow-root}
+  .pr .stop>div:not(.stop-text)>:first-child:is(canvas,.mr-pic){float:left;width:58%}
+  .pr .stop>div:not(.stop-text)>:first-child:is(canvas,.mr-pic)~*{margin-left:58%}
+  .pr .stop>.lab>canvas:first-child~*{border-left:1px solid var(--sline)}
+}
+
+/* the evaluation: dots by film; the question first, its picture small beside it; a result that leads on */
+.pr .qbar{align-items:flex-end;margin-top:4px}
+.pr .dots{gap:22px 6px;padding-top:24px}
+.pr .dots button{position:relative;width:32px;height:32px}
+.pr .dots button.pr-first::before{font-size:10px}
+@media (min-width:861px){
+  .pr .qcard{grid-template-columns:minmax(0,7fr) minmax(0,4fr)}
+  .pr .qbody{order:1}
+  .pr .qvis{order:2;border-right:0;border-left:1px solid var(--line);align-items:flex-start}
+}
+.pr .qfoot .link{display:inline-flex;align-items:center;min-height:40px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-weight:700;text-decoration:none}
+.pr .qfoot .link:hover{border-color:var(--accent)}
+.pr .pr-done{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}

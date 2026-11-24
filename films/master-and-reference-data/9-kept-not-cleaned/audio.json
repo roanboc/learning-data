@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/kept-not-cleaned/soundtrack.mp3",
-      "size": 4598169,
-      "sha256": "711f959e85c00da0c490b40381f725b0ac6429cc8841b72e12c5f9f3c8b058a9",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/711f959e85c00da0c490b40381f725b0ac6429cc8841b72e12c5f9f3c8b058a9.mp3"
+      "size": 4597803,
+      "sha256": "e09b79919157efd5b66f60e8abf47f11ef8ab82abc71ce3d7a7371eb04319de6",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-kept-not-cleaned-e16d700d2571a6c754b3/e09b79919157efd5b66f60e8abf47f11ef8ab82abc71ce3d7a7371eb04319de6.mp3"
     }
   ]
 }

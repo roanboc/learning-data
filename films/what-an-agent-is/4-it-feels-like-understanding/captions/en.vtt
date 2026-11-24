@@ -45,179 +45,179 @@ It was never heard from again.
 00:01:18.652 --> 00:01:23.029
 Years of work, and the first weather satellite at another planet, were lost.
 
-00:01:24.529 --> 00:01:25.917
-Something had to change.
+00:01:24.529 --> 00:01:28.327
+Every number had to mean the same thing on both sides of a hand-off.
 
-00:01:27.217 --> 00:01:32.250
+00:01:29.627 --> 00:01:34.660
 So on the next orbiter, Mars Odyssey, the team wrote both units on every hand-off,
 
-00:01:32.450 --> 00:01:34.976
+00:01:34.860 --> 00:01:37.386
 had every critical number checked independently,
 
-00:01:35.176 --> 00:01:37.489
+00:01:37.586 --> 00:01:39.899
 and added a second way to find the craft.
 
-00:01:38.789 --> 00:01:47.595
+00:01:41.199 --> 00:01:50.005
 In October 2001, Odyssey went into orbit, and twenty years later it was still at work, the longest-lived spacecraft at Mars.
 
-00:01:49.295 --> 00:01:55.522
+00:01:51.705 --> 00:01:57.932
 Agents bring the same risk to data work: a person and an agent, each sure the other means the same thing.
 
-00:01:56.822 --> 00:02:01.138
+00:01:59.232 --> 00:02:03.548
 Say what a number means, check it against something else, and you can rely on it.
 
-00:02:08.238 --> 00:02:13.660
+00:02:10.648 --> 00:02:16.070
 Today, at the university, Anil Kurian plans the Faculty of Health's student advisers.
 
-00:02:14.760 --> 00:02:19.661
+00:02:17.170 --> 00:02:22.071
 Each adviser calls 240 students once a term, to see how they're doing.
 
-00:02:20.961 --> 00:02:26.080
+00:02:23.371 --> 00:02:28.490
 So Anil asks Jun, in the data team, how many students the faculty has this term.
 
-00:02:27.180 --> 00:02:28.630
+00:02:29.590 --> 00:02:31.040
 Jun asks the agent.
 
-00:02:29.330 --> 00:02:34.141
+00:02:31.740 --> 00:02:36.551
 Its hands read the catalog and run a query, and it checks the count against the source.
 
-00:02:35.641 --> 00:02:42.916
+00:02:38.051 --> 00:02:45.326
 Seconds later: 2,160 students, 63 more than last year, with its evidence attached.
 
-00:02:44.616 --> 00:02:53.475
+00:02:47.026 --> 00:02:55.885
 In a 2025 study, longer explanations made people more confident in an AI's answers, even when the answers were no more accurate.
 
-00:02:54.975 --> 00:02:57.585
+00:02:57.385 --> 00:02:59.995
 It feels like understanding, and it feels safe.
 
-00:03:00.285 --> 00:03:04.473
+00:03:02.695 --> 00:03:06.883
 Try this: how well do you understand how a zip works, from one to seven?
 
-00:03:06.773 --> 00:03:10.290
+00:03:09.183 --> 00:03:12.700
 Now explain, step by step, how it closes and opens.
 
-00:03:12.390 --> 00:03:20.730
+00:03:14.800 --> 00:03:23.140
 In 2002, at Yale, Leonid Rozenblit and Frank Keil asked people to do just that, with everyday things like a zip.
 
-00:03:21.430 --> 00:03:23.969
+00:03:23.840 --> 00:03:26.379
 After trying, they rated themselves lower.
 
-00:03:25.469 --> 00:03:28.975
+00:03:27.879 --> 00:03:31.385
 Jun would give his understanding of the agent's answer a six.
 
-00:03:30.275 --> 00:03:31.656
+00:03:32.685 --> 00:03:34.066
 Which table did it read?
 
-00:03:32.156 --> 00:03:33.688
+00:03:34.566 --> 00:03:36.098
 What counted as a student?
 
-00:03:34.188 --> 00:03:35.502
+00:03:36.598 --> 00:03:37.912
 What did its check compare?
 
-00:03:36.602 --> 00:03:38.530
+00:03:39.012 --> 00:03:40.940
 He can't say, not even roughly.
 
-00:03:40.230 --> 00:03:43.582
+00:03:42.640 --> 00:03:45.992
 The feeling came from the answer, not from knowing what happened.
 
-00:03:46.282 --> 00:03:50.667
+00:03:48.692 --> 00:03:53.077
 For months, the agent had been right, so Jun had stopped opening the evidence.
 
-00:03:52.167 --> 00:03:56.577
+00:03:54.577 --> 00:03:58.987
 Early in the term, Anil wrote in a chat that the advisers' lists looked long.
 
-00:03:57.277 --> 00:04:01.552
+00:03:59.687 --> 00:04:03.962
 Jun replied that the agent had checked its source, and they both let it go.
 
-00:04:03.252 --> 00:04:09.588
+00:04:05.662 --> 00:04:11.998
 In 2010, Raja Parasuraman and Dietrich Manzey reviewed the research on automated aids.
 
-00:04:10.288 --> 00:04:15.409
+00:04:12.698 --> 00:04:17.819
 When an aid has been right for a long time, people stop checking it, above all when they're busy.
 
-00:04:16.709 --> 00:04:20.348
+00:04:19.119 --> 00:04:22.758
 It happens to experts too, and training alone doesn't prevent it.
 
-00:04:21.648 --> 00:04:25.693
+00:04:24.058 --> 00:04:28.103
 Like orbiting Mars, the agent's answers had come to feel routine.
 
-00:04:27.193 --> 00:04:29.212
+00:04:29.603 --> 00:04:31.622
 The faculty planned nine advisers.
 
-00:04:30.312 --> 00:04:34.506
+00:04:32.722 --> 00:04:36.916
 It needed twelve, and 720 students never had their call.
 
-00:04:37.206 --> 00:04:43.524
+00:04:39.616 --> 00:04:45.934
 At the end of the term, Anil counted the advisers' lists: 2,880 students.
 
-00:04:44.824 --> 00:04:50.213
+00:04:47.234 --> 00:04:52.623
 The agent had counted from student load, the table the university reports to the government.
 
-00:04:50.913 --> 00:04:55.730
+00:04:53.323 --> 00:04:58.140
 There, two half-time students count as one, and half the faculty studies half-time.
 
-00:04:57.430 --> 00:05:02.697
+00:04:59.840 --> 00:05:05.107
 So the table said 2,160: full-time equivalents, not people.
 
-00:05:04.197 --> 00:05:07.294
+00:05:06.607 --> 00:05:09.704
 Jun meant people; the agent took the table's meaning.
 
-00:05:07.994 --> 00:05:09.008
+00:05:10.404 --> 00:05:11.418
 Neither asked.
 
-00:05:10.708 --> 00:05:14.517
+00:05:13.118 --> 00:05:16.927
 People check they've understood each other: they say it back, or ask.
 
-00:05:15.617 --> 00:05:21.527
+00:05:18.027 --> 00:05:23.937
 A 2024 study found that language models do this less, and presume we already agree.
 
-00:05:22.827 --> 00:05:27.092
+00:05:25.237 --> 00:05:29.502
 The agent's check had compared its total with that same table, so it passed.
 
-00:05:28.392 --> 00:05:33.487
+00:05:30.802 --> 00:05:35.897
 And the record of what its hands did showed it all along: it added up full-time equivalents.
 
-00:05:36.187 --> 00:05:41.247
+00:05:38.597 --> 00:05:43.657
 NASA's review board put it plainly: mistakes happen, and checks are there to catch them.
 
-00:05:43.147 --> 00:05:46.741
+00:05:45.557 --> 00:05:49.151
 So Jun's team changed three things, as Odyssey's team did.
 
-00:05:48.241 --> 00:05:55.671
+00:05:50.651 --> 00:05:58.081
 Say what you mean, and hear it said back: every count names its unit, and the agent reads the question back before it counts.
 
-00:05:57.771 --> 00:06:02.376
+00:06:00.181 --> 00:06:04.786
 Check against something the agent didn't make, like the faculty's own list of students,
 
-00:06:02.576 --> 00:06:05.432
+00:06:04.986 --> 00:06:07.842
 and read what its hands did, not only what it says.
 
-00:06:07.532 --> 00:06:11.336
+00:06:09.942 --> 00:06:13.746
 Write every doubt in the team's log, with an owner, until it's answered.
 
-00:06:13.236 --> 00:06:17.158
+00:06:15.646 --> 00:06:19.568
 And a person decides; the agent's tick is only for reference.
 
-00:06:20.458 --> 00:06:27.654
+00:06:22.868 --> 00:06:30.064
 This term, Jun asks again, and the agent reads it back: students in the Faculty of Health, each person counted once?
 
-00:06:28.354 --> 00:06:29.481
+00:06:30.764 --> 00:06:31.891
 Jun says yes.
 
-00:06:30.581 --> 00:06:35.313
+00:06:32.991 --> 00:06:37.723
 It counts 2,880, and the faculty's own list agrees.
 
-00:06:36.813 --> 00:06:41.125
+00:06:39.223 --> 00:06:43.535
 So the faculty plans twelve advisers, and every student gets their call.
 
-00:06:42.825 --> 00:06:48.187
+00:06:45.235 --> 00:06:50.597
 A fluent answer, a green tick and a long run of success all make us feel we understand.
 
-00:06:49.487 --> 00:06:54.191
+00:06:51.897 --> 00:06:56.601
 Odyssey's team checked anyway, and their orbiter was still at work twenty years later.
 
-00:06:55.491 --> 00:06:58.759
+00:06:57.901 --> 00:07:01.169
 Checked like that, an agent's answer is one you can plan on.
 
-00:07:00.259 --> 00:07:01.790
+00:07:02.669 --> 00:07:04.200
 Feeling sure is not knowing.

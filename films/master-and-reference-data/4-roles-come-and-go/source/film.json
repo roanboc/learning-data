@@ -14,6 +14,8 @@
     ["\\bLinh's\\b", "Lin's"],
     ["\\bLinh\\b", "Lin"],
     ["\\bHR\\b", "H R"],
-    ["\\bCato\\b", "Kayto"]
+    ["\\bCato\\b", "Kayto"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bJun\\b", "Joon"]
   ]
 }

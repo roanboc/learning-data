@@ -1,191 +1,195 @@
 1
-00:00:01,600 --> 00:00:08,728
-México, 1944. En el valle del Yaqui, en Sonora, en el norte, los agricultores casi ya no sembraban trigo.
+00:00:01,600 --> 00:00:09,549
+Jaipur, India, en los años sesenta. Al hospital de la ciudad, el Sawai Man Singh, llegaban personas que habían perdido una pierna.
 
 2
-00:00:10,278 --> 00:00:15,342
-La roya del tallo, un hongo que asfixia la planta, podía arruinar todo un campo de trigo de una vez.
+00:00:11,099 --> 00:00:15,826
+El hospital podía ponerles un pie artificial, hecho con un diseño del extranjero.
 
 3
-00:00:16,892 --> 00:00:23,726
-Ese año, de un campo de allí se esperaban solo diez bushels por acre: una cosecha pobre para una temporada de trabajo.
+00:00:17,376 --> 00:00:23,123
+Había que usarlo con zapato. Pero muchos andaban descalzos, en campos que a menudo estaban bajo el agua.
 
 4
-00:00:25,476 --> 00:00:32,317
-Para un agricultor, un campo arruinado era un año de trabajo y de semilla perdido, y México compraba trigo afuera para su pan.
+00:00:24,873 --> 00:00:32,242
+Y era pesado y rígido: con él, nadie podía ponerse en cuclillas, ni sentarse en el suelo, como se hacía para comer, conversar y trabajar.
 
 5
-00:00:34,067 --> 00:00:41,249
-Y criar un trigo que resistiera la roya era lento: una generación al año, y muchos años antes de llegar a una granja.
+00:00:33,992 --> 00:00:38,931
+Así que quienes vivían descalzos lo dejaban, y con él, el trabajo que un pie les habría permitido hacer.
 
 6
-00:00:42,999 --> 00:00:45,584
-Los agricultores no podían esperar una década por cada trigo nuevo.
+00:00:40,681 --> 00:00:43,869
+Necesitaban un pie para la vida que llevaban, no para un zapato.
 
 7
-00:00:47,134 --> 00:00:55,857
-Desde 1945, un programa de trigo de la Secretaría de Agricultura de México, con el fitomejorador Norman Borlaug, probó otro camino.
+00:00:45,419 --> 00:00:52,592
+Pramod Karan Sethi, jefe de ortopedia, trabajó con Ram Chandra Sharma, un artesano que trabajaba el aluminio.
 
 8
-00:00:57,607 --> 00:01:06,103
-Sembraron dos generaciones al año: una en verano, en las tierras altas cerca de Ciudad de México, y otra en invierno, en Sonora, al norte.
+00:00:54,342 --> 00:00:59,654
+Sharma hacía pies de madera y caucho, curado como un neumático, y Sethi los probaba en pacientes.
 
 9
-00:01:08,053 --> 00:01:15,148
-Cada temporada cruzaban plantas, las probaban en el campo, guardaban las pocas mejores y las sembraban en el otro lugar.
+00:01:01,404 --> 00:01:07,938
+Cada paciente caminaba con él, se ponía en cuclillas, se sentaba en el suelo y decía dónde dolía. Luego lo cambiaban, y volvían a probar.
 
 10
-00:01:17,098 --> 00:01:22,873
-Muchos fitomejoradores decían que un trigo solo debía criarse donde iba a crecer. El equipo lo probó igual, y midió.
+00:01:09,888 --> 00:01:14,468
+Al final de los años sesenta, tenían un pie que parecía y se doblaba como uno descalzo.
 
 11
-00:01:24,623 --> 00:01:30,836
-Redujo a la mitad el tiempo para criar un trigo nuevo, y los trigos nuevos crecieron bien en ambos lugares, y mucho más allá.
+00:01:16,218 --> 00:01:22,672
+Con él, la gente andaba descalza, se ponía en cuclillas, se sentaba cruzada de piernas, trabajaba en campos mojados y hasta trepaba árboles.
 
 12
-00:01:32,786 --> 00:01:40,194
-Para 1956, México cultivaba todo el trigo que necesitaba. En los primeros veinte años del programa, su cosecha se triplicó.
+00:01:24,622 --> 00:01:28,523
+Se podía hacer en cerca de una hora, por mucho menos que un pie del extranjero.
 
 13
-00:01:42,144 --> 00:01:47,125
-Y las pruebas nunca pararon: la roya seguía cambiando, así que el trigo también tenía que cambiar.
+00:01:30,273 --> 00:01:40,636
+Desde 1975, una sociedad de Jaipur lo pone gratis: más de 700.000 prótesis hasta hoy, en India y en otros cuarenta y cuatro países.
 
 14
-00:01:48,675 --> 00:01:55,852
-Las plataformas de datos también cambian, cada mes. Lo que perdura son las ideas, y una forma rápida y honesta de probar lo nuevo.
+00:01:42,586 --> 00:01:50,269
+Y el pie siguió cambiando: los plásticos reemplazaron a la madera y al aluminio, y la primera pregunta quedó: ¿cómo vive esta persona?
 
 15
-00:02:03,602 --> 00:02:08,813
-Este módulo recorrió la plataforma de la universidad, desde donde nacen los datos hasta quién los lee.
+00:01:51,819 --> 00:01:58,996
+Las plataformas de datos también cambian, cada mes. Lo que perdura son las ideas, y una forma rápida y honesta de probar lo nuevo.
 
 16
-00:02:10,563 --> 00:02:16,119
-En Datos que se mueven, mover datos era fácil, y acordar qué significa cada campo era el trabajo.
+00:02:06,746 --> 00:02:11,742
+Este tema recorrió la plataforma de la universidad, desde donde nacen los datos hasta quién los lee.
 
 17
-00:02:17,669 --> 00:02:23,371
-Qué tan frescos deben ser los datos dependía de cuándo alguien actúa con ellos, y casi todo análisis aguantaba un día.
+00:02:13,492 --> 00:02:19,048
+En Datos que se mueven, mover datos era fácil, y acordar qué significa cada campo era el trabajo.
 
 18
-00:02:24,921 --> 00:02:29,014
-Y cada solicitud se escribía una vez, en una plataforma, para que todos la leyeran.
+00:02:20,598 --> 00:02:26,300
+Qué tan frescos deben ser los datos dependía de cuándo alguien actúa con ellos, y casi todo análisis aguantaba un día.
 
 19
-00:02:30,764 --> 00:02:38,662
-En Datos como software, los scripts se volvieron software: probados, revisados por el equipo de datos y publicados siempre igual.
+00:02:27,850 --> 00:02:31,943
+Y cada solicitud se escribía una vez, en una plataforma, para que todos la leyeran.
 
 20
-00:02:40,212 --> 00:02:44,266
-Y la plataforma se vigilaba sola, mientras una persona decidía qué cambiar.
+00:02:33,693 --> 00:02:41,591
+En Datos como software, los scripts se volvieron software: probados, revisados por el equipo de datos y publicados siempre igual.
 
 21
-00:02:46,016 --> 00:02:54,412
-En De las tablas a las decisiones, las respuestas llegaban a pedido, y cada medida se definía a la vista, como la entiende cada área.
+00:02:43,141 --> 00:02:47,195
+Y la plataforma se vigilaba sola, mientras una persona decidía qué cambiar.
 
 22
-00:02:55,962 --> 00:03:00,910
-Y cada lector, persona o agente, leía esas definiciones como sí mismo.
+00:02:48,945 --> 00:02:57,341
+En De las tablas a las decisiones, las respuestas llegaban a pedido, y cada medida se definía a la vista, como la entiende cada área.
 
 23
-00:03:02,660 --> 00:03:08,671
-Y aquí, en Documentos y comentarios finales, cada documento se leyó, se guardó o se escribió como datos.
+00:02:58,891 --> 00:03:03,839
+Y cada lector, persona o agente, leía esas definiciones como sí mismo.
 
 24
-00:03:10,421 --> 00:03:13,193
-Cada idea es más vieja que las herramientas que la mostraron.
+00:03:05,589 --> 00:03:11,600
+Y aquí, en Documentos y comentarios finales, cada documento se leyó, se guardó o se escribió como datos.
 
 25
-00:03:17,143 --> 00:03:21,320
-Las herramientas cambian rápido: funciones nuevas cada mes, nombres nuevos, límites nuevos.
+00:03:13,350 --> 00:03:16,122
+Cada idea es más vieja que las herramientas que la mostraron.
 
 26
-00:03:23,420 --> 00:03:26,770
-Una película que enseñara cada botón quedaría vieja en pocos meses.
+00:03:20,072 --> 00:03:24,249
+Las herramientas cambian rápido: funciones nuevas cada mes, nombres nuevos, límites nuevos.
 
 27
-00:03:28,970 --> 00:03:36,357
-Así, estas películas tratan lo que cambia despacio: acordar qué significan los datos, probarlos, gobernarlos y servirlos cuando se actúa.
+00:03:26,349 --> 00:03:29,699
+Una película que enseñara cada botón quedaría vieja en pocos meses.
 
 28
-00:03:38,657 --> 00:03:46,040
-Para el cómo, ve a la fuente: la documentación y la formación oficiales de cada herramienta, al día gracias a quienes la construyen.
+00:03:31,899 --> 00:03:39,286
+Así, estas películas tratan lo que cambia despacio: acordar qué significan los datos, probarlos, gobernarlos y servirlos cuando se actúa.
 
 29
-00:03:48,240 --> 00:03:56,426
-¿No usas Databricks? Las ideas siguen valiendo. Revisa qué ofrece tu plataforma para cada una: casi todas tienen respuesta, con otro nombre.
+00:03:41,586 --> 00:03:48,969
+Para el cómo, ve a la fuente: la documentación y la formación oficiales de cada herramienta, al día gracias a quienes la construyen.
 
 30
-00:03:58,726 --> 00:04:05,127
-No elijas una función porque es nueva, ni una plataforma porque la mostró una película. Elige lo que responde a una necesidad real.
+00:03:51,169 --> 00:03:59,355
+¿No usas Databricks? Las ideas siguen valiendo. Revisa qué ofrece tu plataforma para cada una: casi todas tienen respuesta, con otro nombre.
 
 31
-00:04:09,427 --> 00:04:15,149
-¿Y cómo mantenerse al día? Con un ciclo, pequeño y rápido: investigar, adaptar, implementar, iterar.
+00:04:01,655 --> 00:04:08,056
+No elijas una función porque es nueva, ni una plataforma porque la mostró una película. Elige lo que responde a una necesidad real.
 
 32
-00:04:17,399 --> 00:04:22,490
-Son otra vez las dos temporadas de los fitomejoradores: cuanto más corto el ciclo, más aprendes en el mismo tiempo.
+00:04:12,356 --> 00:04:18,078
+¿Y cómo mantenerse al día? Con un ciclo, pequeño y rápido: investigar, adaptar, implementar, iterar.
 
 33
-00:04:24,540 --> 00:04:33,575
-Investigar parte de una necesidad real, no de la función. El equipo de Rohan ingresaba cada factura a mano, y pidió algo mejor en un ticket.
+00:04:20,328 --> 00:04:26,512
+Es otra vez el taller de Jaipur: cuanto antes lo pruebas en una necesidad real, antes sabes dónde duele.
 
 34
-00:04:35,625 --> 00:04:42,680
-Jun leyó la documentación oficial de las funciones que leen documentos: qué hacen, cuánto cuestan y dónde se detienen.
+00:04:28,562 --> 00:04:37,597
+Investigar parte de una necesidad real, no de la función. El equipo de Rohan ingresaba cada factura a mano, y pidió algo mejor en un ticket.
 
 35
-00:04:44,730 --> 00:04:53,036
-Adaptar es probarlo en pequeño, con tus datos, en un sandbox, por un tiempo fijo: dos días, con 200 facturas de septiembre.
+00:04:39,647 --> 00:04:46,702
+Jun leyó la documentación oficial de las funciones que leen documentos: qué hacen, cuánto cuestan y dónde se detienen.
 
 36
-00:04:55,086 --> 00:05:04,558
-Jun comparó lo leído por las funciones con lo que Finanzas ingresó: 188 de 200 coincidían, y casi todas las otras 12 eran malos escaneos.
+00:04:48,752 --> 00:04:57,058
+Adaptar es probarlo en pequeño, con tus datos, en un sandbox, por un tiempo fijo: dos días, con 200 facturas de septiembre.
 
 37
-00:05:06,808 --> 00:05:11,582
-Dos días le dijeron al equipo lo que meses de suposiciones no podían: dónde funciona y dónde no.
+00:04:59,108 --> 00:05:08,580
+Jun comparó lo leído por las funciones con lo que Finanzas ingresó: 188 de 200 coincidían, y casi todas las otras 12 eran malos escaneos.
 
 38
-00:05:13,782 --> 00:05:19,588
-Implementar es un caso de uso, bien hecho: en el proyecto de datos, con sus pruebas y una forma de volver atrás.
+00:05:10,830 --> 00:05:15,604
+Dos días le dijeron al equipo lo que meses de suposiciones no podían: dónde funciona y dónde no.
 
 39
-00:05:21,638 --> 00:05:28,963
-El equipo de datos revisó el cambio. Luego el equipo de Rohan revisó los resultados de octubre, y solo entonces se cerró el ticket.
+00:05:17,804 --> 00:05:23,610
+Implementar es un caso de uso, bien hecho: en el proyecto de datos, con sus pruebas y una forma de volver atrás.
 
 40
-00:05:31,213 --> 00:05:38,030
-Iterar es observar qué pasa, y volver a probar: cada mes, el equipo mira qué fue a una persona, y por qué.
+00:05:25,660 --> 00:05:32,985
+El equipo de datos revisó el cambio. Luego el equipo de Rohan revisó los resultados de octubre, y solo entonces se cerró el ticket.
 
 41
-00:05:40,280 --> 00:05:45,776
-No toda prueba termina en sí. Probaron que el modelo eligiera el centro de costos de cada factura.
+00:05:35,235 --> 00:05:42,052
+Iterar es observar qué pasa, y volver a probar: cada mes, el equipo mira qué fue a una persona, y por qué.
 
 42
-00:05:47,426 --> 00:05:50,978
-Pero la lista de proveedores de Finanzas ya lo daba, así que lo dejaron.
+00:05:44,302 --> 00:05:49,798
+No toda prueba termina en sí. Probaron que el modelo eligiera el centro de costos de cada factura.
 
 43
-00:05:53,228 --> 00:05:56,384
-Una prueba que termina en no cuesta dos días, no un año.
+00:05:51,448 --> 00:05:55,000
+Pero la lista de proveedores de Finanzas ya lo daba, así que lo dejaron.
 
 44
-00:06:00,434 --> 00:06:09,420
-Los trigos de los años cincuenta ya no están en los campos. El método, dos lugares y dos temporadas, lo siguen usando hoy.
+00:05:57,250 --> 00:06:00,406
+Una prueba que termina en no cuesta dos días, no un año.
 
 45
-00:06:11,120 --> 00:06:15,855
-Así que guarda las ideas, y prueba las funciones: en pequeño, pronto y sobre una necesidad real.
+00:06:04,456 --> 00:06:13,166
+Los pies de caucho de los sesenta ya no existen. El método, partir de cómo vive la gente y probarlo con ella, sigue siendo cómo se hace.
 
 46
-00:06:17,355 --> 00:06:24,434
-Con esto cierra el módulo: mover datos, operar la plataforma, servirlos a personas y agentes, y leer documentos.
+00:06:14,866 --> 00:06:19,601
+Así que guarda las ideas, y prueba las funciones: en pequeño, pronto y sobre una necesidad real.
 
 47
-00:06:25,734 --> 00:06:33,630
-Cada cosa requería antes todo un equipo. Databricks y dbt hacen hoy gran parte; a las personas les queda acordar qué significan los datos.
+00:06:21,101 --> 00:06:28,200
+Con esto cierra el tema: mover datos, operar la plataforma, servirlos a personas y agentes, y leer documentos.
 
 48
-00:06:35,130 --> 00:06:40,627
+00:06:29,500 --> 00:06:37,396
+Cada cosa requería antes todo un equipo. Databricks y dbt hacen hoy gran parte; a las personas les queda acordar qué significan los datos.
+
+49
+00:06:38,896 --> 00:06:44,393
 Empieza por la documentación oficial. Investiga, adapta, implementa, itera, y sigue adelante.

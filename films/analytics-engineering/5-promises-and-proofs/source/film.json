@@ -13,6 +13,7 @@
     ["\\bJun\\b", "Joon"],
     ["\\bMei\\b", "May"],
     ["\\bdbt\\b", "dee bee tee"],
-    ["\\bDuckDB\\b", "duck dee bee"]
+    ["\\bDuckDB\\b", "duck dee bee"],
+    ["\\bNoor\\b", "Nuur"]
   ]
 }

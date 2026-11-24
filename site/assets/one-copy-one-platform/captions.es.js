@@ -92,8 +92,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si un sistema comprado guarda su copia, acuerda el contrato en esa interfaz, como mostró «Mover es fácil, acordar es el trabajo».",
 "Both at once showed one database that writes and reads. Here, one copy serves a whole platform.":
 "«Las dos cosas a la vez» mostró una base de datos que escribe y lee. Aquí, una sola copia sirve a toda una plataforma.",
-"There are already standards for this, so don't reinvent the wheel.":
-"Ya hay estándares para esto, así que no reinventes la rueda.",
+"There are already standards for this: start from them.":
+"Ya hay estándares para esto: parte de ellos.",
 "Investigate, adapt, implement and iterate, starting from the official docs.":
 "Investiga, adapta, implementa e itera, partiendo de la documentación oficial.",
 "In Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held.":

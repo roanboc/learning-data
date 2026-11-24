@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/fixed-where-it-starts/soundtrack.mp3",
-      "size": 5042512,
-      "sha256": "e08f1ee19a0491259f15b28a0ecd8622171746df37ef0999f2984948ac566477",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/e08f1ee19a0491259f15b28a0ecd8622171746df37ef0999f2984948ac566477.mp3"
+      "size": 5060797,
+      "sha256": "46030f9c8d05e214fa79d6a6fe111d78dae8301d5d8c139b6ee3ea6220f92319",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-fixed-where-it-starts-dd78359c5b148bf49459/46030f9c8d05e214fa79d6a6fe111d78dae8301d5d8c139b6ee3ea6220f92319.mp3"
     }
   ]
 }

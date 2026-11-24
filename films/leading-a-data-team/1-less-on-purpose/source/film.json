@@ -45,7 +45,8 @@
     [
       "\\bA I\\b",
       "AI"
-    ]
+    ],
+    ["\\bNovak\\b", "Noh-vak"]
   ],
   "story": [
     "doless"

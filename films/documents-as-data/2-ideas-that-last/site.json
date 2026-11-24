@@ -1,29 +1,29 @@
 {
-  "kicker": "Module recap, and keeping up",
+  "kicker": "Topic recap, and keeping up",
   "kicker_es": "Repaso y cómo seguir al día",
   "title_es": "Ideas que perduran, funciones que se prueban",
-  "h1": "Ideas that last, features you test: the module, and how to keep up",
-  "h1_es": "Ideas que perduran, funciones que se prueban: el módulo y cómo seguir",
-  "lead": "Data platforms change every month, so a film of every button would soon be out of date. This one looks back on what the module showed, points to the official docs, and follows Jun's team as they test a new feature on Finance's invoices in two days: investigate, adapt, implement, iterate.",
-  "lead_es": "Las plataformas de datos cambian cada mes, así que una película de cada botón pronto quedaría vieja. Esta repasa lo que mostró el módulo, apunta a la documentación oficial y sigue al equipo de Jun mientras prueba una función nueva con facturas en dos días: investigar, adaptar, implementar, iterar.",
-  "description": "The closing film of Documents and closing remarks, the last series of Modern data basics. It opens in Mexico in 1944, where stem rust ruined wheat in the Yaqui Valley and breeding a resistant wheat took one generation a year; from 1945 a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, grew two generations a year, one in the highlands near Mexico City and one in Sonora, cut the time to breed a new wheat in half, and by 1956 Mexico grew all the wheat it needed. Then it recaps the module's four series, says why the films stay with the ideas that change slowly and leave the how to each tool's official documentation and training, asks viewers on another platform to check what theirs offers, and shows a short loop to test what's new: Rohan's team asks for a better way to handle invoices typed by hand, Jun reads the docs, tries the functions on 200 of September's invoices in a sandbox for two days (188 match), builds one use case in the data project with its tests and a way back, and the team watches it each month. A trial that ended in no is dropped after two days.",
-  "description_es": "La película que cierra Documentos y comentarios finales, la última serie de Lo básico de los datos modernos. Empieza en México en 1944, donde la roya del tallo arruinaba el trigo en el valle del Yaqui y criar un trigo resistente tomaba una generación al año; desde 1945, un programa de trigo de la Secretaría de Agricultura de México, con el fitomejorador Norman Borlaug, sembró dos generaciones al año, una en las tierras altas cerca de Ciudad de México y otra en Sonora, redujo a la mitad el tiempo para criar un trigo nuevo, y para 1956 México cultivaba todo el trigo que necesitaba. Luego repasa las cuatro series del módulo, explica por qué las películas se quedan con las ideas que cambian despacio y dejan el cómo a la documentación y la formación oficiales de cada herramienta, invita a quien usa otra plataforma a revisar qué ofrece la suya, y muestra un ciclo corto para probar lo nuevo: el equipo de Rohan pide una mejor forma de manejar las facturas ingresadas a mano, Jun lee la documentación, prueba las funciones con 200 facturas de septiembre en un sandbox durante dos días (188 coinciden), construye un caso de uso en el proyecto de datos con sus pruebas y una forma de volver atrás, y el equipo lo revisa cada mes. Una prueba que terminó en no se deja tras dos días.",
-  "card": "What the module showed, why the films stay with ideas, and a two-day loop to test each new feature.",
-  "card_es": "Lo que mostró el módulo, por qué las películas se quedan con las ideas, y un ciclo de dos días para probar cada función nueva.",
+  "h1": "Ideas that last, features you test: the topic, and how to keep up",
+  "h1_es": "Ideas que perduran, funciones que se prueban: el tema y cómo seguir",
+  "lead": "Data platforms change every month, so a film of every button would soon be out of date. This one looks back on what the topic showed, points to the official docs, and follows Jun's team as they test a new feature on Finance's invoices in two days: investigate, adapt, implement, iterate.",
+  "lead_es": "Las plataformas de datos cambian cada mes, así que una película de cada botón pronto quedaría vieja. Esta repasa lo que mostró el tema, apunta a la documentación oficial y sigue al equipo de Jun mientras prueba una función nueva con facturas en dos días: investigar, adaptar, implementar, iterar.",
+  "description": "The closing film of Documents and closing remarks, the last series of Modern data basics. It opens in Jaipur, India, in the 1960s, where the artificial foot the hospital could fit had to be worn in a shoe and couldn't squat or sit on the floor, so people who lived barefoot gave it up; the surgeon Pramod Karan Sethi and the craftsman Ram Chandra Sharma made feet of wood and rubber, tried each on patients, changed it and tried again, until they had a foot that looked and bent like a bare one, made in about an hour; from 1975 a society in Jaipur has fitted it free, more than 700,000 limbs so far. Then it recaps the topic's four series, says why the films stay with the ideas that change slowly and leave the how to each tool's official documentation and training, asks viewers on another platform to check what theirs offers, and shows a short loop to test what's new: Rohan's team asks for a better way to handle invoices typed by hand, Jun reads the docs, tries the functions on 200 of September's invoices in a sandbox for two days (188 match), builds one use case in the data project with its tests and a way back, and the team watches it each month. A trial that ended in no is dropped after two days.",
+  "description_es": "La película que cierra Documentos y comentarios finales, la última serie de Lo básico de los datos modernos. Empieza en Jaipur, India, en los años sesenta, donde el pie artificial que podía poner el hospital había que usarlo con zapato y no dejaba ponerse en cuclillas ni sentarse en el suelo, así que quienes vivían descalzos lo dejaban; el cirujano Pramod Karan Sethi y el artesano Ram Chandra Sharma hicieron pies de madera y caucho, probaron cada uno con pacientes, lo cambiaron y volvieron a probar, hasta tener un pie que parecía y se doblaba como uno descalzo, hecho en cerca de una hora; desde 1975 una sociedad de Jaipur lo pone gratis, más de 700.000 prótesis hasta hoy. Luego repasa las cuatro series del tema, explica por qué las películas se quedan con las ideas que cambian despacio y dejan el cómo a la documentación y la formación oficiales de cada herramienta, invita a quien usa otra plataforma a revisar qué ofrece la suya, y muestra un ciclo corto para probar lo nuevo: el equipo de Rohan pide una mejor forma de manejar las facturas ingresadas a mano, Jun lee la documentación, prueba las funciones con 200 facturas de septiembre en un sandbox durante dos días (188 coinciden), construye un caso de uso en el proyecto de datos con sus pruebas y una forma de volver atrás, y el equipo lo revisa cada mes. Una prueba que terminó en no se deja tras dos días.",
+  "card": "What the topic showed, why the films stay with ideas, and a two-day loop to test each new feature.",
+  "card_es": "Lo que mostró el tema, por qué las películas se quedan con las ideas, y un ciclo de dos días para probar cada función nueva.",
   "chapters_es": {
-    "seasons": "Dos cosechas al año",
-    "recap": "Lo que mostró el módulo",
+    "foot": "Un pie para andar descalzo",
+    "recap": "Lo que mostró el tema",
     "light": "Por qué las películas son ligeras",
     "loop": "Prueba lo nuevo",
     "close": "Guarda el método"
   },
   "past": [
-    "Mexico, from 1945",
-    "Breeders grew two generations of wheat a year, in two places, and tested each, so a new wheat took half the time."
+    "Jaipur, India, the 1960s",
+    "A surgeon and a craftsman made a foot for barefoot lives, tried each one on patients and changed it, and it is still made that way."
   ],
   "past_es": [
-    "México, desde 1945",
-    "Los fitomejoradores sembraron dos generaciones de trigo al año, en dos lugares, y probaron cada una, así que un trigo nuevo tardó la mitad."
+    "Jaipur, India, los años sesenta",
+    "Un cirujano y un artesano hicieron un pie para vidas descalzas, probaron cada uno con pacientes y lo cambiaron, y todavía se hace así."
   ],
   "next_h": "That closes Modern data basics. Which new feature would answer a real need of yours, and how would you test it in two days?",
   "next_h_es": "Con esto cierra Lo básico de los datos modernos. ¿Qué función nueva respondería a una necesidad real tuya, y cómo la probarías en dos días?",

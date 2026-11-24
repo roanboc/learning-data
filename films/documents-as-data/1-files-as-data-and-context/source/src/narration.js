@@ -54,7 +54,7 @@ const NARR={
  {"id":"write","gap":0.8,"text":"If we write it, we write it as data, in a standard structure such as JSON or YAML, with its metadata.","say":"If we write it, we write it as data, in a standard structure such as Jason or YAML, with its metadata."},
  {"id":"official","gap":0.8,"text":"If it's official, we keep it as it is, its metadata beside it."},
  {"id":"read","gap":0.8,"text":"If it's written for people, we read it, with the platform's functions or a scraper, only where a use case needs it, and keep the file."},
- {"id":"docs","gap":0.8,"text":"Every organisation's documents differ, and the standards are there already: don't reinvent the wheel."},
+ {"id":"docs","gap":0.8,"text":"Every organisation's documents differ, and the standards are there already: start from them."},
  {"id":"iterate","gap":0.8,"text":"Start from the official docs. Investigate, adapt, implement, iterate."},
  {"id":"data","gap":0.8,"text":"In short: read documents where a use case needs it, keep the file and its metadata, and write what's yours as data."}]}
 };

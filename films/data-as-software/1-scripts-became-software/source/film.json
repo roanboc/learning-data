@@ -46,7 +46,8 @@
     [
       "\\bFarquharson\\b",
       "Far-kwar-son"
-    ]
+    ],
+    ["\\bOkafor\\b", "Oh-kah-for"]
   ],
   "story": [
     "gertie"

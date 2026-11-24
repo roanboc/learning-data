@@ -482,7 +482,7 @@ const NARR={
  {"id":"decades","gap":0.8,"text":"None of this is new: software has been built this way for decades, and data work took it up, as bridges took up the wind tunnel."},
  {"id":"keep","gap":0.8,"text":"So keep data work as software: in Git, tested, reviewed by someone else, and deployed the same way every time."},
  {"id":"night","gap":0.8,"text":"The next film, A platform that watches itself, follows a night when a job fails."},
- {"id":"wheel","gap":0.8,"text":"There are already standards for this, so don't reinvent the wheel."},
+ {"id":"wheel","gap":0.8,"text":"There are already standards for this: start from them, not from a blank page."},
  {"id":"docs","gap":0.8,"text":"Investigate, adapt, implement and iterate, starting from the official docs."}]},
 "stands":{"name":"Still standing","lead":1.2,"tail":1.0,"vo":[
  {"id":"bridge","gap":0.8,"text":"The bridge of 1950 was tested before it was built, and it still stands.","say":"The bridge of nineteen fifty was tested before it was built, and it still stands."},
@@ -490,7 +490,7 @@ const NARR={
  {"id":"takeaway","gap":0.8,"text":"Data work is software."}]}
 };
 
-const VODUR={"gertie/opens": 3.302, "gertie/narrows": 6.798, "gertie/slender": 4.863, "gertie/gertie": 5.533, "gertie/nobody": 3.058, "gertie/twist": 7.954, "gertie/gone": 7.892, "gertie/board": 8.28, "gertie/tunnel": 4.689, "gertie/finds": 5.398, "gertie/opens50": 6.928, "gertie/next": 7.079, "gertie/data": 3.218, "gertie/export": 6.624, "gertie/now": 6.693, "laptop/payday": 4.776, "laptop/rohan": 7.77, "laptop/script": 3.188, "laptop/byhand": 5.403, "laptop/rule": 8.609, "laptop/worked": 5.037, "laptop/feb": 5.315, "laptop/unsafe": 6.545, "project/move": 5.191, "project/git": 5.017, "project/model": 6.708, "project/ingrid": 6.59, "project/tests": 9.897, "project/weeds": 6.402, "project/branch": 6.528, "review/other": 3.55, "review/swap": 4.872, "review/merge": 3.21, "review/ticket": 7.441, "review/surprises": 4.359, "review/agents": 5.336, "release/bundle": 6.791, "release/job": 5.259, "release/test": 5.752, "release/checks": 6.128, "release/noor": 6.076, "release/account": 5.555, "release/drift": 5.298, "release/today": 6.904, "choose/decades": 7.621, "choose/keep": 7.039, "choose/night": 4.659, "choose/wheel": 3.185, "choose/docs": 4.598, "stands/bridge": 4.412, "stands/export": 5.267, "stands/takeaway": 1.293};
+const VODUR={"gertie/opens": 3.302, "gertie/narrows": 6.798, "gertie/slender": 4.863, "gertie/gertie": 5.533, "gertie/nobody": 3.058, "gertie/twist": 7.954, "gertie/gone": 7.892, "gertie/board": 8.28, "gertie/tunnel": 4.689, "gertie/finds": 5.398, "gertie/opens50": 6.928, "gertie/next": 7.079, "gertie/data": 3.218, "gertie/export": 6.624, "gertie/now": 6.693, "laptop/payday": 4.776, "laptop/rohan": 7.77, "laptop/script": 3.188, "laptop/byhand": 5.403, "laptop/rule": 8.609, "laptop/worked": 5.037, "laptop/feb": 5.315, "laptop/unsafe": 6.545, "project/move": 5.395, "project/git": 5.017, "project/model": 6.708, "project/ingrid": 6.59, "project/tests": 9.897, "project/weeds": 6.402, "project/branch": 6.528, "review/other": 3.55, "review/swap": 4.872, "review/merge": 3.21, "review/ticket": 7.441, "review/surprises": 4.359, "review/agents": 5.336, "release/bundle": 6.791, "release/job": 5.259, "release/test": 5.752, "release/checks": 6.128, "release/noor": 6.076, "release/account": 5.555, "release/drift": 5.298, "release/today": 6.904, "choose/decades": 7.621, "choose/keep": 7.039, "choose/night": 4.659, "choose/wheel": 4.105, "choose/docs": 4.598, "stands/bridge": 4.412, "stands/export": 5.267, "stands/takeaway": 1.293};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2442,7 +2442,7 @@ const SB_KEEP=[["In Git",null,"github",MD.ink],["Tested","tick",null,MD.pass],["
 scene("choose",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
     softW:wAt(sc,"decades","software"),took:wAt(sc,"decades","data work took"),asB:wAt(sc,"decades","as bridges"),
     inGit:wAt(sc,"keep","in Git"),tested:wAt(sc,"keep","tested"),reviewed:wAt(sc,"keep","reviewed"),deployed:wAt(sc,"keep","deployed"),
-    nextF:wAt(sc,"night","next film"),fails:wAt(sc,"night","a job fails"),std:wAt(sc,"wheel","standards"),wheelW:wAt(sc,"wheel","reinvent the wheel"),
+    nextF:wAt(sc,"night","next film"),fails:wAt(sc,"night","a job fails"),std:wAt(sc,"wheel","standards"),wheelW:wAt(sc,"wheel","start from them"),
     inv:wAt(sc,"docs","Investigate"),adapt:wAt(sc,"docs","adapt"),impl:wAt(sc,"docs","implement"),iter:wAt(sc,"docs","iterate"),off:wAt(sc,"docs","official docs")}));
   const keepAt=c.keep-0.5,nightAt=c.night-0.5,wheelAt=c.wheel-0.5,end=sc.dur-1.6;
   ag_shots(ctx,S,t,sc.dur,[
@@ -2462,7 +2462,7 @@ scene("choose",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
     {later:true,at:wheelAt,place:"map",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{const go=1-ag_in(tt,end,0.8);cx.save();cx.globalAlpha*=go;
       const ma=ag_in(tt,wheelAt+0.5,0.5)*(1-ag_in(tt,T.inv-0.6,0.5));md_mark(cx,960,340,92,(tt-wheelAt-0.5)/1.8,ma);
       md_T(cx,"Standards already exist",960,540,{w:800,size:44,align:"center",a:ag_in(tt,T.std-0.2,0.5)*(1-ag_in(tt,T.inv-0.6,0.5))});
-      md_T(cx,"Don't reinvent the wheel",960,604,{w:600,size:36,align:"center",col:MD.soft,a:ag_in(tt,T.wheelW-0.2,0.5)*(1-ag_in(tt,T.inv-0.6,0.5))});
+      md_T(cx,"Start from the standards",960,604,{w:600,size:36,align:"center",col:MD.soft,a:ag_in(tt,T.wheelW-0.2,0.5)*(1-ag_in(tt,T.inv-0.6,0.5))});
       [["databricks","Databricks","Declarative Automation Bundles"],["dbt","dbt","Data tests and unit tests"],["github","GitHub","Protected branches and environments"]].forEach(([lg,pr,ti],i)=>
         sb_doc(cx,96+i*586,250,556,{logo:lg,product:pr,title:ti,a:ag_in(tt,T.off-0.5+i*0.15,0.5),k:sb_k(tt,T.off-0.5+i*0.15)}));
       const steps=[["Investigate",T.inv],["Adapt",T.adapt],["Implement",T.impl],["Iterate",T.iter]];let x=96;

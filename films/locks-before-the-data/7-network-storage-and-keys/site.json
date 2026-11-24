@@ -103,6 +103,13 @@
       }
     ]
   },
+  "seen_before": [
+    {
+      "key": "walls-doors-and-keys",
+      "line": "The university's own key: kept in its own vault, used by the platform, never taken out",
+      "line_es": "La llave propia de la universidad: guardada en su bóveda, usada por la plataforma, nunca sacada"
+    }
+  ],
   "draft": false,
   "tile": [730, 285, 440]
 }

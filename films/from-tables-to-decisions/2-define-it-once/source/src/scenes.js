@@ -293,7 +293,7 @@ scene("same",(ctx,S,t,sc)=>{
       const ka=dn_io(tt,T.kilo-0.1,T.std-0.4,0.6,0.5);if(ka>0){dn_planckCard(c,560,300,{size:40,sub:1,a:ka,k:dn_k(tt,T.kilo-0.1)});
         md_textCard(c,1010,300,640,{kick:"measures",title:"three, each defined once",sub:"owner · words · rules"},{edge:MD.agreed,kickCol:MD.agreed,a:ka*ag_in(tt,T.onedef-0.2,0.5),k:dn_k(tt,T.onedef-0.2)});
         md_pill(c,960,620,"one definition each · held by no single tool",{col:MD.agreed,size:30,a:ka*ag_in(tt,T.held,0.5),k:dn_k(tt,T.held)});}
-      // don't reinvent the standards: investigate, adapt, implement, iterate, starting from the official docs
+      // start from the standards: investigate, adapt, implement, iterate, starting from the official docs
       const sa=ag_in(tt,T.std-0.1,0.5)*(1-ag_in(tt,sc.cues.breath-0.3,0.6));if(sa>0){c.save();c.globalAlpha*=sa;
         md_reader(c,170,190,440,{title:"a metric view",logo:"databricks",h:100});md_pill(c,960,240,"Apache Ossie",{col:MD.agreed,size:40});md_reader(c,1310,190,440,{title:"MetricFlow",logo:"dbt",h:100});
         [["investigate",T.inv],["adapt",T.adapt],["implement",T.impl],["iterate",T.iter]].forEach(([s,t0],i)=>md_tag(c,330+i*420,440,s,{align:"center",col:MD.flow,size:34,a:ag_in(tt,t0-0.1,0.4)}));

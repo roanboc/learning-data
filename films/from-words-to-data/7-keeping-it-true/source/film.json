@@ -8,5 +8,5 @@
     "scenes.js"
   ],
   "poster": ["dict", "admit", 1.0],
-  "say": []
+  "say": [["\\bNoor\\b", "Nuur"]]
 }

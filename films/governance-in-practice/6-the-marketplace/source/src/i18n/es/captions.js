@@ -26,8 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que la facultad ofreció un cupo, y un estudiante a una unidad de terminar habría esperado un semestre.",
 "And the copy stayed in his inbox: a code for every learner, which can lead back to their name, sent with nobody's yes, and no end date.":
 "Y la copia se quedó en su correo: un código por estudiante, que puede llevar a su nombre, enviada sin el sí de nadie y sin fecha de fin.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Faculties needed one trusted product to ask for, and a yes from its owner.":
+"Las facultades necesitaban un producto confiable que pedir, y un sí de su dueño.",
 "Now the university's data products sit in one catalogue, like a shop window, each with its promise and its owner.":
 "Ahora los productos de datos de la universidad están en un solo catálogo, como un escaparate, cada uno con su promesa y su dueño.",
 "You find what you need, read what it promises, and ask its owner, saying why, and until when.":

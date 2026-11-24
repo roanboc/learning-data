@@ -314,8 +314,10 @@ scene("switch",(ctx,S,t,sc)=>{const c=sc.cues,P=nw_once(sc,"P",()=>({door:wAt(sc
 
 /* ---------------------------------------------------------------- 8 · The university's own key */
 scene("key",(ctx,S,t,sc)=>{const c=sc.cues,P=nw_once(sc,"P",()=>({enc:wAt(sc,"always","always encrypted"),prov:wAt(sc,"always","the cloud provider kept"),uown:wAt(sc,"own","the university's own"),
-    vlt:wAt(sc,"own","a vault"),use:wAt(sc,"use","use the key"),del:wAt(sc,"cant","can't delete it"),ver:wAt(sc,"version","a new version"),kept:wAt(sc,"deleted","kept ninety days"),
-    nb:wAt(sc,"workspace","notebooks"),back:wAt(sc,"back","take the key back"),nob:wAt(sc,"nobody","nobody can read")}));
+    vlt:wAt(sc,"own","a vault"),rules:wAt(sc,"own","Walls, doors and keys"),ver:wAt(sc,"version","a new version"),
+    nb:wAt(sc,"workspace","notebooks"),back:Infinity,nob:Infinity}));
+  // the storage's line to its key lights once the vault is there; the rules of the key were film 3's, so this chapter only names them
+  P.use=P.vlt+1.0;
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"nwHall",keys:[[0,960,540,1]],push:0.004,draw:(x,tt)=>{
     const vk1=ag_in(tt,P.vlt+0.4,0.5),gone=ag_in(tt,P.nob,0.8);
     nw_base(x,tt,Object.assign({},NW_END7,{admin:{a:1,glow:0,open:0,lock:1},enc:ag_in(tt,P.enc,0.6),vault:ag_in(tt,P.vlt-0.4,0.6),vk:[ag_in(tt,P.nb,0.5),vk1],vkRev:ag_in(tt,P.back+0.4,0.6),
@@ -323,12 +325,9 @@ scene("key",(ctx,S,t,sc)=>{const c=sc.cues,P=nw_once(sc,"P",()=>({enc:wAt(sc,"al
     // the cards of this chapter, one at a time, in the left column
     const L=(t0,t1,w,col)=>nw_cardAt(x,tt,t0,t1,60,300,560,w,col);
     {const a=ag_in(tt,P.enc+0.4,0.5)*(1-ag_in(tt,P.uown,0.4));if(a>0)dp_sealed(x,60,300,560,"Microsoft-managed keys",{sub:"kept by the cloud provider",a});}
-    L(P.use,P.del-0.3,{kick:"The storage",title:"Uses the key",sub:"never takes it out"},"cyan");
-    L(P.del,P.ver-0.3,{kick:"The platform team",title:"Can't delete it or turn it off",sub:"every use is recorded"},"coral");
-    L(P.ver,P.kept-0.3,{kick:"A new version every year",title:"Picked up within a day"},"grey");
-    L(P.kept,P.nb-0.3,{kick:"A deleted key",title:"Kept ninety days",sub:"nobody can cut that short"},"grey");
-    L(P.nb,P.back-0.3,{kick:"The workspace",title:"Notebooks, queries, disks",sub:"a key from the same vault"},"cyan");
-    L(P.back,null,{kick:"If it's taken back",title:"Nobody can read the files",sub:"the cloud provider included"},"coral");
+    L(P.rules-0.2,P.ver-0.3,{kick:"As in Walls, doors and keys",title:"The university's own key",sub:"used by the storage, never taken out"},"cyan");
+    L(P.ver,P.nb-0.3,{kick:"A new version every year",title:"Picked up within a day"},"grey");
+    L(P.nb,null,{kick:"The workspace",title:"Notebooks, queries, disks",sub:"a key from the same vault"},"cyan");
     // the vault makes a new version: a ring of light round the storage's key
     {const u=clamp((tt-P.ver-0.3)/1.2,0,1);if(u>0&&u<1){const k=NW_VK[1];withA(x,Math.sin(Math.PI*u),()=>{x.save();x.strokeStyle=rgba(dp_f("cyan"),1);x.shadowColor=rgba(dp_f("cyan"),0.9);x.shadowBlur=14;x.lineWidth=3;rr(x,k.x-6-10*u,k.y-6-10*u,k.w+12+20*u,108+20*u,22);x.stroke();x.restore();});}}}}]);});
 

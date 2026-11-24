@@ -37,8 +37,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nunca más se supo de él.",
 "Years of work, and the first weather satellite at another planet, were lost.":
 "Se perdieron años de trabajo, y el primer satélite meteorológico en otro planeta.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Every number had to mean the same thing on both sides of a hand-off.":
+"Cada número tenía que significar lo mismo a ambos lados de una entrega.",
 "So on the next orbiter, Mars Odyssey, the team wrote both units on every hand-off,":
 "Así que en el siguiente orbitador, Mars Odyssey, el equipo escribió ambas unidades en cada entrega,",
 "had every critical number checked independently,":

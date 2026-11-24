@@ -537,14 +537,9 @@ const NARR={
 "key":{"name":"The university's own key","lead":1.0,"tail":1.0,"vo":[
  {"id":"last","gap":0.8,"text":"Last, the keys."},
  {"id":"always","gap":0.8,"text":"The files were always encrypted, with a key the cloud provider kept for the university."},
- {"id":"own","gap":0.8,"text":"Now the key is the university's own, kept by its security team in a vault of its own."},
- {"id":"use","gap":0.8,"text":"The storage may use the key, never take it out."},
- {"id":"cant","gap":0.8,"text":"The people who run the platform can't delete it or turn it off, and every use is recorded."},
+ {"id":"own","gap":0.8,"text":"Now the key is the university's own, in a vault of its own, with the rules Walls, doors and keys set out."},
  {"id":"version","gap":0.8,"text":"The vault makes a new version every year, and the storage picks it up within a day."},
- {"id":"deleted","gap":0.8,"text":"A deleted key is kept ninety days, and nobody can cut that short."},
- {"id":"workspace","gap":0.8,"text":"The workspace's notebooks, queries and disks use a key from the same vault."},
- {"id":"back","gap":0.3,"text":"And the security team can take the key back:"},
- {"id":"nobody","gap":0.8,"text":"then nobody can read the files, the cloud provider included."}
+ {"id":"workspace","gap":0.8,"text":"The workspace's notebooks, queries and disks use a key from the same vault."}
 ]},
 "end":{"name":"Only through the catalog","lead":1.2,"tail":1.0,"vo":[
  {"id":"rome","gap":0.8,"text":"In Rome, water was drawn only at the tank, through a stamped nozzle, and the gangs' work was written down."},
@@ -555,7 +550,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"holes/rome": 1.728, "holes/aqueducts": 5.465, "holes/tanks": 3.824, "holes/uses": 6.844, "holes/frontinus": 4.583, "holes/office": 3.99, "holes/measures": 7.265, "holes/drawn": 1.671, "holes/watermen": 3.916, "holes/gardens": 3.605, "holes/pavements": 5.35, "holes/little": 5.674, "holes/stop": 1.396, "holes/nobody": 1.802, "holes/change": 3.982, "tank/rules": 2.127, "tank/none": 2.047, "tank/grant": 6.75, "tank/records": 1.755, "tank/lead": 5.367, "tank/gangs": 3.628, "tank/written": 4.393, "tank/doubled": 4.64, "tank/people": 3.741, "tank/care": 4.229, "tank/files": 4.023, "tank/draw": 4.042, "tank/hole": 3.038, "around/platform": 7.939, "around/storage": 6.308, "around/only": 3.046, "around/counts": 4.799, "around/keys": 2.902, "around/link": 7.89, "around/six": 5.12, "around/nine": 2.729, "around/rows": 5.361, "around/internet": 4.834, "around/wrong": 4.057, "paths/first": 1.23, "paths/endpoint": 5.691, "paths/path": 2.491, "paths/machines": 5.701, "paths/list": 6.946, "paths/off": 3.636, "paths/nodoor": 2.628, "paths/out": 1.01, "paths/serverless": 5.637, "paths/send": 1.972, "paths/policy": 6.671, "paths/dry": 5.477, "paths/on": 3.487, "files/now": 1.361, "files/public": 5.661, "files/keysoff": 4.542, "files/nothing": 3.11, "files/roles": 5.886, "files/one": 5.103, "files/azure": 3.495, "files/credential": 7.109, "files/every": 6.361, "files/rome": 3.4, "walls/wall": 0.885, "walls/default": 3.046, "walls/dev": 4.424, "walls/binds": 2.771, "walls/five": 5.609, "walls/others": 2.673, "walls/same": 4.343, "walls/grant": 5.028, "switch/shut": 2.511, "switch/needs": 1.981, "switch/morning": 6.071, "switch/group": 4.305, "switch/empty": 2.885, "switch/on": 6.53, "switch/reads": 4.333, "switch/log": 6.186, "switch/forgot": 3.232, "switch/gangs": 4.591, "key/last": 1.0, "key/always": 5.146, "key/own": 5.142, "key/use": 2.549, "key/cant": 4.987, "key/version": 4.183, "key/deleted": 3.972, "key/workspace": 4.385, "key/back": 2.056, "key/nobody": 3.413, "end/rome": 6.323, "end/uni": 3.562, "end/doors": 4.574, "end/one": 3.363, "end/takeaway": 4.436};
+const VODUR={"holes/rome": 1.728, "holes/aqueducts": 5.465, "holes/tanks": 3.824, "holes/uses": 6.844, "holes/frontinus": 4.583, "holes/office": 3.99, "holes/measures": 7.265, "holes/drawn": 1.671, "holes/watermen": 3.916, "holes/gardens": 3.605, "holes/pavements": 5.35, "holes/little": 5.674, "holes/stop": 1.396, "holes/nobody": 1.802, "holes/change": 3.982, "tank/rules": 2.127, "tank/none": 2.047, "tank/grant": 6.75, "tank/records": 1.755, "tank/lead": 5.367, "tank/gangs": 3.628, "tank/written": 4.393, "tank/doubled": 4.64, "tank/people": 3.741, "tank/care": 4.229, "tank/files": 4.023, "tank/draw": 4.042, "tank/hole": 3.038, "around/platform": 7.939, "around/storage": 6.308, "around/only": 3.046, "around/counts": 4.799, "around/keys": 2.902, "around/link": 7.89, "around/six": 5.12, "around/nine": 2.729, "around/rows": 5.361, "around/internet": 4.834, "around/wrong": 4.057, "paths/first": 1.23, "paths/endpoint": 5.691, "paths/path": 2.491, "paths/machines": 5.701, "paths/list": 6.946, "paths/off": 3.636, "paths/nodoor": 2.628, "paths/out": 1.01, "paths/serverless": 5.637, "paths/send": 1.972, "paths/policy": 6.671, "paths/dry": 5.477, "paths/on": 3.487, "files/now": 1.361, "files/public": 5.661, "files/keysoff": 4.542, "files/nothing": 3.11, "files/roles": 5.886, "files/one": 5.103, "files/azure": 3.495, "files/credential": 7.109, "files/every": 6.361, "files/rome": 3.4, "walls/wall": 0.885, "walls/default": 3.046, "walls/dev": 4.424, "walls/binds": 2.771, "walls/five": 5.609, "walls/others": 2.673, "walls/same": 4.343, "walls/grant": 5.028, "switch/shut": 2.511, "switch/needs": 1.981, "switch/morning": 6.071, "switch/group": 4.305, "switch/empty": 2.885, "switch/on": 6.53, "switch/reads": 4.333, "switch/log": 6.186, "switch/forgot": 3.232, "switch/gangs": 4.591, "key/last": 1.0, "key/always": 5.146, "key/own": 6.484, "key/version": 4.183, "key/workspace": 4.385, "end/rome": 6.323, "end/uni": 3.562, "end/doors": 4.574, "end/one": 3.363, "end/takeaway": 4.436};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -571,7 +566,7 @@ const BREATH={
 "files":{"hold":{"now":0.4,"public":1.0,"nothing":1.4,"roles":1.2,"azure":1.2,"credential":1.0,"every":1.2,"rome":1.2}},
 "walls":{"hold":{"wall":0.4,"dev":1.0,"others":1.2,"same":0.8,"grant":1.4}},
 "switch":{"hold":{"shut":0.8,"needs":0.4,"morning":1.0,"group":0.8,"empty":1.0,"on":1.4,"reads":1.0,"log":1.2,"forgot":0.8,"gangs":1.2}},
-"key":{"hold":{"last":0.4,"always":0.8,"own":1.0,"use":0.8,"cant":1.0,"version":1.2,"deleted":1.0,"workspace":1.0,"nobody":1.4}},
+"key":{"hold":{"last":0.4,"always":0.8,"own":1.4,"version":1.2,"workspace":1.4}},
 "end":{"hold":{"rome":1.0,"doors":1.0,"one":1.2,"takeaway":1.6},"breathe":6.2}
 };
 
@@ -2592,8 +2587,10 @@ scene("switch",(ctx,S,t,sc)=>{const c=sc.cues,P=nw_once(sc,"P",()=>({door:wAt(sc
 
 /* ---------------------------------------------------------------- 8 · The university's own key */
 scene("key",(ctx,S,t,sc)=>{const c=sc.cues,P=nw_once(sc,"P",()=>({enc:wAt(sc,"always","always encrypted"),prov:wAt(sc,"always","the cloud provider kept"),uown:wAt(sc,"own","the university's own"),
-    vlt:wAt(sc,"own","a vault"),use:wAt(sc,"use","use the key"),del:wAt(sc,"cant","can't delete it"),ver:wAt(sc,"version","a new version"),kept:wAt(sc,"deleted","kept ninety days"),
-    nb:wAt(sc,"workspace","notebooks"),back:wAt(sc,"back","take the key back"),nob:wAt(sc,"nobody","nobody can read")}));
+    vlt:wAt(sc,"own","a vault"),rules:wAt(sc,"own","Walls, doors and keys"),ver:wAt(sc,"version","a new version"),
+    nb:wAt(sc,"workspace","notebooks"),back:Infinity,nob:Infinity}));
+  // the storage's line to its key lights once the vault is there; the rules of the key were film 3's, so this chapter only names them
+  P.use=P.vlt+1.0;
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"nwHall",keys:[[0,960,540,1]],push:0.004,draw:(x,tt)=>{
     const vk1=ag_in(tt,P.vlt+0.4,0.5),gone=ag_in(tt,P.nob,0.8);
     nw_base(x,tt,Object.assign({},NW_END7,{admin:{a:1,glow:0,open:0,lock:1},enc:ag_in(tt,P.enc,0.6),vault:ag_in(tt,P.vlt-0.4,0.6),vk:[ag_in(tt,P.nb,0.5),vk1],vkRev:ag_in(tt,P.back+0.4,0.6),
@@ -2601,12 +2598,9 @@ scene("key",(ctx,S,t,sc)=>{const c=sc.cues,P=nw_once(sc,"P",()=>({enc:wAt(sc,"al
     // the cards of this chapter, one at a time, in the left column
     const L=(t0,t1,w,col)=>nw_cardAt(x,tt,t0,t1,60,300,560,w,col);
     {const a=ag_in(tt,P.enc+0.4,0.5)*(1-ag_in(tt,P.uown,0.4));if(a>0)dp_sealed(x,60,300,560,"Microsoft-managed keys",{sub:"kept by the cloud provider",a});}
-    L(P.use,P.del-0.3,{kick:"The storage",title:"Uses the key",sub:"never takes it out"},"cyan");
-    L(P.del,P.ver-0.3,{kick:"The platform team",title:"Can't delete it or turn it off",sub:"every use is recorded"},"coral");
-    L(P.ver,P.kept-0.3,{kick:"A new version every year",title:"Picked up within a day"},"grey");
-    L(P.kept,P.nb-0.3,{kick:"A deleted key",title:"Kept ninety days",sub:"nobody can cut that short"},"grey");
-    L(P.nb,P.back-0.3,{kick:"The workspace",title:"Notebooks, queries, disks",sub:"a key from the same vault"},"cyan");
-    L(P.back,null,{kick:"If it's taken back",title:"Nobody can read the files",sub:"the cloud provider included"},"coral");
+    L(P.rules-0.2,P.ver-0.3,{kick:"As in Walls, doors and keys",title:"The university's own key",sub:"used by the storage, never taken out"},"cyan");
+    L(P.ver,P.nb-0.3,{kick:"A new version every year",title:"Picked up within a day"},"grey");
+    L(P.nb,null,{kick:"The workspace",title:"Notebooks, queries, disks",sub:"a key from the same vault"},"cyan");
     // the vault makes a new version: a ring of light round the storage's key
     {const u=clamp((tt-P.ver-0.3)/1.2,0,1);if(u>0&&u<1){const k=NW_VK[1];withA(x,Math.sin(Math.PI*u),()=>{x.save();x.strokeStyle=rgba(dp_f("cyan"),1);x.shadowColor=rgba(dp_f("cyan"),0.9);x.shadowBlur=14;x.lineWidth=3;rr(x,k.x-6-10*u,k.y-6-10*u,k.w+12+20*u,108+20*u,22);x.stroke();x.restore();});}}}}]);});
 

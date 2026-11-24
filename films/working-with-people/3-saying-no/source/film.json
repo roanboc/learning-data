@@ -37,7 +37,8 @@
     [
       "\\bUry\\b",
       "Yuri"
-    ]
+    ],
+    ["\\bNovak\\b", "Noh-vak"]
   ],
   "story": [
     "aral"

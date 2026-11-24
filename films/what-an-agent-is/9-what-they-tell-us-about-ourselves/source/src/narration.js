@@ -9,7 +9,7 @@ const NARR={
  {"id":"cut","gap":0.8,"text":"For people like Rod, deaf as adults, it meant a life cut off from voices."},
  {"id":"doubt","gap":0.3,"text":"Even a pioneer of the field doubted, in 1966, that an adult brain could ever learn to understand speech from electric signals:","say":"Even a pioneer of the field doubted, in nineteen sixty-six, that an adult brain could ever learn to understand speech from electric signals:"},
  {"id":"foreign","gap":0.8,"text":"a ‘foreign language’, he called it."},
- {"id":"change","gap":0.9,"text":"Something had to change."},
+ {"id":"change","gap":0.9,"text":"People like Rod needed a way to hear that went around the broken inner ear."},
  {"id":"father","gap":0.8,"text":"The surgeon Graeme Clark had watched his own father go deaf."},
  {"id":"years","gap":0.3,"text":"For ten years, he and his team worked on a rough copy of the inner ear:"},
  {"id":"implant","gap":0.8,"text":"an implant, a fine wire with ten electrodes, to carry sound to the nerve as electric pulses."},

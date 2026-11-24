@@ -126,20 +126,20 @@ Where a system you buy keeps its own copy, agree the contract at that interface,
 00:04:51.275 --> 00:04:57.457
 Both at once showed one database that writes and reads. Here, one copy serves a whole platform.
 
-00:04:58.957 --> 00:05:02.242
-There are already standards for this, so don't reinvent the wheel.
+00:04:58.957 --> 00:05:01.676
+There are already standards for this: start from them.
 
-00:05:02.942 --> 00:05:07.640
+00:05:02.376 --> 00:05:07.074
 Investigate, adapt, implement and iterate, starting from the official docs.
 
-00:05:11.540 --> 00:05:18.169
+00:05:10.974 --> 00:05:17.603
 In Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held.
 
-00:05:19.669 --> 00:05:27.615
+00:05:19.103 --> 00:05:27.049
 At the university, Linh's claim is one row: she writes it, her coordinator approves it, payroll pays it and Finance counts it.
 
-00:05:29.115 --> 00:05:36.902
+00:05:28.549 --> 00:05:36.336
 Today, 856 casual staff are paid from rows like hers, and no team had to copy a claim to get there.
 
-00:05:38.602 --> 00:05:40.643
+00:05:38.036 --> 00:05:40.077
 Keep one copy, governed once.

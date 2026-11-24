@@ -2,40 +2,41 @@
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the module's pages and the earlier films: Finanzas, el proyecto de datos, el equipo de datos, un caso de uso, las facturas de proveedores. New here:
-   la roya del tallo for stem rust, el fitomejorador for a plant breeder, la Secretaría de Agricultura for Mexico's Ministry of Agriculture (its name in 1945),
-   bushels por acre as on screen; investigar, adaptar, implementar, iterar for the loop's four steps; un sandbox, un ticket. The series by their Spanish titles:
+   un pie artificial, una prótesis for a limb, ponerse en cuclillas for squat, curado como un neumático for rubber cured like a tyre; investigar, adaptar, implementar, iterar for the loop's four steps; un sandbox, un ticket. The series by their Spanish titles:
    Datos que se mueven, Datos como software, De las tablas a las decisiones, Documentos y comentarios finales. Numbers as on screen. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
-"Mexico, 1944. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more.":
-"México, 1944. En el valle del Yaqui, en Sonora, en el norte, los agricultores casi ya no sembraban trigo.",
-"Stem rust, a fungus that chokes the plant, could ruin a whole field of wheat at once.":
-"La roya del tallo, un hongo que asfixia la planta, podía arruinar todo un campo de trigo de una vez.",
-"One field there that year was expected to give only ten bushels an acre: a poor harvest for a season's work.":
-"Ese año, de un campo de allí se esperaban solo diez bushels por acre: una cosecha pobre para una temporada de trabajo.",
-"For a farmer, a ruined field meant a year's work and seed lost, and Mexico bought wheat from abroad for its bread.":
-"Para un agricultor, un campo arruinado era un año de trabajo y de semilla perdido, y México compraba trigo afuera para su pan.",
-"And breeding a wheat that resisted the rust was slow: one generation a year, and many years before it reached a farm.":
-"Y criar un trigo que resistiera la roya era lento: una generación al año, y muchos años antes de llegar a una granja.",
-"Farmers couldn't wait a decade for every new wheat.":
-"Los agricultores no podían esperar una década por cada trigo nuevo.",
-"From 1945, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way.":
-"Desde 1945, un programa de trigo de la Secretaría de Agricultura de México, con el fitomejorador Norman Borlaug, probó otro camino.",
-"They grew two generations a year: one in summer, in the highlands near Mexico City, and one in winter, in Sonora, far to the north.":
-"Sembraron dos generaciones al año: una en verano, en las tierras altas cerca de Ciudad de México, y otra en invierno, en Sonora, al norte.",
-"Each season, they crossed plants, tested them in the field, kept the few that did best, and sowed those in the other place.":
-"Cada temporada cruzaban plantas, las probaban en el campo, guardaban las pocas mejores y las sembraban en el otro lugar.",
-"Many breeders said a wheat should be bred only where it would grow. The team tried it anyway, and measured.":
-"Muchos fitomejoradores decían que un trigo solo debía criarse donde iba a crecer. El equipo lo probó igual, y midió.",
-"It cut the time to breed a new wheat in half, and the new wheats grew well in both places, and far beyond.":
-"Redujo a la mitad el tiempo para criar un trigo nuevo, y los trigos nuevos crecieron bien en ambos lugares, y mucho más allá.",
-"By 1956, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled.":
-"Para 1956, México cultivaba todo el trigo que necesitaba. En los primeros veinte años del programa, su cosecha se triplicó.",
-"And the testing never stopped: the rust kept changing, so the wheat had to change too.":
-"Y las pruebas nunca pararon: la roya seguía cambiando, así que el trigo también tenía que cambiar.",
+"Jaipur, India, in the 1960s. At the city's hospital, the Sawai Man Singh, people came in who had lost a leg.":
+"Jaipur, India, en los años sesenta. Al hospital de la ciudad, el Sawai Man Singh, llegaban personas que habían perdido una pierna.",
+"The hospital could fit them with an artificial foot, made to a design from abroad.":
+"El hospital podía ponerles un pie artificial, hecho con un diseño del extranjero.",
+"It had to be worn in a shoe. But many of them walked barefoot, in fields that were often under water.":
+"Había que usarlo con zapato. Pero muchos andaban descalzos, en campos que a menudo estaban bajo el agua.",
+"And it was heavy and stiff: on it, nobody could squat, or sit on the floor, as people did to eat, to talk and to work.":
+"Y era pesado y rígido: con él, nadie podía ponerse en cuclillas, ni sentarse en el suelo, como se hacía para comer, conversar y trabajar.",
+"So people who lived barefoot gave it up, and with it, the work a foot would have let them do.":
+"Así que quienes vivían descalzos lo dejaban, y con él, el trabajo que un pie les habría permitido hacer.",
+"They needed a foot for the life they lived, not for a shoe.":
+"Necesitaban un pie para la vida que llevaban, no para un zapato.",
+"Pramod Karan Sethi, the head of orthopaedics, worked with Ram Chandra Sharma, a craftsman who shaped aluminium.":
+"Pramod Karan Sethi, jefe de ortopedia, trabajó con Ram Chandra Sharma, un artesano que trabajaba el aluminio.",
+"Sharma made feet of wood and rubber, cured like a tyre, and Sethi fitted them on patients.":
+"Sharma hacía pies de madera y caucho, curado como un neumático, y Sethi los probaba en pacientes.",
+"Each patient walked on it, squatted, sat on the floor, and said where it hurt. Then they changed it, and tried again.":
+"Cada paciente caminaba con él, se ponía en cuclillas, se sentaba en el suelo y decía dónde dolía. Luego lo cambiaban, y volvían a probar.",
+"By the end of the 1960s, they had a foot that looked and bent like a bare one.":
+"Al final de los años sesenta, tenían un pie que parecía y se doblaba como uno descalzo.",
+"On it, people walked barefoot, squatted, sat cross-legged, worked in wet fields, and even climbed trees.":
+"Con él, la gente andaba descalza, se ponía en cuclillas, se sentaba cruzada de piernas, trabajaba en campos mojados y hasta trepaba árboles.",
+"It could be made in about an hour, for far less than a foot from abroad.":
+"Se podía hacer en cerca de una hora, por mucho menos que un pie del extranjero.",
+"From 1975, a society in Jaipur has fitted it free: more than 700,000 limbs so far, in India and in forty-four other countries.":
+"Desde 1975, una sociedad de Jaipur lo pone gratis: más de 700.000 prótesis hasta hoy, en India y en otros cuarenta y cuatro países.",
+"And the foot kept changing: plastics took over from wood and aluminium, while the first question stayed: how does this person live?":
+"Y el pie siguió cambiando: los plásticos reemplazaron a la madera y al aluminio, y la primera pregunta quedó: ¿cómo vive esta persona?",
 "Data platforms change too, every month. What lasts is the ideas, and a quick, honest way to test what's new.":
 "Las plataformas de datos también cambian, cada mes. Lo que perdura son las ideas, y una forma rápida y honesta de probar lo nuevo.",
-"This module walked the university's platform, from where data is born to who reads it.":
-"Este módulo recorrió la plataforma de la universidad, desde donde nacen los datos hasta quién los lee.",
+"This topic walked the university's platform, from where data is born to who reads it.":
+"Este tema recorrió la plataforma de la universidad, desde donde nacen los datos hasta quién los lee.",
 "In Data that moves, moving data was easy, and agreeing what each field means was the work.":
 "En Datos que se mueven, mover datos era fácil, y acordar qué significa cada campo era el trabajo.",
 "How fresh data must be came from when someone acts on it, and most analysis was fine a day old.":
@@ -68,8 +69,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "No elijas una función porque es nueva, ni una plataforma porque la mostró una película. Elige lo que responde a una necesidad real.",
 "So how do you keep up? With a loop, small and quick: investigate, adapt, implement, iterate.":
 "¿Y cómo mantenerse al día? Con un ciclo, pequeño y rápido: investigar, adaptar, implementar, iterar.",
-"It's the breeders' two seasons again: the shorter the loop, the more you learn in the same time.":
-"Son otra vez las dos temporadas de los fitomejoradores: cuanto más corto el ciclo, más aprendes en el mismo tiempo.",
+"It's the workshop in Jaipur again: the sooner you try it on a real need, the sooner you learn where it hurts.":
+"Es otra vez el taller de Jaipur: cuanto antes lo pruebas en una necesidad real, antes sabes dónde duele.",
 "Investigate starts from a real need, not from the feature. Rohan's team typed every invoice by hand, and asked for a better way in a ticket.":
 "Investigar parte de una necesidad real, no de la función. El equipo de Rohan ingresaba cada factura a mano, y pidió algo mejor en un ticket.",
 "Jun read the official docs on the functions that read documents: what they do, what they cost, and where they stop.":
@@ -92,12 +93,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Pero la lista de proveedores de Finanzas ya lo daba, así que lo dejaron.",
 "A trial that ends in no costs two days, not a year.":
 "Una prueba que termina en no cuesta dos días, no un año.",
-"The wheats of the 1950s are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today.":
-"Los trigos de los años cincuenta ya no están en los campos. El método, dos lugares y dos temporadas, lo siguen usando hoy.",
+"The rubber feet of the 1960s are long gone. The method, start from how people live and try it on them, is still how the foot is made.":
+"Los pies de caucho de los sesenta ya no existen. El método, partir de cómo vive la gente y probarlo con ella, sigue siendo cómo se hace.",
 "So keep the ideas, and test the features: small, soon, and on a real need.":
 "Así que guarda las ideas, y prueba las funciones: en pequeño, pronto y sobre una necesidad real.",
-"That closes this module: moving data, running the platform, serving it to people and agents, and reading documents.":
-"Con esto cierra el módulo: mover datos, operar la plataforma, servirlos a personas y agentes, y leer documentos.",
+"That closes this topic: moving data, running the platform, serving it to people and agents, and reading documents.":
+"Con esto cierra el tema: mover datos, operar la plataforma, servirlos a personas y agentes, y leer documentos.",
 "Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means.":
 "Cada cosa requería antes todo un equipo. Databricks y dbt hacen hoy gran parte; a las personas les queda acordar qué significan los datos.",
 "Start from the official docs. Investigate, adapt, implement, iterate, and keep going.":

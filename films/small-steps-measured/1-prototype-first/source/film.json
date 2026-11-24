@@ -20,7 +20,8 @@
     ["\\bJaime Lerner\\b", "Zhy-mee Lair-ner"],
     ["\\bNovak's\\b", "Noh-vak's"],
     ["\\bJun\\b", "Joon"],
-    ["\\bA I\\b", "AI"]
+    ["\\bA I\\b", "AI"],
+    ["\\bReyes\\b", "Rayess"]
   ],
   "story": [
     "street"

@@ -69,5 +69,5 @@ const NARR={
  {"id":"last","gap":0.8,"text":"Last semester's is 2.21 million, and beside it, the other two measures, each under its own name and owner.","say":"Last semester's is two point two one million, and beside it, the other two measures, each under its own name and owner."},
  {"id":"budget","gap":0.8,"text":"Rohan sets Health's budget for next year on the cost, with every tutorial's tutor in it."},
  {"id":"kilo","gap":0.8,"text":"Like the kilogram, each measure is one definition, written where anyone can read it, and held by no single tool."},
- {"id":"close","gap":0.8,"text":"The standards already exist, so don't reinvent them: investigate, adapt, implement, iterate, starting from the official docs."}]}
+ {"id":"close","gap":0.8,"text":"The standards already exist, so build on them: investigate, adapt, implement, iterate, starting from the official docs."}]}
 };

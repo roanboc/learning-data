@@ -9,7 +9,7 @@ const NARR={
  {"id":"y1592","gap":0.8,"text":"In 1592, war comes up the roads, and three of the four archives burn.","say":"In fifteen ninety-two, war comes up the roads, and three of the four archives burn."},
  {"id":"left","gap":0.8,"text":"Only Jeonju's copy is left."},
  {"id":"gone","gap":0.8,"text":"If it burns too, 175 years of the kingdom's memory are gone: what was decided, by whom, and why.","say":"If it burns too, a hundred and seventy-five years of the kingdom's memory are gone: what was decided, by whom, and why."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"That last copy has to be kept safe, whatever the war does."},
  {"id":"scholars","gap":0.8,"text":"Two local scholars carry it into the mountains, and guard it, in turns, for more than a year."},
  {"id":"again","gap":0.8,"text":"After the war, the court prints the annals again, from that one copy."},
  {"id":"five","gap":0.8,"text":"Five sets, far apart: one in the capital, four high in the mountains."},

@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "y la mayoría de los autos suecos se hacían para la derecha, con el volante a la izquierda.",
 "When overtaking, drivers couldn't see what was coming, and many crashed head on.":
 "Al adelantar, los conductores no veían lo que venía, y muchos chocaban de frente.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Sweden had to drive on the right, like its neighbours.":
+"Suecia tenía que conducir por la derecha, como sus vecinos.",
 "Switching sides would be safer, but many feared the switch itself: one driver who didn't know could meet another head on.":
 "Cambiar de lado sería más seguro, pero muchos temían el cambio mismo: un conductor que no supiera podía chocar de frente con otro.",
 "Everyone had to know.":

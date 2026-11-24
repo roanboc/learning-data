@@ -10,7 +10,7 @@ const NARR={
  {"id":"master","gap":0.8,"text":"So he learns it from a master, and the masters don't agree."},
  {"id":"books","gap":0.8,"text":"Guido wrote that hardly one singer agreed with another, and there were as many chant books as masters: Leo's, or Albert's."},
  {"id":"years","gap":0.8,"text":"Learning the chants takes about ten years, and even then, a singer knows them imperfectly."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Singers need a way to read a chant they have never heard."},
  {"id":"lines","gap":0.8,"text":"Guido's answer is lines across the page: each line, and each space between, one note."},
  {"id":"colour","gap":0.8,"text":"Two of the lines are coloured, red for F and yellow for C, so a singer always knows where he is."},
  {"id":"page","gap":0.8,"text":"Every sign now sits on a line or a space: what lived in the master's head is on the page."},

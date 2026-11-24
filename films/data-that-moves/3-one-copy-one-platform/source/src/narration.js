@@ -48,7 +48,7 @@ const NARR={
  {"id":"decide","gap":0.8,"text":"Decide which system writes each table, and let the others read it."},
  {"id":"bought","gap":0.8,"text":"Where a system you buy keeps its own copy, agree the contract at that interface, as Moving is easy, agreeing is the work showed."},
  {"id":"both","gap":0.8,"text":"Both at once showed one database that writes and reads. Here, one copy serves a whole platform."},
- {"id":"wheel","gap":0.8,"text":"There are already standards for this, so don't reinvent the wheel."},
+ {"id":"wheel","gap":0.8,"text":"There are already standards for this: start from them."},
  {"id":"docs","gap":0.8,"text":"Investigate, adapt, implement and iterate, starting from the official docs."}]},
 "row":{"name":"The same row","lead":1.2,"tail":1.0,"vo":[
  {"id":"amsterdam","gap":0.8,"text":"In Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held."},

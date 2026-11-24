@@ -11,8 +11,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los pasos estaban escritos en guías, pero en un quirófano ajetreado, a menudo se saltaban.",
 "Patients paid for it: infections, mistakes, and deaths that could have been avoided.":
 "Los pacientes lo pagaban: infecciones, errores y muertes que se podían evitar.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Patients needed the steps done every time, not only when someone remembered.":
+"Los pacientes necesitaban que los pasos se hicieran siempre, no solo cuando alguien se acordaba.",
 "In 2008, a study in eight hospitals, in eight countries, tried one change.":
 "En 2008, un estudio en ocho hospitales, de ocho países, probó un solo cambio.",
 "Three times in every operation, the team paused, and a nurse read a short checklist out loud.":

@@ -117,59 +117,59 @@ Hasta las tablas: el trabajo programado, los puntos de suministro que corta, y l
 00:05:07.578 --> 00:05:14.648
 Hay un elemento nuevo: un servicio de SMS, sin responsable. Las comprobaciones paran ahí hasta que lo asume quien dirige comercialización.
 
-00:05:16.448 --> 00:05:23.443
+00:05:16.448 --> 00:05:23.518
 Enumera quién debe estar de acuerdo: Grace, quien dirige comercialización, Ama por la regla del muro, e Inés por los datos entre ambas.
 
-00:05:25.343 --> 00:05:28.912
+00:05:25.418 --> 00:05:28.987
 Cada uno con su ID y su evidencia, para que una persona pueda comprobarlo.
 
-00:05:32.012 --> 00:05:37.548
+00:05:32.087 --> 00:05:37.623
 El mapa y el código dicen cómo deberían funcionar las cosas. Solo lo que está en marcha muestra cómo funcionan.
 
-00:05:39.448 --> 00:05:45.229
+00:05:39.523 --> 00:05:45.304
 Así que el recorrido se contrasta con lo que está en marcha: qué lee cada tabla, y qué corre cada noche.
 
-00:05:46.829 --> 00:05:52.612
+00:05:46.904 --> 00:05:52.687
 El agente lee ahí como lee el mapa: solo lectura, con los datos personales y sensibles enmascarados.
 
-00:05:54.212 --> 00:06:00.496
+00:05:54.287 --> 00:06:00.571
 Encuentra un lector que el mapa no muestra: el software del centro de contacto guarda su propia copia de los teléfonos.
 
-00:06:02.296 --> 00:06:08.206
+00:06:02.371 --> 00:06:08.281
 Cuando un hogar llama con un número nuevo, la copia cambia. El sistema de clientes nunca se entera.
 
-00:06:10.006 --> 00:06:15.795
+00:06:10.081 --> 00:06:15.870
 El equipo de datos cuenta la diferencia: un número de cada once. Los mensajes habrían ido a números viejos.
 
-00:06:17.895 --> 00:06:24.969
+00:06:17.970 --> 00:06:25.044
 Quien dirige comercialización decide: el sistema de clientes es la fuente, y los cambios del centro de contacto vuelven primero a él.
 
-00:06:27.069 --> 00:06:29.322
+00:06:27.144 --> 00:06:29.397
 Y la copia entra en el mapa, con un responsable.
 
-00:06:32.422 --> 00:06:37.305
+00:06:32.497 --> 00:06:37.380
 En Babilonia, el muro del río decía, ladrillo a ladrillo, quién había construido cada tramo, y para qué.
 
-00:06:39.005 --> 00:06:46.185
+00:06:39.080 --> 00:06:46.260
 Cuando Nabopolasar halló en un muro la inscripción de un rey anterior, según sus propias palabras, no cambió su lugar.
 
-00:06:47.785 --> 00:06:51.238
+00:06:47.860 --> 00:06:51.313
 Y pidió a los reyes futuros que guardaran sus palabras junto a las suyas.
 
-00:06:52.838 --> 00:07:00.290
+00:06:52.913 --> 00:07:00.365
 En la empresa, cada elemento lleva su responsable y su fuente, así que cada cambio se comprueba, y se recorre, antes de construir.
 
-00:07:01.690 --> 00:07:08.587
+00:07:01.765 --> 00:07:08.662
 En abril salen los primeros mensajes: 3,400 hogares, cada uno dos días antes de que las cuadrillas lleguen a su calle.
 
-00:07:10.187 --> 00:07:12.290
+00:07:10.262 --> 00:07:12.365
 Cada uno tiene la fecha que tienen las cuadrillas.
 
-00:07:17.990 --> 00:07:24.147
+00:07:18.065 --> 00:07:24.222
 Da a cada elemento un responsable y una fuente, y prueba el mapa en cada cambio, con un caso que debe fallar.
 
-00:07:25.547 --> 00:07:31.616
+00:07:25.622 --> 00:07:31.691
 Recorre cada cambio por todo lo que toca, contrástalo con lo que de verdad está en marcha, y deja decidir a los responsables.
 
-00:07:33.516 --> 00:07:34.892
+00:07:33.591 --> 00:07:34.967
 Luego: mantenerla viva.

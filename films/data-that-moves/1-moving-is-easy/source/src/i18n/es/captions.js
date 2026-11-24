@@ -120,8 +120,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Ya existen estándares para esto.",
 "Enterprise Integration Patterns for how data moves, and the Open Data Contract Standard for what it means.":
 "Enterprise Integration Patterns para cómo se mueven los datos, y el Open Data Contract Standard para qué significan.",
-"Don't reinvent the wheel. Investigate, adapt, implement and iterate, starting from the official docs.":
-"No reinventes la rueda. Investiga, adapta, implementa e itera, partiendo de la documentación oficial.",
+"Start from them, not from scratch. Investigate, adapt, implement and iterate, starting from the official docs.":
+"Parte de ellos, no de cero. Investiga, adapta, implementa e itera, empezando por la documentación oficial.",
 "If these basics are still a struggle where you work, look first at your governance or your tooling: other modules here show both.":
 "Si estas bases aún te cuestan donde trabajas, mira primero tu gobierno de datos o tus herramientas: otros módulos de aquí muestran ambos.",
 "Let the tools move it; spend your time on the contract.":

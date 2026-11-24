@@ -26,8 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Seis semanas antes, la tripulación de otra aerolínea había entendido lo mismo, y esquivó por poco la misma cresta.",
 "Their airline warned its own pilots. But there was no way to share it with other airlines.":
 "Su aerolínea avisó a sus propios pilotos. Pero no había forma de compartirlo con otras aerolíneas.",
-"And a pilot who reported a mistake could be punished for it. Something had to change.":
-"Y un piloto que reportaba un error podía ser castigado por ello. Algo tenía que cambiar.",
+"And a pilot who reported a mistake could be punished for it. Pilots needed a way to warn each other without fear.":
+"Y un piloto que reportaba un error podía ser castigado por ello. Los pilotos necesitaban una forma de avisarse sin miedo.",
 "In 1976, a reporting system opened to every pilot, controller and mechanic in the United States.":
 "En 1976, se abrió un sistema de reportes para todo piloto, controlador y mecánico de Estados Unidos.",
 "They could tell what went wrong in confidence, without being punished for an honest mistake.":

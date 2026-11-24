@@ -45,7 +45,9 @@
   [
    "\\bA I\\b",
    "AI"
-  ]
+  ],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bYusuf\\b", "Yoosoof"]
  ],
  "story": [
   "rough"

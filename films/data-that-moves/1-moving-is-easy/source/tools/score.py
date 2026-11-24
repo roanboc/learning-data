@@ -13,7 +13,7 @@
 #    only then does a phrase pass from one to the other (D, C sharp, B, A, from left to right). It sounds where the gauge is agreed
 #    in 1962, and again where the film comes back to Albury.
 #  - D major for what's agreed and what runs through; B minor for the break of gauge and the file that took two days; A major at
-#    "Something had to change", which turns to D; G major for a new place. Just intonation from D (see hz()), so nothing beats; no
+#    "until the rails agreed", which turns to D; G major for a new place. Just intonation from D (see hz()), so nothing beats; no
 #    E held with G or B: those aren't pure in this table.
 # The rules every film of the module keeps (palettes.md, 5 November 2026):
 #  - Music under the opening story; after it, only from time to time: at a chapter's turn, under a moment on screen or in a pause
@@ -160,7 +160,7 @@ def rumble(s, sec=2.4, g=0.010, pan=0.0):
 #    from Melbourne: each its own reed, New South Wales's A on the right and Victoria's G sharp on the left, a little apart. Each its
 #    own gauge: B minor; the gauge end-on, each colony's rails with its reed. Every passenger changes trains: B minor under the
 #    lifting. What it cost: G major, low. Their reasons: New South Wales's reed steps from G sharp to A as it changes, and Victoria's
-#    keeps its G sharp. 79 years: B minor, still; "Something had to change": A major. 1962, one agreed gauge: the mark, the phrase
+#    keeps its G sharp. 79 years: B minor, still; "until the rails agreed": A major. 1962, one agreed gauge: the mark, the phrase
 #    passing from one side to the other as the freight runs straight through. Up by a third: D major. The university's file: G major
 #    for the new place, B minor for the two days; "Agree what it means": the two reeds on one note, and the phrase passes through.
 #    The title card: D major, the receiver's low D
@@ -201,7 +201,7 @@ tap(F('reasons', 'changed its gauge', -0.1), 0.009, px(1250))
 reed(VIC, F('reasons', 'changed its gauge', 0.0), 0.6, 0.55, hold=0.2, ring=0.35); reed(NSW, F('reasons', 'changed its gauge', 0.45), 0.7, 0.55, hold=0.3, ring=0.6)
 tap(F('reasons', 'Victoria kept', -0.1), 0.009, px(370))
 reed(VIC, F('reasons', 'Victoria kept', 0.1), 0.7, -0.55, hold=0.45, ring=0.7)
-# 79 years: B minor, still; "Something had to change": A major
+# 79 years: B minor, still; "until the rails agreed": A major
 tY = F('years', 'seventy-nine years')
 tap(tY, 0.009, px(250))
 recv(B2, tY - 0.3, F('years', 'and it would', -0.5), 0.75, att=1.2, rel=0.9)
@@ -344,7 +344,7 @@ same(tMn, 0.85, px(486), px(1440))
 recv(D3, tMn + 0.1, tMn + 2.2, 0.5, att=0.6, rel=1.0)
 knock(A('two', 'Enterprise Integration Patterns', -0.1), 0.012, px(550), 240)
 knock(A('two', 'Open Data Contract Standard', -0.1), 0.012, px(1370), 240)
-air(A('wheel', 'reinvent the wheel', -0.1), 1.6, 0.008, px(960), 160, 800)
+air(A('wheel', 'Start from them', -0.1), 1.6, 0.008, px(960), 160, 800)
 for w_ in ('Investigate', 'adapt', 'implement', 'iterate'):
     tap(A('wheel', w_, -0.1), 0.007, px(960))
 knock(A('struggle', 'a struggle', -0.2), 0.012, px(960), 220)

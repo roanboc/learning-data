@@ -9,7 +9,7 @@ const NARR={
  {"id":"signals","gap":0.8,"text":"Its driver can't read the signals beside the track in time, and the train can't slow down at once."},
  {"id":"missed","gap":0.8,"text":"A missed signal could cost lives: in Tokyo in 1962, a train ran past a red one, and in the crashes that followed, 160 people died.","say":"A missed signal could cost lives: in Tokyo in nineteen sixty-two, a train ran past a red one, and in the crashes that followed, a hundred and sixty people died."},
  {"id":"rest","gap":0.8,"text":"Passengers' lives would rest on one person seeing every signal in time."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Safety couldn't rest on one tired pair of eyes."},
  {"id":"build","gap":0.8,"text":"So the railway's engineers build the limits into the line itself."},
  {"id":"cab","gap":0.8,"text":"A signal inside the driver's cab shows the speed allowed, and if the train goes faster, it slows itself down."},
  {"id":"room","gap":0.8,"text":"One control room watches every train on the line."},

@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y el día del censo, el informe de una facultad podía fallar cuando hace falta para planear los cupos del próximo semestre.",
 "And each catalogue kept its promises in its own format: change the catalogue, and every promise is typed again.":
 "Y cada catálogo guardaba sus promesas en su propio formato: cambia el catálogo, y cada promesa se escribe otra vez.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"The promises had to live with the tables, in a form any catalogue can read.":
+"Las promesas tenían que vivir junto a las tablas, en una forma que cualquier catálogo pueda leer.",
 "Now each promise is a file, kept with the code, in two open standards that any tool can read:":
 "Ahora cada promesa es un archivo, guardado con el código, en dos estándares abiertos que lee cualquier herramienta:",
 "one for the product, and one for the contract of each core table it's built on.":

@@ -17,7 +17,7 @@ const NARR={
  {"id":"behind","gap":0.8,"text":"and passed behind Mars, 170 kilometres lower than planned.","say":"and passed behind Mars, a hundred and seventy kilometres lower than planned."},
  {"id":"never","gap":0.8,"text":"It was never heard from again."},
  {"id":"lost","gap":0.8,"text":"Years of work, and the first weather satellite at another planet, were lost."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Every number had to mean the same thing on both sides of a hand-off."},
  {"id":"odyssey","gap":0.3,"text":"So on the next orbiter, Mars Odyssey, the team wrote both units on every hand-off,"},
  {"id":"independent","gap":0.3,"text":"had every critical number checked independently,"},
  {"id":"second","gap":0.8,"text":"and added a second way to find the craft."},

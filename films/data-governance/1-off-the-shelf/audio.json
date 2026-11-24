@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/off-the-shelf/soundtrack.mp3",
-      "size": 4661803,
-      "sha256": "e5ce085f67c67d79559ff9a3dd97f6da07adbd2cc6fd629f83ca8363266f9bbf",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/e5ce085f67c67d79559ff9a3dd97f6da07adbd2cc6fd629f83ca8363266f9bbf.mp3"
+      "size": 4702763,
+      "sha256": "676b42856df472d64925da433616c2a373cfa4bf3849b84d77b27c22834b7681",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-off-the-shelf-31fb54159d68cfb7fd62/676b42856df472d64925da433616c2a373cfa4bf3849b84d77b27c22834b7681.mp3"
     }
   ]
 }

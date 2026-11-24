@@ -163,65 +163,65 @@ Ivy, la más nueva, lee la suya: los extractos antiguos copian tablas enteras, c
 Ahora R3 tiene una causa, y una señal temprana: un extracto con campos personales que su reporte nunca muestra.
 
 42
-00:04:54,940 --> 00:05:02,307
+00:04:54,940 --> 00:05:02,242
 Yusuf, su dueño, escribe la respuesta esa misma tarde: antes de trasladar un extracto, se revisa con las reglas de protección.
 
 43
-00:05:03,607 --> 00:05:05,915
+00:05:03,542 --> 00:05:05,850
 Lo que ningún reporte necesita se queda atrás.
 
 44
-00:05:08,815 --> 00:05:15,722
+00:05:08,750 --> 00:05:15,657
 Miércoles 16 de junio, tercera semana del traslado. Sigue el reporte de Instalaciones de quién tiene tarjeta de acceso.
 
 45
-00:05:17,422 --> 00:05:22,514
+00:05:17,357 --> 00:05:22,449
 Su extracto antiguo trae 42 columnas de la lista de personal. El reporte muestra cinco.
 
 46
-00:05:24,414 --> 00:05:31,087
+00:05:24,349 --> 00:05:31,022
 La revisión lee las etiquetas del catálogo: el domicilio y la fecha de nacimiento son personales, y ningún reporte los usa.
 
 47
-00:05:32,787 --> 00:05:37,945
+00:05:32,722 --> 00:05:37,880
 Así que el extracto se queda atrás, y el reporte se rehace con la única lista de personal gobernada.
 
 48
-00:05:39,845 --> 00:05:46,689
+00:05:39,780 --> 00:05:46,624
 De haberse trasladado esos campos, R3 sería un problema: ya no algo que podría pasar, sino algo que ya pasó.
 
 49
-00:05:48,589 --> 00:05:53,022
+00:05:48,524 --> 00:05:52,957
 Etiquetas como estas, y las cerraduras tras ellas, se enseñan en Cerraduras antes que los datos.
 
 50
-00:05:55,922 --> 00:06:02,141
+00:05:55,857 --> 00:06:02,076
 Martes 29 de junio. La página del mes del consejo de datos tiene lugar para tres riesgos.
 
 51
-00:06:03,641 --> 00:06:12,436
+00:06:03,576 --> 00:06:12,371
 R1, la licencia. R4, un equipo dividido entre el traslado y nuevas solicitudes. Y R3: su señal apareció, así que ahora es probable.
 
 52
-00:06:14,336 --> 00:06:20,053
+00:06:14,271 --> 00:06:19,988
 R8 se cierra: la exportación de nómina corre desde el proyecto cada día de pago desde hace más de un año.
 
 53
-00:06:21,553 --> 00:06:27,439
+00:06:21,488 --> 00:06:27,374
 R7, un agente con más permisos de los que su tarea pide, sigue vigilado, como explica Cómo sale mal.
 
 54
-00:06:28,939 --> 00:06:32,309
+00:06:28,874 --> 00:06:32,244
 Dicho a tiempo, un riesgo genera confianza. Oculto, la gasta.
 
 55
-00:06:34,409 --> 00:06:38,725
+00:06:34,344 --> 00:06:38,660
 Las banderas de Amundsen también eran señales tempranas, puestas donde se cruzarían a tiempo.
 
 56
-00:06:40,425 --> 00:06:46,711
+00:06:40,360 --> 00:06:46,646
 El lunes, toma tus tres riesgos más grandes y escribe cada uno en una frase, con un dueño y una señal temprana.
 
 57
-00:06:48,411 --> 00:06:51,510
+00:06:48,346 --> 00:06:51,445
 Nombra cada riesgo, dale un dueño, vigila su señal temprana.

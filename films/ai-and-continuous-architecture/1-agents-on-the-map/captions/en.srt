@@ -71,189 +71,189 @@ This series adds what's around them: the AI platform they run on, and what each 
 How an agent works is the AI agents module's; here, the map shows where agents work, and who answers for them.
 
 19
-00:02:34,446 --> 00:02:40,366
+00:02:34,446 --> 00:02:40,515
 Then Farah brings a household, behind on their bill. They asked the website's chat for more time to pay.
 
 20
-00:02:41,966 --> 00:02:45,657
+00:02:42,115 --> 00:02:45,806
 The chat said yes: a plan over three months, and no late fee.
 
 21
-00:02:47,257 --> 00:02:52,264
+00:02:47,406 --> 00:02:52,413
 Two weeks later, their bill came with a late fee, and a warning that their power could be cut.
 
 22
-00:02:54,464 --> 00:03:00,078
+00:02:54,613 --> 00:03:00,227
 The chat is an agent: its vendor switched it on in an update to the contact centre's software.
 
 23
-00:03:01,678 --> 00:03:07,542
+00:03:01,827 --> 00:03:07,691
 Nobody put it on the map. It was given a whole activity, payment requests, so it agreed plans.
 
 24
-00:03:09,142 --> 00:03:15,592
+00:03:09,291 --> 00:03:15,741
 But agreeing a plan is a billing officer's decision, under the regulator's rules for households who can't pay.
 
 25
-00:03:17,192 --> 00:03:24,220
+00:03:17,341 --> 00:03:24,369
 It wrote each plan in the contact centre's notes, which billing doesn't read: 212 plans in six weeks.
 
 26
-00:03:28,220 --> 00:03:36,384
+00:03:28,369 --> 00:03:36,533
 How many agents work here? The IT service management tool can't say: it lists applications, not what's switched on inside them.
 
 27
-00:03:37,584 --> 00:03:46,749
+00:03:37,733 --> 00:03:46,898
 So Tomás looks where agents leave traces: vendors' release notes and contracts, logs of calls to language models, and each team's answer.
 
 28
-00:03:48,149 --> 00:03:56,133
+00:03:48,298 --> 00:03:56,282
 He finds three more: a crew planner the network's analysts built, and a meter agent that drafts a work order when a meter goes quiet.
 
 29
-00:03:57,733 --> 00:04:02,019
+00:03:57,882 --> 00:04:02,168
 And the field app's assistant, which answers crews' questions from the manuals.
 
 30
-00:04:02,819 --> 00:04:10,491
+00:04:02,968 --> 00:04:10,640
 Inside billing, an assistant works on each officer's sign-in: a helper, with that person's rights, not an agent of its own.
 
 31
-00:04:11,891 --> 00:04:14,763
+00:04:12,040 --> 00:04:14,912
 Six agents and a helper, where the map showed two.
 
 32
-00:04:18,563 --> 00:04:26,779
+00:04:18,712 --> 00:04:26,928
 On the map, an agent is drawn as ArchiMate 4 draws software that works beside people: an application, assigned to a role.
 
 33
-00:04:28,579 --> 00:04:30,802
+00:04:28,728 --> 00:04:30,951
 A role of its own, never a person's.
 
 34
-00:04:32,402 --> 00:04:39,226
+00:04:32,551 --> 00:04:39,375
 In a billing officer's role, the chat would hold every right an officer holds, and no one could tell its work from theirs.
 
 35
-00:04:41,226 --> 00:04:48,260
+00:04:41,375 --> 00:04:48,409
 And it covers tasks, never a whole activity: the activity, and the decisions in it, stay with the people who own them.
 
 36
-00:04:51,060 --> 00:04:57,006
+00:04:51,209 --> 00:04:57,155
 Helping a household that can't pay is a process, written down, and its owner is the head of retail.
 
 37
-00:04:58,406 --> 00:05:07,211
+00:04:58,555 --> 00:05:07,360
 For each task, its owner sets how far the agent may go: inform a person, draft for them, verify their work, or run the task alone.
 
 38
-00:05:09,011 --> 00:05:12,871
+00:05:09,160 --> 00:05:13,020
 Answering a question about a bill: run. It may do that alone.
 
 39
-00:05:14,271 --> 00:05:21,866
+00:05:14,420 --> 00:05:22,015
 Taking a request for more time: draft. It writes the request for a billing officer, and tells the household when they'll hear back.
 
 40
-00:05:23,266 --> 00:05:27,229
+00:05:23,415 --> 00:05:27,378
 Telling the officer what the household owes, and has paid: inform.
 
 41
-00:05:28,629 --> 00:05:32,192
+00:05:28,778 --> 00:05:32,341
 Agreeing the plan: not at all. That stays with the officer.
 
 42
-00:05:33,792 --> 00:05:39,799
+00:05:33,941 --> 00:05:39,948
 Checking that the plan follows the hardship rules: verify. It checks, and the officer decides.
 
 43
-00:05:41,199 --> 00:05:46,372
+00:05:41,348 --> 00:05:46,521
 How an agent earns more is the AI agents module's Five stages, not a switch.
 
 44
-00:05:49,172 --> 00:05:54,433
+00:05:49,321 --> 00:05:54,582
 It works under its own identity, never a person's: one for each set of rights it needs.
 
 45
-00:05:55,833 --> 00:06:00,098
+00:05:55,982 --> 00:06:00,247
 One may read bills. The other may only write requests into billing's queue.
 
 46
-00:06:01,698 --> 00:06:06,000
+00:06:01,847 --> 00:06:06,149
 So every log says which agent did what, and it can be stopped on its own.
 
 47
-00:06:07,800 --> 00:06:10,354
+00:06:07,949 --> 00:06:10,503
 Its role says when it hands over, and to whom.
 
 48
-00:06:11,554 --> 00:06:18,357
+00:06:11,703 --> 00:06:18,506
 Anyone who mentions hardship, illness or life support goes to a person, the same day, and the agent says so.
 
 49
-00:06:21,957 --> 00:06:26,549
+00:06:22,106 --> 00:06:26,846
 Farah asks what the map couldn't say: when the agent is wrong, who answers for it?
 
 50
-00:06:27,349 --> 00:06:33,374
+00:06:27,646 --> 00:06:33,671
 Not the vendor, which answers to the utility under its contract. Not Tomás, who draws the map.
 
 51
-00:06:34,774 --> 00:06:41,170
+00:06:35,071 --> 00:06:41,467
 The head of retail, who owns the process and set its tasks, answers for it, as for anyone in that team.
 
 52
-00:06:42,970 --> 00:06:50,761
+00:06:43,267 --> 00:06:51,058
 AI frameworks, such as NIST's and ISO's, ask the same: clear roles, and people accountable for each AI system.
 
 53
-00:06:51,561 --> 00:06:54,771
+00:06:51,858 --> 00:06:55,068
 And it never approves. Approving is a person's job.
 
 54
-00:06:58,171 --> 00:07:06,053
+00:06:58,468 --> 00:07:06,350
 One by one, every agent goes on the map: its role, its tasks and how far, its identity, its hand-off, and who answers.
 
 55
-00:07:07,853 --> 00:07:13,150
+00:07:08,150 --> 00:07:13,447
 The crew planner drafts rosters, a supervisor approves them, and Grace answers for it.
 
 56
-00:07:13,950 --> 00:07:18,647
+00:07:14,247 --> 00:07:18,944
 The vendor's setting that let the chat agree plans is switched off. It drafts them now.
 
 57
-00:07:20,047 --> 00:07:27,577
+00:07:20,344 --> 00:07:27,874
 With every change, a check runs on the map: no agent without a role, an identity, a hand-off and a person who answers.
 
 58
-00:07:29,177 --> 00:07:34,324
+00:07:29,474 --> 00:07:34,621
 The field app's assistant is flagged: its vendor hasn't said which identity it uses.
 
 59
-00:07:35,724 --> 00:07:42,430
+00:07:36,021 --> 00:07:42,727
 And the 212 plans? Billing honours every one, refunds the late fees, and calls each household.
 
 60
-00:07:46,230 --> 00:07:52,848
+00:07:46,527 --> 00:07:53,145
 Many scholars think Babylon's tower may have inspired the story of the Tower of Babel, in the Book of Genesis.
 
 61
-00:07:53,648 --> 00:08:00,309
+00:07:53,945 --> 00:08:00,606
 In the story, the builders all speak one language, until they can no longer understand each other, and stop building.
 
 62
-00:08:01,909 --> 00:08:06,176
+00:08:02,206 --> 00:08:06,473
 Babylon's real builders came from many lands, and spoke many languages.
 
 63
-00:08:07,576 --> 00:08:12,199
+00:08:07,873 --> 00:08:12,496
 What they shared was the plan: a task for each, and a name that answered for the work.
 
 64
-00:08:17,599 --> 00:08:25,971
+00:08:17,896 --> 00:08:26,268
 Tomás's note has its answer: each agent in a role of its own, with its tasks, its identity, a hand-off and someone who answers.
 
 65
-00:08:27,771 --> 00:08:29,779
+00:08:28,068 --> 00:08:30,076
 Next, the platform they all run on.

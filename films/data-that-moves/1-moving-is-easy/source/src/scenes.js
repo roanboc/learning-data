@@ -206,7 +206,7 @@ scene("agreed",(ctx,S,t,sc)=>{
   const T={tRan:wAt(sc,"ran","the trains always ran"),tTook:wAt(sc,"ran","What took"),tAgreeing:wAt(sc,"ran","agreeing the gauge"),
     tNow:wAt(sc,"ours","Now"),tReach:wAt(sc,"ours","reach Rohan"),tDay:wAt(sc,"ours","the day they're made"),tMeaning:wAt(sc,"ours","meaning just"),tNobody:wAt(sc,"ours","nobody spends"),
     tStd:wAt(sc,"standards","standards"),tEIP:wAt(sc,"two","Enterprise Integration Patterns"),tODCS:wAt(sc,"two","Open Data Contract Standard"),
-    tWheel:wAt(sc,"wheel","reinvent the wheel"),tInv:wAt(sc,"wheel","Investigate"),tAdapt:wAt(sc,"wheel","adapt"),tImpl:wAt(sc,"wheel","implement"),tIter:wAt(sc,"wheel","iterate"),tDocs:wAt(sc,"wheel","the official docs"),
+    tWheel:wAt(sc,"wheel","Start from them"),tInv:wAt(sc,"wheel","Investigate"),tAdapt:wAt(sc,"wheel","adapt"),tImpl:wAt(sc,"wheel","implement"),tIter:wAt(sc,"wheel","iterate"),tDocs:wAt(sc,"wheel","the official docs"),
     tStruggle:wAt(sc,"struggle","a struggle"),tGov:wAt(sc,"struggle","governance"),tTool:wAt(sc,"struggle","tooling"),tModules:wAt(sc,"struggle","other modules"),
     tLet:wAt(sc,"takeaway","Let the tools"),tSpend:wAt(sc,"takeaway","spend your time")};
   ag_shots(ctx,S,t,sc.dur,[
@@ -227,7 +227,7 @@ scene("agreed",(ctx,S,t,sc)=>{
         md_textCard(c,190,330,720,{kick:"How data moves",title:"Enterprise Integration Patterns",sub:"Hohpe and Woolf"},{icon:"event",edge:MD.flow,a:sA*ag_in(tt,T.tEIP-0.1,0.5),k:(tt-T.tEIP+0.1)/0.5});
         md_textCard(c,1010,330,720,{kick:"What it means",title:"Open Data Contract Standard",sub:"an open standard for data contracts"},{icon:"contract",edge:MD.agreed,a:sA*ag_in(tt,T.tODCS-0.1,0.5),k:(tt-T.tODCS+0.1)/0.5});
         const wA=ag_io(tt,T.tWheel-0.2,T.tStruggle-0.4,0.45);
-        if(wA>0){md_T(c,"Don't reinvent the wheel",960,200,{w:800,size:44,align:"center",a:wA});mv_wheel(c,960,470,{a:wA,p:(tt-T.tWheel)/1.6,n:[T.tInv,T.tAdapt,T.tImpl,T.tIter].reduce((s,q)=>s+clamp((tt-q+0.1)/0.4,0,1),0),docs:ag_in(tt,T.tDocs-0.1,0.5)});}
+        if(wA>0){md_T(c,"Start from the standards",960,200,{w:800,size:44,align:"center",a:wA});mv_wheel(c,960,470,{a:wA,p:(tt-T.tWheel)/1.6,n:[T.tInv,T.tAdapt,T.tImpl,T.tIter].reduce((s,q)=>s+clamp((tt-q+0.1)/0.4,0,1),0),docs:ag_in(tt,T.tDocs-0.1,0.5)});}
         const gA=ag_io(tt,T.tStruggle-0.2,T.tLet-0.4,0.45);
         if(gA>0){md_textCard(c,460,300,1000,{kick:"Still a struggle?",title:"Look first at your governance or your tooling",sub:"Other modules here show both."},{icon:"warn",edge:MD.wait,a:gA,k:(tt-T.tStruggle+0.2)/0.5});
           md_tag(c,700,600,"governance",{col:MD.agreed,icon:"contract",a:gA*ag_in(tt,T.tGov,0.4)});md_tag(c,1000,600,"tooling",{col:MD.flow,icon:"refresh",a:gA*ag_in(tt,T.tTool,0.4)});}});}}

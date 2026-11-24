@@ -17,6 +17,7 @@
     ["\\bNabopolassar\\b", "Nabbo-poe-lassar"],
     ["\\bMarduk\\b", "Mar-dook"],
     ["\\bArahtu\\b", "Ah-rakh-too"],
-    ["\\bID\\b", "I D"]
+    ["\\bID\\b", "I D"],
+    ["\\bAma\\b", "Ah-mah"]
   ]
 }

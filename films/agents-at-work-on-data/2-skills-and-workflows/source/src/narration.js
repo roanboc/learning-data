@@ -9,7 +9,7 @@ const NARR={
  {"id":"own","gap":0.8,"text":"But each problem is worked out on its own, with its own tricks, and a new kind starts from nothing."},
  {"id":"slip","gap":0.8,"text":"One slip, and a widow or a child could get less than the law gives them."},
  {"id":"two","gap":0.8,"text":"And two reckoners could reach two answers for one estate."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"People needed one method that gave every reckoner the same answer."},
  {"id":"writes","gap":0.8,"text":"Encouraged by the caliph, Muhammad al-Khwarizmi, a scholar of the House of Wisdom, writes a short book."},
  {"id":"require","gap":0.8,"text":"It teaches what people, in his words, constantly require."},
  {"id":"moves","gap":0.8,"text":"Two moves, completion and balancing, bring any problem to one of six forms."},

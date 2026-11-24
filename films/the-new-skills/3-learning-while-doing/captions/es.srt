@@ -135,145 +135,145 @@ Aprender cuando haya una semana tranquila nunca pasa: no la hay.
 Desde el jueves 1 de abril, todo el equipo reserva dos horas cada jueves por la tarde para aprender, sin reuniones.
 
 35
-00:04:18,848 --> 00:04:26,824
+00:04:18,848 --> 00:04:26,924
 Helena Novak, la gestora de datos, lo puso en el calendario de todos y lo cuida: si piden una reunión a esa hora, se ofrece otra.
 
 36
-00:04:28,724 --> 00:04:36,840
+00:04:28,824 --> 00:04:36,940
 Cada persona elige algo que el trabajo necesita y parte de la documentación oficial, la de dbt y la de Databricks, junto al trabajo.
 
 37
-00:04:38,540 --> 00:04:44,588
+00:04:38,640 --> 00:04:44,688
 Lo prueban en el proyecto real y anotan lo que aprendieron en las notas del equipo, junto al código.
 
 38
-00:04:46,288 --> 00:04:50,640
+00:04:46,388 --> 00:04:50,740
 Ivy elige los conteos de los sensores: qué significa de verdad un número del flujo de Sam.
 
 39
-00:04:52,340 --> 00:04:57,908
+00:04:52,440 --> 00:04:58,008
 Lee la guía de los sensores y las notas de Sam, y recorre una semana de conteos, hora por hora.
 
 40
-00:05:01,008 --> 00:05:07,789
+00:05:01,108 --> 00:05:07,889
 El jueves 13 de mayo, en el tiempo de aprendizaje, se lo enseña al equipo, en una página, en veinte minutos.
 
 41
-00:05:09,689 --> 00:05:13,955
+00:05:09,789 --> 00:05:14,055
 Cada conteo es el máximo de personas que el sensor vio a la vez en esa hora.
 
 42
-00:05:16,055 --> 00:05:21,621
+00:05:16,155 --> 00:05:21,721
 Un cero significa que no vio a nadie; un hueco, que no envió nada, y nunca son lo mismo.
 
 43
-00:05:23,721 --> 00:05:26,052
+00:05:23,821 --> 00:05:26,152
 Y cuenta cabezas; nunca sabe de quién son.
 
 44
-00:05:28,152 --> 00:05:33,748
+00:05:28,252 --> 00:05:33,848
 Al prepararse, encontró dos cosas que no sabía explicar y le preguntó a Sam: ahí las aprendió de verdad.
 
 45
-00:05:35,848 --> 00:05:38,776
+00:05:35,948 --> 00:05:38,876
 Logan Fiorella y Richard Mayer encontraron lo mismo.
 
 46
-00:05:39,876 --> 00:05:46,338
+00:05:39,976 --> 00:05:46,438
 Quienes prepararon una lección para enseñarla, y la enseñaron, la recordaron más después que quienes solo la estudiaron.
 
 47
-00:05:48,438 --> 00:05:56,002
+00:05:48,538 --> 00:05:56,102
 Freire lo dijo así, años después de Angicos: quien enseña aprende al enseñar, y quien aprende enseña al aprender.
 
 48
-00:05:58,102 --> 00:06:01,533
+00:05:58,202 --> 00:06:01,633
 Ahora todo el equipo lee un conteo de la misma manera, no solo Sam.
 
 49
-00:06:04,233 --> 00:06:09,849
+00:06:04,333 --> 00:06:09,949
 Un equipo donde solo una persona sabe operar algo está a una ausencia de tener problemas.
 
 50
-00:06:11,949 --> 00:06:16,791
+00:06:12,049 --> 00:06:16,891
 En mayo, el equipo anota los nueve trabajos que no pueden parar, y quién puede operar cada uno.
 
 51
-00:06:18,891 --> 00:06:24,437
+00:06:18,991 --> 00:06:24,537
 Cinco tienen un solo nombre: el flujo de los sensores es solo de Sam; los modelos de aulas, solo de Jun.
 
 52
-00:06:26,537 --> 00:06:31,490
+00:06:26,637 --> 00:06:31,590
 Así que también ahí trabajan en pareja, un trabajo a la vez, y escriben cada uno, paso a paso.
 
 53
-00:06:33,590 --> 00:06:37,580
+00:06:33,690 --> 00:06:37,680
 Para el miércoles 30 de junio, cada trabajo tiene al menos dos nombres.
 
 54
-00:06:39,680 --> 00:06:44,539
+00:06:39,780 --> 00:06:44,639
 El de Ivy es el segundo nombre en dos de ellos: el flujo de los sensores y los modelos de aulas.
 
 55
-00:06:46,639 --> 00:06:50,567
+00:06:46,739 --> 00:06:50,667
 Ahora cualquiera puede tomar vacaciones, o enfermarse, y el trabajo sigue.
 
 56
-00:06:53,667 --> 00:06:58,035
+00:06:53,767 --> 00:06:58,135
 Quienes estudian cómo aprenden los adultos en el trabajo ven lo mismo, oficio tras oficio.
 
 57
-00:06:59,935 --> 00:07:06,679
+00:07:00,035 --> 00:07:06,779
 Jean Lave y Etienne Wenger estudiaron aprendices, de sastres en Liberia a parteras en México.
 
 58
-00:07:08,579 --> 00:07:16,236
+00:07:08,679 --> 00:07:16,336
 Quien llega aprende participando en el trabajo real: primero en su borde, con tareas pequeñas que importan, junto a quienes saben.
 
 59
-00:07:18,336 --> 00:07:25,625
+00:07:18,436 --> 00:07:25,725
 Anders Ericsson vio que la destreza crece practicando lo que aún no puedes hacer, con retroalimentación rápida de quien sí puede.
 
 60
-00:07:27,725 --> 00:07:33,041
+00:07:27,825 --> 00:07:33,141
 Una regla práctica dice que cerca del setenta por ciento de lo que se aprende en el trabajo viene de hacerlo.
 
 61
-00:07:34,141 --> 00:07:37,322
+00:07:34,241 --> 00:07:37,422
 Cerca de veinte viene de otras personas, y diez de los cursos.
 
 62
-00:07:39,422 --> 00:07:43,048
+00:07:39,522 --> 00:07:43,148
 Es una regla práctica, no una medición, pero apunta en la misma dirección.
 
 63
-00:07:45,148 --> 00:07:50,246
+00:07:45,248 --> 00:07:50,346
 Cursos y documentación siguen contando: parte de la documentación oficial, y apréndelo en el trabajo.
 
 64
-00:07:52,946 --> 00:08:00,291
+00:07:53,046 --> 00:08:00,391
 En Angicos, los adultos aprendieron a leer con sus propias palabras, un paso pequeño cada noche, en un círculo con alguien al lado.
 
 65
-00:08:02,191 --> 00:08:09,199
+00:08:02,291 --> 00:08:09,299
 Ivy aprendió así el trabajo del equipo, enseñó lo que aprendió, y en junio era el segundo nombre en dos de sus trabajos.
 
 66
-00:08:11,299 --> 00:08:14,804
+00:08:11,399 --> 00:08:14,904
 El lunes, aprende en el trabajo real, junto a alguien que sabe.
 
 67
-00:08:16,304 --> 00:08:18,912
+00:08:16,404 --> 00:08:19,012
 Da un paso pequeño a la vez, y termínalo.
 
 68
-00:08:20,412 --> 00:08:24,874
+00:08:20,512 --> 00:08:24,974
 Pon tiempo de aprendizaje en el calendario, protégelo, y parte de la documentación oficial.
 
 69
-00:08:26,374 --> 00:08:28,379
+00:08:26,474 --> 00:08:28,479
 Escribe lo que aprendes, y enséñalo.
 
 70
-00:08:30,079 --> 00:08:33,044
+00:08:30,179 --> 00:08:33,144
 Aprende en el trabajo real, junto a alguien, y luego enséñalo.

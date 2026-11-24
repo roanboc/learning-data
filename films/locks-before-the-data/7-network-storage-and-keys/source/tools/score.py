@@ -349,9 +349,9 @@ paper(sw_('gangs', 'written down before'), 0.012, px(300)); paper(sw_('gangs', "
 slaps(sw_('gangs', "recorded as it's done", 0.3), (C4, F3), 0.42, 0.65, px(960))
 
 # 8. The university's own key: the files' locks come on, a soft click; the cloud provider's keys, sealed, a card. The vault, and the
-#    storage's key in it: two pipes, F and C, rising. The storage uses the key, a click along its line; the platform team can't delete
-#    it, a card; a new version every year: one pipe, A, as the ring of light goes round. A deleted key kept ninety days, a card. The
-#    workspace's key, a click. The security team takes it back: struck through; nobody can read the files: two low pipes, F and D
+#    storage's key in it: two pipes, F and C, rising; its rules, as Walls, doors and keys set out, a card. A new version every year:
+#    one pipe, A, as the ring of light goes round. The workspace's key, a click (24 November 2026: the rules film 3 teaches are named,
+#    not shown again)
 kw = lambda lid, word, off=0: W('key', lid, word, off)
 kc = lambda lid, off=0: G('key', lid, off)
 P_enc = kw('always', 'always encrypted')
@@ -359,14 +359,9 @@ tap(P_enc + 0.1, 0.01, px(1675)); paper(P_enc + 0.4, 0.012, px(340))
 P_v = kw('own', 'a vault')
 air(P_v - 0.4, 0.9, 0.006, px(1675))
 slaps(P_v + 0.4, (F3, C4), 0.45, 0.7, px(1675))
-tap(kw('use', 'use the key', 0.1), 0.01, px(1600)); paper(kw('use', 'use the key'), 0.011, px(340))
-paper(kw('cant', "can't delete it"), 0.011, px(340))
+paper(kw('own', 'Walls, doors and keys'), 0.011, px(340))
 slap(A3, kw('version', 'a new version', 0.35), 0.7, px(1675)); paper(kw('version', 'a new version'), 0.01, px(340))
-paper(kw('deleted', 'kept ninety days'), 0.011, px(340))
 tap(kw('workspace', 'notebooks', 0.4), 0.01, px(1600)); paper(kw('workspace', 'notebooks'), 0.011, px(340))
-P_bk = kw('back', 'take the key back')
-paper(P_bk, 0.011, px(340)); strike(P_bk + 0.4, 0.009, px(1675))
-slaps(kw('nobody', 'nobody can read', 0.1), (F3, D3), 0.45, 0.75, px(1675))
 
 # 9. Only through the catalog: Rome's tank once more, the nozzle stamped: one pipe, C; the gangs' work written down, a page. The hall:
 #    "only through the catalog", its three checks, C D F; the private doors, the short list, the key, a soft knock as each is named.

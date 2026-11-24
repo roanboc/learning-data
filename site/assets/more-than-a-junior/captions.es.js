@@ -12,7 +12,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
  "Thirteen experts came to judge, and found no trick.": "Trece expertos vinieron a juzgar, y no hallaron truco.",
  "Many took that to mean Hans could think.": "Muchos entendieron que Hans podía pensar.",
  "But in every test, someone there knew the answer.": "Pero en cada prueba, alguien allí sabía la respuesta.",
- "Something had to change: not the horse, but the way he was tested.": "Algo tenía que cambiar: no el caballo, sino la forma de examinarlo.",
+ "The horse didn't need changing; the way he was tested did.": "El caballo no necesitaba cambiar; la forma de ponerlo a prueba, sí.",
  "That autumn, a young psychologist, Oskar Pfungst, tested Hans as a horse, not as a pupil.": "Ese otoño, un joven psicólogo, Oskar Pfungst, examinó a Hans como a un caballo, no como a un alumno.",
  "When nobody there knew the answer, Hans failed.": "Cuando nadie allí sabía la respuesta, Hans fallaba.",
  "With large blinkers on, so he couldn't see the one asking, he got 6 in every 100 right.": "Con grandes anteojeras, sin poder ver a quien preguntaba, acertaba 6 de cada 100.",

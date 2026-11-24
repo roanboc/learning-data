@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Pasarse una señal puede costar vidas: en Tokio, en 1962, un tren pasó una en rojo, y en los choques que siguieron murieron 160 personas.",
 "Passengers' lives would rest on one person seeing every signal in time.":
 "La vida de los pasajeros dependería de que una persona viera a tiempo cada señal.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Safety couldn't rest on one tired pair of eyes.":
+"La seguridad no podía depender de un solo par de ojos cansados.",
 "So the railway's engineers build the limits into the line itself.":
 "Así que los ingenieros del ferrocarril ponen los límites en la propia vía.",
 "A signal inside the driver's cab shows the speed allowed, and if the train goes faster, it slows itself down.":

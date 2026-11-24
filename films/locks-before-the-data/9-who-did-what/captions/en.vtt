@@ -54,209 +54,209 @@ Without one, when something goes wrong, the team can only guess what was touched
 00:01:50.239 --> 00:01:54.628
 With one, they can see who did what, close the way in, and show what didn't happen.
 
-00:02:02.128 --> 00:02:08.293
+00:02:02.128 --> 00:02:08.467
 At the university, Sam Okafor has locked the platform's sign-ins, doors, power and changes.
 
-00:02:09.793 --> 00:02:15.865
+00:02:09.967 --> 00:02:16.039
 Now the security review asks him to show they held, with three questions about the last 90 days.
 
-00:02:17.365 --> 00:02:18.982
+00:02:17.539 --> 00:02:19.156
 Who signed in, and from where?
 
-00:02:20.282 --> 00:02:23.407
+00:02:20.456 --> 00:02:23.581
 Who switched on admin power, and what did they do with it?
 
-00:02:24.707 --> 00:02:27.047
+00:02:24.881 --> 00:02:27.221
 What changed production, and who approved it?
 
-00:02:28.747 --> 00:02:32.182
+00:02:28.921 --> 00:02:32.356
 The answers are in four records, and each keeps its own time.
 
-00:02:33.882 --> 00:02:36.020
+00:02:34.056 --> 00:02:36.194
 The platform's audit table keeps a year.
 
-00:02:37.520 --> 00:02:42.590
+00:02:37.694 --> 00:02:42.764
 GitHub's audit log keeps six months, but who pushed or copied code, only a week.
 
-00:02:44.290 --> 00:02:48.376
+00:02:44.464 --> 00:02:48.550
 The directory keeps its sign-ins, and each switch-on of power, for a month.
 
-00:02:50.076 --> 00:02:53.514
+00:02:50.250 --> 00:02:53.688
 And the storage keeps a log only where someone has asked it to.
 
-00:02:55.214 --> 00:02:58.769
+00:02:55.388 --> 00:02:58.943
 So for two of the questions, part of the answer is already gone.
 
-00:03:02.269 --> 00:03:08.157
+00:03:02.443 --> 00:03:08.331
 So every record is now sent, as it's written, to one store apart, kept by the security team.
 
-00:03:10.457 --> 00:03:16.673
+00:03:10.631 --> 00:03:16.847
 A locked copy is kept for a year: until then, no one can change or delete it, not even an admin.
 
-00:03:18.973 --> 00:03:24.370
+00:03:19.147 --> 00:03:24.544
 Switching a record off is recorded too, and if one goes quiet, someone is told at once.
 
-00:03:26.670 --> 00:03:32.692
+00:03:26.844 --> 00:03:32.866
 Everyone is in it under their own name, agents too, as AI agents in data work shows.
 
-00:03:34.792 --> 00:03:42.051
+00:03:34.966 --> 00:03:42.225
 The record is about people, so it's kept like personal data: read by few, for a reason, and every search is recorded.
 
-00:03:44.151 --> 00:03:46.583
+00:03:44.325 --> 00:03:46.757
 Warren's pilots feared a spy in the cockpit.
 
-00:03:48.283 --> 00:03:53.265
+00:03:48.457 --> 00:03:53.439
 A record of who did what is read to find out what happened, not to watch the people in it.
 
-00:03:56.565 --> 00:04:00.159
+00:03:56.739 --> 00:04:00.333
 A few moments ring a bell at once, and someone always answers it.
 
-00:04:01.659 --> 00:04:02.888
+00:04:01.833 --> 00:04:03.062
 The first is power.
 
-00:04:04.188 --> 00:04:10.151
+00:04:04.362 --> 00:04:10.325
 One morning, last night's load has gone wrong, and Jun has to put the learner table back as it was.
 
-00:04:11.851 --> 00:04:18.239
+00:04:12.025 --> 00:04:18.413
 He switches on his admin account's power to restore a table, for an hour, with a reason, and Sam approves.
 
-00:04:20.139 --> 00:04:24.560
+00:04:20.313 --> 00:04:24.734
 The platform team gets the alert at once, and checks it matches a known task.
 
-00:04:26.260 --> 00:04:33.695
+00:04:26.434 --> 00:04:33.869
 The record keeps the rest: the switch-on, the restore, made by Jun's admin account, and the switch-off, twenty minutes later.
 
-00:04:35.795 --> 00:04:41.254
+00:04:35.969 --> 00:04:41.428
 The other bells: a risky sign-in, an emergency account used, a record gone quiet.
 
-00:04:43.154 --> 00:04:45.060
+00:04:43.328 --> 00:04:45.234
 Few bells, so none is ignored.
 
-00:04:47.960 --> 00:04:51.964
+00:04:48.134 --> 00:04:52.138
 One evening, at twenty to ten, the bell rings for a risky sign-in.
 
-00:04:53.664 --> 00:04:57.968
+00:04:53.838 --> 00:04:58.142
 Jun's session is in use from another country, at an hour he never works.
 
-00:04:59.468 --> 00:05:02.904
+00:04:59.642 --> 00:05:03.078
 Jun is at home, and his laptop has been shut since six.
 
-00:05:04.604 --> 00:05:10.406
+00:05:04.778 --> 00:05:10.580
 A browser add-on he'd used for a year had changed hands, and its last update copied his sign-ins.
 
-00:05:12.306 --> 00:05:15.966
+00:05:12.480 --> 00:05:16.140
 Whoever holds a copied session is Jun, until the session ends.
 
-00:05:17.666 --> 00:05:19.330
+00:05:17.840 --> 00:05:19.504
 So the first step is to end it.
 
-00:05:20.630 --> 00:05:28.629
+00:05:20.804 --> 00:05:28.803
 The security team's on-call switches his account off, and ends all his sessions: in the directory, in GitHub, and on the platform.
 
-00:05:30.729 --> 00:05:34.456
+00:05:30.903 --> 00:05:34.630
 Twelve minutes after the bell, GitHub and the platform refuse it.
 
-00:05:37.556 --> 00:05:40.373
+00:05:37.730 --> 00:05:40.547
 Then they read, in the one store, what the copy did.
 
-00:05:41.873 --> 00:05:45.212
+00:05:42.047 --> 00:05:45.386
 In GitHub, it downloaded the platform's code as a file.
 
-00:05:46.912 --> 00:05:49.725
+00:05:47.086 --> 00:05:49.899
 No push, no change to a rule, no approval.
 
-00:05:51.425 --> 00:05:55.238
+00:05:51.599 --> 00:05:55.412
 On the platform, nothing: it has no door on the open internet.
 
-00:05:56.938 --> 00:05:59.898
+00:05:57.112 --> 00:06:00.072
 The code holds no secret and no learner's data.
 
-00:06:01.398 --> 00:06:07.986
+00:06:01.572 --> 00:06:08.160
 That night, the add-on is taken off every browser; the next morning, Jun is back at work on a clean laptop.
 
-00:06:09.886 --> 00:06:14.679
+00:06:10.060 --> 00:06:14.853
 Nothing was changed, so nothing has to be put back: the record is how they know.
 
-00:06:16.579 --> 00:06:20.854
+00:06:16.753 --> 00:06:21.028
 The next day, a review without blame asks what made it possible, not who.
 
-00:06:22.554 --> 00:06:30.082
+00:06:22.728 --> 00:06:30.256
 Now browsers take only add-ons the university approves, and GitHub takes requests only from the university's network.
 
-00:06:31.982 --> 00:06:36.348
+00:06:32.156 --> 00:06:36.522
 A leaked secret gets the same steps: end it first, then read what it did.
 
-00:06:39.448 --> 00:06:44.053
+00:06:39.622 --> 00:06:44.227
 Every admin power here is switched on for a task, and approved by someone else.
 
-00:06:45.553 --> 00:06:50.193
+00:06:45.727 --> 00:06:50.367
 But what if the sign-in service fails, or a wrong rule locks every admin out?
 
-00:06:51.893 --> 00:06:54.909
+00:06:52.067 --> 00:06:55.083
 For that, the directory has two emergency accounts.
 
-00:06:56.409 --> 00:06:59.458
+00:06:56.583 --> 00:06:59.632
 They belong to no one, and their power is always on.
 
-00:07:01.158 --> 00:07:05.997
+00:07:01.332 --> 00:07:06.171
 So they sign in only with security keys, kept in two safes, in two buildings.
 
-00:07:07.697 --> 00:07:12.866
+00:07:07.871 --> 00:07:13.040
 No rule that could lock everyone out applies to them, and any sign-in rings every bell.
 
-00:07:14.766 --> 00:07:20.223
+00:07:14.940 --> 00:07:20.397
 Every 90 days, two people open a safe, sign in, check it works, and lock the key away.
 
-00:07:21.923 --> 00:07:25.159
+00:07:22.097 --> 00:07:25.333
 The bell rings then too, and everyone knows it's the test.
 
-00:07:28.059 --> 00:07:30.249
+00:07:28.233 --> 00:07:30.423
 The last lock is on the data itself.
 
-00:07:31.749 --> 00:07:35.650
+00:07:31.923 --> 00:07:35.824
 A table's own history can undo most mistakes, for seven days.
 
-00:07:37.350 --> 00:07:41.992
+00:07:37.524 --> 00:07:42.166
 But what if a mistake is found too late, or someone deletes a table and its history?
 
-00:07:43.692 --> 00:07:50.065
+00:07:43.866 --> 00:07:50.239
 Every night after the load, a copy of production's data goes to a place apart, with admins of its own.
 
-00:07:51.965 --> 00:07:56.227
+00:07:52.139 --> 00:07:56.401
 For 30 days, no one can change or delete it, not even an admin.
 
-00:07:57.927 --> 00:08:02.452
+00:07:58.101 --> 00:08:02.626
 Once a month, the team restores one beside the real table, and checks they match.
 
-00:08:04.152 --> 00:08:09.330
+00:08:04.326 --> 00:08:09.504
 As Walls, doors and keys says, a copy nobody has restored is only a hope.
 
-00:08:12.430 --> 00:08:15.688
+00:08:12.604 --> 00:08:15.862
 Three months on, the review asks its three questions again.
 
-00:08:17.188 --> 00:08:20.132
+00:08:17.362 --> 00:08:20.306
 Sam answers them in an afternoon, from one place.
 
-00:08:21.632 --> 00:08:26.289
+00:08:21.806 --> 00:08:26.463
 Of every sign-in, one was wrong: a copied session, stopped in twelve minutes.
 
-00:08:27.989 --> 00:08:34.483
+00:08:28.163 --> 00:08:34.657
 Admin power was switched on 23 times, each with a reason, an approval, and a record of what was done.
 
-00:08:36.183 --> 00:08:41.315
+00:08:36.357 --> 00:08:41.489
 Production changed 11 times, each change reviewed, and each release approved.
 
-00:08:43.015 --> 00:08:46.190
+00:08:43.189 --> 00:08:46.364
 And every night at two, the job signed in as itself.
 
-00:08:48.090 --> 00:08:50.503
+00:08:48.264 --> 00:08:50.677
 Warren's box doesn't keep a plane in the air.
 
-00:08:51.803 --> 00:08:54.170
+00:08:51.977 --> 00:08:54.344
 It means no one has to guess what happened.
 
-00:08:55.670 --> 00:08:57.890
+00:08:55.844 --> 00:08:58.064
 The record does the same for the platform.
 
-00:08:59.390 --> 00:09:01.984
+00:08:59.564 --> 00:09:02.158
 If you can't see it, you can't say it's protected.

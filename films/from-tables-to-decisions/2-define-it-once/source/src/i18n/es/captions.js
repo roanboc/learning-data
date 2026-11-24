@@ -6,7 +6,7 @@
    una tutoría. As the site's other Spanish captions say them: una vista de métricas for a metric view, un pull request, la capa semántica, El significado en la plataforma.
    The other two numbers' names: horas ocasionales contratadas and pago ocasional pagado. In 1889 and after: la bóveda, las copias, las pesas, una pesada, el patrón de masa,
    la balanza de Kibble, la constante de Planck. The platform's names stay as they are on screen: Unity Catalog, Genie, Genie One, the Ask Genie button, MetricFlow, Apache Ossie.
-   Tú, as the film's last lines speak to the viewer (Deja, revisa, no los reinventes).
+   Tú, as the film's last lines speak to the viewer (Deja, revisa, construye sobre ellos).
    Numbers keep the picture's comma and point (A$2.21M is 2.21 millones; 330 mil), as the module's other Spanish captions do, so a viewer reads the same number in the caption and on screen. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Near Paris, 1889. A small cylinder of platinum and iridium, kept in a vault, becomes the kilogram.":
@@ -137,6 +137,6 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Rohan fija con el costo el presupuesto de Salud del año siguiente, con el tutor de cada tutoría incluido.",
 "Like the kilogram, each measure is one definition, written where anyone can read it, and held by no single tool.":
 "Como el kilogramo, cada medida es una definición, escrita donde cualquiera la lee, y no la guarda ninguna herramienta.",
-"The standards already exist, so don't reinvent them: investigate, adapt, implement, iterate, starting from the official docs.":
-"Los estándares ya existen, así que no los reinventes: investiga, adapta, implementa, itera, empezando por la documentación oficial."
+"The standards already exist, so build on them: investigate, adapt, implement, iterate, starting from the official docs.":
+"Los estándares ya existen, así que construye sobre ellos: investiga, adapta, implementa, itera, empezando por la documentación oficial."
 });

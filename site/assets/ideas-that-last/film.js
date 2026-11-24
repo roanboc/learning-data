@@ -429,23 +429,24 @@ function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14
 // Ideas that last, features you test: the closing film of Documents and closing remarks, the last series of Modern data basics. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers in words). The few longer stops are in breath.js.
 const NARR={
-"seasons":{"name":"Two harvests a year","lead":1.6,"tail":1.0,"vo":[
- {"id":"place","gap":0.8,"text":"Mexico, 1944. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more.","say":"Mexico, nineteen forty-four. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more."},
- {"id":"rust","gap":0.8,"text":"Stem rust, a fungus that chokes the plant, could ruin a whole field of wheat at once."},
- {"id":"field","gap":0.8,"text":"One field there that year was expected to give only ten bushels an acre: a poor harvest for a season's work."},
- {"id":"lost","gap":0.8,"text":"For a farmer, a ruined field meant a year's work and seed lost, and Mexico bought wheat from abroad for its bread."},
- {"id":"slow","gap":0.8,"text":"And breeding a wheat that resisted the rust was slow: one generation a year, and many years before it reached a farm."},
- {"id":"change","gap":0.8,"text":"Farmers couldn't wait a decade for every new wheat."},
- {"id":"team","gap":0.8,"text":"From 1945, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way.","say":"From nineteen forty-five, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way."},
- {"id":"two","gap":0.8,"text":"They grew two generations a year: one in summer, in the highlands near Mexico City, and one in winter, in Sonora, far to the north."},
- {"id":"each","gap":0.8,"text":"Each season, they crossed plants, tested them in the field, kept the few that did best, and sowed those in the other place."},
- {"id":"dogma","gap":0.8,"text":"Many breeders said a wheat should be bred only where it would grow. The team tried it anyway, and measured."},
- {"id":"half","gap":0.8,"text":"It cut the time to breed a new wheat in half, and the new wheats grew well in both places, and far beyond."},
- {"id":"enough","gap":0.8,"text":"By 1956, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled.","say":"By nineteen fifty-six, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled."},
- {"id":"kept","gap":0.8,"text":"And the testing never stopped: the rust kept changing, so the wheat had to change too."},
+"foot":{"name":"A foot for bare feet","lead":1.6,"tail":1.0,"vo":[
+ {"id":"place","gap":0.8,"text":"Jaipur, India, in the 1960s. At the city's hospital, the Sawai Man Singh, people came in who had lost a leg.","say":"Jaipur, India, in the nineteen-sixties. At the city's hospital, the Sawai Man Singh, people came in who had lost a leg."},
+ {"id":"abroad","gap":0.8,"text":"The hospital could fit them with an artificial foot, made to a design from abroad."},
+ {"id":"shoe","gap":0.8,"text":"It had to be worn in a shoe. But many of them walked barefoot, in fields that were often under water."},
+ {"id":"squat","gap":0.8,"text":"And it was heavy and stiff: on it, nobody could squat, or sit on the floor, as people did to eat, to talk and to work."},
+ {"id":"gave","gap":0.8,"text":"So people who lived barefoot gave it up, and with it, the work a foot would have let them do."},
+ {"id":"change","gap":0.8,"text":"They needed a foot for the life they lived, not for a shoe."},
+ {"id":"team","gap":0.8,"text":"Pramod Karan Sethi, the head of orthopaedics, worked with Ram Chandra Sharma, a craftsman who shaped aluminium."},
+ {"id":"made","gap":0.8,"text":"Sharma made feet of wood and rubber, cured like a tyre, and Sethi fitted them on patients."},
+ {"id":"tried","gap":0.8,"text":"Each patient walked on it, squatted, sat on the floor, and said where it hurt. Then they changed it, and tried again."},
+ {"id":"foot","gap":0.8,"text":"By the end of the 1960s, they had a foot that looked and bent like a bare one.","say":"By the end of the nineteen-sixties, they had a foot that looked and bent like a bare one."},
+ {"id":"could","gap":0.8,"text":"On it, people walked barefoot, squatted, sat cross-legged, worked in wet fields, and even climbed trees."},
+ {"id":"hour","gap":0.8,"text":"It could be made in about an hour, for far less than a foot from abroad."},
+ {"id":"free","gap":0.8,"text":"From 1975, a society in Jaipur has fitted it free: more than 700,000 limbs so far, in India and in forty-four other countries.","say":"From nineteen seventy-five, a society in Jaipur has fitted it free: more than seven hundred thousand limbs so far, in India and in forty-four other countries."},
+ {"id":"kept","gap":0.8,"text":"And the foot kept changing: plastics took over from wood and aluminium, while the first question stayed: how does this person live?"},
  {"id":"same","gap":0.8,"text":"Data platforms change too, every month. What lasts is the ideas, and a quick, honest way to test what's new."}]},
-"recap":{"name":"What the module showed","lead":1.0,"tail":1.0,"vo":[
- {"id":"walk","gap":0.8,"text":"This module walked the university's platform, from where data is born to who reads it."},
+"recap":{"name":"What the topic showed","lead":1.0,"tail":1.0,"vo":[
+ {"id":"walk","gap":0.8,"text":"This topic walked the university's platform, from where data is born to who reads it."},
  {"id":"moves","gap":0.8,"text":"In Data that moves, moving data was easy, and agreeing what each field means was the work."},
  {"id":"fresh","gap":0.8,"text":"How fresh data must be came from when someone acts on it, and most analysis was fine a day old."},
  {"id":"once","gap":0.8,"text":"And each claim was written once, on one platform, for everyone to read."},
@@ -464,7 +465,7 @@ const NARR={
  {"id":"need","gap":0.8,"text":"Don't choose a feature because it's new, or a platform because a film showed it. Choose what answers a real need."}]},
 "loop":{"name":"Test what's new","lead":1.0,"tail":1.0,"vo":[
  {"id":"loop","gap":0.8,"text":"So how do you keep up? With a loop, small and quick: investigate, adapt, implement, iterate."},
- {"id":"shorter","gap":0.8,"text":"It's the breeders' two seasons again: the shorter the loop, the more you learn in the same time."},
+ {"id":"shorter","gap":0.8,"text":"It's the workshop in Jaipur again: the sooner you try it on a real need, the sooner you learn where it hurts."},
  {"id":"need","gap":0.8,"text":"Investigate starts from a real need, not from the feature. Rohan's team typed every invoice by hand, and asked for a better way in a ticket."},
  {"id":"read","gap":0.8,"text":"Jun read the official docs on the functions that read documents: what they do, what they cost, and where they stop."},
  {"id":"adapt","gap":0.8,"text":"Adapt means trying it small, on your own data, in a sandbox, for a set time: two days, on 200 of September's invoices.","say":"Adapt means trying it small, on your own data, in a sandbox, for a set time: two days, on two hundred of September's invoices."},
@@ -477,24 +478,24 @@ const NARR={
  {"id":"list","gap":0.8,"text":"But Finance's supplier list already gave it, so they dropped it."},
  {"id":"cost","gap":0.8,"text":"A trial that ends in no costs two days, not a year."}]},
 "close":{"name":"Keep the method","lead":1.0,"tail":1.0,"vo":[
- {"id":"wheats","gap":0.8,"text":"The wheats of the 1950s are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today.","say":"The wheats of the nineteen fifties are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today."},
+ {"id":"feet","gap":0.8,"text":"The rubber feet of the 1960s are long gone. The method, start from how people live and try it on them, is still how the foot is made.","say":"The rubber feet of the nineteen-sixties are long gone. The method, start from how people live and try it on them, is still how the foot is made."},
  {"id":"keep","gap":0.8,"text":"So keep the ideas, and test the features: small, soon, and on a real need."},
- {"id":"module","gap":0.8,"text":"That closes this module: moving data, running the platform, serving it to people and agents, and reading documents."},
+ {"id":"module","gap":0.8,"text":"That closes this topic: moving data, running the platform, serving it to people and agents, and reading documents."},
  {"id":"team","gap":0.8,"text":"Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means."},
  {"id":"end","gap":0.8,"text":"Start from the official docs. Investigate, adapt, implement, iterate, and keep going."}]}
 };
 
-const VODUR={"seasons/place": 7.028, "seasons/rust": 4.964, "seasons/field": 6.734, "seasons/lost": 6.741, "seasons/slow": 7.082, "seasons/change": 2.485, "seasons/team": 8.623, "seasons/two": 8.396, "seasons/each": 6.995, "seasons/dogma": 5.675, "seasons/half": 6.113, "seasons/enough": 7.308, "seasons/kept": 4.881, "seasons/same": 7.077, "recap/walk": 5.111, "recap/moves": 5.456, "recap/fresh": 5.602, "recap/once": 3.993, "recap/software": 7.798, "recap/watches": 3.954, "recap/tables": 8.296, "recap/readers": 4.848, "recap/docs": 5.911, "recap/older": 2.672, "light/fast": 4.077, "light/date": 3.25, "light/slow": 7.287, "light/source": 7.283, "light/other": 8.086, "light/need": 6.301, "loop/loop": 5.622, "loop/shorter": 4.991, "loop/need": 8.935, "loop/read": 6.955, "loop/adapt": 8.206, "loop/compare": 9.372, "loop/learned": 4.674, "loop/implement": 5.706, "loop/review": 7.225, "loop/iterate": 6.717, "loop/drop": 5.396, "loop/list": 3.452, "loop/cost": 3.056, "close/wheats": 8.886, "close/keep": 4.635, "close/module": 6.979, "close/team": 7.796, "close/end": 5.397};
+const VODUR={"foot/place": 7.849, "foot/abroad": 4.627, "foot/shoe": 5.647, "foot/squat": 7.269, "foot/gave": 4.839, "foot/change": 3.088, "foot/team": 7.073, "foot/made": 5.212, "foot/tried": 6.434, "foot/foot": 4.48, "foot/could": 6.354, "foot/hour": 3.801, "foot/free": 10.263, "foot/kept": 7.583, "foot/same": 7.077, "recap/walk": 4.896, "recap/moves": 5.456, "recap/fresh": 5.602, "recap/once": 3.993, "recap/software": 7.798, "recap/watches": 3.954, "recap/tables": 8.296, "recap/readers": 4.848, "recap/docs": 5.911, "recap/older": 2.672, "light/fast": 4.077, "light/date": 3.25, "light/slow": 7.287, "light/source": 7.283, "light/other": 8.086, "light/need": 6.301, "loop/loop": 5.622, "loop/shorter": 6.084, "loop/need": 8.935, "loop/read": 6.955, "loop/adapt": 8.206, "loop/compare": 9.372, "loop/learned": 4.674, "loop/implement": 5.706, "loop/review": 7.225, "loop/iterate": 6.717, "loop/drop": 5.396, "loop/list": 3.452, "loop/cost": 3.056, "close/feet": 8.61, "close/keep": 4.635, "close/module": 6.999, "close/team": 7.796, "close/end": 5.397};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the title card after the opening, and the end card. */
 const BREATH={
-"seasons":{"hold":{"place":0.85,"rust":0.85,"field":1.05,"lost":1.05,"slow":1.05,"change":0.85,"team":1.05,"two":1.25,"each":1.25,"dogma":1.05,"half":1.25,"enough":1.25,"kept":0.85,"same":0.65},"breathe":4.4},
+"foot":{"hold":{"place":0.85,"abroad":0.85,"shoe":1.05,"squat":1.05,"gave":1.05,"change":0.85,"team":1.05,"made":1.05,"tried":1.25,"foot":1.05,"could":1.25,"hour":1.05,"free":1.25,"kept":0.85,"same":0.65},"breathe":4.4},
 "recap":{"hold":{"walk":1.05,"moves":0.85,"fresh":0.85,"once":1.05,"software":0.85,"watches":1.05,"tables":0.85,"readers":1.05,"docs":1.05,"older":1.25}},
 "light":{"hold":{"fast":1.4,"date":1.5,"slow":1.6,"source":1.5,"other":1.6,"need":1.6}},
 "loop":{"hold":{"loop":1.55,"shorter":1.35,"need":1.35,"read":1.35,"adapt":1.35,"compare":1.55,"learned":1.5,"implement":1.35,"review":1.55,"iterate":1.55,"drop":0.95,"list":1.55,"cost":1.35}},
-"close":{"hold":{"wheats":1.0,"keep":0.8,"module":0.6,"team":0.8,"end":0.4},"breathe":4.6}
+"close":{"hold":{"feet":1.0,"keep":0.8,"module":0.6,"team":0.8,"end":0.4},"breathe":4.6}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -1793,138 +1794,116 @@ function md_tree(ctx,x,y,items,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||52,in
     ctx.restore();});
   ctx.restore();return rh*items.length;}
 
-/* ===== Ideas that last, features you test: the film's own world, Mexico, 1944 to 1956 =====
+/* ===== Ideas that last, features you test: the film's own world, Jaipur, the 1960s =====
    The film draws with the module's look (films/data-that-moves/shared/README.md); these are its own pictures, each name starting
-   with il_ or IL_. The opening is lit by a low sun over the fields, on the module's navy: a wheat field in Sonora's Yaqui Valley
-   (ilField), painted once with its sky, its mountains and its rows, and its wheat drawn live (il_field: each stalk a tapering curve,
-   its ear of grain, swaying, the rust spreading on it, a ruined stalk bowing over); and a map of Mexico (ilMexico), with the two
-   places the breeders worked: the highlands near Mexico City in summer and Sonora in winter (il_site, il_shuttle).
-     the map         the land from Natural Earth's 1:110m land (public domain, naturalearthdata.com; NOTICE.md), simplified to about a
-                     third of a degree and kept here in tenths of a degree, as Files as data and as context keeps it; il_xy projects
-                     it, plate carrée, 50 px a degree, centred on 102° W, 23.5° N. The sites are where the program worked: Ciudad
-                     Obregón in the Yaqui Valley, and Toluca, in the highlands west of Mexico City
-     the people      a plant breeder (Norman Borlaug) and a young agronomist, one of the hundreds of Mexican graduates the program
-                     trained, in the work shirts of a 1940s field station (IL_P)
+   with il_ or IL_. The opening is lit by a late afternoon sun through a high arched window, on the module's navy: the limb workshop
+   of Jaipur's hospital (ilWork), painted once with its sandstone walls, its window and the light falling from it, a shelf of moulds and
+   a long workbench; on the bench, drawn live, two feet seen from the side: the one made to a design from abroad, stiff, in a shoe
+   (il_footShoe), and the one the workshop made, of rubber over a wooden core on an aluminium leg, shaped like a bare foot, its front
+   bending as a foot does (il_footBare).
+     the place       the Sawai Man Singh Hospital, Jaipur, where Sethi led the orthopaedics department of the medical college; the room is
+                     imagined from that: a workshop at the hospital, its walls of the city's sandstone, a high window with a stone screen
+     the people      the surgeon Pramod Karan Sethi, in the white coat over shirt and tie of a 1960s hospital doctor, and the craftsman
+                     Ram Chandra Sharma, older, in a plain cotton kurta (IL_P); neither waves a hand: the feet on the bench are the story
    Every word is at least 28 px as seen, or marked as decoration; none but the captions below y 890. */
 
-const IL={wheat:[218,190,124],wheatHi:[246,226,170],wheatDk:[140,112,62],stem:[150,148,92],rust:[200,104,52],rustDk:[118,58,34],
-  soil:[34,26,22],soilHi:[70,52,40],sun:[255,190,120],sky0:[10,18,40],sky1:[64,52,74],hill:[22,26,44],land:[24,33,50],landHi:[38,50,72],coast:[128,164,214]};
+const IL={wall:[150,92,78],wallHi:[214,150,112],wallDk:[62,36,40],sun:[255,196,130],wood:[118,78,50],woodHi:[168,118,78],woodDk:[56,36,26],
+  rubber:[186,138,104],rubberHi:[226,184,146],rubberDk:[118,80,58],metal:[176,184,196],metalDk:[96,104,118],shoe:[34,30,34],shoeHi:[92,84,92],sole:[20,18,20]};
 const il_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
 const il_k=(tt,t0)=>clamp(tt-t0,0,1);
 // screen space inside a shot: what's drawn here stays put while the camera moves
 function il_scr(ctx,S,fn){ctx.save();setScreen(ctx,S);try{fn();}finally{ctx.restore();}}
 
-/* ---------------------------------------------------------------- the field */
-// the sky at dusk, the Sierra Madre far off, and the valley's ploughed ground in rows going away: painted once
-function il_paintField(c){let g=c.createLinearGradient(0,0,0,600);g.addColorStop(0,"#07102a");g.addColorStop(0.55,"#1a2142");g.addColorStop(0.86,"#4a3a4e");g.addColorStop(1,"#6a4a44");c.fillStyle=g;c.fillRect(0,0,1920,600);
-  // the low sun's glow on the horizon, to the right
-  let q=c.createRadialGradient(1500,560,10,1500,560,900);q.addColorStop(0,"rgba(255,186,120,0.42)");q.addColorStop(0.25,"rgba(240,150,100,0.14)");q.addColorStop(1,"rgba(200,120,90,0)");c.fillStyle=q;c.fillRect(0,0,1920,640);
-  // a few stars high up
-  const r=ag_rnd(1944);c.fillStyle="rgba(220,230,255,0.5)";for(let i=0;i<60;i++){const x=r()*1920,y=r()*260,s=r()*1.6+0.4;c.globalAlpha=0.25+0.5*r();c.beginPath();c.arc(x,y,s,0,TAU);c.fill();}c.globalAlpha=1;
-  // two ranges of mountains, the far one paler
-  for(const [y0,amp,col,seed] of [[500,90,[52,48,74],7],[548,60,[26,28,48],11]]){const rr_=ag_rnd(seed);c.fillStyle=rgba(col,1);c.beginPath();c.moveTo(0,620);
-    let y=y0;for(let x=0;x<=1940;x+=40){y=clamp(y+(rr_()-0.5)*amp*0.6,y0-amp,y0+amp*0.25);c.lineTo(x,y);}c.lineTo(1920,620);c.closePath();c.fill();}
-  // the ground: dark soil, warmer towards the sun, in rows that run away to the horizon
-  g=c.createLinearGradient(0,580,0,1080);g.addColorStop(0,"#2a2026");g.addColorStop(0.3,"#1c1614");g.addColorStop(1,"#0b0807");c.fillStyle=g;c.fillRect(0,580,1920,500);
-  q=c.createRadialGradient(1500,590,10,1500,620,1100);q.addColorStop(0,"rgba(255,170,110,0.22)");q.addColorStop(1,"rgba(255,170,110,0)");c.fillStyle=q;c.fillRect(0,580,1920,500);
-  c.strokeStyle="rgba(150,110,80,0.10)";c.lineWidth=2;for(let k=-30;k<=30;k++){c.beginPath();c.moveTo(960+k*16,590);c.lineTo(960+k*130,1080);c.stroke();}
-  // a far line of the field's wheat on the horizon, lit at its top
-  c.fillStyle="rgba(150,120,70,0.35)";for(let x=0;x<1920;x+=5){const h=6+r()*6;c.fillRect(x,592-h,3,h);}
-  const v=c.createRadialGradient(1100,600,300,1100,560,1250);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.55)");c.fillStyle=v;c.fillRect(0,0,1920,1080);}
-AG_PLACES.ilField=c=>il_paintField(c);
+/* ---------------------------------------------------------------- the workshop */
+// the room, painted once: sandstone walls warm where the sun falls, a high arched window at the right with its stone screen, the light
+// falling from it across the room, a shelf of moulds and tools on the back wall, and the long workbench across the front
+function il_paintWork(c){let g=c.createLinearGradient(0,0,0,1080);g.addColorStop(0,"#1a1020");g.addColorStop(0.5,"#3a2228");g.addColorStop(1,"#120a0c");c.fillStyle=g;c.fillRect(0,0,1920,1080);
+  // the wall's stone courses, faint
+  c.strokeStyle="rgba(214,150,112,0.07)";c.lineWidth=2;for(let y=60;y<760;y+=64){c.beginPath();c.moveTo(0,y);c.lineTo(1920,y);c.stroke();
+    const r=ag_rnd(y);for(let x=(y/64%2)*90;x<1920;x+=180+r()*20){c.beginPath();c.moveTo(x,y);c.lineTo(x,y+64);c.stroke();}}
+  // the sun's warmth on the wall, round the window and where its light lands
+  for(const [x,y,rad,al] of [[1600,300,620,0.30],[760,560,700,0.18]]){const q=c.createRadialGradient(x,y,10,x,y,rad);q.addColorStop(0,rgba(IL.wallHi,al));q.addColorStop(1,rgba(IL.wallHi,0));c.fillStyle=q;c.fillRect(0,0,1920,1080);}
+  // the arched window, its deep reveal, and a stone screen of small eight-sided openings, the sky warm behind it
+  const wx=1480,wy=150,ww=240,wh=340,arch=(o)=>{c.beginPath();c.moveTo(wx-o,wy+wh+o);c.lineTo(wx-o,wy+ww/2);c.arc(wx+ww/2,wy+ww/2,ww/2+o,Math.PI,0);c.lineTo(wx+ww+o,wy+wh+o);c.closePath();};
+  arch(26);c.fillStyle=rgba(IL.wallDk,0.9);c.fill();arch(0);g=c.createLinearGradient(0,wy,0,wy+wh);g.addColorStop(0,"#ffd9a0");g.addColorStop(1,"#f0a070");c.fillStyle=g;c.fill();
+  c.save();arch(0);c.clip();c.fillStyle=rgba(IL.wall,1);c.fillRect(wx-10,wy-10,ww+20,wh+20);c.globalCompositeOperation="destination-out";
+  for(let y=wy+14;y<wy+wh;y+=30)for(let x=wx+12+((y-wy)/30%2)*15;x<wx+ww;x+=30){c.beginPath();for(let k=0;k<8;k++){const an=k/8*TAU+Math.PI/8;c.lineTo(x+Math.cos(an)*10,y+Math.sin(an)*10);}c.closePath();c.fill();}
+  c.restore();c.save();arch(0);c.clip();c.globalCompositeOperation="destination-over";g=c.createLinearGradient(0,wy,0,wy+wh);g.addColorStop(0,"#ffe2b0");g.addColorStop(1,"#f6a676");c.fillStyle=g;c.fillRect(wx,wy,ww,wh);c.restore();
+  // the window's light: a soft shaft falling to the right, onto the bench
+  c.save();c.globalCompositeOperation="lighter";const sh=c.createLinearGradient(1500,300,720,800);sh.addColorStop(0,"rgba(255,190,130,0.16)");sh.addColorStop(1,"rgba(255,190,130,0)");
+  c.fillStyle=sh;c.beginPath();c.moveTo(wx,wy+40);c.lineTo(wx+ww,wy+80);c.lineTo(1180,760);c.lineTo(420,760);c.closePath();c.fill();c.restore();
+  // a shelf on the back wall: feet drying on it, a few moulds, a coil of rubber strip
+  c.fillStyle=rgba(IL.woodDk,1);c.fillRect(160,300,700,16);c.fillStyle=rgba(IL.wood,0.8);c.fillRect(160,296,700,6);
+  for(let i=0;i<5;i++){const x=210+i*92;il_footShape(c,x,296,46,{fill:mix(IL.rubberDk,IL.wallDk,0.35),hi:mix(IL.rubber,IL.wallDk,0.4),flip:i%2===1});}
+  c.fillStyle=rgba(mix(IL.woodDk,IL.wallDk,0.3),1);rr(c,690,236,70,60,6);c.fill();rr(c,770,250,60,46,6);c.fill();
+  c.strokeStyle=rgba(mix(IL.rubberDk,IL.wallDk,0.4),1);c.lineWidth=7;for(let k=0;k<3;k++){c.beginPath();c.ellipse(700+k*4,370,40-k*6,12-k*2,0,0,TAU);c.stroke();}
+  // tools hanging on the wall: a saw and a rasp, in silhouette
+  c.fillStyle=rgba(mix(IL.metalDk,IL.wallDk,0.5),1);c.beginPath();c.moveTo(1060,180);c.lineTo(1200,200);c.lineTo(1200,236);c.lineTo(1060,214);c.closePath();c.fill();
+  c.fillStyle=rgba(mix(IL.woodDk,IL.wallDk,0.2),1);rr(c,1020,176,48,44,10);c.fill();rr(c,1300,250,14,120,6);c.fill();
+  // the workbench: a thick top lit along its front edge, its face going down into the dark
+  g=c.createLinearGradient(0,742,0,790);g.addColorStop(0,rgba(IL.woodHi,1));g.addColorStop(1,rgba(IL.wood,1));c.fillStyle=g;c.fillRect(0,742,1920,48);
+  c.fillStyle=rgba(IL.woodDk,1);c.fillRect(0,790,1920,290);c.strokeStyle="rgba(0,0,0,0.35)";c.lineWidth=3;for(let x=0;x<1920;x+=240){c.beginPath();c.moveTo(x,800);c.lineTo(x,1080);c.stroke();}
+  const sb=c.createRadialGradient(900,760,10,900,760,700);sb.addColorStop(0,"rgba(255,190,130,0.20)");sb.addColorStop(1,"rgba(255,190,130,0)");c.fillStyle=sb;c.fillRect(0,700,1920,120);
+  const v=c.createRadialGradient(960,520,380,960,540,1250);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.6)");c.fillStyle=v;c.fillRect(0,0,1920,1080);}
+AG_PLACES.ilWork=c=>il_paintWork(c);
 
-// the field's stalks, made once: three bands, each further back smaller and dimmer, each stalk a little bent its own way
-let IL_STALKS=null;
-function il_stalks(){if(IL_STALKS)return IL_STALKS;const r=ag_rnd(1945),out=[];
-  for(const [y0,y1,n,s] of [[598,640,150,0.26],[648,760,120,0.5],[780,1010,64,0.92]])for(let i=0;i<n;i++){const x=-40+(i+r()*0.9)/n*2000,y=lerp(y0,y1,r());
-    out.push({x,y,s:s*(0.8+0.4*r()),ph:r()*TAU,lean:(r()-0.5)*0.14,bend:(r()-0.5)*0.16,leaf:r()<0.7?(r()<0.5?-1:1):0,d:r()});}
-  out.sort((a,b)=>a.y-b.y);IL_STALKS=out;return out;}
-// one stalk of wheat at (x, y), its foot, of height h: a stem that tapers as it rises, bent a little (o.bend), a leaf, and its ear of grain
-// nodding at the top, swaying (sway, in radians), its colour going from straw and grain to rust (rust 0 to 1, specks of it spreading
-// up the stem); a ruined stalk (bow 0 to 1) bends at the top, its ear hanging, thin and brown
-function il_stalk(c,x,y,h,o){o=o||{};const sway=o.sway||0,rust=o.rust||0,bow=o.bow||0,a=o.a==null?1:o.a,lit=o.lit==null?1:o.lit,bend=o.bend||0;if(a<=0.004)return;
-  const ang=sway+bow*0.3,tip=[x+Math.sin(ang)*h,y-Math.cos(ang)*h*(1-0.08*bow)],mid=[x+Math.sin(ang*0.4)*h*0.5+bend*h,y-h*0.5];
-  const stem=mix(mix(IL.stem,IL.rustDk,rust*0.8),[46,36,28],bow*0.5),grain=mix(mix(IL.wheat,IL.rust,rust),[96,60,38],bow*0.75);
-  c.save();c.globalAlpha*=a;c.lineCap="round";
-  const pts=[];for(let i=0;i<=8;i++){const u=i/8;pts.push([lerp(lerp(x,mid[0],u),lerp(mid[0],tip[0],u),u),lerp(lerp(y,mid[1],u),lerp(mid[1],tip[1],u),u)]);}
-  for(let i=0;i<8;i++){c.strokeStyle=rgba(mix(stem,IL.wheatHi,0.25*lit*(i/8)),1);c.lineWidth=Math.max(0.7,(2.6-1.8*i/8)*h/220);c.beginPath();c.moveTo(pts[i][0],pts[i][1]);c.lineTo(pts[i+1][0],pts[i+1][1]);c.stroke();}
-  // a long leaf from low on the stem, arching out and down to a point
-  if(o.leaf){const b=pts[2],L=h*0.36,dir=o.leaf;c.fillStyle=rgba(mix(stem,[34,40,30],0.25),1);c.beginPath();c.moveTo(b[0],b[1]);
-    c.quadraticCurveTo(b[0]+dir*L*0.55,b[1]-L*0.42,b[0]+dir*L,b[1]-L*0.08+bow*L*0.3);c.quadraticCurveTo(b[0]+dir*L*0.5,b[1]-L*0.28,b[0],b[1]+h*0.02);c.fill();}
-  // the ear: small grains in pairs up its length, each an almond set at an angle, lit on the sun's side; it nods, and hangs when ruined
-  const ea=ang+0.12*Math.sign(ang||1)+bow*2.3,ex=Math.sin(ea),ey=-Math.cos(ea),n=10,eL=h*0.2*(1-0.25*bow),gw=Math.max(1.2,h*0.012),gl=Math.max(2.4,h*0.03);
-  for(let i=0;i<n;i++){const u=i/(n-1),cx_=tip[0]+ex*eL*u,cy_=tip[1]+ey*eL*u,sz=(1-0.4*u)*(1-0.3*bow);
-    for(const sd of [-1,1]){c.save();c.translate(cx_+(-ey)*sd*gw*0.8,cy_+ex*sd*gw*0.8);c.rotate(ea+sd*0.45);
-      c.fillStyle=rgba(mix(grain,IL.wheatHi,sd>0?0.4*lit:0.05),1);c.beginPath();c.ellipse(0,0,gw*sz,gl*sz,0,0,TAU);c.fill();c.restore();}}
-  // the awns: fine bristles from the ear, longer at its top
-  c.strokeStyle=rgba(mix(grain,IL.wheatHi,0.35),0.5*(1-0.6*bow));c.lineWidth=Math.max(0.5,h/420);for(let i=0;i<n;i+=1){const u=i/(n-1),cx_=tip[0]+ex*eL*u,cy_=tip[1]+ey*eL*u,sd=i%2?1:-1,L=h*(0.07+0.07*u);
-    c.beginPath();c.moveTo(cx_,cy_);c.lineTo(cx_+ex*L+(-ey)*sd*L*0.35,cy_+ey*L+ex*sd*L*0.35);c.stroke();}
-  // rust: specks along the stem and leaf, more of them as it spreads
-  if(rust>0.02){const r=ag_rnd(Math.floor(x*7+y));c.fillStyle=rgba(IL.rust,0.9);const m=Math.floor(3+16*rust);for(let i=0;i<m;i++){const p=pts[1+Math.floor(r()*6)];
-    c.beginPath();c.ellipse(p[0]+(r()-0.5)*5*h/220,p[1]+(r()-0.5)*8,1+1.4*r()*h/220,2+1.6*r()*h/220,0.3,0,TAU);c.fill();}}
+/* ---------------------------------------------------------------- the feet */
+// a bare foot seen from its side, its heel at (x, y) on the ground, length L: an ankle rising behind, the heel's round, the sole flat,
+// the arch lifted, the ball, and the toes; o.flex (0 to 1) bends the front up at the ball, as a foot does when its owner squats.
+// Facing right; o.flip faces it left. Filled with o.fill, lit along its top with o.hi
+function il_footShape(c,x,y,L,o){o=o||{};const f=o.flex||0,s=o.flip?-1:1,u=L/100;c.save();c.translate(x,y);c.scale(s*u,u);
+  const ball=[72,0],an=-f*0.5,rot=(p)=>{const dx=p[0]-ball[0],dy=p[1]-ball[1];return [ball[0]+dx*Math.cos(an)-dy*Math.sin(an),ball[1]+dx*Math.sin(an)+dy*Math.cos(an)];};
+  const toe=[rot([100,-2]),rot([102,-10]),rot([96,-18]),rot([80,-22])];
+  c.beginPath();c.moveTo(14,-60);c.bezierCurveTo(12,-40,4,-30,2,-18);c.bezierCurveTo(-2,-8,2,0,14,0);c.lineTo(30,0);c.bezierCurveTo(40,-6,54,-6,64,0);c.lineTo(ball[0],ball[1]);
+  c.lineTo(toe[0][0],toe[0][1]);c.quadraticCurveTo(toe[1][0],toe[1][1],toe[2][0],toe[2][1]);c.lineTo(toe[3][0],toe[3][1]);c.bezierCurveTo(60,-26,40,-36,34,-60);c.closePath();
+  c.fillStyle=rgba(o.fill||IL.rubber,1);c.fill();
+  if(o.hi){c.strokeStyle=rgba(o.hi,0.85);c.lineWidth=3;c.lineCap="round";c.beginPath();c.moveTo(34,-58);c.bezierCurveTo(40,-36,60,-26,toe[3][0],toe[3][1]);c.stroke();}
+  if(o.toes){c.strokeStyle=rgba(o.toes,0.6);c.lineWidth=1.6;for(let k=0;k<3;k++){const p=rot([84+k*6,-20+k*2]),q=rot([88+k*6,-6]);c.beginPath();c.moveTo(p[0],p[1]);c.lineTo(q[0],q[1]);c.stroke();}}
   c.restore();}
-// the field: o.t, o.rust(stalk) (0 to 1 for each stalk, from its place), o.bow(stalk), o.wind (how strongly it sways), o.a, o.band (only stalks
-// whose foot is past y band), o.health (how lit the grain is: 1 as at dusk, more for a harvest)
-function il_field(c,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=o.wind==null?1:o.wind;
-  for(const s of il_stalks()){if(o.band&&s.y<o.band)continue;if(o.upTo&&s.y>=o.upTo)continue;const h=250*s.s,sway=s.lean+w*0.05*Math.sin(t*1.3+s.ph+s.x*0.004),rust=o.rust?o.rust(s):0,bow=o.bow?o.bow(s):0;
-    const dim=lerp(0.4,1,(s.s-0.2)/0.9);il_stalk(c,s.x,s.y,h,{sway,rust,bow,bend:s.bend,leaf:s.leaf,a:a*dim,lit:dim*(o.health==null?1:o.health)});}}
-// how far the rust has come: a front that spreads from (x0, y0) at speed v px a second from t0; a stalk behind it rusts, and later bows
-function il_rustAt(s,t,t0,x0,y0,v){if(t<t0||s.d<0.12)return 0;const d=Math.hypot(s.x-x0,(s.y-y0)*3);return clamp(((t-t0)*v-d)/260,0,1);}
+// the workshop's foot, standing on the bench at (x, y), size L: an aluminium leg rising from a wooden block hidden in a foot of rubber,
+// cured like a tyre's, shaped and coloured like a bare foot; o.flex bends its front; o.a fades it; o.k springs it in (0 to 1)
+function il_footBare(c,x,y,L,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c.save();c.globalAlpha*=a;
+  if(o.k!=null){const z=lerp(0.85,1,ag_spr(o.k,0,0.5));c.translate(x,y);c.scale(z,z);c.translate(-x,-y);}
+  c.fillStyle="rgba(0,0,0,0.35)";c.beginPath();c.ellipse(x+L*0.5,y+4,L*0.6,L*0.06,0,0,TAU);c.fill();
+  // the leg: an aluminium tube with a bolt where it meets the foot, and a socket at its top
+  const lx=x+L*0.24;let g=c.createLinearGradient(lx-L*0.07,0,lx+L*0.07,0);g.addColorStop(0,rgba(IL.metalDk,1));g.addColorStop(0.4,rgba(IL.metal,1));g.addColorStop(1,rgba(IL.metalDk,1));
+  c.fillStyle=g;c.fillRect(lx-L*0.06,y-L*1.5,L*0.12,L*0.95);rr(c,lx-L*0.12,y-L*1.75,L*0.24,L*0.32,L*0.05);c.fill();
+  c.fillStyle=rgba(IL.metalDk,1);c.beginPath();c.arc(lx,y-L*0.62,L*0.03,0,TAU);c.fill();
+  il_footShape(c,x,y,L,{flex:o.flex||0,fill:IL.rubber,hi:IL.rubberHi,toes:IL.rubberDk});
+  if(o.glow)glow(c,x+L*0.5,y-L*0.3,L*0.9,o.glowCol||MD.pass,0.22*o.glow);
+  c.restore();}
+// the foot made to a design from abroad, at (x, y), size L: a stiff foot in a laced black shoe on a heavy wooden leg; it can't bend
+function il_footShoe(c,x,y,L,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c.save();c.globalAlpha*=a;
+  c.fillStyle="rgba(0,0,0,0.35)";c.beginPath();c.ellipse(x+L*0.5,y+4,L*0.62,L*0.06,0,0,TAU);c.fill();
+  // the wooden leg, thick, its grain faint
+  const lx=x+L*0.26;let g=c.createLinearGradient(lx-L*0.12,0,lx+L*0.12,0);g.addColorStop(0,rgba(IL.woodDk,1));g.addColorStop(0.45,rgba(IL.woodHi,1));g.addColorStop(1,rgba(IL.woodDk,1));
+  c.fillStyle=g;c.beginPath();c.moveTo(lx-L*0.11,y-L*1.75);c.lineTo(lx+L*0.11,y-L*1.75);c.lineTo(lx+L*0.09,y-L*0.5);c.lineTo(lx-L*0.09,y-L*0.5);c.closePath();c.fill();
+  c.strokeStyle="rgba(40,24,16,0.35)";c.lineWidth=1.5;for(let k=-1;k<=1;k++){c.beginPath();c.moveTo(lx+k*L*0.04,y-L*1.7);c.lineTo(lx+k*L*0.035,y-L*0.55);c.stroke();}
+  // the shoe: a heel, a sole, an upper with its laces
+  c.fillStyle=rgba(IL.sole,1);c.fillRect(x-L*0.02,y-L*0.07,L*1.08,L*0.07);
+  g=c.createLinearGradient(0,y-L*0.6,0,y);g.addColorStop(0,rgba(IL.shoeHi,1));g.addColorStop(1,rgba(IL.shoe,1));c.fillStyle=g;
+  c.beginPath();c.moveTo(x,y-L*0.07);c.lineTo(x,y-L*0.5);c.bezierCurveTo(x+L*0.1,y-L*0.58,x+L*0.36,y-L*0.58,x+L*0.42,y-L*0.42);c.bezierCurveTo(x+L*0.6,y-L*0.36,x+L*0.92,y-L*0.3,x+L*1.04,y-L*0.16);
+  c.quadraticCurveTo(x+L*1.08,y-L*0.07,x+L*1.0,y-L*0.07);c.closePath();c.fill();
+  c.strokeStyle="rgba(220,214,220,0.5)";c.lineWidth=2;for(let k=0;k<4;k++){const px=x+L*(0.44+k*0.07),py=y-L*(0.4-k*0.03);c.beginPath();c.moveTo(px-L*0.03,py-L*0.03);c.lineTo(px+L*0.03,py+L*0.01);c.stroke();}
+  c.restore();}
+// a cross over a thing that can't be done, drawn as u goes from 0 to 1, in the colour of a harm
+function il_cross(c,x,y,r,u,a){if(u<=0||a<=0.004)return;c.save();c.globalAlpha*=a;c.strokeStyle=rgba(MD.fail,0.95);c.lineWidth=6;c.lineCap="round";
+  const p=ag_eo(Math.min(1,u*2)),q=ag_eo(clamp(u*2-1,0,1));c.beginPath();c.moveTo(x-r,y-r);c.lineTo(x-r+2*r*p,y-r+2*r*p);if(q>0){c.moveTo(x+r,y-r);c.lineTo(x+r-2*r*q,y-r+2*r*q);}c.stroke();c.restore();}
 
-/* ---------------------------------------------------------------- the map of Mexico */
-// Natural Earth's 1:110m land around Mexico (public domain), as Files as data and as context keeps it: each ring's first point, then
-// each step from the one before, longitude then latitude, in tenths of a degree
-const IL_LAND=[[-797,228,14,-3,26,-18,15,-4,-36,-4,7,5,-22,12,-25,6,-4,2,4,2,-32,-7,27,13,26,-4],[-905,695,-1,-10,14,8,12,-7,-3,-7,9,-7,18,16,1,11,29,-2,13,-5,1,-5,-8,-6,7,-5,-1,-5,-19,-7,-25,2,-15,-18,-12,-7,-14,-1,-8,-4,-1,-6,-11,-2,-13,-8,-10,-11,-5,-20,15,-1,9,-17,14,2,59,-20,27,-2,2,-18,7,-11,15,-10,8,3,5,11,-5,15,-7,6,16,4,17,14,-8,16,-12,7,12,11,-8,24,43,1,24,-13,18,0,3,-21,17,-8,14,6,16,15,32,-33,-4,-7,45,-17,4,-8,11,-5,1,-12,-43,-19,-64,0,-47,-34,24,15,36,9,9,-5,-9,-6,6,-19,13,-5,17,2,10,11,1,-7,6,-4,-56,-24,-7,1,-1,9,18,8,-27,-2,1,-3,-31,-11,-6,-7,-1,-7,8,-7,-37,-7,18,0,-21,-1,-9,-19,-6,6,4,-11,-8,-12,2,7,-6,13,0,-11,-7,1,7,-3,6,-23,-34,-21,-22,-21,0,-14,12,-31,-3,-17,-8,0,-5,7,-12,20,0,12,-12,10,-10,-5,-13,8,-28,-1,-4,-1,4,-9,-10,-2,-14,6,-22,0,-28,-14,-8,-9,3,-15,-8,-35,16,-31,19,-12,24,6,12,6,5,17,32,5,3,-7,-10,-25,-5,2,-1,-20,-5,-6,39,1,16,-7,2,-10,-6,-32,16,-21,8,-2,18,8,28,-10,11,8,2,12,6,5,15,1,16,12,7,-3,-8,-7,2,-23,7,8,-4,11,12,4,3,8,17,-16,20,0,13,-5,6,5,24,1,-8,-3,3,-5,16,-5,1,-8,16,-6,6,-12,14,-8,31,-2,27,-16,8,-23,5,-2,1,-7,-8,-8,3,-3,18,-1,0,-10,8,6,29,-10,5,-5,-2,-6,12,3,34,-5,28,-19,16,-3,9,-22,-4,-17,-36,-41,-6,-48,-16,-40,-11,-11,-26,-4,-30,-15,-9,-10,-4,-28,-49,-57,-11,-6,-13,1,-22,10,-1,-5,13,-9,-2,-7,7,-4,-1,-5,-9,-13,-15,-5,-31,-1,2,-19,-6,-3,-24,-1,1,-10,7,-3,5,4,3,-6,-17,-9,-4,-15,-17,-6,-3,-7,20,-9,-4,-9,-12,-6,-6,-12,-13,-8,9,-16,-13,0,-13,-6,-2,-9,-4,-1,-35,16,-4,7,3,6,-5,6,-1,17,4,10,11,8,-15,3,9,8,3,17,12,-4,5,21,-7,3,-3,-13,-6,2,11,39,-4,21,4,1,18,47,-1,35,6,13,7,78,-2,15,-11,9,-45,28,-38,74,-14,11,3,4,-5,10,16,20,-2,5,-4,-5,-6,5,1,11,8,19,12,6,5,12,13,12,-4,3,0,26,-7,8,0,8,-14,6,-9,-8,5,-6,-9,-3,-2,6,-24,6,-1,7,-14,10,-1,-5,-6,3,0,12,-20,18,2,4,-37,6,-35,23,-19,-5,-69,26,-20,16,-2,5,4,10,-7,14,-33,28,0,8,-29,26,-9,22,-8,4,-9,2,1,-16,31,-35,9,-24,13,-9,-6,-6,-22,19,-1,13,-28,17,5,0,4,9,-13,10,-18,34,-12,10,-21,6,-38,57,-1,25,6,27,-8,27,16,-2,5,-9,-2,19,-46,18,-6,9,1,6,-12,5,-2,8,-27,19,-2,9,-13,8,-6,9,-25,1,-33,13,-72,14,-11,-2,2,-7,-37,-8,3,15,11,3,-3,3,-34,-19,7,-5,-9,-8,-21,-7,-21,-14,-64,-16,71,32,7,13,-21,-5,-13,7,-16,-4,1,9,-6,4,-13,-2,-15,7,-1,6,-7,4,15,16,15,0,23,7,-7,6,7,4,-42,-4,-14,3,-17,10,36,9,8,0,-1,-5,21,0,-51,23,6,5,30,5,13,9,53,11,23,-7,107,-5,71,-13,21,7,15,-1,31,7,7,-4,10,7,23,-10,14,7,1,-8,28,4,63,-9,13,-5,-14,-5,54,1,10,-6,11,5,-10,4,6,4,20,1,19,-8,28,-4,31,2,-2,6,9,2,16,-4,0,-9,6,8,8,0,5,10,-23,10,1,11,12,7,23,-6,14,-11,-9,-5,19,-2]];
-const IL_BORDER=[[-117.1,32.53],[-114.72,32.72],[-111.07,31.33],[-108.21,31.33],[-108.21,31.78],[-106.5,31.76],[-105.0,30.68],[-104.4,29.57],[-103.3,28.98],[-102.4,29.77],[-101.4,29.77],[-100.3,28.3],[-99.5,27.5],[-99.1,26.4],[-97.15,25.95]];
-const IL_PRJ={lon0:-102,lat0:23.5,k:50};
-const il_xy=(lon,lat)=>[960+(lon-IL_PRJ.lon0)*IL_PRJ.k,540-(lat-IL_PRJ.lat0)*IL_PRJ.k];
-// the two places the program bred its wheat, and Mexico City
-const IL_SITE={sonora:[-109.94,27.49],toluca:[-99.66,19.29],cdmx:[-99.13,19.43]};
-function il_paintMexico(c){let g=c.createLinearGradient(0,0,0,1080);g.addColorStop(0,"#0a1430");g.addColorStop(0.55,"#071026");g.addColorStop(1,"#040812");c.fillStyle=g;c.fillRect(0,0,1920,1080);
-  for(const [x,y,r,a] of [[900,500,900,0.06],[1500,800,600,0.04]]){const q=c.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,rgba(MD.flow,a));q.addColorStop(1,rgba(MD.flow,0));c.fillStyle=q;c.fillRect(0,0,1920,1080);}
-  // lines of latitude and longitude every five degrees
-  c.strokeStyle=rgba(MD.flow,0.06);c.lineWidth=1.2;c.beginPath();for(let lo=-125;lo<=-80;lo+=5){const p=il_xy(lo,40),q=il_xy(lo,5);c.moveTo(p[0],p[1]);c.lineTo(q[0],q[1]);}
-  for(let la=10;la<=35;la+=5){const p=il_xy(-130,la),q=il_xy(-75,la);c.moveTo(p[0],p[1]);c.lineTo(q[0],q[1]);}c.stroke();
-  // the land, its coast lit faintly
-  c.beginPath();for(const r of IL_LAND){let lo=0,la=0;for(let i=0;i<r.length;i+=2){lo+=r[i];la+=r[i+1];const p=il_xy(lo/10,la/10);i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]);}c.closePath();}
-  g=c.createLinearGradient(0,0,0,1080);g.addColorStop(0,rgba(IL.landHi,1));g.addColorStop(1,rgba(IL.land,1));c.fillStyle=g;c.fill();c.lineJoin="round";
-  c.strokeStyle=rgba(IL.coast,0.16);c.lineWidth=6;c.stroke();c.strokeStyle=rgba(IL.coast,0.6);c.lineWidth=1.6;c.stroke();
-  // the border with the United States, drawn faintly (illustrative: from the Pacific to the Gulf, along the Rio Grande)
-  c.save();c.setLineDash([10,8]);c.strokeStyle="rgba(170,200,245,0.35)";c.lineWidth=2;c.beginPath();
-  IL_BORDER.forEach((q,i)=>{const p=il_xy(q[0],q[1]);i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]);});c.stroke();c.restore();
-  const v=c.createRadialGradient(960,540,400,960,540,1250);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.5)");c.fillStyle=v;c.fillRect(0,0,1920,1080);}
-AG_PLACES.ilMexico=c=>il_paintMexico(c);
-// a site on the map: a ring of light, its name and a line under it, at the size they read through the camera (o.cam)
-function il_site(c,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const z=o.cam&&o.cam.z||1,p=il_xy(IL_SITE[k][0],IL_SITE[k][1]),col=o.col||MD.agreed,lit=o.lit||0;
-  c.save();c.globalAlpha*=a;glow(c,p[0],p[1],(40+40*lit)/z,col,0.35+0.4*lit);c.fillStyle=rgba(col,1);c.beginPath();c.arc(p[0],p[1],7/z,0,TAU);c.fill();
-  c.strokeStyle=rgba(col,0.8);c.lineWidth=2.4/z;c.beginPath();c.arc(p[0],p[1],(16+6*lit)/z,0,TAU);c.stroke();
-  if(o.name){const al=o.align||"left",dx=(al==="left"?28:-28)/z;md_T(c,o.name,p[0]+dx,p[1]-8/z+(o.dy||0)/z,{w:700,size:30/z,align:al});
-    if(o.sub)md_T(c,o.sub,p[0]+dx,p[1]+30/z+(o.dy||0)/z,{w:500,size:28/z,align:al,col:MD.soft});}
-  c.restore();}
-// the arc between the two sites, bowed out to sea, and the seed's place along it (u 0 at Toluca, 1 in Sonora)
-function il_arc(){const A=il_xy(...IL_SITE.toluca),B=il_xy(...IL_SITE.sonora);return md_curve(A,B,{bend:0.38});}
-// a packet of seed, a small paper envelope with a wheat ear on it, at (x, y), size s
-function il_packet(c,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c.save();c.globalAlpha*=a;c.translate(x,y);c.rotate(o.rot||0);const w=s,h=s*1.25;
-  c.fillStyle=rgba(mix([214,198,160],[255,255,255],0.1),1);c.shadowColor="rgba(0,0,0,0.45)";c.shadowBlur=s*0.25;rr(c,-w/2,-h/2,w,h,s*0.06);c.fill();c.shadowColor="transparent";
-  c.fillStyle="rgba(150,126,86,0.9)";c.beginPath();c.moveTo(-w/2,-h/2);c.lineTo(0,-h/2+h*0.28);c.lineTo(w/2,-h/2);c.closePath();c.fill();
-  c.strokeStyle=rgba(IL.wheatDk,1);c.lineWidth=s*0.05;c.lineCap="round";c.beginPath();c.moveTo(0,h*0.36);c.lineTo(0,-h*0.02);c.stroke();
-  c.fillStyle=rgba(IL.wheatDk,1);for(let i=0;i<4;i++)for(const sd of[-1,1]){c.beginPath();c.ellipse(sd*s*0.07,h*0.02-i*s*0.1,s*0.05,s*0.085,sd*0.4,0,TAU);c.fill();}
-  c.restore();}
-
-/* ---------------------------------------------------------------- the people of the program */
+/* ---------------------------------------------------------------- the people of the workshop */
 const IL_P={
-  breeder:{name:"Norman Borlaug",role:"Plant breeder",skin:[226,184,152],hair:{style:"side",c:[110,84,58]},top:{kind:"overshirt",c:[150,138,104],inner:[226,220,200]},breath:0.27},
-  agronomist:{name:"A young agronomist",role:"One of hundreds the program trained",skin:[190,142,106],hair:{style:"side",c:[26,22,22]},top:{kind:"overshirt",c:[212,204,184],inner:[236,232,220]},breath:0.29}};
-// a person of the program, arms down: the field is what the story is about, and it is all round them
+  surgeon:{name:"Pramod Karan Sethi",role:"Head of orthopaedics",skin:[176,124,92],hair:{style:"side",c:[34,30,30]},glasses:[40,34,30],top:{kind:"blazer",c:[232,232,226],inner:[214,222,234],tie:[96,70,60]},breath:0.27},
+  craftsman:{name:"Ram Chandra Sharma",role:"Craftsman",skin:[168,116,84],hair:{style:"cropped",c:[150,146,140]},top:{kind:"tunic",c:[226,220,204],inner:[236,232,220]},breath:0.29}};
+// a person of the workshop, arms down: the feet on the bench are what the story is about
 function il_period(ctx,who,x,y,s,o){return md_person(ctx,IL_P[who],x,y,s,o||{});}
 
 /* ===== Ideas that last, features you test: the scenes =====
-   Five chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The opening moves between two
-   places of the 1940s and 1950s, each painted once (a wheat field in Sonora at dusk, and the map of Mexico), and comes to the
-   university's night map for its last line and the title card. The three chapters after it stay in one room, the map, where the camera
-   holds and only what changes fades; each opens on the one before (ag_cutInto). The last goes back to the field, now a harvest, then to
-   the map for its end. Words over the field and the map of Mexico are drawn in the frame itself (il_scr), so they stay put while the
-   camera moves. */
+   Five chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The opening stays in one place of
+   the 1960s, painted once (the limb workshop of Jaipur's hospital, its feet on the bench), where the camera glides and only what
+   changes fades, and comes to the university's night map for its last line and the title card. The three chapters after it stay in
+   one room, the map, where the camera holds and only what changes fades; each opens on the one before (ag_cutInto). The last goes
+   back to the workshop, then to the map for its end. Words over the workshop are drawn in the frame itself (il_scr), so they stay put
+   while the camera moves. */
 
 // the film's name at the top left, and the chapter's case under it
 function il_top(ctx,a){md_label(ctx,96,100,"Ideas that last, features you test",{col:MD.soft,a});}
@@ -1950,86 +1929,69 @@ function il_idea(ctx,x,y,w,text,o){o=o||{};const a=o.a==null?1:o.a,lines=md_wrap
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,ag_spr(o.k,0,0.5)));md_card(ctx,x,y,w,h,{edge:o.edge||null,glow:0.5});
   md_icon(ctx,o.icon||"tick",x+40,y+h/2,30,o.edge||MD.soft);lines.forEach((l,i)=>md_T(ctx,l,x+72,y+50+i*40,{w:600,size:30,col:o.col||MD.ink}));ctx.restore();return h;}
 
-/* ---------------------------------------------------------------- 1 · Two harvests a year */
-const IL_LOST=[["A year's work, lost","clock"],["The seed, lost","warn"],["Wheat bought from abroad","share"]];
-scene("seasons",(ctx,S,t,sc)=>{const c=sc.cues,T=il_once(sc,"T",()=>({
-    mexico:wAt(sc,"place","Mexico"),yaqui:wAt(sc,"place","Yaqui Valley"),hardly:wAt(sc,"place","hardly grew wheat"),
-    rust:wAt(sc,"rust","Stem rust"),fungus:wAt(sc,"rust","a fungus"),chokes:wAt(sc,"rust","chokes the plant"),whole:wAt(sc,"rust","a whole field"),
-    one:wAt(sc,"field","One field"),ten:wAt(sc,"field","ten bushels"),poor:wAt(sc,"field","a poor harvest"),
-    farmer:wAt(sc,"lost","For a farmer"),work:wAt(sc,"lost","a year's work"),seed:wAt(sc,"lost","seed lost"),abroad:wAt(sc,"lost","from abroad"),
-    breeding:wAt(sc,"slow","breeding a wheat"),gen:wAt(sc,"slow","one generation a year"),years:wAt(sc,"slow","many years"),farm:wAt(sc,"slow","reached a farm"),
-    y1945:wAt(sc,"team","nineteen forty-five"),ministry:wAt(sc,"team","Ministry of Agriculture"),borlaug:wAt(sc,"team","Norman Borlaug"),another:wAt(sc,"team","another way"),
-    twoGen:wAt(sc,"two","two generations a year"),summer:wAt(sc,"two","in summer"),highlands:wAt(sc,"two","the highlands"),winter:wAt(sc,"two","in winter"),north:wAt(sc,"two","far to the north"),
-    crossed:wAt(sc,"each","crossed plants"),tested:wAt(sc,"each","tested them"),kept:wAt(sc,"each","kept the few"),sowed:wAt(sc,"each","sowed those"),
-    said:wAt(sc,"dogma","Many breeders said"),only:wAt(sc,"dogma","only where it would grow"),anyway:wAt(sc,"dogma","tried it anyway"),measured:wAt(sc,"dogma","measured"),
-    half:wAt(sc,"half","in half"),both:wAt(sc,"half","both places"),beyond:wAt(sc,"half","far beyond"),
-    y1956:wAt(sc,"enough","nineteen fifty-six"),needed:wAt(sc,"enough","all the wheat it needed"),twenty:wAt(sc,"enough","first twenty years"),tripled:wAt(sc,"enough","tripled"),
-    never:wAt(sc,"kept","never stopped"),changing:wAt(sc,"kept","the rust kept changing"),too:wAt(sc,"kept","change too"),
+/* ---------------------------------------------------------------- 1 · A foot for bare feet */
+// what the foot from abroad couldn't do, each crossed out; what the workshop's foot let people do, each ticked
+const IL_CANT=[["Barefoot","shoe"],["Squat","squat"],["Sit on the floor","squat"]];
+const IL_CAN=[["Walk barefoot","walked barefoot"],["Squat","squatted"],["Sit cross-legged","sat cross-legged"],["Work in wet fields","wet fields"],["Climb trees","climbed trees"]];
+const IL_TRY=[["Walk","walked on it"],["Squat","squatted"],["Sit on the floor","sat on the floor"],["Where does it hurt?","where it hurt"],["Change it","changed it"]];
+scene("foot",(ctx,S,t,sc)=>{const c=sc.cues,T=il_once(sc,"T",()=>({
+    jaipur:wAt(sc,"place","Jaipur"),hosp:wAt(sc,"place","Sawai Man Singh"),leg:wAt(sc,"place","lost a leg"),
+    artificial:wAt(sc,"abroad","an artificial foot"),abroad:wAt(sc,"abroad","from abroad"),
+    shoe:wAt(sc,"shoe","in a shoe"),barefoot:wAt(sc,"shoe","barefoot"),water:wAt(sc,"shoe","under water"),
+    heavy:wAt(sc,"squat","heavy and stiff"),squat:wAt(sc,"squat","squat"),floor:wAt(sc,"squat","sit on the floor"),
+    gave:wAt(sc,"gave","gave it up"),work:wAt(sc,"gave","the work"),
+    life:wAt(sc,"change","the life they lived"),
+    sethi:wAt(sc,"team","Pramod Karan Sethi"),sharma:wAt(sc,"team","Ram Chandra Sharma"),
+    wood:wAt(sc,"made","wood and rubber"),tyre:wAt(sc,"made","cured like a tyre"),fitted:wAt(sc,"made","fitted them"),
+    walked:wAt(sc,"tried","walked on it"),squatted:wAt(sc,"tried","squatted"),sat:wAt(sc,"tried","sat on the floor"),hurt:wAt(sc,"tried","where it hurt"),changed:wAt(sc,"tried","changed it"),again:wAt(sc,"tried","tried again"),
+    bent:wAt(sc,"foot","looked and bent"),
+    cb:wAt(sc,"could","walked barefoot"),csq:wAt(sc,"could","squatted"),ccl:wAt(sc,"could","sat cross-legged"),cwf:wAt(sc,"could","wet fields"),ctr:wAt(sc,"could","climbed trees"),
+    hour:wAt(sc,"hour","about an hour"),less:wAt(sc,"hour","far less"),
+    y1975:wAt(sc,"free","nineteen seventy-five"),free:wAt(sc,"free","fitted it free"),n700:wAt(sc,"free","seven hundred thousand"),n44:wAt(sc,"free","forty-four"),
+    changing:wAt(sc,"kept","kept changing"),plastics:wAt(sc,"kept","plastics"),question:wAt(sc,"kept","the first question"),
     platforms:wAt(sc,"same","Data platforms"),month:wAt(sc,"same","every month"),lasts:wAt(sc,"same","What lasts"),test:wAt(sc,"same","a quick, honest way")}));
-  const map0=T.twoGen-1.0,uni0=T.platforms-0.9;
-  // the rust spreads from the field's right, and the stalks it reaches bow over a little later
-  const rustOf=s=>il_rustAt(s,t,T.rust-0.4,1500,900,170),bowOf=s=>clamp((il_rustAt(s,t,T.rust-0.4,1500,900,170)-0.75)*4,0,1)*ag_in(t,T.whole-0.3,1.6);
+  const uni0=T.platforms-0.9,pOut=c.foot-0.4;
   ag_shots(ctx,S,t,sc.dur,[
-    // the Yaqui Valley at dusk: the wheat, then the rust spreading through it; the field's poor harvest, what it cost, and how slow a cure was;
-    // and the people of the program in the field, each holding a stalk
-    {at:0,place:"ilField",keys:[[0,960,500,1.0],[T.rust-0.6,1240,700,1.4],[T.farmer-0.2,960,540,1.0]],d:2.4,push:0.015,draw:(cx,tt)=>{
-      il_field(cx,tt,{band:0,rust:rustOf,bow:bowOf,wind:0.8,a:1});
-      il_scr(cx,S,()=>{const lA=ag_io(tt,0.5,T.rust-0.8,0.7);md_label(cx,96,118,"Sonora, Mexico, 1944",{col:MD.soft,a:lA});md_T(cx,"The Yaqui Valley",96,166,{w:700,size:36,a:lA*ag_in(tt,T.yaqui-0.3,0.7)});
-        md_tag(cx,96,240,"Hardly any wheat grown",{col:MD.soft,a:lA*ag_in(tt,T.hardly-0.2,0.5)});
-        md_tag(cx,1240,180,"Stem rust · a fungus",{col:IL.rust,icon:"warn",a:ag_io(tt,T.fungus-0.3,c.field-1.0,0.5)});
-        md_tag(cx,1240,262,"It chokes the plant",{col:IL.rust,a:ag_io(tt,T.chokes-0.2,c.field-1.0,0.5)});
-        // one field's expected harvest
-        const fA=ag_io(tt,T.one-0.3,c.lost-1.0,0.5);md_textCard(cx,1180,170,640,{kick:"One field, 1944",title:"Expected: 10 bushels an acre",sub:"A poor harvest for a season's work"},{edge:MD.fail,icon:"warn",a:fA,k:il_k(tt,T.one-0.3)});
-        // what it cost: the farmer, and the country
-        IL_LOST.forEach(([s,ic],i)=>md_tag(cx,1240,200+i*92,s,{col:MD.ink,icon:ic,a:ag_io(tt,[T.work,T.seed,T.abroad][i]-0.25,c.slow-1.0,0.4)}));
-        // one generation a year: ten years, and many before a new wheat reaches a farm
-        const gA=ag_io(tt,c.slow-0.2,c.change+0.2,0.5);if(gA>0){md_card(cx,1080,170,740,300,{edge:MD.flow,a:gA,glow:0.5});md_T(cx,"ONE GENERATION A YEAR",1108,222,{w:800,size:28,ls:4,col:MD.flow,a:gA});
-          for(let i=0;i<10;i++){const q=gA*ag_in(tt,T.gen+i*0.32,0.3);il_stalk(cx,1130+i*68,404,118,{a:q,sway:0.04*Math.sin(tt*1.2+i),leaf:i%2?1:-1,lit:1.3});md_T(cx,String(i+1),1130+i*68,440,{w:600,size:28,align:"center",col:MD.soft,a:q});}
-          md_T(cx,"Years, one harvest each",1108,268,{w:500,size:28,col:MD.soft,a:gA*ag_in(tt,T.years-0.3,0.5)});}
-        md_tag(cx,1450,520,"Many years to reach a farm",{align:"center",col:MD.wait,icon:"clock",a:ag_io(tt,T.farm-0.3,c.change+0.2,0.5)});
-        // the program: a plant breeder and a young agronomist, among the stalks
-        const pA=ag_in(tt,c.team-0.4,0.8);if(pA>0){withA(cx,pA,()=>il_period(cx,"breeder",300,590,0.98,{t:tt,gaze:[3,0]}));withA(cx,pA,()=>il_period(cx,"agronomist",1620,590,0.98,{t:tt,gaze:[-3,0],flip:true}));
-          md_nameTag(cx,420,400,IL_P.breeder,{col:MD.agreed,a:pA*ag_in(tt,T.borlaug-0.3,0.5)});md_nameTag(cx,1500,400,IL_P.agronomist,{align:"right",col:MD.agreed,a:pA*ag_in(tt,T.borlaug+0.4,0.5)});
-          md_textCard(cx,700,170,520,{kick:"From 1945",title:"Mexico's wheat program",sub:"Its Ministry of Agriculture"},{edge:MD.agreed,a:pA*ag_in(tt,T.ministry-0.4,0.5),k:il_k(tt,T.ministry-0.4)});}});
-}},
-    // the map of Mexico: two places, two generations a year; the seed carried between them; the plots, crossed, tested, the best kept; the
-    // breeders who said it couldn't work; half the time; Mexico's own wheat by 1956, the harvest tripled; and the rust that kept changing
-    {at:map0,place:"ilMexico",dis:0.9,keys:[[0,920,560,1.0]],push:0.015,draw:(cx,tt,cam)=>{
-      const arc=il_arc(),sA=ag_in(tt,T.summer-0.3,0.6),wA=ag_in(tt,T.winter-0.3,0.6);
-      il_site(cx,"toluca",{cam,a:sA,lit:ag_io(tt,T.summer-0.2,T.winter-0.2,0.5),name:"The highlands, in summer",sub:"Near Mexico City",col:MD.agreed});
-      il_site(cx,"sonora",{cam,a:wA,lit:ag_io(tt,T.winter-0.2,T.crossed,0.5),name:"Sonora, in winter",sub:"Far to the north",col:MD.agreed,dy:-6});
-      // the way between them, and the seed carried along it: each season's best, sown in the other place
-      const lu=ag_sine((tt-T.twoGen+0.2)/1.4);il_link(cx,arc,lu,tt,{col:MD.agreed,a:0.75*Math.min(sA+wA,1),flow:false,dash:true});
-      const trip=(t0,back)=>{const u=ag_sine((tt-t0)/2.0);if(u<=0||u>=1)return;const p=at(mk(arc.map(q=>P(q[0],q[1]))),back?1-u:u);il_packet(cx,p.x,p.y,58,{a:Math.min(1,Math.sin(Math.PI*u)*2.5)});};
-      trip(T.summer+0.4,false);trip(T.winter+0.6,true);trip(T.sowed-0.2,false);trip(T.both-0.4,true);trip(T.changing-0.2,false);trip(T.too+0.8,true);
-      il_scr(cx,S,()=>{md_label(cx,96,118,"Mexico, from 1945",{col:MD.soft,a:ag_in(tt,map0+0.3,0.6)});
-        const gA=0.75*ag_in(tt,map0+0.4,0.8);md_T(cx,"United States",900,150,{w:500,size:28,col:MD.soft,a:gA});md_T(cx,"Gulf of Mexico",1330,690,{w:500,size:28,col:MD.soft,a:gA});md_T(cx,"Pacific Ocean",360,760,{w:500,size:28,col:MD.soft,a:gA});
-        md_tag(cx,96,186,"Two generations a year",{col:MD.agreed,icon:"refresh",a:ag_in(tt,T.twoGen-0.2,0.5)});
-        // the plots: crossed, tested, the few that did best kept (green), the rest let go
-        const pA=ag_io(tt,c.each-0.4,c.dogma-1.0,0.5);if(pA>0){md_card(cx,1240,150,600,450,{a:pA});md_T(cx,"EACH SEASON",1268,202,{w:800,size:28,ls:4,col:MD.soft,a:pA});
-          const r=ag_rnd(56);for(let j=0;j<2;j++)for(let i=0;i<7;i++){const k=j*7+i,keep=[3,9].includes(k),x=1300+i*78,y=410+j*110,q=pA*ag_in(tt,T.crossed+k*0.05,0.3),dimK=keep?0:ag_in(tt,T.kept-0.2,0.6);
-            cx.save();cx.globalAlpha*=q*0.6;cx.fillStyle="rgba(60,44,34,0.9)";cx.beginPath();cx.ellipse(x,y+40,30,7,0,0,TAU);cx.fill();cx.restore();
-            il_stalk(cx,x-8,y+40,96,{a:q*(1-0.65*dimK),sway:0.05*Math.sin(tt*1.4+k),rust:keep?0:0.6*ag_in(tt,T.tested,0.8)*r(),leaf:1,lit:1.2});il_stalk(cx,x+8,y+40,84,{a:q*(1-0.65*dimK),sway:-0.04+0.05*Math.sin(tt*1.2+k),rust:keep?0:0.5*ag_in(tt,T.tested,0.8)*r(),lit:1.2});
-            if(keep){const kA=q*ag_in(tt,T.kept-0.1,0.5);if(kA>0){cx.save();cx.globalAlpha*=kA;cx.strokeStyle=rgba(MD.pass,0.95);cx.lineWidth=3.5;cx.beginPath();cx.arc(x,y-4,52,0,TAU);cx.stroke();cx.restore();}}}
-          [["Crossed",T.crossed],["Tested",T.tested],["The best kept",T.kept]].forEach(([s,a_],i)=>md_T(cx,s,1268+i*186,262,{w:600,size:28,col:i===2?MD.pass:MD.ink,a:pA*ag_in(tt,a_-0.2,0.4)}));
-          md_tag(cx,1540,636,"Sown in the other place",{align:"center",col:MD.agreed,a:pA*ag_in(tt,T.sowed-0.2,0.5)});}
-        // the breeders who said it couldn't work, and the team that measured
-        const dA=ag_io(tt,c.dogma-0.3,c.half-1.0,0.5);md_textCard(cx,1240,170,600,{kick:"Many breeders said",title:"Breed a wheat only where it will grow"},{edge:MD.soft,a:dA,k:il_k(tt,c.dogma-0.3)});
-        md_tag(cx,1300,420,"Tried anyway, and measured",{col:MD.pass,icon:"tick",a:dA*ag_in(tt,T.measured-0.4,0.5)});
-        // half the time to breed a new wheat
-        const hA=ag_io(tt,c.half-0.3,c.enough-1.0,0.5);if(hA>0){md_card(cx,1180,170,660,300,{edge:MD.pass,a:hA,glow:0.5});md_T(cx,"YEARS TO BREED A NEW WHEAT",1208,222,{w:800,size:28,ls:4,col:MD.pass,a:hA});
-          const b1=600,b2=lerp(600,300,ag_sine((tt-T.half+0.3)/1.0));cx.save();cx.globalAlpha*=hA;cx.fillStyle=rgba(MD.soft,0.55);rr(cx,1208,262,b1,30,15);cx.fill();cx.fillStyle=rgba(MD.pass,0.9);rr(cx,1208,360,b2,30,15);cx.fill();cx.restore();
-          md_T(cx,"One generation a year",1208,330,{w:500,size:28,col:MD.soft,a:hA});md_T(cx,"Two a year: half the time",1208,428,{w:600,size:28,col:MD.pass,a:hA*ag_in(tt,T.half-0.2,0.5)});}
-        md_tag(cx,1510,520,"Grew well in both places, and beyond",{align:"center",col:MD.pass,icon:"tick",a:ag_io(tt,T.both-0.3,c.enough-1.0,0.5)});
-        // by 1956, all the wheat Mexico needed; in twenty years, the harvest tripled
-        const eA=ag_io(tt,c.enough-0.3,c.kept-1.0,0.5);md_textCard(cx,1180,150,660,{kick:"By 1956",title:"All the wheat Mexico needed"},{edge:MD.pass,icon:"tick",a:eA,k:il_k(tt,T.y1956-0.3)});
-        const tA=eA*ag_in(tt,T.twenty-0.3,0.5);if(tA>0){md_card(cx,1180,350,660,250,{a:tA});md_T(cx,"THE HARVEST, FIRST TWENTY YEARS",1208,402,{w:800,size:28,ls:4,col:MD.soft,a:tA});
-          [[1,"Year 1"],[3,"Year 20"]].forEach(([m,s],i)=>{const g=ag_sine((tt-T.twenty-0.2-i*0.6)/1.0)*(i?ag_in(tt,T.tripled-0.6,0.2):1),x=1260+i*300,hh=40*m*g;
-            cx.save();cx.globalAlpha*=tA;cx.fillStyle=rgba(i?MD.pass:MD.soft,i?0.9:0.6);rr(cx,x,560-hh,120,hh,8);cx.fill();cx.restore();md_T(cx,s,x+60,592,{w:500,size:28,align:"center",col:MD.soft,a:tA});});
-          md_T(cx,"× 3",1700,520,{w:800,size:48,col:MD.pass,a:tA*ag_in(tt,T.tripled-0.2,0.4)});}
-        // and the testing never stopped: the rust kept changing
-        const kA=ag_io(tt,c.kept-0.3,uni0+0.2,0.5);md_tag(cx,1240,200,"The rust kept changing",{col:IL.rust,icon:"warn",a:kA*ag_in(tt,T.changing-0.3,0.5)});
-        md_tag(cx,1240,282,"So the testing never stopped",{col:MD.flow,icon:"refresh",a:kA*ag_in(tt,T.never-0.3,0.5)});});}},
+    // the workshop: the foot from abroad on the bench, and what it couldn't do; then the surgeon and the craftsman, the feet they made and
+    // tried, again and again; the bare foot, what it let people do, and how far it went. One room: the camera glides, what changes fades
+    {at:0,place:"ilWork",keys:[[0,960,520,1.0],[T.artificial-0.6,1060,560,1.12],[c.team-0.6,960,540,1.0],[c.could-0.6,1000,560,1.06],[c.kept-0.6,960,540,1.0]],d:2.4,push:0.012,draw:(cx,tt)=>{
+      // the feet on the bench: the shoe from abroad, then, beside it, the workshop's foot; the shoe goes once the bare foot is made
+      const shoeA=ag_in(tt,T.artificial-0.3,0.6)*(1-ag_in(tt,T.bent-0.6,0.8)),bareA=ag_in(tt,T.wood-0.2,0.7);
+      const shoeX=980;il_footShoe(cx,shoeX,742,180,{a:shoeA});
+      const bareX=lerp(1180,900,ag_sine((tt-T.bent+0.5)/1.4)),flex=0.7*Math.max(ag_io(tt,T.squatted-0.2,T.sat+0.6,0.4),ag_io(tt,T.csq-0.2,T.ccl+0.6,0.4))*Math.max(0.25,Math.abs(Math.sin(tt*1.6)));
+      il_footBare(cx,bareX,742,180,{a:bareA,flex,k:il_k(tt,T.wood-0.2),glow:ag_io(tt,T.bent-0.2,c.hour-0.2,0.6)});
+      il_scr(cx,S,()=>{const lA=ag_io(tt,0.5,c.change-0.6,0.7);md_label(cx,96,118,"Jaipur, India, the 1960s",{col:MD.soft,a:lA});md_T(cx,"Sawai Man Singh Hospital",96,166,{w:700,size:36,a:lA*ag_in(tt,T.hosp-0.3,0.7)});
+        md_tag(cx,96,240,"People who had lost a leg",{col:MD.soft,a:lA*ag_in(tt,T.leg-0.2,0.5)});
+        // the foot from abroad: a shoe; barefoot lives, wet fields; heavy and stiff; what it couldn't do; given up
+        const fA=ag_io(tt,T.artificial-0.3,c.change-0.6,0.5);md_textCard(cx,1180,150,640,{kick:"An artificial foot",title:"Made to a design from abroad",sub:"Worn in a shoe"},{edge:MD.soft,a:fA,k:il_k(tt,T.artificial-0.3)});
+        const cA=ag_io(tt,T.barefoot-0.3,c.change-0.6,0.5);if(cA>0){md_card(cx,1180,400,640,250,{edge:MD.fail,a:cA,glow:0.5});md_T(cx,"WHAT IT COULDN'T DO",1208,452,{w:800,size:28,ls:4,col:MD.fail,a:cA});
+          IL_CANT.forEach(([s],i)=>{const at_=[T.barefoot,T.squat,T.floor][i],q=cA*ag_in(tt,at_-0.25,0.4),y=510+i*44;md_T(cx,s,1260,y+10,{w:600,size:30,a:q});il_cross(cx,1228,y,11,ag_in(tt,at_+0.1,0.5),q);});}
+        md_tag(cx,96,330,"Fields often under water",{col:MD.flow,a:ag_io(tt,T.water-0.3,c.change-0.6,0.5)});
+        md_tag(cx,96,410,"Heavy and stiff",{col:MD.fail,icon:"warn",a:ag_io(tt,T.heavy-0.3,c.change-0.6,0.5)});
+        md_pill(cx,640,560,"Given up",{col:MD.fail,icon:"cross",a:ag_io(tt,T.gave-0.3,c.team-0.6,0.5),k:il_k(tt,T.gave-0.3)});
+        md_textCard(cx,560,150,800,{title:"A foot for the life they lived",sub:"Not for a shoe"},{edge:MD.agreed,a:ag_io(tt,c.change-0.3,c.team-0.6,0.5),k:il_k(tt,c.change-0.3)});
+        // the surgeon and the craftsman, at either side of the bench
+        const pA=ag_in(tt,c.team-0.4,0.8)*(1-ag_in(tt,pOut,0.8)),nmA=pA*(1-ag_in(tt,c.tried-0.6,0.5));if(pA>0){withA(cx,pA,()=>il_period(cx,"surgeon",300,590,0.98,{t:tt,gaze:[3,0]}));withA(cx,pA,()=>il_period(cx,"craftsman",1620,590,0.98,{t:tt,gaze:[-3,0],flip:true}));
+          md_nameTag(cx,470,400,IL_P.surgeon,{col:MD.agreed,a:nmA*ag_in(tt,T.sethi-0.3,0.5)});md_nameTag(cx,1450,400,IL_P.craftsman,{align:"right",col:MD.agreed,a:nmA*ag_in(tt,T.sharma-0.3,0.5)});}
+        // made, fitted; each trial, then changed and tried again
+        md_textCard(cx,500,150,480,{kick:"Made in the workshop",title:"Wood and rubber",sub:"Cured like a tyre"},{edge:MD.agreed,a:ag_io(tt,T.wood-0.3,c.tried-0.6,0.5),k:il_k(tt,T.wood-0.3)});
+        md_tag(cx,740,420,"Fitted on patients",{align:"center",col:MD.agreed,a:ag_io(tt,T.fitted-0.3,c.tried-0.6,0.5)});
+        const tA=ag_io(tt,c.tried-0.3,pOut,0.5);if(tA>0){md_card(cx,500,150,480,420,{a:tA});md_T(cx,"EACH TRIAL",528,202,{w:800,size:28,ls:4,col:MD.soft,a:tA});
+          IL_TRY.forEach(([s],i)=>{const at_=[T.walked,T.squatted,T.sat,T.hurt,T.changed][i],q=tA*ag_in(tt,at_-0.25,0.4),y=262+i*62;md_T(cx,s,580,y+10,{w:600,size:30,col:i===3?MD.wait:i===4?MD.agreed:MD.ink,a:q});
+            md_icon(cx,i===3?"warn":i===4?"refresh":"tick",546,y,28,i===3?MD.wait:i===4?MD.agreed:MD.pass,{a:q});});
+          md_tag(cx,740,630,"Tried again",{align:"center",col:MD.agreed,icon:"refresh",a:tA*ag_in(tt,T.again-0.3,0.5)});}
+        // the bare foot, and what people could do on it
+        md_textCard(cx,560,150,800,{kick:"By the end of the 1960s",title:"A foot that looked and bent like a bare one"},{edge:MD.pass,icon:"tick",a:ag_io(tt,T.bent-0.3,c.could-0.6,0.5),k:il_k(tt,T.bent-0.3)});
+        const kA=ag_io(tt,c.could-0.3,c.hour-0.6,0.5);if(kA>0){md_card(cx,1180,150,640,380,{edge:MD.pass,a:kA,glow:0.5});md_T(cx,"ON IT, PEOPLE COULD",1208,202,{w:800,size:28,ls:4,col:MD.pass,a:kA});
+          IL_CAN.forEach(([s],i)=>{const at_=[T.cb,T.csq,T.ccl,T.cwf,T.ctr][i],q=kA*ag_in(tt,at_-0.25,0.4),y=262+i*56;md_icon(cx,"tick",1226,y,28,MD.pass,{a:q});md_T(cx,s,1260,y+10,{w:600,size:30,a:q});});}
+        // an hour; far less; from 1975, free; the count
+        md_textCard(cx,1180,150,640,{kick:"Made in about an hour",title:"For far less",sub:"than a foot from abroad"},{edge:MD.pass,icon:"clock",a:ag_io(tt,T.hour-0.3,c.free-0.6,0.5),k:il_k(tt,T.hour-0.3)});
+        const nA=ag_io(tt,c.free-0.3,c.kept-0.6,0.5);if(nA>0){md_textCard(cx,1180,150,640,{kick:"From 1975",title:"Fitted free, in Jaipur"},{edge:MD.agreed,a:nA,k:il_k(tt,T.y1975-0.3)});
+          const n=Math.round(700000*ag_sine((tt-T.n700+0.4)/1.2));md_T(cx,n>0?"More than "+n.toLocaleString("en-US"):"",1208,440,{w:700,size:44,col:MD.pass,a:nA*ag_in(tt,T.n700-0.4,0.4)});
+          md_T(cx,"limbs so far",1208,490,{w:600,size:30,col:MD.soft,a:nA*ag_in(tt,T.n700,0.4)});md_tag(cx,1208,560,"India and 44 other countries",{col:MD.flow,a:nA*ag_in(tt,T.n44-0.3,0.5)});}
+        // the foot kept changing; the question stayed
+        const qA=ag_io(tt,c.kept-0.3,uni0+0.2,0.5);md_tag(cx,1180,200,"New materials, again and again",{col:MD.flow,icon:"refresh",a:qA*ag_in(tt,T.changing-0.3,0.5)});
+        md_textCard(cx,1180,290,640,{kick:"The first question",title:"How does this person live?"},{edge:MD.agreed,a:qA*ag_in(tt,T.question-0.3,0.5),k:il_k(tt,T.question-0.3)});});}},
     // today: the university's map, its tools always changing; what lasts, the ideas and a quick, honest test
     {at:uni0,place:"map",dis:0.9,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       const ch=["New feature","New name","New limit","New option","New screen","New default"];
@@ -2037,7 +1999,7 @@ scene("seasons",(ctx,S,t,sc)=>{const c=sc.cues,T=il_once(sc,"T",()=>({
       md_pill(cx,960,430,"The ideas",{col:MD.agreed,icon:"person",a:ag_in(tt,T.lasts-0.2,0.5),k:il_k(tt,T.lasts-0.2)});
       md_pill(cx,960,560,"A quick, honest test",{col:MD.flow,icon:"refresh",a:ag_in(tt,T.test-0.2,0.5),k:il_k(tt,T.test-0.2)});}}
   ],0.9);
-  md_title(ctx,S,t,c.breath,"Ideas that last, features you test","What the module taught, and how to keep up","Documents and closing remarks · Modern data basics");});
+  md_title(ctx,S,t,c.breath,"Ideas that last, features you test","What the topic taught, and how to keep up","Documents and closing remarks · Modern data basics");});
 
 /* ---------------------------------------------------------------- 2 · What the module showed */
 // the four series, and what each one showed, line by line
@@ -2106,7 +2068,7 @@ scene("light",(ctx,S,t,sc)=>{const c=sc.cues,T=il_once(sc,"T",()=>({
 const IL_MISS=[7,23,38,51,66,90,104,121,137,152,176,191];
 scene("loop",(ctx,S,t,sc)=>{const c=sc.cues,T=il_once(sc,"T",()=>({
     keep:wAt(sc,"loop","keep up"),small:wAt(sc,"loop","small and quick"),inv:wAt(sc,"loop","investigate"),adapt:wAt(sc,"loop","adapt"),impl:wAt(sc,"loop","implement"),iter:wAt(sc,"loop","iterate"),
-    seasons:wAt(sc,"shorter","two seasons"),shorter:wAt(sc,"shorter","the shorter the loop"),more:wAt(sc,"shorter","the more you learn"),
+    seasons:wAt(sc,"shorter","the workshop in Jaipur"),shorter:wAt(sc,"shorter","the sooner you try it"),more:wAt(sc,"shorter","where it hurts"),
     realNeed:wAt(sc,"need","a real need"),notFeat:wAt(sc,"need","not from the feature"),typed:wAt(sc,"need","typed every invoice"),ticket:wAt(sc,"need","in a ticket"),
     docs:wAt(sc,"read","the official docs"),what:wAt(sc,"read","what they do"),cost:wAt(sc,"read","what they cost"),stop:wAt(sc,"read","where they stop"),
     small2:wAt(sc,"adapt","trying it small"),own:wAt(sc,"adapt","your own data"),sandbox:wAt(sc,"adapt","in a sandbox"),set:wAt(sc,"adapt","a set time"),days:wAt(sc,"adapt","two days"),n200:wAt(sc,"adapt","two hundred"),
@@ -2123,7 +2085,7 @@ scene("loop",(ctx,S,t,sc)=>{const c=sc.cues,T=il_once(sc,"T",()=>({
     il_top(cx,1);il_case(cx,"Test what's new · a short loop",ag_in(tt,0.2,0.6),MD.ink);
     // the loop, drawn as it's named, each step lit while its line is said
     const rA=ag_in(tt,T.small-0.4,0.6);il_loop(cx,tt,400,500,210,{a:rA,u:ag_sine((tt-T.small+0.2)/2.2),lit,stepA:i=>ag_in(tt,[T.inv,T.adapt,T.impl,T.iter][i]-0.25,0.4)});
-    // a shorter loop learns more in the same time: the breeders' two seasons again
+    // a shorter loop learns more in the same time: the workshop in Jaipur again
     const shA=ag_io(tt,c.shorter-0.3,c.need-0.3,0.5);if(shA>0){md_card(cx,960,260,860,360,{a:shA});md_T(cx,"IN THE SAME TIME",988,312,{w:800,size:28,ls:4,col:MD.soft,a:shA});
       [["A long loop",1,MD.soft,T.seasons],["A short loop",3,MD.pass,T.shorter]].forEach(([s,n,col,a_],i)=>{const q=shA*ag_in(tt,a_-0.3,0.5),y=400+i*130;md_T(cx,s,988,y,{w:600,size:30,col,a:q});
         for(let k=0;k<n;k++){const u=ag_sine((tt-a_-k*0.35)/0.9);if(u<=0)continue;cx.save();cx.globalAlpha*=q;cx.strokeStyle=rgba(col,0.9);cx.lineWidth=4;cx.beginPath();cx.arc(1380+k*120+(n===1?120:0),y-10,n===1?100:46,-Math.PI/2,-Math.PI/2+TAU*u);cx.stroke();cx.restore();}});
@@ -2161,18 +2123,18 @@ scene("loop",(ctx,S,t,sc)=>{const c=sc.cues,T=il_once(sc,"T",()=>({
 /* ---------------------------------------------------------------- 5 · Keep the method */
 const IL_MOD=[["Data that moves","Moving data"],["Data as software","Running the platform"],["From tables to decisions","Serving it to people and agents"],["Documents and closing remarks","Reading documents"]];
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=il_once(sc,"T",()=>({
-    gone:wAt(sc,"wheats","long gone"),method:wAt(sc,"wheats","The method"),places:wAt(sc,"wheats","two places"),still:wAt(sc,"wheats","still used"),
+    gone:wAt(sc,"feet","long gone"),method:wAt(sc,"feet","The method"),places:wAt(sc,"feet","how people live"),still:wAt(sc,"feet","still how"),
     ideas:wAt(sc,"keep","keep the ideas"),features:wAt(sc,"keep","test the features"),small:wAt(sc,"keep","small, soon"),need:wAt(sc,"keep","a real need"),
     moving:wAt(sc,"module","moving data"),running:wAt(sc,"module","running the platform"),serving:wAt(sc,"module","serving it"),reading:wAt(sc,"module","reading documents"),
     whole:wAt(sc,"team","a whole team"),dbx:wAt(sc,"team","Databricks and dbt"),agree:wAt(sc,"team","agreeing what the data means"),
     docs:wAt(sc,"end","the official docs"),inv:wAt(sc,"end","Investigate"),going:wAt(sc,"end","keep going")}));
   const map0=c.keep-1.0;
   ag_shots(ctx,S,t,sc.dur,[
-    // the field again, now a harvest; the wheats are gone, the method stays
-    {at:0,place:"ilField",keys:[[0,960,520,1.0]],push:0.02,draw:(cx,tt)=>{
-      il_field(cx,tt,{wind:0.7,health:1.15,a:1});
-      il_scr(cx,S,()=>{md_textCard(cx,1180,170,640,{kick:"The wheats of the 1950s",title:"Long gone from the fields"},{edge:MD.soft,a:ag_in(tt,T.gone-0.4,0.5),k:il_k(tt,T.gone-0.4)});
-        md_textCard(cx,1180,380,640,{kick:"The method",title:"Two places, two seasons",sub:"Still used by wheat breeders today"},{edge:MD.agreed,icon:"refresh",a:ag_in(tt,T.method-0.3,0.5),k:il_k(tt,T.method-0.3)});});}},
+    // the workshop again, the bare foot on the bench: the feet of the 1960s are gone, the method stays
+    {at:0,place:"ilWork",keys:[[0,960,520,1.0]],push:0.02,draw:(cx,tt)=>{
+      il_footBare(cx,880,742,180,{a:1,flex:0.5*ag_io(tt,T.method,T.still+1.4,0.6)*Math.abs(Math.sin(tt*1.4))});
+      il_scr(cx,S,()=>{md_textCard(cx,1180,170,640,{kick:"The rubber feet of the 1960s",title:"Long gone"},{edge:MD.soft,a:ag_in(tt,T.gone-0.4,0.5),k:il_k(tt,T.gone-0.4)});
+        md_textCard(cx,1180,380,640,{kick:"The method",title:"Start from how people live",sub:"Try it on them, and change it"},{edge:MD.agreed,icon:"refresh",a:ag_in(tt,T.method-0.3,0.5),k:il_k(tt,T.method-0.3)});});}},
     // keep the ideas, test the features; the module; what's left for people; start from the docs, and the loop
     {at:map0,place:"map",dis:0.9,keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
       il_top(cx,1);const kA=ag_in(tt,map0+0.3,0.5)*(1-ag_in(tt,c.module-0.6,0.5));

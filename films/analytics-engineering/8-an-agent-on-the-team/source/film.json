@@ -18,6 +18,7 @@
     ["\\bID\\b", "eye dee"],
     ["\\bCI\\b", "see eye"],
     ["\\bAI\\b", "ay eye"],
-    ["\\bMaskelyne\\b", "Maskelin"]
+    ["\\bMaskelyne\\b", "Maskelin"],
+    ["\\bNoor\\b", "Nuur"]
   ]
 }

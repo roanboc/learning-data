@@ -9,7 +9,7 @@ const NARR={
  {"id":"five","gap":0.8,"text":"Until now, award was kept in five glossaries, lists of what words mean, with three meanings between them."},
  {"id":"two","gap":0.8,"text":"So two reports counted awards two ways: Planning's census report said 4,812, the draft submission to the government 4,867.","say":"So two reports counted awards two ways: Planning's census report said four thousand, eight hundred and twelve, the draft submission to the government four thousand, eight hundred and sixty-seven."},
  {"id":"explain","gap":0.8,"text":"The university could have sent the government a number it couldn't explain."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Award needed one meaning, kept in one place."},
  {"id":"page","gap":0.8,"text":"Now award has one page, on the platform, and every copy is checked against it each night."},
  {"id":"setting","gap":0.8,"text":"The 6 credit points are kept once, as a setting.","say":"The six credit points are kept once, as a setting."},
  {"id":"once","gap":0.8,"text":"And awards conferred is counted once, for every report and every agent."},

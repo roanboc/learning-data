@@ -9,7 +9,7 @@ const NARR={
  {"id":"column","gap":0.8,"text":"So the catalogue could promise a column the table no longer had."},
  {"id":"census","gap":0.8,"text":"And on census day, a faculty's report could break, just when it's needed to plan next semester's places."},
  {"id":"format","gap":0.8,"text":"And each catalogue kept its promises in its own format: change the catalogue, and every promise is typed again."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"The promises had to live with the tables, in a form any catalogue can read."},
  {"id":"now","gap":0.3,"text":"Now each promise is a file, kept with the code, in two open standards that any tool can read:"},
  {"id":"pair","gap":0.8,"text":"one for the product, and one for the contract of each core table it's built on."},
  {"id":"written","gap":0.8,"text":"Data governance's information architect writes that contract first, and the data team builds to it."},

@@ -9,7 +9,7 @@ const NARR={
  {"id":"left","gap":0.4,"text":"Until then, Sweden drove on the left, but its neighbours drove on the right,"},
  {"id":"wheel","gap":0.8,"text":"and most Swedish cars were built for the right, with the wheel on the left."},
  {"id":"overtake","gap":0.8,"text":"When overtaking, drivers couldn't see what was coming, and many crashed head on."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Sweden had to drive on the right, like its neighbours."},
  {"id":"feared","gap":0.8,"text":"Switching sides would be safer, but many feared the switch itself: one driver who didn't know could meet another head on."},
  {"id":"know","gap":0.8,"text":"Everyone had to know."},
  {"id":"commission","gap":0.8,"text":"So a commission prepared for four years."},

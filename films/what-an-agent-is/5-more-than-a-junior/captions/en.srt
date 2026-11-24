@@ -43,241 +43,241 @@ Many took that to mean Hans could think.
 But in every test, someone there knew the answer.
 
 12
-00:00:53,622 --> 00:00:57,243
-Something had to change: not the horse, but the way he was tested.
+00:00:53,622 --> 00:00:56,845
+The horse didn't need changing; the way he was tested did.
 
 13
-00:00:59,543 --> 00:01:05,432
+00:00:59,145 --> 00:01:05,034
 That autumn, a young psychologist, Oskar Pfungst, tested Hans as a horse, not as a pupil.
 
 14
-00:01:06,932 --> 00:01:09,424
+00:01:06,534 --> 00:01:09,026
 When nobody there knew the answer, Hans failed.
 
 15
-00:01:11,124 --> 00:01:16,543
+00:01:10,726 --> 00:01:16,145
 With large blinkers on, so he couldn't see the one asking, he got 6 in every 100 right.
 
 16
-00:01:18,643 --> 00:01:20,471
+00:01:18,245 --> 00:01:20,073
 When he could see them, 89.
 
 17
-00:01:22,571 --> 00:01:24,685
+00:01:22,173 --> 00:01:24,287
 Hans had been watching the one who asked.
 
 18
-00:01:26,385 --> 00:01:29,463
+00:01:25,987 --> 00:01:29,065
 So von Osten was no cheat, and Hans couldn't count.
 
 19
-00:01:30,963 --> 00:01:34,281
+00:01:30,565 --> 00:01:33,883
 But he could see movements too small for any expert to notice.
 
 20
-00:01:35,781 --> 00:01:39,356
+00:01:35,383 --> 00:01:38,958
 Ever since, careful tests keep the answer from the one who asks.
 
 21
-00:01:41,256 --> 00:01:46,323
+00:01:40,858 --> 00:01:45,925
 Jun's data team works with something else that isn't what it looks like: an AI agent.
 
 22
-00:01:47,823 --> 00:01:52,284
+00:01:47,425 --> 00:01:51,886
 Supervised for what it is, it gives them more than a junior could, and safely.
 
 23
-00:01:59,884 --> 00:02:03,338
+00:01:59,486 --> 00:02:02,940
 An agent is a model that reasons, with hands, in a loop.
 
 24
-00:02:05,038 --> 00:02:10,273
+00:02:04,640 --> 00:02:09,875
 Teams starting with one are often told: treat it like a junior who needs supervision.
 
 25
-00:02:12,173 --> 00:02:16,797
+00:02:11,775 --> 00:02:16,399
 A junior knows a little, works slowly, and does small jobs that someone checks.
 
 26
-00:02:18,497 --> 00:02:22,306
+00:02:18,099 --> 00:02:21,908
 They remember what they're told, so month by month, you check them less.
 
 27
-00:02:24,006 --> 00:02:26,688
+00:02:23,608 --> 00:02:26,290
 And they're careful, because a mistake would cost them.
 
 28
-00:02:28,388 --> 00:02:31,440
+00:02:27,990 --> 00:02:31,042
 But, like Hans, the agent only looks like the picture.
 
 29
-00:02:33,140 --> 00:02:36,972
+00:02:32,742 --> 00:02:36,574
 It's more than a junior in two ways, and less than a person in three.
 
 30
-00:02:41,072 --> 00:02:47,286
+00:02:40,674 --> 00:02:46,888
 One morning, Jun asks it how the award count is built, from student records to the government's report.
 
 31
-00:02:48,786 --> 00:02:54,428
+00:02:48,388 --> 00:02:54,030
 It reads the whole project, 33 tables and their code, and draws the path in about a minute.
 
 32
-00:02:56,728 --> 00:02:58,859
+00:02:56,330 --> 00:02:58,461
 A new junior would need a week for this.
 
 33
-00:03:00,559 --> 00:03:03,821
+00:03:00,161 --> 00:03:03,423
 It has read more than any of us could in a thousand lifetimes.
 
 34
-00:03:05,921 --> 00:03:09,097
+00:03:05,523 --> 00:03:08,699
 So the junior picture undersells it, and hides a danger.
 
 35
-00:03:10,597 --> 00:03:16,426
+00:03:10,199 --> 00:03:16,028
 Given free rein, it could change every table in a minute: the wrong way, as fast as the right one.
 
 36
-00:03:18,726 --> 00:03:24,136
+00:03:18,328 --> 00:03:23,738
 A junior's pace keeps their mistakes small. The agent's pace doesn't, so something else must.
 
 37
-00:03:28,436 --> 00:03:31,431
+00:03:28,038 --> 00:03:31,033
 Later, Jun asks it for this year's count of awards.
 
 38
-00:03:32,131 --> 00:03:35,717
+00:03:31,733 --> 00:03:35,319
 It counts 4,812, and shows how.
 
 39
-00:03:37,217 --> 00:03:43,222
+00:03:36,819 --> 00:03:42,824
 Jun points it to the glossary: here, microcredentials of six credit points or more count too.
 
 40
-00:03:44,322 --> 00:03:48,087
+00:03:43,924 --> 00:03:47,689
 It counts again: 4,867.
 
 41
-00:03:49,587 --> 00:03:54,289
+00:03:49,189 --> 00:03:53,891
 The next morning, Jun starts a new session and asks for awards by faculty.
 
 42
-00:03:54,989 --> 00:04:01,523
+00:03:54,591 --> 00:04:01,125
 Its faculties add up to 4,812 again: it has left the microcredentials out.
 
 43
-00:04:03,023 --> 00:04:05,124
+00:04:02,625 --> 00:04:04,726
 A junior, told once, would remember.
 
 44
-00:04:05,824 --> 00:04:09,504
+00:04:05,426 --> 00:04:09,106
 The agent has no memory of yesterday, unless we give it one.
 
 45
-00:04:10,604 --> 00:04:15,969
+00:04:10,206 --> 00:04:15,571
 So Jun adds the lesson to the team's notes for agents, which every session starts by reading.
 
 46
-00:04:16,669 --> 00:04:19,662
+00:04:16,271 --> 00:04:19,264
 Before you count a word, read its meaning in the glossary.
 
 47
-00:04:21,362 --> 00:04:25,128
+00:04:20,964 --> 00:04:24,730
 From then on, it counts the glossary's way, whoever starts the session.
 
 48
-00:04:28,028 --> 00:04:31,011
+00:04:27,630 --> 00:04:30,613
 Another day, Jun asks it to speed up the nightly run.
 
 49
-00:04:32,511 --> 00:04:36,416
+00:04:32,113 --> 00:04:36,018
 It finds three tables, built every night, that nothing seems to read.
 
 50
-00:04:38,116 --> 00:04:41,008
+00:04:37,718 --> 00:04:40,610
 In seconds, it drafts a change that deletes them.
 
 51
-00:04:42,908 --> 00:04:47,408
+00:04:42,510 --> 00:04:47,010
 A junior would have asked around first, with their name on the work and a career ahead.
 
 52
-00:04:48,908 --> 00:04:52,483
+00:04:48,510 --> 00:04:52,085
 The agent has no career, and no mistake costs it anything.
 
 53
-00:04:53,983 --> 00:04:56,474
+00:04:53,585 --> 00:04:56,076
 It isn't careless. It has nothing to lose.
 
 54
-00:04:58,574 --> 00:05:05,464
+00:04:58,176 --> 00:05:05,066
 So its caution comes from its rights: it reads, and writes only drafts in a sandbox, where they wait for a person.
 
 55
-00:05:07,564 --> 00:05:12,832
+00:05:07,166 --> 00:05:12,434
 Jun asks around: one of the three is read once a year, for the report to the government.
 
 56
-00:05:14,732 --> 00:05:19,919
+00:05:14,334 --> 00:05:19,521
 So the change goes ahead with two. Jun reviews it, and Noor approves it for production.
 
 57
-00:05:22,019 --> 00:05:27,774
+00:05:21,621 --> 00:05:27,376
 A junior grows into the one who approves. The agent never does: its review is for reference.
 
 58
-00:05:31,674 --> 00:05:34,702
+00:05:31,276 --> 00:05:34,304
 Back in Berlin, Pfungst found what Hans was watching.
 
 59
-00:05:36,202 --> 00:05:42,037
+00:05:35,804 --> 00:05:41,639
 At the right number, the questioner's head lifted, in von Osten a fifth of a millimetre at most.
 
 60
-00:05:44,137 --> 00:05:46,563
+00:05:43,739 --> 00:05:46,165
 Nobody knew they did it, not even Pfungst.
 
 61
-00:05:48,463 --> 00:05:55,048
+00:05:48,065 --> 00:05:54,650
 AI researchers still use Hans's name for a model that takes its answer from a hint, not from the problem.
 
 62
-00:05:56,548 --> 00:06:03,546
+00:05:56,150 --> 00:06:03,148
 In tests since 2023, a hint like 'I think it's B' pulled models to B, and their reasoning rarely mentioned it.
 
 63
-00:06:05,446 --> 00:06:09,684
+00:06:05,048 --> 00:06:09,286
 So Jun asks the way Pfungst asked: without the answer in the question.
 
 64
-00:06:11,184 --> 00:06:14,606
+00:06:10,786 --> 00:06:14,208
 He looks at how it got there: the query, and the rows it read.
 
 65
-00:06:16,306 --> 00:06:23,070
+00:06:15,908 --> 00:06:22,672
 And he checks a count it didn't make: the draft for the government says 4,867 too.
 
 66
-00:06:27,370 --> 00:06:31,914
+00:06:26,972 --> 00:06:31,516
 Hans was never a pupil: he was a horse, with a gift nobody had looked for.
 
 67
-00:06:33,814 --> 00:06:37,391
+00:06:33,416 --> 00:06:36,993
 The agent isn't a junior. It knows more, and works faster.
 
 68
-00:06:38,891 --> 00:06:43,914
+00:06:38,493 --> 00:06:43,516
 And it's less than a person: no career, nothing to lose, no memory of yesterday.
 
 69
-00:06:45,414 --> 00:06:51,107
+00:06:45,016 --> 00:06:50,709
 So its caution lives in its rights, its memory in the team's notes, and every yes with a person.
 
 70
-00:06:53,007 --> 00:07:00,657
+00:06:52,609 --> 00:07:00,259
 This week, that gave Jun's team a path in a minute, a count checked twice, a yearly table kept, and a lesson for every session.
 
 71
-00:07:02,557 --> 00:07:05,668
+00:07:02,159 --> 00:07:05,270
 Supervise it for what it is, not for what it looks like.

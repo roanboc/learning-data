@@ -67,105 +67,105 @@ El YAML de la credencial lista cada columna, su tipo y lo que no puede estar vac
 Si la consulta y el contrato no coinciden en el tipo de una columna, la construcción se detiene antes de crear la tabla.
 
 18
-00:02:17,500 --> 00:02:22,477
+00:02:17,500 --> 00:02:22,698
 El contrato se verifica en cada construcción, no se lee una vez y se olvida. Noor lo aprueba.
 
 19
-00:02:25,577 --> 00:02:29,165
+00:02:25,798 --> 00:02:29,386
 Cada consumidor recibe su propio contrato, sobre el mismo núcleo.
 
 20
-00:02:30,865 --> 00:02:36,799
+00:02:31,086 --> 00:02:37,020
 Cada uno lleva la granularidad que declaró: la de Planificación, como era el día del censo; la de la billetera, como es hoy.
 
 21
-00:02:38,599 --> 00:02:42,897
+00:02:38,820 --> 00:02:43,118
 Ambos son obligatorios y protegidos: solo este proyecto puede construir sobre ellos.
 
 22
-00:02:44,797 --> 00:02:50,558
+00:02:45,018 --> 00:02:50,779
 Y cada uno declara una exposición: el tablero o la app que lo lee, con un responsable y un correo.
 
 23
-00:02:52,558 --> 00:02:58,707
+00:02:52,779 --> 00:02:58,928
 Si cambias la credencial en el núcleo, el linaje encuentra una exposición: la app de billetera. A ellos hay que avisar.
 
 24
-00:03:00,707 --> 00:03:03,529
+00:03:00,928 --> 00:03:03,750
 Planificación y el equipo de la billetera aprueban cada uno el suyo.
 
 25
-00:03:06,829 --> 00:03:11,485
+00:03:07,050 --> 00:03:11,706
 Paso cinco: las pruebas, antes del código que verifican. Dicen cómo se ve lo terminado.
 
 26
-00:03:13,585 --> 00:03:18,698
+00:03:13,806 --> 00:03:18,919
 Cada clave, única y nunca vacía. Cada relación, apuntando a algo que existe.
 
 27
-00:03:19,798 --> 00:03:25,327
+00:03:20,019 --> 00:03:25,548
 Cada lista cerrada, con valores acordados. Cada historia, con versiones que nunca se superponen.
 
 28
-00:03:27,027 --> 00:03:31,456
+00:03:27,248 --> 00:03:31,677
 Y un número en el que ya se confía: los doce estudiantes del informe del censo.
 
 29
-00:03:32,956 --> 00:03:38,312
+00:03:33,177 --> 00:03:38,532
 Una prueba compara el conteo del modelo con el informe, y falla en cualquier facultad que difiera.
 
 30
-00:03:39,912 --> 00:03:44,673
+00:03:40,132 --> 00:03:44,893
 El agente redacta las pruebas a partir de los contratos y el registro. Jun las revisa.
 
 31
-00:03:47,773 --> 00:03:56,101
+00:03:47,993 --> 00:03:56,321
 Las pruebas de datos verifican las tablas. Cierta lógica se verifica por separado, con unas filas inventadas para eso. Eso es una prueba unitaria.
 
 32
-00:03:58,201 --> 00:04:10,156
+00:03:58,421 --> 00:04:10,376
 La regla de créditos, en dos filas inventadas. Una asignatura aprobada cuenta desde el diez de enero. Una microcredencial cuenta desde el dos de febrero, hasta que se revoca el doce de agosto.
 
 33
-00:04:12,356 --> 00:04:18,093
+00:04:12,576 --> 00:04:18,313
 El crédito cambia dos veces, así que la respuesta son tres versiones: quince, veinte y otra vez quince.
 
 34
-00:04:20,193 --> 00:04:26,068
+00:04:20,413 --> 00:04:26,288
 Las fechas de la microcredencial son las de Jordan. La regla se prueba antes de que llegue una sola fila real.
 
 35
-00:04:29,668 --> 00:04:34,905
+00:04:29,888 --> 00:04:35,125
 No toda falla debe detenerlo todo. Una prueba puede advertir, o puede detener la construcción.
 
 36
-00:04:36,205 --> 00:04:41,999
+00:04:36,425 --> 00:04:42,219
 Una inscripción a un curso corto no tiene correo: alguien que llegó sin registro, cuyo certificado no llega a nadie.
 
 37
-00:04:43,499 --> 00:04:51,843
+00:04:43,719 --> 00:04:52,063
 El equipo de aprendizaje acordó: advertir si hay alguna, detener si hay más de cinco. Se esperan una o dos por período. Más significa que algo se rompió.
 
 38
-00:04:53,843 --> 00:04:56,520
+00:04:54,063 --> 00:04:56,740
 Hoy, la construcción advierte una vez y sigue.
 
 39
-00:04:58,220 --> 00:05:02,851
+00:04:58,440 --> 00:05:03,071
 La frescura funciona igual: advertir si una fuente lleva un día de retraso, fallar a los tres.
 
 40
-00:05:04,651 --> 00:05:08,477
+00:05:04,871 --> 00:05:08,697
 ¿Quién fija el nivel? El responsable de los datos, con la razón por escrito.
 
 41
-00:05:11,777 --> 00:05:18,310
+00:05:11,997 --> 00:05:18,530
 112 pruebas de datos. Cuatro pruebas unitarias. Cada promesa por escrito, con su prueba al lado.
 
 42
-00:05:19,610 --> 00:05:25,692
+00:05:19,830 --> 00:05:25,912
 Cada una se escribe antes del código que verifica, así que hasta que ese código exista, no puede pasar. Es a propósito.
 
 43
-00:05:26,992 --> 00:05:30,487
+00:05:27,212 --> 00:05:30,707
 Luego, el mínimo código que las ponga en verde, en el lugar correcto.

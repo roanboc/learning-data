@@ -1253,44 +1253,67 @@ def series_course(lg, S, SL, series, films_, step):
             f'<ol class="path" data-store="{SL["prefix"]}" data-labs="{nl}" data-quiz="{nq}" data-series="{" ".join([x["prefix"] for x in films_] + hand)}" data-text=\'{txt}\'>\n{lis}\n</ol></div></nav>')
 
 
+PRACTICE_TEXT = {  # the words of assets/learn/practice.js
+    "en": dict(film="Film {n}", lab="Lab {i} of {n}", exp="{n} of {of} experiments done", seen="opened", tab="Lab {i}: {t}", shows="What this shows",
+               from_="from {t}", tryit="Try these", retry="Retry the ones you missed", toEval="Evaluation"),
+    "es": dict(film="Pel. {n}", lab="Lab {i} de {n}", exp="{n} de {of} experimentos hechos", seen="abierto", tab="Lab {i}: {t}", shows="Lo que muestra",
+               from_="de {t}", tryit="Prueba esto", retry="Repite las que fallaste", toEval="Evaluación")}
+
+
+def one_line(text):
+    """A labs or evaluation page's one line under its title, from the series' longer text: what there is to do. The second
+    sentence when the first only counts the labs, up to its colon."""
+    parts = re.split(r"(?<=[.?!])\s+", text.strip())
+    line = parts[1] if len(parts) > 1 and re.search(r"\blabs?\b", parts[0]) and not re.search(r"\blabs?\b", parts[1]) else parts[0]
+    line = line.split(":")[0].rstrip(".") + "."
+    return line
+
+
 def series_learn_page(lg, S, series, films_, which):
-    """A series' own labs page (which="labs") or scenarios page (which="scenarios"), for all its films. Its engine
-    (site/assets/<dir>/learn.js) fills #series-labs or #series-quiz, and draws their pictures with a film's parts: that film's
-    bundle loads here, and never plays."""
-    SL = series_learn(S); path = f'{S["slug"]}/{which}/'; nq = SL["quiz"]
-    if which == "labs":
-        h1, img = T(lg, "Take it apart", "Desarma"), films_[-1]["key"]
-        lead = learn_text(lg, S, series, "labs_lead") + T(lg, " Your progress stays in this browser.", " Tu avance queda en este navegador.")
+    """A series' own labs page (which="labs") or evaluation page (which="scenarios"), for all its films, on its template
+    (docs/page-templates.md): a short hero with one line and the practice as icons, then the app, which leads on by itself.
+    Its engine (site/assets/<dir>/learn.js) fills #series-labs or #series-quiz, and draws their pictures with a film's parts:
+    that film's bundle loads here, and never plays. assets/learn/practice.js then lays out what the engine drew as the template
+    says, the same for every series: the labs as circles by film, the playground first and its ideas folded; the situations as
+    dots by film, and a result that leads on."""
+    SL = series_learn(S); path = f'{S["slug"]}/{which}/'; nl, nq = SL["labs"], SL["quiz"]
+    labs = which == "labs"
+    if labs:
+        h1, img = "Labs", films_[-1]["key"]
+        full = learn_text(lg, S, series, "labs_lead") + T(lg, " Your progress stays in this browser.", " Tu avance queda en este navegador.")
+        other = f'<a class="pr-go" href="../scenarios/">{T(lg, "Evaluation", "Evaluación")}: {nq} {T(lg, "situations", "situaciones")} →</a>'
     else:
-        h1, img = T(lg, "Make the call", "Tú decides"), films_[0]["key"]
-        lead = learn_text(lg, S, series, "quiz_lead") + T(lg, " Your answers stay in this browser.", " Tus respuestas quedan en este navegador.")
-    h, R = head(lg, path, f'{h1} · {SN(lg, S)} · Learning Data', lead, lead, f"{img}-poster.jpg")
+        h1, img = T(lg, "Evaluation", "Evaluación"), films_[0]["key"]
+        full = learn_text(lg, S, series, "quiz_lead") + T(lg, " Your answers stay in this browser.", " Tus respuestas quedan en este navegador.")
+        other = f'<a class="pr-go" href="../labs/">Labs: {nl} →</a>'
+    lead = one_line(learn_text(lg, S, series, "labs_lead" if labs else "quiz_lead"))
+    h, R = head(lg, path, f'{h1} · {SN(lg, S)} · Learning Data', full, full, f"{img}-poster.jpg")
     h += f'<link rel="stylesheet" href="{R}assets/{SL["engine"]}/learn.css">\n'
-    if which == "labs":  # the classic kinds a film's labs beside its playground may take (site/assets/learn/classic.js)
+    if labs:  # the classic kinds a film's labs beside its playground may take (site/assets/learn/classic.js)
         h += f'<link rel="stylesheet" href="{R}assets/learn/classic.css">\n'
-    app = f'data-store="{SL["prefix"]}" data-films="{E(learn_films(lg, S, series, films_))}"'
-    if which == "labs":
-        mid = (f'<section aria-labelledby="labs-h">\n<h2 class="sr" id="labs-h">Labs</h2>\n<div id="series-labs" {app}><noscript><p class="noscript">{T(lg, "The labs need JavaScript.", "Los labs necesitan JavaScript.")}</p></noscript></div>\n</section>\n\n'
-               f'<section class="next-step" aria-labelledby="next-step-h"><img src="{R}assets/{films_[0]["key"]}-poster.jpg" alt="" width="1280" height="720" loading="lazy"><div><p class="step">{T(lg, "Next", "Siguiente")}</p>'
-               f'<h2 id="next-step-h"><a href="../scenarios/">{T(lg, "Make the call", "Tú decides")} →</a></h2><p>'
-               + T(lg, f"{nq} situations from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
-                   f"{nq} situaciones de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata.") + '</p></div></section>\n')
+    h += f'<link rel="stylesheet" href="{R}assets/learn/pages.css">\n<link rel="stylesheet" href="{R}assets/learn/practice.css">\n'
+    # what practice.js needs to lay the app out: each lab's film, or each situation's, in the order shown; its words; where the
+    # result leads (the next series, or the topic at its end)
+    after = next((x for x in SERIES if x["id"] == S.get("next")), None)
+    RT = R if lg == "en" else R[3:]
+    nxt = ([f'{RT}{after["slug"]}/', f'{T(lg, "Next series", "Siguiente serie")}: {SN(lg, after)}'] if after and films(after)[1]
+           else [topic_href(lg, R, S["id"]), f'{T(lg, "Back to the topic", "Vuelve al tema")}: {topic_name(lg, S["id"])}'])
+    pr = dict(map=[[x["id"], x["film"]] for x in SL[lg]["labs"]] if labs else [f for _, f, _ in SL[lg]["qs"]], text=PRACTICE_TEXT[lg], next=nxt)
+    app = (f'data-store="{SL["prefix"]}" data-films="{E(learn_films(lg, S, series, films_))}" '
+           f'data-practice-page="{html.escape(json.dumps(pr, ensure_ascii=False, separators=(",", ":")), quote=True)}"')
+    if labs:
+        mid = (f'<section class="pr-app" aria-labelledby="labs-h">\n<h2 class="sr" id="labs-h">{T(lg, "The labs", "Los labs")}</h2>\n<div id="series-labs" {app}><noscript><p class="noscript">{T(lg, "The labs need JavaScript.", "Los labs necesitan JavaScript.")}</p></noscript></div>\n</section>\n')
     else:
-        nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
-        lang = lambda h: ' lang="en"' if lg == "es" and h.get("title_lang") == "en" else ""
-        lis = "\n".join(li for _, li in sorted([(x["index"], f'<li><a href="{"../" if S.get("single") else "../" + x["key"] + "/"}"><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>') for x in films_]
-                                               + [(n - 1, f'<li><a href="{R if lg == "en" else R[3:]}{h["href"]}"><span class="n">{n}</span><span{lang(h)}>{E(h["title"][lg])}</span></a></li>') for n, _, h, _ in outside(S)]))
-        mid = (f'<section aria-labelledby="scenarios-h" class="section-gap">\n<h2 class="sr" id="scenarios-h">{T(lg, "Scenarios", "Situaciones")}</h2>\n'
-               f'<div id="series-quiz" {app}><noscript><p class="noscript">{T(lg, "The scenarios need JavaScript.", "Las situaciones necesitan JavaScript.")}</p></noscript></div>\n</section>\n\n'
-               f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "The films", "Las películas")}: <a href="../">{SN(lg, S)}</a></h2>'
-               f'<p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n<ol class="series-list" aria-label="{T(lg, "Every film of the series", "Todas las películas de la serie")}">\n{lis}\n</ol>\n</section>\n')
-    body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="page-head cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{img}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
-            f'{crumbs(lg, R, S, "../")}\n<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n{draft_note(lg, series.get("draft"))}</section>\n{series_course(lg, S, SL, series, films_, 1 if which == "labs" else 2)}\n{mid}</main>\n{foot(lg, S, True, True)}\n'
+        mid = (f'<section class="pr-app" aria-labelledby="scenarios-h">\n<h2 class="sr" id="scenarios-h">{T(lg, "The situations", "Las situaciones")}</h2>\n'
+               f'<div id="series-quiz" {app}><noscript><p class="noscript">{T(lg, "The scenarios need JavaScript.", "Las situaciones necesitan JavaScript.")}</p></noscript></div>\n</section>\n')
+    body = (f'<body>\n{header(lg, path, R)}\n<main class="pr pr-{"labs" if labs else "quiz"}">\n<section class="page-head cine pr-head"><div class="bg" aria-hidden="true"><img src="{R}assets/{img}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
+            f'{crumbs(lg, R, S, "../")}\n<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n{draft_note(lg, series.get("draft"))}'
+            f'<div class="pr-strip">{practice_bars(lg, SL["prefix"], nl, nq)}{other}</div>\n</section>\n{mid}</main>\n{foot(lg, S, True, True)}\n'
             + ("" if SL["lazy"] or not SL["bundle"] else f'<script src="{R}assets/{SL["bundle"]}/film.js"></script>\n')
             + f'<script src="{R}assets/{SL["dir"]}/learn.{lg}.js"></script>\n'
-            + (f'<script src="{R}assets/learn/classic.js"></script>\n' if which == "labs" else "")
+            + (f'<script src="{R}assets/learn/classic.js"></script>\n' if labs else "")
             + f'<script src="{R}assets/{SL["engine"]}/learn.js"></script>\n'
-            f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
+            f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/practice.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body
 
 

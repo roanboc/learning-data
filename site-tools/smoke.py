@@ -1391,6 +1391,10 @@ LEARN_JS = """() => { const app = document.getElementById('series-labs'), on = a
     watch: app ? [...app.querySelectorAll('a[href*="#t="]')].map(a => a.getAttribute('href')) : [],
     badges: app ? [...app.querySelectorAll('[role=tab][data-id]')].map(b => b.dataset.id + ' ' + ((b.querySelector('i') || {}).textContent || '')) : [],
     kicker: ((app && app.querySelector('.stop-text .kicker')) || {}).textContent || '',
+    now: ((app && app.querySelector('.pr-now')) || {}).textContent || '', folds: app ? app.querySelectorAll('.stop .pr-fold').length : 0,
+    firsts: app ? app.querySelectorAll('[role=tab].pr-first[data-fl]').length : 0,
+    order: app ? ['.stop-text > h3', '.stop > :not(.stop-text)', '.stop .pr-fold', '.stop .stop-nav'].map(q => app.querySelector(q)).filter(Boolean).map(e => [e.className || e.tagName, Math.round(e.getBoundingClientRect().top)]) : [],
+    strip: [...document.querySelectorAll('.pr-strip [data-k]')].map(b => b.textContent).join(' '),
     rails: app ? app.querySelectorAll('[role=tablist]').length : 0, split: app ? app.querySelectorAll('.mr-films, .gp-films, select').length : 0,
     sw: document.documentElement.scrollWidth - innerWidth}; }"""
 
@@ -1430,6 +1434,16 @@ async def check_series_learn(run):
                     k = re.match(r"\D*(\d+)\D+(\d+)", r["kicker"])
                     pos = ids.index(x["id"]) + 1 if x["id"] in ids else 0
                     expect(sec, bool(k) and (int(k[1]), int(k[2])) == (pos, len(ids)), f"{where}: the kicker says {r['kicker']!r}, expected lab {pos} of {len(ids)}")
+                    # the page's template (docs/page-templates.md), which assets/learn/practice.js lays out for every engine: the
+                    # labs as circles under their films, one line that names the open lab, then the lab's name, the playground,
+                    # its ideas folded, and Next, in that order down the page
+                    nf = len({y["film"] for y in SL[lg]["labs"]})
+                    expect(sec, r["firsts"] == nf, f"{where}: {r['firsts']} circles carry a film's number, expected {nf}")
+                    kn = re.match(r"\D*(\d+)\D+(\d+)", r["now"])
+                    expect(sec, bool(kn) and (int(kn[1]), int(kn[2])) == (pos, len(ids)), f"{where}: the line under the circles says {r['now']!r}, expected lab {pos} of {len(ids)}")
+                    tops = [t for _, t in r["order"]]
+                    expect(sec, r["folds"] == 1 and len(tops) == 4 and tops == sorted(tops), f"{where}: the lab isn't laid out as its template says (name, playground, ideas folded, Next): {r['order']}")
+                    expect(sec, r["strip"].split()[:1] in ([str(k)] for k in range(1, len(ids) + 1)), f"{where}: the hero's icons don't count this lab as seen: {r['strip']!r}")
                     f = on_site.get(x["film"])
                     if f:  # a film still being made has no "Watch this part"
                         film = "" if S.get("single") else f"{f['key']}/"  # a film that stands alone has its page where the series' would be
@@ -1473,16 +1487,28 @@ async def check_series_learn(run):
                     for p in (probs or []) + log_problems(log):
                         expect(sec, False, f"/{key}: {p}")
                     await pg.close()
-                # every lab was opened, so the course bar counts them all (and the scenarios answered); a film that stands alone has
-                # its page where the series' would be, with no course bar, so its scenarios page shows the bar
-                key = f"{pre}{S['slug']}/" + ("scenarios/" if S.get("single") else "")
+                # every lab was opened, so the evaluation page's icons count them all (and the situations answered), its dots sit
+                # under their films, and, once every situation is answered, its result leads on
+                key = f"{pre}{S['slug']}/scenarios/"
                 pg, _ = await run.page(ctx, key)
-                r = await pg.evaluate("""() => [...document.querySelectorAll('nav.course .path li')].map(li => ({done: li.classList.contains('done'),
-                  t: li.querySelector('span:last-child').textContent}))""")
-                expect(sec, len(r) == 3 and r[1]["done"], f"/{key}: the course bar doesn't count every lab as explored: {r}")
-                if play and len(r) == 3:
-                    expect(sec, str(SL["quiz"]) in r[2]["t"] and r[2]["done"], f"/{key}: the course bar doesn't count every scenario as answered: {r[2]}")
+                await pg.wait_for_timeout(300)
+                r = await pg.evaluate("""() => ({strip: [...document.querySelectorAll('.pr-strip [data-k]')].map(b => +b.textContent),
+                  firsts: document.querySelectorAll('#series-quiz .dots .pr-first[data-fl]').length, sw: document.documentElement.scrollWidth - innerWidth})""")
+                expect(sec, r["strip"][:1] == [SL["labs"]], f"/{key}: the hero's icons don't count every lab as seen: {r['strip']}")
+                expect(sec, r["firsts"] == len({f for _, f, _ in SL[lg]["qs"]}), f"/{key}: {r['firsts']} dots carry a film's number")
+                expect(sec, r["sw"] <= 0, f"/{key}: scrolls sideways ({r['sw']} px)")
+                if play:
+                    expect(sec, r["strip"][1:2] == [SL["quiz"]], f"/{key}: the hero's icons don't count every situation as answered: {r['strip']}")
                 await pg.close()
+                if not S.get("single"):  # the series' page counts them too, in its course bar
+                    key = f"{pre}{S['slug']}/"
+                    pg, _ = await run.page(ctx, key)
+                    r = await pg.evaluate("""() => [...document.querySelectorAll('nav.course .path li')].map(li => ({done: li.classList.contains('done'),
+                      t: li.querySelector('span:last-child').textContent}))""")
+                    expect(sec, len(r) == 3 and r[1]["done"], f"/{key}: the course bar doesn't count every lab as explored: {r}")
+                    if play and len(r) == 3:
+                        expect(sec, str(SL["quiz"]) in r[2]["t"] and r[2]["done"], f"/{key}: the course bar doesn't count every scenario as answered: {r[2]}")
+                    await pg.close()
             finally:
                 await ctx.close()
         sec["notes"].append(f"{S['name']['en']}: {SL['labs']} labs and {SL['quiz']} scenarios, in " + " and ".join("English" if lg == "en" else "Spanish" for lg, _ in langs)

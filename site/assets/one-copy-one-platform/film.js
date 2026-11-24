@@ -476,7 +476,7 @@ const NARR={
  {"id":"decide","gap":0.8,"text":"Decide which system writes each table, and let the others read it."},
  {"id":"bought","gap":0.8,"text":"Where a system you buy keeps its own copy, agree the contract at that interface, as Moving is easy, agreeing is the work showed."},
  {"id":"both","gap":0.8,"text":"Both at once showed one database that writes and reads. Here, one copy serves a whole platform."},
- {"id":"wheel","gap":0.8,"text":"There are already standards for this, so don't reinvent the wheel."},
+ {"id":"wheel","gap":0.8,"text":"There are already standards for this: start from them."},
  {"id":"docs","gap":0.8,"text":"Investigate, adapt, implement and iterate, starting from the official docs."}]},
 "row":{"name":"The same row","lead":1.2,"tail":1.0,"vo":[
  {"id":"amsterdam","gap":0.8,"text":"In Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held."},
@@ -485,7 +485,7 @@ const NARR={
  {"id":"takeaway","gap":0.8,"text":"Keep one copy, governed once."}]}
 };
 
-const VODUR={"ledger/amst": 2.044, "ledger/quays": 4.141, "ledger/kinds": 7.355, "ledger/weigh": 4.794, "ledger/owed": 8.777, "ledger/change": 5.839, "ledger/bank": 6.85, "ledger/deposit": 6.825, "ledger/line": 7.764, "ledger/trust": 5.025, "ledger/century": 3.329, "ledger/data": 7.1, "ledger/claims": 7.46, "ledger/now": 4.558, "usual/payday": 4.776, "usual/linh": 5.539, "usual/sheets": 4.064, "usual/tally": 4.793, "usual/ready": 4.345, "usual/design": 6.961, "usual/cost": 6.137, "copy/noor": 4.256, "copy/lakebase": 4.401, "copy/once": 5.225, "copy/engines": 8.134, "copy/readers": 5.932, "copy/finance": 5.071, "copy/writer": 3.127, "copy/contracts": 7.598, "copy/written": 4.45, "fewer/gone": 5.247, "fewer/together": 5.033, "fewer/catalog": 7.792, "fewer/moves": 6.131, "fewer/tuesday": 6.281, "fewer/purpose": 3.57, "fewer/night": 3.662, "choose/so": 1.237, "choose/keep": 5.322, "choose/decide": 3.494, "choose/bought": 7.836, "choose/both": 6.082, "choose/wheel": 3.185, "choose/docs": 4.598, "row/amsterdam": 6.529, "row/onerow": 7.846, "row/paid": 7.687, "row/takeaway": 1.941};
+const VODUR={"ledger/amst": 2.044, "ledger/quays": 4.141, "ledger/kinds": 7.355, "ledger/weigh": 4.794, "ledger/owed": 8.777, "ledger/change": 5.839, "ledger/bank": 6.85, "ledger/deposit": 6.825, "ledger/line": 7.764, "ledger/trust": 5.025, "ledger/century": 3.329, "ledger/data": 7.1, "ledger/claims": 7.46, "ledger/now": 4.558, "usual/payday": 4.776, "usual/linh": 5.539, "usual/sheets": 4.064, "usual/tally": 4.793, "usual/ready": 4.345, "usual/design": 6.961, "usual/cost": 6.137, "copy/noor": 4.256, "copy/lakebase": 4.401, "copy/once": 5.225, "copy/engines": 8.134, "copy/readers": 5.932, "copy/finance": 5.071, "copy/writer": 3.127, "copy/contracts": 7.598, "copy/written": 4.45, "fewer/gone": 5.247, "fewer/together": 5.033, "fewer/catalog": 7.792, "fewer/moves": 6.131, "fewer/tuesday": 6.281, "fewer/purpose": 3.57, "fewer/night": 3.662, "choose/so": 1.237, "choose/keep": 5.322, "choose/decide": 3.494, "choose/bought": 7.836, "choose/both": 6.082, "choose/wheel": 2.619, "choose/docs": 4.598, "row/amsterdam": 6.529, "row/onerow": 7.846, "row/paid": 7.687, "row/takeaway": 1.941};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2516,7 +2516,7 @@ const OC_ADVICE=[[110,250,"1 · One copy","Keep one copy where you can","move da
   [980,550,"4 · One platform","One copy serves a whole platform","as Both at once did for one database","store",MD.flow]];
 scene("choose",(ctx,S,t,sc)=>{
   const T=oc_once(sc,"T",()=>({tKeep:sc.cues.keep,tDecide:sc.cues.decide,tBought:sc.cues.bought,tBoth:sc.cues.both,tHere:wAt(sc,"both","Here"),
-    tWheel:sc.cues.wheel,tStd:wAt(sc,"wheel","standards"),tReinv:wAt(sc,"wheel","reinvent"),tDocs:sc.cues.docs,tInv:wAt(sc,"docs","Investigate"),tAd:wAt(sc,"docs","adapt"),
+    tWheel:sc.cues.wheel,tStd:wAt(sc,"wheel","standards"),tReinv:wAt(sc,"wheel","start from them"),tDocs:sc.cues.docs,tInv:wAt(sc,"docs","Investigate"),tAd:wAt(sc,"docs","adapt"),
     tImp:wAt(sc,"docs","implement"),tIt:wAt(sc,"docs","iterate"),tOff:wAt(sc,"docs","official docs")}));
   const at=[T.tKeep,T.tDecide,T.tBought,T.tBoth];
   ag_shots(ctx,S,t,sc.dur,[
@@ -2524,7 +2524,7 @@ scene("choose",(ctx,S,t,sc)=>{
       oc_scr(c,S,()=>{oc_kick(c,S,"5","What to choose",ag_in(tt,0.2,0.6));const out=1-ag_in(tt,T.tWheel-0.3,0.5);
         if(out>0)withA(c,out,()=>OC_ADVICE.forEach(([x,y,kick,title,sub,icon,edge],i)=>oc_cardAt(c,x,y,830,{kick,title,sub},tt,at[i]-0.2,null,{edge,icon})));
         // standards already exist: the module's wheel draws itself; then the four steps, starting from the official docs
-        const wa=ag_in(tt,T.tWheel-0.1,0.5);if(wa>0){md_mark(c,960,330,96,(tt-T.tWheel)/1.8,wa);md_T(c,"Don't reinvent the wheel",960,520,{w:800,size:40,align:"center",a:ag_in(tt,T.tReinv-0.2,0.5)});}
+        const wa=ag_in(tt,T.tWheel-0.1,0.5);if(wa>0){md_mark(c,960,330,96,(tt-T.tWheel)/1.8,wa);md_T(c,"Start from the standards",960,520,{w:800,size:40,align:"center",a:ag_in(tt,T.tReinv-0.2,0.5)});}
         [["Investigate",T.tInv],["Adapt",T.tAd],["Implement",T.tImp],["Iterate",T.tIt]].forEach(([s,t0],i)=>oc_pillAt(c,330+i*420,630,s,tt,t0-0.1,null,{col:i===3?MD.pass:MD.flow,size:30}));
         const da=ag_in(tt,T.tOff-0.2,0.5);if(da>0)md_window(c,560,700,800,150,{logo:"databricks",product:"Databricks",title:"the official docs",edge:MD.flow,a:da,k:Math.min(1,ag_spr(tt,T.tOff-0.2,0.5)),
           draw:(c2,b)=>md_T(c2,"docs.databricks.com",b.x+20,b.y+44,{w:500,size:28,f:"mono",col:MD.flow})});});}}

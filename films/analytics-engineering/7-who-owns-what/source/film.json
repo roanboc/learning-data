@@ -14,6 +14,7 @@
     ["\\bMei\\b", "May"],
     ["\\bdbt\\b", "dee bee tee"],
     ["\\bDuckDB\\b", "duck dee bee"],
-    ["\\bIDs\\b", "eye dees"]
+    ["\\bIDs\\b", "eye dees"],
+    ["\\bNoor\\b", "Nuur"]
   ]
 }

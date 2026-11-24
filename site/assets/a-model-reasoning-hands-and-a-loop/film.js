@@ -412,7 +412,7 @@ const NARR={
  {"id":"gust","gap":0.8,"text":"When a gust tips a wing, the pilot has to level it again, at once, all through the flight."},
  {"id":"ache","gap":0.8,"text":"On a long flight, his arms and back ache."},
  {"id":"fall","gap":0.8,"text":"And if he's tired, or slow, a tipped aeroplane can slip sideways, and fall."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Pilots need something that levels the wings for them."},
  {"id":"box","gap":0.8,"text":"Sperry's answer is a box of four gyroscopes: wheels that spin so fast they keep pointing the same way, however the aeroplane moves."},
  {"id":"feels","gap":0.8,"text":"Each time the aeroplane tips, the box feels it, and pistons driven by air level it again."},
  {"id":"hands","gap":0.8,"text":"Over the river, Sperry lets go, and raises his hands."},
@@ -486,7 +486,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"off/date": 8.409, "off/last": 5.583, "off/hard": 1.979, "off/gust": 5.125, "off/ache": 2.363, "off/fall": 4.413, "off/change": 1.34, "off/box": 8.456, "off/feels": 5.41, "off/hands": 3.174, "off/wing": 1.684, "off/dips": 3.239, "off/prize": 4.459, "off/auto": 7.317, "off/seats": 2.505, "off/nomodel": 6.878, "off/agent": 3.625, "question/today": 6.051, "question/census": 4.926, "question/byhand": 6.375, "question/gives": 6.102, "writes/four": 2.942, "writes/learned": 4.564, "writes/guess": 6.517, "writes/alone": 3.646, "reasons/second": 1.618, "reasons/plan": 4.38, "reasons/report": 4.284, "reasons/rules": 8.088, "reasons/result": 4.035, "reasons/is": 2.76, "hands/third": 4.202, "hands/three": 8.32, "hands/server": 4.133, "hands/mcp": 6.658, "hands/read": 6.189, "loop/fourth": 4.892, "loop/counts": 4.101, "loop/short": 4.649, "loop/today": 3.958, "loop/rule": 5.32, "loop/again": 3.865, "loop/passes": 3.374, "loop/unlike": 5.09, "loop/stops": 4.67, "answer/brings": 8.132, "answer/evid": 5.815, "answer/decides": 5.07, "script/march": 3.896, "script/recipe": 7.01, "script/runs": 6.502, "script/took": 4.683, "script/web": 6.046, "script/docs": 3.213, "script/names": 4.85, "script/known": 3.145, "script/keep": 3.671, "seat/held": 5.321, "seat/took": 4.745, "seat/is": 3.354, "seat/only": 2.682};
+const VODUR={"off/date": 8.409, "off/last": 5.583, "off/hard": 1.979, "off/gust": 5.125, "off/ache": 2.363, "off/fall": 4.413, "off/change": 2.757, "off/box": 8.456, "off/feels": 5.41, "off/hands": 3.174, "off/wing": 1.684, "off/dips": 3.239, "off/prize": 4.459, "off/auto": 7.317, "off/seats": 2.505, "off/nomodel": 6.878, "off/agent": 3.625, "question/today": 6.051, "question/census": 4.926, "question/byhand": 6.375, "question/gives": 6.102, "writes/four": 2.942, "writes/learned": 4.564, "writes/guess": 6.517, "writes/alone": 3.646, "reasons/second": 1.618, "reasons/plan": 4.38, "reasons/report": 4.284, "reasons/rules": 8.088, "reasons/result": 4.035, "reasons/is": 2.76, "hands/third": 4.202, "hands/three": 8.32, "hands/server": 4.133, "hands/mcp": 6.658, "hands/read": 6.189, "loop/fourth": 4.892, "loop/counts": 4.101, "loop/short": 4.649, "loop/today": 3.958, "loop/rule": 5.32, "loop/again": 3.865, "loop/passes": 3.374, "loop/unlike": 5.09, "loop/stops": 4.67, "answer/brings": 8.132, "answer/evid": 5.815, "answer/decides": 5.07, "script/march": 3.896, "script/recipe": 7.01, "script/runs": 6.502, "script/took": 4.683, "script/web": 6.046, "script/docs": 3.213, "script/names": 4.85, "script/known": 3.145, "script/keep": 3.671, "seat/held": 5.321, "seat/took": 4.745, "seat/is": 3.354, "seat/only": 2.682};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2383,7 +2383,7 @@ function ml_byHand(ctx,t,k,o){o=o||{};const a=o.a==null?1:o.a,x0=o.x||560,y0=o.y
   out.forEach((b,i)=>{const ki=clamp(k[i]||0,0,1);if(ki<=0)return;const sp=ag_spr(ki,0,1),cx=lerp(b.x+b.w/2,to[0]+(i-2)*14,into),cy=lerp(b.y+h/2,to[1],into),
       s=lerp(1,0.3,into)*lerp(0.6,1,clamp(sp,0,1.2)),fa=ki*(1-sstep(0.7,1,into));if(fa<=0.01)return;
     ctx.save();ctx.translate(cx,cy);ctx.scale(s,s);ag_box(ctx,-b.w/2,-h/2,b.w,h,16,{a:fa,edge:i===4&&L>0?AG.amber:null,edgeA:0.6});
-    ag_T(ctx,b.s,0,10,{w:700,size:28,align:"center",a:fa});ctx.restore();});
+    ag_T(ctx,b.s,0,10,{w:700,size:28,align:"center",a:fa*(1-sstep(0,0.06,into))});ctx.restore();});   // the words leave before the card shrinks below 28 px
   ctx.restore();return out;}
 
 /* ---------------------------------------------------------------- a clock on a card: hour (1 to 5 through the afternoon), a label under the face */

@@ -1,23 +1,24 @@
 // Ideas that last, features you test: the closing film of Documents and closing remarks, the last series of Modern data basics. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers in words). The few longer stops are in breath.js.
 const NARR={
-"seasons":{"name":"Two harvests a year","lead":1.6,"tail":1.0,"vo":[
- {"id":"place","gap":0.8,"text":"Mexico, 1944. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more.","say":"Mexico, nineteen forty-four. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more."},
- {"id":"rust","gap":0.8,"text":"Stem rust, a fungus that chokes the plant, could ruin a whole field of wheat at once."},
- {"id":"field","gap":0.8,"text":"One field there that year was expected to give only ten bushels an acre: a poor harvest for a season's work."},
- {"id":"lost","gap":0.8,"text":"For a farmer, a ruined field meant a year's work and seed lost, and Mexico bought wheat from abroad for its bread."},
- {"id":"slow","gap":0.8,"text":"And breeding a wheat that resisted the rust was slow: one generation a year, and many years before it reached a farm."},
- {"id":"change","gap":0.8,"text":"Farmers couldn't wait a decade for every new wheat."},
- {"id":"team","gap":0.8,"text":"From 1945, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way.","say":"From nineteen forty-five, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way."},
- {"id":"two","gap":0.8,"text":"They grew two generations a year: one in summer, in the highlands near Mexico City, and one in winter, in Sonora, far to the north."},
- {"id":"each","gap":0.8,"text":"Each season, they crossed plants, tested them in the field, kept the few that did best, and sowed those in the other place."},
- {"id":"dogma","gap":0.8,"text":"Many breeders said a wheat should be bred only where it would grow. The team tried it anyway, and measured."},
- {"id":"half","gap":0.8,"text":"It cut the time to breed a new wheat in half, and the new wheats grew well in both places, and far beyond."},
- {"id":"enough","gap":0.8,"text":"By 1956, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled.","say":"By nineteen fifty-six, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled."},
- {"id":"kept","gap":0.8,"text":"And the testing never stopped: the rust kept changing, so the wheat had to change too."},
+"foot":{"name":"A foot for bare feet","lead":1.6,"tail":1.0,"vo":[
+ {"id":"place","gap":0.8,"text":"Jaipur, India, in the 1960s. At the city's hospital, the Sawai Man Singh, people came in who had lost a leg.","say":"Jaipur, India, in the nineteen-sixties. At the city's hospital, the Sawai Man Singh, people came in who had lost a leg."},
+ {"id":"abroad","gap":0.8,"text":"The hospital could fit them with an artificial foot, made to a design from abroad."},
+ {"id":"shoe","gap":0.8,"text":"It had to be worn in a shoe. But many of them walked barefoot, in fields that were often under water."},
+ {"id":"squat","gap":0.8,"text":"And it was heavy and stiff: on it, nobody could squat, or sit on the floor, as people did to eat, to talk and to work."},
+ {"id":"gave","gap":0.8,"text":"So people who lived barefoot gave it up, and with it, the work a foot would have let them do."},
+ {"id":"change","gap":0.8,"text":"They needed a foot for the life they lived, not for a shoe."},
+ {"id":"team","gap":0.8,"text":"Pramod Karan Sethi, the head of orthopaedics, worked with Ram Chandra Sharma, a craftsman who shaped aluminium."},
+ {"id":"made","gap":0.8,"text":"Sharma made feet of wood and rubber, cured like a tyre, and Sethi fitted them on patients."},
+ {"id":"tried","gap":0.8,"text":"Each patient walked on it, squatted, sat on the floor, and said where it hurt. Then they changed it, and tried again."},
+ {"id":"foot","gap":0.8,"text":"By the end of the 1960s, they had a foot that looked and bent like a bare one.","say":"By the end of the nineteen-sixties, they had a foot that looked and bent like a bare one."},
+ {"id":"could","gap":0.8,"text":"On it, people walked barefoot, squatted, sat cross-legged, worked in wet fields, and even climbed trees."},
+ {"id":"hour","gap":0.8,"text":"It could be made in about an hour, for far less than a foot from abroad."},
+ {"id":"free","gap":0.8,"text":"From 1975, a society in Jaipur has fitted it free: more than 700,000 limbs so far, in India and in forty-four other countries.","say":"From nineteen seventy-five, a society in Jaipur has fitted it free: more than seven hundred thousand limbs so far, in India and in forty-four other countries."},
+ {"id":"kept","gap":0.8,"text":"And the foot kept changing: plastics took over from wood and aluminium, while the first question stayed: how does this person live?"},
  {"id":"same","gap":0.8,"text":"Data platforms change too, every month. What lasts is the ideas, and a quick, honest way to test what's new."}]},
-"recap":{"name":"What the module showed","lead":1.0,"tail":1.0,"vo":[
- {"id":"walk","gap":0.8,"text":"This module walked the university's platform, from where data is born to who reads it."},
+"recap":{"name":"What the topic showed","lead":1.0,"tail":1.0,"vo":[
+ {"id":"walk","gap":0.8,"text":"This topic walked the university's platform, from where data is born to who reads it."},
  {"id":"moves","gap":0.8,"text":"In Data that moves, moving data was easy, and agreeing what each field means was the work."},
  {"id":"fresh","gap":0.8,"text":"How fresh data must be came from when someone acts on it, and most analysis was fine a day old."},
  {"id":"once","gap":0.8,"text":"And each claim was written once, on one platform, for everyone to read."},
@@ -36,7 +37,7 @@ const NARR={
  {"id":"need","gap":0.8,"text":"Don't choose a feature because it's new, or a platform because a film showed it. Choose what answers a real need."}]},
 "loop":{"name":"Test what's new","lead":1.0,"tail":1.0,"vo":[
  {"id":"loop","gap":0.8,"text":"So how do you keep up? With a loop, small and quick: investigate, adapt, implement, iterate."},
- {"id":"shorter","gap":0.8,"text":"It's the breeders' two seasons again: the shorter the loop, the more you learn in the same time."},
+ {"id":"shorter","gap":0.8,"text":"It's the workshop in Jaipur again: the sooner you try it on a real need, the sooner you learn where it hurts."},
  {"id":"need","gap":0.8,"text":"Investigate starts from a real need, not from the feature. Rohan's team typed every invoice by hand, and asked for a better way in a ticket."},
  {"id":"read","gap":0.8,"text":"Jun read the official docs on the functions that read documents: what they do, what they cost, and where they stop."},
  {"id":"adapt","gap":0.8,"text":"Adapt means trying it small, on your own data, in a sandbox, for a set time: two days, on 200 of September's invoices.","say":"Adapt means trying it small, on your own data, in a sandbox, for a set time: two days, on two hundred of September's invoices."},
@@ -49,9 +50,9 @@ const NARR={
  {"id":"list","gap":0.8,"text":"But Finance's supplier list already gave it, so they dropped it."},
  {"id":"cost","gap":0.8,"text":"A trial that ends in no costs two days, not a year."}]},
 "close":{"name":"Keep the method","lead":1.0,"tail":1.0,"vo":[
- {"id":"wheats","gap":0.8,"text":"The wheats of the 1950s are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today.","say":"The wheats of the nineteen fifties are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today."},
+ {"id":"feet","gap":0.8,"text":"The rubber feet of the 1960s are long gone. The method, start from how people live and try it on them, is still how the foot is made.","say":"The rubber feet of the nineteen-sixties are long gone. The method, start from how people live and try it on them, is still how the foot is made."},
  {"id":"keep","gap":0.8,"text":"So keep the ideas, and test the features: small, soon, and on a real need."},
- {"id":"module","gap":0.8,"text":"That closes this module: moving data, running the platform, serving it to people and agents, and reading documents."},
+ {"id":"module","gap":0.8,"text":"That closes this topic: moving data, running the platform, serving it to people and agents, and reading documents."},
  {"id":"team","gap":0.8,"text":"Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means."},
  {"id":"end","gap":0.8,"text":"Start from the official docs. Investigate, adapt, implement, iterate, and keep going."}]}
 };

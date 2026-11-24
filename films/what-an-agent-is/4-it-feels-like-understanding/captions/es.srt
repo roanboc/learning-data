@@ -59,237 +59,237 @@ Nunca más se supo de él.
 Se perdieron años de trabajo, y el primer satélite meteorológico en otro planeta.
 
 16
-00:01:24,529 --> 00:01:25,917
-Algo tenía que cambiar.
+00:01:24,529 --> 00:01:28,327
+Cada número tenía que significar lo mismo a ambos lados de una entrega.
 
 17
-00:01:27,217 --> 00:01:32,250
+00:01:29,627 --> 00:01:34,660
 Así que en el siguiente orbitador, Mars Odyssey, el equipo escribió ambas unidades en cada entrega,
 
 18
-00:01:32,450 --> 00:01:34,976
+00:01:34,860 --> 00:01:37,386
 hizo verificar por separado cada cifra crítica,
 
 19
-00:01:35,176 --> 00:01:37,489
+00:01:37,586 --> 00:01:39,899
 y añadió una segunda forma de ubicar la nave.
 
 20
-00:01:38,789 --> 00:01:47,595
+00:01:41,199 --> 00:01:50,005
 En octubre de 2001, Odyssey entró en órbita, y veinte años después seguía trabajando: la nave más longeva en Marte.
 
 21
-00:01:49,295 --> 00:01:55,522
+00:01:51,705 --> 00:01:57,932
 Los agentes traen el mismo riesgo al trabajo con datos: una persona y un agente, cada uno seguro de que el otro entiende lo mismo.
 
 22
-00:01:56,822 --> 00:02:01,138
+00:01:59,232 --> 00:02:03,548
 Di qué significa una cifra, compárala con otra cosa, y podrás confiar en ella.
 
 23
-00:02:08,238 --> 00:02:13,660
+00:02:10,648 --> 00:02:16,070
 Hoy, en la universidad, Anil Kurian planifica los asesores estudiantiles de la Facultad de Salud.
 
 24
-00:02:14,760 --> 00:02:19,661
+00:02:17,170 --> 00:02:22,071
 Cada asesor llama a 240 estudiantes una vez por semestre, para ver cómo están.
 
 25
-00:02:20,961 --> 00:02:26,080
+00:02:23,371 --> 00:02:28,490
 Anil le pregunta a Jun, del equipo de datos, cuántos estudiantes tiene la facultad este semestre.
 
 26
-00:02:27,180 --> 00:02:28,630
+00:02:29,590 --> 00:02:31,040
 Jun le pregunta al agente.
 
 27
-00:02:29,330 --> 00:02:34,141
+00:02:31,740 --> 00:02:36,551
 Sus manos leen el catálogo y ejecutan una consulta, y compara el conteo con la fuente.
 
 28
-00:02:35,641 --> 00:02:42,916
+00:02:38,051 --> 00:02:45,326
 Segundos después: 2,160 estudiantes, 63 más que el año pasado, con su evidencia adjunta.
 
 29
-00:02:44,616 --> 00:02:53,475
+00:02:47,026 --> 00:02:55,885
 En un estudio de 2025, las explicaciones más largas daban más confianza en las respuestas de una IA, aunque no fueran más exactas.
 
 30
-00:02:54,975 --> 00:02:57,585
+00:02:57,385 --> 00:02:59,995
 Se siente como entender, y se siente seguro.
 
 31
-00:03:00,285 --> 00:03:04,473
+00:03:02,695 --> 00:03:06,883
 Prueba esto: ¿qué tan bien entiendes cómo funciona un cierre, del uno al siete?
 
 32
-00:03:06,773 --> 00:03:10,290
+00:03:09,183 --> 00:03:12,700
 Ahora explica, paso a paso, cómo se cierra y se abre.
 
 33
-00:03:12,390 --> 00:03:20,730
+00:03:14,800 --> 00:03:23,140
 En 2002, en Yale, Leonid Rozenblit y Frank Keil pidieron a varias personas hacer justo eso, con cosas cotidianas como un cierre.
 
 34
-00:03:21,430 --> 00:03:23,969
+00:03:23,840 --> 00:03:26,379
 Después de intentarlo, se calificaron más bajo.
 
 35
-00:03:25,469 --> 00:03:28,975
+00:03:27,879 --> 00:03:31,385
 Jun le daría un seis a lo que entiende de la respuesta del agente.
 
 36
-00:03:30,275 --> 00:03:31,656
+00:03:32,685 --> 00:03:34,066
 ¿Qué tabla leyó?
 
 37
-00:03:32,156 --> 00:03:33,688
+00:03:34,566 --> 00:03:36,098
 ¿Qué contó como estudiante?
 
 38
-00:03:34,188 --> 00:03:35,502
+00:03:36,598 --> 00:03:37,912
 ¿Qué comparó su verificación?
 
 39
-00:03:36,602 --> 00:03:38,530
+00:03:39,012 --> 00:03:40,940
 No sabe decirlo, ni aproximadamente.
 
 40
-00:03:40,230 --> 00:03:43,582
+00:03:42,640 --> 00:03:45,992
 La sensación venía de la respuesta, no de saber qué había pasado.
 
 41
-00:03:46,282 --> 00:03:50,667
+00:03:48,692 --> 00:03:53,077
 Durante meses, el agente había acertado, así que Jun dejó de abrir la evidencia.
 
 42
-00:03:52,167 --> 00:03:56,577
+00:03:54,577 --> 00:03:58,987
 A inicios del semestre, Anil escribió en un chat que las listas de los asesores se veían largas.
 
 43
-00:03:57,277 --> 00:04:01,552
+00:03:59,687 --> 00:04:03,962
 Jun respondió que el agente había verificado su fuente, y ambos lo dejaron pasar.
 
 44
-00:04:03,252 --> 00:04:09,588
+00:04:05,662 --> 00:04:11,998
 En 2010, Raja Parasuraman y Dietrich Manzey revisaron la investigación sobre ayudas automatizadas.
 
 45
-00:04:10,288 --> 00:04:15,409
+00:04:12,698 --> 00:04:17,819
 Cuando una ayuda lleva mucho tiempo acertando, la gente deja de revisarla, sobre todo si está ocupada.
 
 46
-00:04:16,709 --> 00:04:20,348
+00:04:19,119 --> 00:04:22,758
 Les pasa también a los expertos, y la capacitación por sí sola no lo evita.
 
 47
-00:04:21,648 --> 00:04:25,693
+00:04:24,058 --> 00:04:28,103
 Como orbitar Marte, las respuestas del agente habían llegado a parecer rutina.
 
 48
-00:04:27,193 --> 00:04:29,212
+00:04:29,603 --> 00:04:31,622
 La facultad planificó nueve asesores.
 
 49
-00:04:30,312 --> 00:04:34,506
+00:04:32,722 --> 00:04:36,916
 Necesitaba doce, y 720 estudiantes nunca recibieron su llamada.
 
 50
-00:04:37,206 --> 00:04:43,524
+00:04:39,616 --> 00:04:45,934
 Al final del semestre, Anil contó las listas de los asesores: 2,880 estudiantes.
 
 51
-00:04:44,824 --> 00:04:50,213
+00:04:47,234 --> 00:04:52,623
 El agente había contado desde la carga estudiantil, la tabla que la universidad reporta al gobierno.
 
 52
-00:04:50,913 --> 00:04:55,730
+00:04:53,323 --> 00:04:58,140
 Ahí, dos estudiantes de medio tiempo cuentan como uno, y la mitad de la facultad estudia a medio tiempo.
 
 53
-00:04:57,430 --> 00:05:02,697
+00:04:59,840 --> 00:05:05,107
 Así que la tabla decía 2,160: equivalentes a tiempo completo, no personas.
 
 54
-00:05:04,197 --> 00:05:07,294
+00:05:06,607 --> 00:05:09,704
 Jun se refería a personas; el agente tomó el significado de la tabla.
 
 55
-00:05:07,994 --> 00:05:09,008
+00:05:10,404 --> 00:05:11,418
 Ninguno preguntó.
 
 56
-00:05:10,708 --> 00:05:14,517
+00:05:13,118 --> 00:05:16,927
 Las personas comprueban que se entendieron: lo repiten, o preguntan.
 
 57
-00:05:15,617 --> 00:05:21,527
+00:05:18,027 --> 00:05:23,937
 Un estudio de 2024 halló que los modelos de lenguaje lo hacen menos, y suponen que ya estamos de acuerdo.
 
 58
-00:05:22,827 --> 00:05:27,092
+00:05:25,237 --> 00:05:29,502
 La verificación del agente había comparado su total con esa misma tabla, así que pasó.
 
 59
-00:05:28,392 --> 00:05:33,487
+00:05:30,802 --> 00:05:35,897
 Y el registro de lo que hicieron sus manos lo mostraba desde el principio: sumó equivalentes a tiempo completo.
 
 60
-00:05:36,187 --> 00:05:41,247
+00:05:38,597 --> 00:05:43,657
 La junta de revisión de la NASA fue clara: los errores ocurren, y las verificaciones están para detectarlos.
 
 61
-00:05:43,147 --> 00:05:46,741
+00:05:45,557 --> 00:05:49,151
 Así que el equipo de Jun cambió tres cosas, como hizo el equipo de Odyssey.
 
 62
-00:05:48,241 --> 00:05:55,671
+00:05:50,651 --> 00:05:58,081
 Di lo que quieres decir y escúchalo de vuelta: cada conteo nombra su unidad, y el agente repite la pregunta antes de contar.
 
 63
-00:05:57,771 --> 00:06:02,376
+00:06:00,181 --> 00:06:04,786
 Compara con algo que el agente no hizo, como la propia lista de estudiantes de la facultad,
 
 64
-00:06:02,576 --> 00:06:05,432
+00:06:04,986 --> 00:06:07,842
 y lee lo que hicieron sus manos, no solo lo que dice.
 
 65
-00:06:07,532 --> 00:06:11,336
+00:06:09,942 --> 00:06:13,746
 Anota cada duda en el registro del equipo, con un responsable, hasta que tenga respuesta.
 
 66
-00:06:13,236 --> 00:06:17,158
+00:06:15,646 --> 00:06:19,568
 Y decide una persona; la marca del agente es solo de referencia.
 
 67
-00:06:20,458 --> 00:06:27,654
+00:06:22,868 --> 00:06:30,064
 Este semestre, Jun vuelve a preguntar, y el agente lo repite: ¿estudiantes de la Facultad de Salud, cada persona contada una vez?
 
 68
-00:06:28,354 --> 00:06:29,481
+00:06:30,764 --> 00:06:31,891
 Jun dice que sí.
 
 69
-00:06:30,581 --> 00:06:35,313
+00:06:32,991 --> 00:06:37,723
 Cuenta 2,880, y la propia lista de la facultad coincide.
 
 70
-00:06:36,813 --> 00:06:41,125
+00:06:39,223 --> 00:06:43,535
 Así que la facultad planifica doce asesores, y cada estudiante recibe su llamada.
 
 71
-00:06:42,825 --> 00:06:48,187
+00:06:45,235 --> 00:06:50,597
 Una respuesta fluida, una marca verde y una larga racha de éxitos nos hacen sentir que entendemos.
 
 72
-00:06:49,487 --> 00:06:54,191
+00:06:51,897 --> 00:06:56,601
 El equipo de Odyssey verificó de todos modos, y su orbitador seguía trabajando veinte años después.
 
 73
-00:06:55,491 --> 00:06:58,759
+00:06:57,901 --> 00:07:01,169
 Verificada así, la respuesta de un agente es una con la que puedes planificar.
 
 74
-00:07:00,259 --> 00:07:01,790
+00:07:02,669 --> 00:07:04,200
 Sentirse seguro no es saber.

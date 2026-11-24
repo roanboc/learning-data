@@ -48,74 +48,74 @@ The question touches four: a learner, a credential, an award, and the credit a l
 00:01:49.625 --> 00:01:52.399
 Everything else stays out, however central it seems.
 
-00:01:53.699 --> 00:02:01.722
+00:01:53.699 --> 00:02:01.816
 Noor agreed that scope with Planning, and wrote down why. Model the university, and you never finish. A question, you can finish.
 
-00:02:05.822 --> 00:02:08.430
+00:02:05.916 --> 00:02:08.524
 Each of the four is written down once, in YAML.
 
-00:02:09.630 --> 00:02:13.191
+00:02:09.724 --> 00:02:13.285
 The learner: a definition, an owner, and the rule for its key.
 
-00:02:14.491 --> 00:02:22.906
+00:02:14.585 --> 00:02:23.000
 The definition is in the business's words, not a system's: a person the university has recorded learning with it, in any of its systems.
 
-00:02:24.406 --> 00:02:31.025
+00:02:24.500 --> 00:02:31.119
 Beside it, a diagram drawn by hand: a learner holds credentials, and holds credit towards an award.
 
-00:02:32.325 --> 00:02:35.917
+00:02:32.419 --> 00:02:36.011
 The YAML holds the meaning. The diagram lets anyone read it.
 
-00:02:39.217 --> 00:02:44.140
+00:02:39.311 --> 00:02:44.234
 Next, what identifies each one in business terms, before anyone opens a source.
 
-00:02:45.340 --> 00:02:54.543
+00:02:45.434 --> 00:02:54.637
 A learner is their student ID, which the registrar's office issues. An award is its code. A credential is the ID its issuer gave it.
 
-00:02:56.043 --> 00:03:03.222
+00:02:56.137 --> 00:03:03.316
 Each key is tagged with the system it comes from: the student system, the learning platform, or the short-course platform.
 
-00:03:04.522 --> 00:03:14.525
+00:03:04.616 --> 00:03:14.619
 And each meaning has an owner. Mei, in the registrar's office, owns learner, credential and award. The learning team owns microcredentials and badges.
 
-00:03:16.025 --> 00:03:20.955
+00:03:16.119 --> 00:03:21.049
 The sources will disagree. The owner is the person who decides which meaning wins.
 
-00:03:24.455 --> 00:03:29.566
+00:03:24.549 --> 00:03:29.660
 Then a harder call. Is a microcredential a kind of credential, or a thing of its own?
 
-00:03:30.266 --> 00:03:37.973
+00:03:30.360 --> 00:03:38.067
 Compare what identifies it: the issuer's own identifier. Compare its life: issued on a date, and perhaps revoked.
 
-00:03:39.273 --> 00:03:42.729
+00:03:39.367 --> 00:03:42.823
 Both match any credential. Only the credit points differ.
 
-00:03:44.029 --> 00:03:51.500
+00:03:44.123 --> 00:03:51.594
 Same identity, same lifecycle: one entity, with kinds. A different identity, grain or lifecycle, and you split.
 
-00:03:53.200 --> 00:03:59.453
+00:03:53.294 --> 00:03:59.547
 A certificate of attendance asks to join. It says someone was there, not what they can do. It stays out.
 
-00:04:02.753 --> 00:04:09.109
+00:04:02.847 --> 00:04:09.203
 Jun doesn't write all this alone. An AI agent drafts it, following a skill kept in the project.
 
-00:04:10.309 --> 00:04:16.428
+00:04:10.403 --> 00:04:16.522
 Write the question first. List only what it touches. Propose combine or split, with the reasons.
 
-00:04:17.728 --> 00:04:21.874
+00:04:17.822 --> 00:04:21.968
 The draft defined the credential, but let certificates of attendance in.
 
-00:04:22.974 --> 00:04:26.559
+00:04:23.068 --> 00:04:26.653
 Mei adds one clause: a certificate of attendance isn't one.
 
-00:04:27.859 --> 00:04:34.261
+00:04:27.953 --> 00:04:34.355
 The agent drafts. The owner approves the meaning, and the decision goes in the log, with her name and the date.
 
-00:04:37.961 --> 00:04:42.504
+00:04:38.055 --> 00:04:42.598
 One question. Four things to model. Two owners of meaning. Nothing else.
 
-00:04:43.804 --> 00:04:44.923
+00:04:43.898 --> 00:04:45.017
 Now, the sources.
 
-00:04:46.123 --> 00:04:51.459
+00:04:46.217 --> 00:04:51.553
 The model says a learner is one person. The sources say one learner, Aisha, is three.

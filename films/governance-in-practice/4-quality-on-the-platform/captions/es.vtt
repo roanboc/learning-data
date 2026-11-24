@@ -21,164 +21,164 @@ Y la calidad de datos era una encuesta: cada quien calificaba sus datos, 3.9 de 
 00:00:39.014 --> 00:00:44.603
 Así, una noche rota podía cambiar un número camino al gobierno, y nadie sabía a quién le tocaba arreglarlo.
 
-00:00:46.303 --> 00:00:47.691
-Algo tenía que cambiar.
+00:00:46.303 --> 00:00:49.106
+Cada comprobación necesitaba un dueño que se enterara cuando fallara.
 
-00:00:49.191 --> 00:00:54.521
+00:00:50.606 --> 00:00:55.936
 Ahora cada control nombra a su dueño, el tipo de calidad que verifica y el nivel que eligió su dueño.
 
-00:00:56.221 --> 00:00:58.659
+00:00:57.636 --> 00:01:00.074
 El monitoreo vigila lo que ninguna regla nombra.
 
-00:00:59.959 --> 00:01:05.121
+00:01:01.374 --> 00:01:06.536
 Y cada mañana, cada resultado entra en un solo tablero de calidad, con una incidencia para cada dueño.
 
-00:01:06.621 --> 00:01:10.960
+00:01:08.036 --> 00:01:12.375
 El 19 de octubre llegaron cinco inscripciones más sin correo.
 
-00:01:12.060 --> 00:01:15.223
+00:01:13.475 --> 00:01:16.638
 Eran seis, más de las cinco que permite el equipo de aprendizaje.
 
-00:01:16.723 --> 00:01:22.354
+00:01:18.138 --> 00:01:23.769
 Todo lo construido con ellas se detuvo, y nada erróneo salió: Planificación conservó los números del día anterior.
 
-00:01:24.054 --> 00:01:30.405
+00:01:25.469 --> 00:01:31.820
 Al mediodía, el equipo de aprendizaje había agregado los seis correos, y esa noche pasaron los 160 controles.
 
-00:01:32.105 --> 00:01:36.679
+00:01:33.520 --> 00:01:38.094
 Ahora Clara sabe cada mañana en qué números confiar, y quién responde por cada uno.
 
-00:01:44.379 --> 00:01:52.292
+00:01:45.794 --> 00:01:53.707
 En el proyecto, cada control es una prueba de dbt, y cada prueba nombra a su dueño y el tipo de calidad que verifica, su dimensión.
 
-00:01:53.592 --> 00:01:58.851
+00:01:55.007 --> 00:02:00.266
 El dueño viene de la carpeta: toda prueba sobre los datos de cursos cortos es del equipo de aprendizaje.
 
-00:02:00.551 --> 00:02:05.699
+00:02:01.966 --> 00:02:07.114
 La dimensión viene del tipo de prueba: una prueba de valores vacíos verifica la completitud.
 
-00:02:07.399 --> 00:02:14.114
+00:02:08.814 --> 00:02:15.529
 El nivel está en la prueba, como lo eligió su dueño: advertir con una inscripción sin correo, detener con más de cinco.
 
-00:02:16.014 --> 00:02:18.538
+00:02:17.429 --> 00:02:19.953
 El registro de decisiones dice quién lo eligió, y por qué.
 
-00:02:20.438 --> 00:02:23.821
+00:02:21.853 --> 00:02:25.236
 Y una prueba sin dueño o sin dimensión no entra.
 
-00:02:28.721 --> 00:02:32.441
+00:02:30.136 --> 00:02:33.856
 Tras cada construcción nocturna, dos scripts leen los resultados de dbt.
 
-00:02:33.941 --> 00:02:38.955
+00:02:35.356 --> 00:02:40.370
 Uno escribe el tablero de calidad: por cada área y cada dimensión, cuántas pruebas pasaron.
 
-00:02:40.255 --> 00:02:43.556
+00:02:41.670 --> 00:02:44.971
 El 19, la completitud del área de aprendizaje fue seis de siete.
 
-00:02:45.256 --> 00:02:50.805
+00:02:46.671 --> 00:02:52.220
 Las pruebas sobre lo construido con los datos detenidos no se ejecutaron: cuentan como no ejecutadas, no como fallidas.
 
-00:02:52.705 --> 00:02:58.424
+00:02:54.120 --> 00:02:59.839
 El otro script le escribe a cada dueño una incidencia que responder: qué no pasó, y por qué existe ese nivel.
 
-00:03:00.124 --> 00:03:02.745
+00:03:01.539 --> 00:03:04.160
 Una causa que completar, y una fecha para responder.
 
-00:03:05.645 --> 00:03:10.096
+00:03:07.060 --> 00:03:11.511
 Una prueba de dbt, sobre lo que construye el equipo de datos, es un lugar de control.
 
-00:03:11.196 --> 00:03:18.150
+00:03:12.611 --> 00:03:19.565
 Hay tres más en el camino de los datos: donde se escriben, donde se cargan, y en las tablas de la plataforma, como monitoreo.
 
-00:03:20.250 --> 00:03:23.987
+00:03:21.665 --> 00:03:25.402
 Cada uno atrapa lo que los otros no pueden, y cada uno avisa al dueño de los datos.
 
-00:03:25.887 --> 00:03:27.870
+00:03:27.302 --> 00:03:29.285
 Prevén lo que puedas, donde empieza.
 
-00:03:29.170 --> 00:03:30.151
+00:03:30.585 --> 00:03:31.566
 Controla lo que conoces.
 
-00:03:31.451 --> 00:03:32.819
+00:03:32.866 --> 00:03:34.234
 Vigila lo que no conoces.
 
-00:03:36.919 --> 00:03:43.164
+00:03:38.334 --> 00:03:44.579
 Los correos llegaban tal como se escribían, con espacios y mayúsculas, y cada noche el equipo de datos los limpiaba.
 
-00:03:44.864 --> 00:03:49.291
+00:03:46.279 --> 00:03:50.706
 Desde el 2 de noviembre, el formulario de inscripción revisa cada correo mientras se escribe.
 
-00:03:50.991 --> 00:03:58.807
+00:03:52.406 --> 00:04:00.222
 Una prueba en la fuente, al leerla el equipo de datos, revisa cada correo desde esa fecha y detiene la construcción si uno no está limpio.
 
-00:04:00.707 --> 00:04:03.722
+00:04:02.122 --> 00:04:05.137
 Nunca debería fallar: si falla, el formulario se rompió.
 
-00:04:05.622 --> 00:04:10.700
+00:04:07.037 --> 00:04:12.115
 Cuando se corrijan los correos viejos, la limpieza se va, y la prueba revisa cada fila.
 
-00:04:13.600 --> 00:04:17.399
+00:04:15.015 --> 00:04:18.814
 Cada noche, el pipeline del equipo de plataforma carga los archivos de cada sistema.
 
-00:04:19.099 --> 00:04:23.838
+00:04:20.514 --> 00:04:25.253
 Sus expectativas, reglas sobre cada tabla, verifican que una fila se pueda cargar.
 
-00:04:25.338 --> 00:04:30.613
+00:04:26.753 --> 00:04:32.028
 Una inscripción sin ID no se distingue de otra, así que queda fuera, y se cuenta.
 
-00:04:32.513 --> 00:04:39.319
+00:04:33.928 --> 00:04:40.734
 El conteo llega a su dueño como cualquier otro resultado, y la fila se corrige donde se guarda, en la plataforma de cursos cortos.
 
-00:04:42.219 --> 00:04:45.339
+00:04:43.634 --> 00:04:46.754
 Una noche, la mitad de las insignias nuevas llegó sin créditos.
 
-00:04:47.039 --> 00:04:51.224
+00:04:48.454 --> 00:04:52.639
 Todas las pruebas pasaron: ninguna regla pedía créditos a una microcredencial.
 
-00:04:52.724 --> 00:04:53.882
+00:04:54.139 --> 00:04:55.297
 El monitoreo lo detectó.
 
-00:04:55.182 --> 00:05:01.515
+00:04:56.597 --> 00:05:02.930
 La plataforma aprende cuándo suele llegar cada tabla y cuántas filas trae, sin escribir reglas.
 
-00:05:03.415 --> 00:05:09.454
+00:05:04.830 --> 00:05:10.869
 Y un perfil de las insignias cuenta, cada noche, cuántas no llevan créditos: por lo general, una de cada doce.
 
-00:05:10.754 --> 00:05:12.121
+00:05:12.169 --> 00:05:13.536
 Esa noche, una de cada dos.
 
-00:05:13.821 --> 00:05:16.787
+00:05:15.236 --> 00:05:18.202
 Una alerta fue al dueño registrado: el equipo de aprendizaje.
 
-00:05:20.487 --> 00:05:23.554
+00:05:21.902 --> 00:05:24.969
 Una vez confirmado, la sorpresa se volvió una prueba.
 
-00:05:26.454 --> 00:05:31.174
+00:05:27.869 --> 00:05:32.589
 Los conteos del pipeline y los resultados del monitoreo quedan en la plataforma, por tabla.
 
-00:05:32.874 --> 00:05:38.781
+00:05:34.289 --> 00:05:40.196
 El dueño de cada tabla está en el proyecto, así que el tablero también los lee, en una tabla bajo la de las pruebas.
 
-00:05:40.481 --> 00:05:43.719
+00:05:41.896 --> 00:05:45.134
 Cada resultado llega a un dueño, no a un buzón compartido.
 
-00:05:45.419 --> 00:05:53.345
+00:05:46.834 --> 00:05:54.760
 Y la calidad se mide, no se encuesta: anoche pasaron 160 de 160 pruebas, una con advertencia.
 
-00:05:54.845 --> 00:05:59.614
+00:05:56.260 --> 00:06:01.029
 También los 22 controles de la plataforma, y cada prueba tenía dueño y dimensión.
 
-00:06:02.714 --> 00:06:06.570
+00:06:04.129 --> 00:06:07.985
 Esta mañana, Clara abre el tablero de calidad antes de que salgan los números.
 
-00:06:07.870 --> 00:06:12.804
+00:06:09.285 --> 00:06:14.219
 Una celda ámbar: una inscripción sin correo, que el equipo de aprendizaje está siguiendo.
 
-00:06:14.504 --> 00:06:17.302
+00:06:15.919 --> 00:06:18.717
 Todo lo demás pasó, y cada celda tiene dueño.
 
-00:06:18.802 --> 00:06:22.330
+00:06:20.217 --> 00:06:23.745
 Clara sabe en qué números confiar, y quién responde por cada uno.
 
-00:06:24.030 --> 00:06:26.560
+00:06:25.445 --> 00:06:27.975
 Reglas que escribes, y monitoreo para el resto.

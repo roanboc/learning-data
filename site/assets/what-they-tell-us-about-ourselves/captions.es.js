@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Incluso un pionero del campo dudó, en 1966, de que un cerebro adulto pudiera aprender a entender el habla a partir de señales eléctricas:",
 "a ‘foreign language’, he called it.":
 "un ‘idioma extranjero’, lo llamó.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"People like Rod needed a way to hear that went around the broken inner ear.":
+"Personas como Rod necesitaban una forma de oír que rodeara el oído interno dañado.",
 "The surgeon Graeme Clark had watched his own father go deaf.":
 "El cirujano Graeme Clark había visto a su propio padre quedarse sordo.",
 "For ten years, he and his team worked on a rough copy of the inner ear:":

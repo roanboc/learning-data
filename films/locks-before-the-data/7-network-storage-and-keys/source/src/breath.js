@@ -12,6 +12,6 @@ const BREATH={
 "files":{"hold":{"now":0.4,"public":1.0,"nothing":1.4,"roles":1.2,"azure":1.2,"credential":1.0,"every":1.2,"rome":1.2}},
 "walls":{"hold":{"wall":0.4,"dev":1.0,"others":1.2,"same":0.8,"grant":1.4}},
 "switch":{"hold":{"shut":0.8,"needs":0.4,"morning":1.0,"group":0.8,"empty":1.0,"on":1.4,"reads":1.0,"log":1.2,"forgot":0.8,"gangs":1.2}},
-"key":{"hold":{"last":0.4,"always":0.8,"own":1.0,"use":0.8,"cant":1.0,"version":1.2,"deleted":1.0,"workspace":1.0,"nobody":1.4}},
+"key":{"hold":{"last":0.4,"always":0.8,"own":1.4,"version":1.2,"workspace":1.4}},
 "end":{"hold":{"rome":1.0,"doors":1.0,"one":1.2,"takeaway":1.6},"breathe":6.2}
 };

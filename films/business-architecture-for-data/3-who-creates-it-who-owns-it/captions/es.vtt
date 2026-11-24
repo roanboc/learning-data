@@ -48,125 +48,125 @@ Unas setenta familias tenían el resto, y cada parte tenía un dueño con nombre
 00:01:39.987 --> 00:01:46.771
 En la empresa, cada concepto necesita lo mismo: un dueño que decida, y alguien que lo cuide cada día.
 
-00:01:54.671 --> 00:01:58.922
+00:01:54.671 --> 00:01:58.872
 La siguiente nota de Tomás pregunta quién crea cada concepto, y de quién es.
 
-00:02:00.222 --> 00:02:04.639
+00:02:00.172 --> 00:02:04.589
 En su mapa, cada concepto ya está debajo de las capacidades que lo usan.
 
-00:02:06.139 --> 00:02:10.294
+00:02:06.089 --> 00:02:10.244
 Ahora necesita saber qué hace exactamente cada capacidad con cada uno.
 
-00:02:13.594 --> 00:02:18.819
+00:02:13.544 --> 00:02:18.769
 Dibuja una matriz: las capacidades a un costado, y los conceptos arriba.
 
-00:02:20.319 --> 00:02:26.929
+00:02:20.269 --> 00:02:26.879
 En cada casilla va lo que la capacidad hace con el concepto: lo crea, lo lee, lo actualiza o lo borra.
 
-00:02:28.629 --> 00:02:31.994
+00:02:28.579 --> 00:02:31.944
 Los arquitectos la llaman matriz CRUD, por sus iniciales en inglés.
 
-00:02:33.294 --> 00:02:38.175
+00:02:33.244 --> 00:02:38.125
 La llena con la gente que dirige cada capacidad, no con lo que dicen los sistemas.
 
-00:02:39.675 --> 00:02:44.883
+00:02:39.625 --> 00:02:44.833
 Luego lee cada columna hacia abajo: cada concepto debería crearlo una sola capacidad.
 
-00:02:46.583 --> 00:02:49.303
+00:02:46.533 --> 00:02:49.253
 Y su dueño es el dueño de esa capacidad.
 
-00:02:50.803 --> 00:02:55.602
+00:02:50.753 --> 00:02:55.552
 Conectar clientes crea el punto de conexión, así que el punto de conexión es de Grace.
 
-00:02:58.902 --> 00:03:00.638
+00:02:58.852 --> 00:03:00.588
 Pero la columna de la cuenta tiene dos.
 
-00:03:02.138 --> 00:03:05.636
+00:03:02.088 --> 00:03:05.586
 Atender clientes abre una cuenta cuando alguien se registra.
 
-00:03:06.936 --> 00:03:12.488
+00:03:06.886 --> 00:03:12.438
 Y conectar clientes abre una cuando se conecta una casa nueva, para que salga su primera factura.
 
-00:03:13.988 --> 00:03:17.262
+00:03:13.938 --> 00:03:17.212
 Así, una familia que se muda a una casa nueva podía quedar con dos.
 
-00:03:18.762 --> 00:03:25.144
+00:03:18.712 --> 00:03:25.094
 El año pasado, mil doscientas casas nuevas tuvieron dos cuentas, y trescientas cuarenta familias recibieron dos primeras facturas.
 
-00:03:26.844 --> 00:03:32.358
+00:03:26.794 --> 00:03:32.308
 Farah, que habla por los clientes de la empresa, venía preguntando por qué. La matriz lo muestra.
 
-00:03:33.858 --> 00:03:39.277
+00:03:33.808 --> 00:03:39.226
 Qué capacidad debe crear la cuenta no lo deciden Tomás ni el equipo de datos.
 
-00:03:42.577 --> 00:03:48.969
+00:03:42.526 --> 00:03:48.918
 Grace está a cargo de conectar clientes, y quien dirige comercialización, de atender clientes. Lo deciden en conjunto.
 
-00:03:50.469 --> 00:03:57.662
+00:03:50.418 --> 00:03:57.611
 Atender clientes crea la cuenta. Conectar clientes crea el punto de conexión, y solo lee la cuenta.
 
-00:03:59.362 --> 00:04:03.979
+00:03:59.311 --> 00:04:03.928
 Cuando se conecta una casa nueva, avisa a comercialización, que abre la cuenta.
 
-00:04:05.479 --> 00:04:10.365
+00:04:05.428 --> 00:04:10.314
 Así que la cuenta es de quien dirige comercialización, la persona a cargo de la capacidad que la crea.
 
-00:04:12.065 --> 00:04:16.331
+00:04:12.014 --> 00:04:16.280
 La decisión va al mapa con su fecha, para que nadie tenga que resolverla otra vez.
 
-00:04:17.831 --> 00:04:21.582
+00:04:17.780 --> 00:04:21.531
 Desde entonces, cada casa nueva recibe una cuenta, y una primera factura.
 
-00:04:27.282 --> 00:04:33.107
+00:04:27.231 --> 00:04:33.056
 Un dueño decide qué significa un concepto, quién lo crea, sus reglas y qué tan bueno debe ser.
 
-00:04:34.807 --> 00:04:40.093
+00:04:34.756 --> 00:04:40.042
 Pero quien dirige comercialización no puede cuidar trescientas diez mil cuentas, día a día.
 
-00:04:41.793 --> 00:04:46.108
+00:04:41.742 --> 00:04:46.057
 Así, cada dueño nombra a un responsable de datos: alguien que usa el concepto cada día.
 
-00:04:48.008 --> 00:04:55.750
+00:04:47.957 --> 00:04:55.699
 Para las cuentas, es quien lidera facturación en comercialización: cuida la definición, responde preguntas y da seguimiento si algo falla.
 
-00:04:57.850 --> 00:05:01.943
+00:04:57.799 --> 00:05:01.892
 Como el mirab, un responsable de datos lo cuida para su dueño, y no es su dueño.
 
-00:05:03.943 --> 00:05:10.144
+00:05:03.892 --> 00:05:10.093
 Y el equipo de datos construye y opera lo que lo guarda, como los excavadores el túnel de un qanat, sin ser dueño de nada.
 
-00:05:13.844 --> 00:05:16.613
+00:05:13.793 --> 00:05:16.562
 Algunos conceptos no tienen dueño anotado en ningún lado.
 
-00:05:17.713 --> 00:05:25.425
+00:05:17.662 --> 00:05:25.474
 Una tabla de cortes, hecha en 2019, guarda cada corte, y el informe anual de Ama al regulador los cuenta desde ahí.
 
-00:05:26.925 --> 00:05:30.405
+00:05:26.974 --> 00:05:30.454
 Quien la hizo ya se fue, y nadie sabe de quién es lo que contiene.
 
-00:05:31.905 --> 00:05:37.964
+00:05:31.954 --> 00:05:38.013
 Tomás no pregunta de qué sistema vino la tabla. Pregunta qué capacidad crea los cortes.
 
-00:05:39.664 --> 00:05:45.807
+00:05:39.713 --> 00:05:45.856
 Operar la red, así que los cortes son de Grace, y quien lidera su mesa de cortes pasa a ser su responsable de datos.
 
-00:05:47.507 --> 00:05:52.816
+00:05:47.556 --> 00:05:52.865
 Los dueños se encuentran por capacidad, no por sistema, aun donde nada se anotó.
 
-00:05:56.316 --> 00:06:01.392
+00:05:56.365 --> 00:06:01.441
 Al mapa de la práctica de datos se suman dos roles: dueño de los datos y responsable de datos.
 
-00:06:03.092 --> 00:06:09.884
+00:06:03.141 --> 00:06:09.933
 El dueño de cada dominio tiene el rol de dueño: Grace para los conceptos de la red, y quien dirige comercialización para los suyos.
 
-00:06:11.584 --> 00:06:15.919
+00:06:11.633 --> 00:06:15.968
 Y cada dueño nombra a los responsables de datos que cuidan sus conceptos, día a día.
 
-00:06:19.419 --> 00:06:25.613
+00:06:19.468 --> 00:06:25.662
 En un qanat, cada parte tiene un dueño con nombre: los dueños deciden, y el mirab cuida el agua.
 
-00:06:27.313 --> 00:06:35.285
+00:06:27.362 --> 00:06:35.334
 En la empresa, cada concepto tiene ahora una capacidad que lo crea, un dueño que decide y un responsable de datos que lo cuida.
 
-00:06:36.985 --> 00:06:42.330
+00:06:37.034 --> 00:06:42.372
 La siguiente nota de Tomás pregunta dónde nace cada uno: en qué proceso, y en qué paso.

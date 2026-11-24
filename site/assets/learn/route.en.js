@@ -347,8 +347,8 @@ window.LD_ROUTE = {
      "href": "governance-in-practice/",
      "poster": "governed-in-dbt-poster.jpg",
      "kicker": "Series · 6 films",
-     "len": "38 min",
-     "min": 38.0,
+     "len": "39 min",
+     "min": 39.0,
      "films": [
       "ld-governed-in-dbt",
       "ld-governed-in-unity-catalog",
@@ -746,8 +746,8 @@ window.LD_ROUTE = {
      "href": "what-an-agent-is/",
      "poster": "decades-in-the-making-poster.jpg",
      "kicker": "Series · 10 films",
-     "len": "80 min",
-     "min": 80.0,
+     "len": "81 min",
+     "min": 81.0,
      "films": [
       "ld-decades-in-the-making",
       "ld-borrowed-from-the-brain",
@@ -773,8 +773,8 @@ window.LD_ROUTE = {
      "href": "agents-at-work-on-data/",
      "poster": "context-engineering-poster.jpg",
      "kicker": "Series · 9 films",
-     "len": "69 min",
-     "min": 69.0,
+     "len": "70 min",
+     "min": 70.0,
      "films": [
       "ld-context-engineering",
       "ld-skills-and-workflows",

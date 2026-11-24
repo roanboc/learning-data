@@ -104,8 +104,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si es oficial, lo guardamos tal como está, con sus metadatos al lado.",
 "If it's written for people, we read it, with the platform's functions or a scraper, only where a use case needs it, and keep the file.":
 "Si se escribió para personas, lo leemos con funciones de la plataforma o un scraper, solo si un caso de uso lo pide, y guardamos el archivo.",
-"Every organisation's documents differ, and the standards are there already: don't reinvent the wheel.":
-"Los documentos de cada organización son distintos, y los estándares ya existen: no reinventes la rueda.",
+"Every organisation's documents differ, and the standards are there already: start from them.":
+"Los documentos de cada organización son distintos, y los estándares ya existen: parte de ellos.",
 "Start from the official docs. Investigate, adapt, implement, iterate.":
 "Empieza por la documentación oficial. Investiga, adapta, implementa, itera.",
 "In short: read documents where a use case needs it, keep the file and its metadata, and write what's yours as data.":

@@ -46,7 +46,9 @@
     [
       "\\bA I\\b",
       "AI"
-    ]
+    ],
+    ["\\bNovak\\b", "Noh-vak"],
+    ["\\bYusuf\\b", "Yoosoof"]
   ],
   "story": [
     "elms"

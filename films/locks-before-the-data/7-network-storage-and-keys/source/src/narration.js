@@ -98,14 +98,9 @@ const NARR={
 "key":{"name":"The university's own key","lead":1.0,"tail":1.0,"vo":[
  {"id":"last","gap":0.8,"text":"Last, the keys."},
  {"id":"always","gap":0.8,"text":"The files were always encrypted, with a key the cloud provider kept for the university."},
- {"id":"own","gap":0.8,"text":"Now the key is the university's own, kept by its security team in a vault of its own."},
- {"id":"use","gap":0.8,"text":"The storage may use the key, never take it out."},
- {"id":"cant","gap":0.8,"text":"The people who run the platform can't delete it or turn it off, and every use is recorded."},
+ {"id":"own","gap":0.8,"text":"Now the key is the university's own, in a vault of its own, with the rules Walls, doors and keys set out."},
  {"id":"version","gap":0.8,"text":"The vault makes a new version every year, and the storage picks it up within a day."},
- {"id":"deleted","gap":0.8,"text":"A deleted key is kept ninety days, and nobody can cut that short."},
- {"id":"workspace","gap":0.8,"text":"The workspace's notebooks, queries and disks use a key from the same vault."},
- {"id":"back","gap":0.3,"text":"And the security team can take the key back:"},
- {"id":"nobody","gap":0.8,"text":"then nobody can read the files, the cloud provider included."}
+ {"id":"workspace","gap":0.8,"text":"The workspace's notebooks, queries and disks use a key from the same vault."}
 ]},
 "end":{"name":"Only through the catalog","lead":1.2,"tail":1.0,"vo":[
  {"id":"rome","gap":0.8,"text":"In Rome, water was drawn only at the tank, through a stamped nozzle, and the gangs' work was written down."},

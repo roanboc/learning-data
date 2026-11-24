@@ -12,8 +12,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los edificios de ese tamaño solían enfriarse con aire acondicionado: importado, caro y encendido todo el día.",
 "That meant high bills, and high rents for the shops and offices inside.":
 "Eso significaba facturas altas y alquileres altos para las tiendas y oficinas.",
-"Something had to change. The owners asked for a building that would cool itself.":
-"Algo tenía que cambiar. Los dueños pidieron un edificio que se enfriara solo.",
+"The owners wanted lower bills, and asked for a building that would cool itself.":
+"Los dueños querían facturas más bajas, y pidieron un edificio que se enfriara solo.",
 "Pearce looked to termite mounds, which were thought then to breathe like chimneys,":
 "Pearce se fijó en los termiteros, que entonces se creía que respiraban como chimeneas:",
 "warm air rising out of the top and drawing fresh air in below.":

@@ -27,245 +27,245 @@ Only Jeonju's copy is left.
 If it burns too, 175 years of the kingdom's memory are gone: what was decided, by whom, and why.
 
 8
-00:00:43,815 --> 00:00:45,255
-Something has to change.
+00:00:43,815 --> 00:00:47,172
+That last copy has to be kept safe, whatever the war does.
 
 9
-00:00:46,955 --> 00:00:52,245
+00:00:48,872 --> 00:00:54,162
 Two local scholars carry it into the mountains, and guard it, in turns, for more than a year.
 
 10
-00:00:54,545 --> 00:00:58,412
+00:00:56,462 --> 00:01:00,329
 After the war, the court prints the annals again, from that one copy.
 
 11
-00:00:59,712 --> 00:01:03,812
+00:01:01,629 --> 00:01:05,729
 Five sets, far apart: one in the capital, four high in the mountains.
 
 12
-00:01:05,312 --> 00:01:11,454
+00:01:07,229 --> 00:01:13,371
 Every few years, a historian climbs to each archive, airs the books, and writes down what he finds.
 
 13
-00:01:13,154 --> 00:01:20,181
+00:01:15,071 --> 00:01:22,098
 The annals survive, complete: 472 years, twenty-five kings, 888 books.
 
 14
-00:01:21,681 --> 00:01:24,122
+00:01:23,598 --> 00:01:26,039
 Today, anyone can read them online, free.
 
 15
-00:01:25,422 --> 00:01:32,432
+00:01:27,339 --> 00:01:34,349
 Jeonju's copy could rebuild the rest because every copy was made from one source, one way, and nobody wrote in one.
 
 16
-00:01:33,732 --> 00:01:35,106
+00:01:35,649 --> 00:01:37,023
 It's the same with data.
 
 17
-00:01:36,106 --> 00:01:40,115
+00:01:38,023 --> 00:01:42,032
 A copy can be trusted when it's made from its home, one way, and checked.
 
 18
-00:01:48,415 --> 00:01:49,211
+00:01:50,332 --> 00:01:51,128
 February.
 
 19
-00:01:50,211 --> 00:01:57,347
+00:01:52,128 --> 00:01:59,264
 A planner in the Faculty of Business asks to read Planning's list of learners near an award, to plan next year's courses.
 
 20
-00:01:58,647 --> 00:02:02,680
+00:02:00,564 --> 00:02:04,597
 On the data platform, the table's page names its owner: Jun.
 
 21
-00:02:03,980 --> 00:02:06,400
+00:02:05,897 --> 00:02:08,317
 So her request goes to Jun, and waits.
 
 22
-00:02:08,100 --> 00:02:09,566
+00:02:10,017 --> 00:02:11,483
 But Jun only built it.
 
 23
-00:02:10,566 --> 00:02:13,432
+00:02:12,483 --> 00:02:15,349
 Since October, its owner is Clara, in Planning.
 
 24
-00:02:14,732 --> 00:02:18,292
+00:02:16,649 --> 00:02:20,209
 Nine days later, Jun sees the request, and passes it on.
 
 25
-00:02:19,992 --> 00:02:24,043
+00:02:21,909 --> 00:02:25,960
 Had he said yes, someone who isn't the owner would have decided who may see it.
 
 26
-00:02:25,543 --> 00:02:30,103
+00:02:27,460 --> 00:02:32,020
 The page was typed by hand when the table was built, and nobody kept it in step.
 
 27
-00:02:32,803 --> 00:02:37,179
+00:02:34,720 --> 00:02:39,096
 Sam runs the data platform, and wants its pages to name the right owner.
 
 28
-00:02:38,279 --> 00:02:41,517
+00:02:40,196 --> 00:02:43,434
 So Sam asks Yusuf where governance's pieces live.
 
 29
-00:02:42,817 --> 00:02:44,643
+00:02:44,734 --> 00:02:46,560
 Yusuf counts seven places.
 
 30
-00:02:45,943 --> 00:02:48,643
+00:02:47,860 --> 00:02:50,560
 The architecture tool, which holds Noor's map.
 
 31
-00:02:49,643 --> 00:02:50,459
+00:02:51,560 --> 00:02:52,376
 The glossary.
 
 32
-00:02:51,459 --> 00:02:55,110
+00:02:53,376 --> 00:02:57,027
 The document library, with the policies and the council's minutes.
 
 33
-00:02:56,110 --> 00:03:02,725
+00:02:58,027 --> 00:03:04,642
 The data team's repository: owners, classes, tables, checks, decisions, and each product's promise.
 
 34
-00:03:03,825 --> 00:03:07,679
+00:03:05,742 --> 00:03:09,596
 The data platform: who may read what, and the record of who read it.
 
 35
-00:03:08,679 --> 00:03:11,017
+00:03:10,596 --> 00:03:12,934
 The catalogue, where people find products.
 
 36
-00:03:12,017 --> 00:03:14,369
+00:03:13,934 --> 00:03:16,286
 And the tracker, for issues and requests.
 
 37
-00:03:15,669 --> 00:03:17,814
+00:03:17,586 --> 00:03:19,731
 Some pieces sit in more than one place.
 
 38
-00:03:19,314 --> 00:03:22,499
+00:03:21,231 --> 00:03:24,416
 One copy no longer matched the others: it had drifted.
 
 39
-00:03:25,199 --> 00:03:29,425
+00:03:27,116 --> 00:03:31,342
 Noor puts each place on her map, as an application, with what it holds.
 
 40
-00:03:30,925 --> 00:03:32,301
+00:03:32,842 --> 00:03:34,218
 Then she sets one rule.
 
 41
-00:03:33,401 --> 00:03:37,621
+00:03:35,318 --> 00:03:39,538
 Every piece has one home, where it's changed, and an owner, who decides it.
 
 42
-00:03:39,121 --> 00:03:42,908
+00:03:41,038 --> 00:03:44,825
 Every other place keeps a copy, and says where it came from, and when.
 
 43
-00:03:44,408 --> 00:03:48,493
+00:03:46,325 --> 00:03:50,410
 A product's owner, for one, lives in the data team's repository.
 
 44
-00:03:49,593 --> 00:03:52,128
+00:03:51,510 --> 00:03:54,045
 The catalogue and the platform's page copy it.
 
 45
-00:03:53,628 --> 00:03:56,266
+00:03:55,545 --> 00:03:58,183
 As with the annals, nobody writes in a copy.
 
 46
-00:03:57,766 --> 00:04:00,765
+00:03:59,683 --> 00:04:02,682
 A fix goes to its home, and every copy follows.
 
 47
-00:04:03,465 --> 00:04:05,778
+00:04:05,382 --> 00:04:07,695
 Then the flows between them, each one way.
 
 48
-00:04:07,078 --> 00:04:09,564
+00:04:08,995 --> 00:04:11,481
 Definitions go from the map to the glossary.
 
 49
-00:04:10,864 --> 00:04:17,566
+00:04:12,781 --> 00:04:19,483
 From the glossary, they go to every tool that reads them: the data team's copy, the dashboards, and the assistant.
 
 50
-00:04:18,866 --> 00:04:23,443
+00:04:20,783 --> 00:04:25,360
 The map's concepts, a learner or an award, go to the data team's tables.
 
 51
-00:04:24,743 --> 00:04:29,939
+00:04:26,660 --> 00:04:31,856
 Each column's class goes from the repository to the platform, where it sets who may read it.
 
 52
-00:04:31,239 --> 00:04:35,162
+00:04:33,156 --> 00:04:37,079
 Each product's promise goes from the repository to the catalogue.
 
 53
-00:04:36,462 --> 00:04:37,746
+00:04:38,379 --> 00:04:39,663
 Nothing flows back.
 
 54
-00:04:39,246 --> 00:04:40,722
+00:04:41,163 --> 00:04:42,639
 A copy is never a home.
 
 55
-00:04:43,422 --> 00:04:48,475
+00:04:45,339 --> 00:04:50,392
 But a copy can still drift from its home, if someone types into it, or a sync stops.
 
 56
-00:04:49,975 --> 00:04:53,402
+00:04:51,892 --> 00:04:55,319
 So every night, a check compares each copy with its home.
 
 57
-00:04:55,102 --> 00:05:03,063
+00:04:57,019 --> 00:05:04,980
 The first night, it finds the old owner's name on the table's page, and wrong names on two more pages, typed by hand last year.
 
 58
-00:05:04,963 --> 00:05:09,313
+00:05:06,880 --> 00:05:11,230
 The sync puts them right by morning, and the check tells each owner what changed.
 
 59
-00:05:11,013 --> 00:05:14,949
+00:05:12,930 --> 00:05:16,866
 Drift is something a check finds, not something a person remembers.
 
 60
-00:05:16,649 --> 00:05:20,585
+00:05:18,566 --> 00:05:22,502
 The historians climbed to each archive, and wrote down what they found.
 
 61
-00:05:22,085 --> 00:05:24,017
+00:05:24,002 --> 00:05:25,934
 Here, a check does it every night.
 
 62
-00:05:26,717 --> 00:05:28,691
+00:05:28,634 --> 00:05:30,608
 Each team still works in its own tool.
 
 63
-00:05:29,991 --> 00:05:35,531
+00:05:31,908 --> 00:05:37,448
 What changes is that everyone knows which copy is theirs to change, and which only to read.
 
 64
-00:05:37,031 --> 00:05:41,040
+00:05:38,948 --> 00:05:42,957
 The planner's next request goes straight to Clara, who decides it in a day.
 
 65
-00:05:42,740 --> 00:05:50,389
+00:05:44,657 --> 00:05:52,306
 And Noor's map becomes the plan for the next series, Governance you can use: each of its films builds a part of it, in the tools.
 
 66
-00:05:52,089 --> 00:05:57,156
+00:05:54,006 --> 00:05:59,073
 The annals lasted because every copy came from one source, one way, and was checked.
 
 67
-00:05:58,656 --> 00:06:02,793
+00:06:00,573 --> 00:06:04,710
 Give every piece of governance one home, and every copy can be trusted.
 
 68
-00:06:04,093 --> 00:06:08,872
+00:06:06,010 --> 00:06:10,789
 Everyone reads the same thing, and every request reaches the person who decides.

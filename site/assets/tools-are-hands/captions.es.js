@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Cada uno se había copiado a mano, y algunos no tenían otra copia: perdidos, perdidos para siempre.",
 "For half a century, the university has no library.":
 "Durante medio siglo, la universidad no tiene biblioteca.",
-"A library is only as safe as the hands that can reach it. Something has to change.":
-"Una biblioteca está tan segura como las manos que la alcanzan. Algo tiene que cambiar.",
+"A library is only as safe as the hands that can reach it. The next one needs a rule that keeps every book in the room.":
+"Una biblioteca solo está tan segura como las manos que pueden alcanzarla. La próxima necesita una regla que deje cada libro en la sala.",
 "In 1598, Thomas Bodley, a retired diplomat, offers to restore it at his own cost, with seats, and shelves, and desks.":
 "En 1598, Thomas Bodley, un diplomático retirado, ofrece restaurarla a su costa, con asientos, estantes y pupitres.",
 "It opens on the 8th of November, 1602, on one rule.":

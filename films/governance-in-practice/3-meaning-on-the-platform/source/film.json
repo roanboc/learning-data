@@ -25,6 +25,7 @@
     [
       "\\bNoor\\b",
       "Nuur"
-    ]
+    ],
+    ["\\bJun\\b", "Joon"]
   ]
 }

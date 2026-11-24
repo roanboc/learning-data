@@ -34,3 +34,14 @@ This film never says the cycle's name. Only its script's table of references did
 | # | Question | Assumption made | Where it shows | If it's wrong |
 |---|---|---|---|---|
 | 13 | Does the film change? | No. Its loop is its own four words, investigate, adapt, implement, iterate, and neither its voice, its pictures, its captions nor its page name Deming's cycle. The script's table of references now says "plan, do, study, act (Deming)". | `script.md`, *The reference* | Nothing in the film |
+
+## A new opening, 24 November 2026
+
+Rodrigo agreed on 24 November 2026 to the portal assessment's finding that Borlaug's two harvests a year opened both this film and *Small, every week*. *Small, every week* keeps it; this film opens on a new story.
+
+| # | Question | Assumption made | Where it shows | If it's wrong |
+|---|---|---|---|---|
+| 13 | Which story replaces it? | The Jaipur foot, India, in the 1960s: a foot from abroad that needed a shoe and couldn't squat or sit on the floor, given up by people who lived barefoot; a surgeon and a craftsman who made feet of wood and rubber, tried each on patients, heard where it hurt, changed it and tried again; a foot that bent like a bare one, made in about an hour, fitted free from 1975, more than 700,000 limbs so far. It fits the film twice: start from a real need, not a feature, and learn by trying on the people it's for; and the method outlasts each foot. Chosen over Hōkūleʻa's 1976 voyage (ideas that last, but not a short trial) and Kerala's fishermen and their phones (numbers disputed). | Chapters 1, 4 and 5 | One opening chapter, two lines, the score's opening cues |
+| 14 | How sure are the facts? | Sources agree on the people, the place, the problem, what the foot let people do, the hour, 1975 and the count. The year is 1968 or 1969 in different sources, so the film says "the 1960s". "Each patient said where it hurt, then they changed it" is the way the sources describe the work, said once, plainly; the bicycle-tyre anecdote is left out as weakly sourced. | Chapter 1 | One line |
+| 15 | How do the names sound? | Sawai Man "Suh-why Mahn", Pramod "Pruh-mode", Sethi "Saytee", Ram Chandra "Rahm Chandra", spelled for the voice in film.json. | The voice | One spelling each |
+| 16 | How is the room drawn? | A limb workshop at the hospital, imagined: sandstone walls, a high window with a stone screen, a bench with the two feet. No people are shown wearing the foot, so nobody's body is drawn as a demonstration. | Chapter 1 and the close | The painted room |

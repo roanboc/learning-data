@@ -8,17 +8,17 @@ Every line passes two tests: someone who has only watched the module's films can
 
 ## The story in one paragraph
 
-Mexico, 1944. In the Yaqui Valley of Sonora, farmers hardly grow wheat any more: stem rust, a fungus that chokes the plant, can ruin a whole field at once, and one field that year is expected to give only ten bushels an acre. A ruined field means a year's work and seed lost, and Mexico buys wheat from abroad; breeding a wheat that resists the rust is slow, one generation a year, many years before it reaches a farm. From 1945 a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, grows two generations a year, one in summer in the highlands near Mexico City and one in winter in Sonora, crossing, testing in the field, keeping the few that do best and sowing those in the other place. Many breeders say a wheat should be bred only where it will grow; the team tries it anyway, and measures. It cuts the time to breed a new wheat in half, the new wheats grow well in both places and far beyond, and by 1956 Mexico grows all the wheat it needs; in the program's first twenty years its harvest triples. And the testing never stops, because the rust keeps changing. Data platforms change too, every month: what lasts is the ideas, and a quick, honest way to test what's new. The film recaps the module's four series, each idea older than the tools that showed it; says why the films stay light and where the how lives; and follows a loop at the university: Rohan Desai's team in Finance asks in a ticket for a better way than typing invoices by hand; Jun Park reads the official docs; tries the functions in a sandbox for two days on 200 of September's invoices (188 match, and most of the 12 that don't are poor scans); builds one use case in the data project with its tests and a way back, reviewed by the data team, checked by Finance, and only then is the ticket closed; and each month the team looks at what went to a person, and why. One trial, letting the model pick each invoice's cost centre, ends in no after two days: Finance's supplier list already gives it. The close comes back to the field: the wheats of the 1950s are long gone, the method is still used today. Keep the ideas, and test the features.
+Jaipur, India, in the 1960s. People who have lost a leg come to the city's hospital, the Sawai Man Singh, and it can fit them with an artificial foot made to a design from abroad. It has to be worn in a shoe, though many of them walk barefoot, in fields often under water; it is heavy and stiff, so nobody can squat on it or sit on the floor, as people do to eat, to talk and to work. So people who live barefoot give it up, and with it the work a foot would let them do: they need a foot for the life they live, not for a shoe. The head of orthopaedics, Pramod Karan Sethi, works with Ram Chandra Sharma, a craftsman who shapes aluminium: Sharma makes feet of wood and rubber, cured like a tyre, Sethi fits them on patients, each patient walks, squats, sits on the floor and says where it hurts, and they change it and try again, until, by the end of the 1960s, they have a foot that looks and bends like a bare one. On it people walk barefoot, squat, sit cross-legged, work in wet fields and climb trees; it is made in about an hour, for far less than a foot from abroad; and from 1975 a society in Jaipur has fitted it free, more than 700,000 limbs so far, in India and in forty-four other countries. The foot keeps changing, plastics taking over from wood and aluminium, while the first question stays: how does this person live? Data platforms change too, every month; what lasts is the ideas, and a quick, honest way to test what's new. The film then looks back on what the topic showed, says why its films stay with ideas and leave the how to each tool's own documentation, and follows Jun's team through one short loop, investigate, adapt, implement, iterate, on Finance's invoices. It ends back at the workshop: the rubber feet of the 1960s are long gone, and the method, start from how people live and try it on them, is still how the foot is made.
 
 ## Opening story
 
 | Beat | The line that says it |
 |---|---|
-| Scenario | "Mexico, 1944. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more." "Stem rust, a fungus that chokes the plant, could ruin a whole field of wheat at once." |
-| Problem | "One field there that year was expected to give only ten bushels an acre: a poor harvest for a season's work." "For a farmer, a ruined field meant a year's work and seed lost, and Mexico bought wheat from abroad for its bread." "And breeding a wheat that resisted the rust was slow: one generation a year, and many years before it reached a farm." "Farmers couldn't wait a decade for every new wheat." |
-| Solution | "From 1945, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way." "They grew two generations a year: one in summer, in the highlands near Mexico City, and one in winter, in Sonora, far to the north." "Each season, they crossed plants, tested them in the field, kept the few that did best, and sowed those in the other place." |
-| Benefits | "It cut the time to breed a new wheat in half, and the new wheats grew well in both places, and far beyond." "By 1956, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled." Then the same for data: "Data platforms change too, every month. What lasts is the ideas, and a quick, honest way to test what's new." |
-| Back to the story | In *Test what's new*: "It's the breeders' two seasons again: the shorter the loop, the more you learn in the same time." And at the end, with its benefit for data: "The wheats of the 1950s are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today." "So keep the ideas, and test the features: small, soon, and on a real need." |
+| Scenario | "Jaipur, India, in the 1960s. At the city's hospital, the Sawai Man Singh, people came in who had lost a leg." "The hospital could fit them with an artificial foot, made to a design from abroad." |
+| Problem | "It had to be worn in a shoe. But many of them walked barefoot, in fields that were often under water." "And it was heavy and stiff: on it, nobody could squat, or sit on the floor, as people did to eat, to talk and to work." "So people who lived barefoot gave it up, and with it, the work a foot would have let them do." Why it couldn't go on: "They needed a foot for the life they lived, not for a shoe." |
+| Solution | "Pramod Karan Sethi, the head of orthopaedics, worked with Ram Chandra Sharma, a craftsman who shaped aluminium." "Sharma made feet of wood and rubber, cured like a tyre, and Sethi fitted them on patients." "Each patient walked on it, squatted, sat on the floor, and said where it hurt. Then they changed it, and tried again." |
+| Benefits | "By the end of the 1960s, they had a foot that looked and bent like a bare one." "On it, people walked barefoot, squatted, sat cross-legged, worked in wet fields, and even climbed trees." "It could be made in about an hour, for far less than a foot from abroad." "From 1975, a society in Jaipur has fitted it free: more than 700,000 limbs so far, in India and in forty-four other countries." Then the same for data: "Data platforms change too, every month. What lasts is the ideas, and a quick, honest way to test what's new." |
+| Back to the story | In *Test what's new*: "It's the workshop in Jaipur again: the sooner you try it on a real need, the sooner you learn where it hurts." And at the end, with its benefit for data: "The rubber feet of the 1960s are long gone. The method, start from how people live and try it on them, is still how the foot is made." "So keep the ideas, and test the features: small, soon, and on a real need." |
 
 ## The reference, and practice
 
@@ -38,18 +38,17 @@ Mexico, 1944. In the Yaqui Valley of Sonora, farmers hardly grow wheat any more:
 
 | Object | Stands for |
 |---|---|
-| A wheat field at dusk in Sonora, "Sonora, Mexico, 1944", "The Yaqui Valley", "Hardly any wheat grown" | The place, and the problem's start |
-| Rust spreading through the stalks from the right, the stalks bowing; "Stem rust · a fungus", "It chokes the plant" | The harm to the plant |
-| "One field, 1944 · Expected: 10 bushels an acre · A poor harvest for a season's work" | The harm in a number |
-| "A year's work, lost", "The seed, lost", "Wheat bought from abroad" | The harm for the farmer and the country |
-| "One generation a year", ten stalks counted, "Years, one harvest each", "Many years to reach a farm" | Why a cure was slow |
-| A plant breeder and a young agronomist among the stalks, arms down; "From 1945 · Mexico's wheat program · Its Ministry of Agriculture" | Who tried another way |
-| The map of Mexico, the highlands near Mexico City in summer and Sonora in winter, the seed carried between them | Two places, two generations a year |
-| "Each season": fourteen plots, crossed, tested, the best two ringed in green; "Sown in the other place" | The loop of the breeders' work |
-| "Many breeders said · Breed a wheat only where it will grow", "Tried anyway, and measured" | A belief tested, not argued |
-| "Years to breed a new wheat": the bar halves | The benefit: half the time |
-| "By 1956 · All the wheat Mexico needed", "The harvest, first twenty years", "× 3" | The benefit for the country |
-| "The rust kept changing", "So the testing never stopped" | Why the loop kept going |
+| The hospital's limb workshop, a high arched window with a stone screen, the light falling on a long bench; "Jaipur, India, the 1960s", "Sawai Man Singh Hospital", "People who had lost a leg" | The place, and who the story is about |
+| On the bench, a stiff foot in a laced black shoe on a heavy wooden leg; "An artificial foot · Made to a design from abroad · Worn in a shoe" | The foot from abroad |
+| "What it couldn't do": "Barefoot", "Squat", "Sit on the floor", each crossed out; "Fields often under water", "Heavy and stiff" | The harm, as a life a viewer can picture |
+| "Given up"; "A foot for the life they lived · Not for a shoe" | Why it couldn't go on |
+| The surgeon and the craftsman at either side of the bench, arms down, named once | Who did it |
+| A foot of rubber appears beside the shoe: "Made in the workshop · Wood and rubber · Cured like a tyre", "Fitted on patients" | The first try |
+| "Each trial": walk, squat, sit on the floor, "Where does it hurt?", "Change it", and "Tried again", the rubber foot bending at the ball as each patient squats | The loop of their work |
+| The shoe fades and the rubber foot moves to the middle, lit: "By the end of the 1960s · A foot that looked and bent like a bare one" | The solution |
+| "On it, people could": walk barefoot, squat, sit cross-legged, work in wet fields, climb trees, each ticked | The benefit for the people who wear it |
+| "Made in about an hour · For far less than a foot from abroad"; "From 1975 · Fitted free, in Jaipur", a count to more than 700,000 limbs, "India and 44 other countries" | The benefit, in numbers |
+| "New materials, again and again"; "The first question · How does this person live?" | Why the method outlasts each foot |
 | The university's night map, tags "New feature", "New name", "New limit" coming and going, then "The ideas" and "A quick, honest test" | The same for data |
 | Four series cards, each with its ideas; "Each idea is older than the tools that showed it" | The module's recap |
 | "What changes fast", tags falling past; "Every button, filmed · Out of date within months"; "What changes slowly", four ideas | Why the films stay light |
@@ -57,58 +56,60 @@ Mexico, 1944. In the Yaqui Valley of Sonora, farmers hardly grow wheat any more:
 | The four ideas linked to "Microsoft Fabric" and "Your own platform · What does it offer?", "Most have an answer, under another name" | For those not on Databricks |
 | "Because it's new" and "Because a film showed it", struck out; "Because it answers a real need" | How to choose |
 | The loop's ring, its four steps lit in turn, and Jun at the right | The loop, run by the data team |
-| "In the same time": one long loop, three short ones, "More learned" | The breeders' two seasons, again |
+| "In the same time": one long loop, three short ones, "More learned" | The workshop in Jaipur, again: try it soon on a real need |
 | "A ticket · Finance · Invoices typed by hand", "A real need, not a feature"; "Read first · The official docs", what they do, cost, and where they stop | Investigate |
 | "A sandbox · two days", 200 squares, 188 turning green and 12 amber, "12 didn't: most were poor scans" | Adapt |
 | "One use case · In the data project", "Its tests", "A way back"; "Reviewed by the data team", "Finance checked October's results", "The ticket closed" | Implement |
 | "Each month · What went to a person, and why", four reasons as bars | Iterate |
 | "Tried · The model picks each invoice's cost centre", "The supplier list already gives it", "Dropped"; "Two days, not a year" | A trial that ends in no |
-| The field again, at harvest; "The wheats of the 1950s · Long gone from the fields", "The method · Two places, two seasons" | The close: the method lasts |
+| The workshop again, the rubber foot on the bench; "The rubber feet of the 1960s · Long gone", "The method · Start from how people live · Try it on them, and change it" | The close: the method lasts |
 | "Keep the ideas", "Test the features", "Small · soon · on a real need" | The film's rule |
 | The module's four series, each once a team of people, now one, with Databricks and dbt; "Agreeing what the data means" | What the tools took on, and what's left for people |
 | "Start from · The official docs", and the loop, "Keep going" | Where to go next |
 
 ## The look
 
-The module's look: the intro's platform map, up close, at night, for the recap, the loop and the close. The opening is painted in the film's own source (`src/il_world.js`): a wheat field in the Yaqui Valley at dusk (sky, a line of mountains, soil and rows, stalks with slim ears and awns, drawn in three depths and swaying), with stem rust spreading as red-brown flecks and the stalks it reaches bowing; and the map of Mexico from Natural Earth's 1:110m land (public domain, credited in NOTICE.md), with the US border dashed, the two places of the program and the seed carried between them. The plant breeder and the agronomist are drawn in the agent films' people, in the khaki work shirts and trousers of the 1940s, arms down; the breeder is named once, as the program's plant breeder. Words over the field and the map are drawn in the frame itself, so they stay put while the camera moves. After the opening the film stays in one room, the map, and each chapter glides on from the one before. The Databricks, dbt and Microsoft Fabric logos stand unaltered on their readers. The poster is the loop, lit at *Adapt*, with the sandbox (`["loop", "adapt", 3.0]`).
+The topic's look: the intro's platform map, up close, at night, for the recap, the loop and the close. The opening is painted in the film's own source (`src/il_world.js`): the limb workshop of Jaipur's hospital, imagined from the sources, in late sun (sandstone walls in courses, a high arched window with a stone screen of small eight-sided openings, a shaft of light, a shelf of feet and moulds, tools on the wall, a long bench), and on the bench two feet drawn live from the side: the foot from abroad, stiff, in a laced black shoe on a heavy wooden leg, and the workshop's foot, rubber over a wooden core on an aluminium leg, shaped like a bare foot, whose front bends at the ball when a patient squats. The surgeon, in the white coat over shirt and tie of a 1960s hospital doctor, and the craftsman, older, in a plain cotton kurta, are drawn in the agent films' people, arms down; each is named once. Words over the workshop are drawn in the frame itself, so they stay put while the camera glides. After the opening the film stays in one room, the map, and each chapter glides on from the one before. The Databricks, dbt and Microsoft Fabric logos stand unaltered on their readers. The poster is the loop, lit at *Adapt*, with the sandbox (`["loop", "adapt", 3.0]`).
 
 ## Script
 
 Each line is said as written; the voice reads the numbers in words. *On screen* lists the words the picture shows.
 
-### 1 · Two harvests a year · 0:00–2:03
+### 1 · A foot for bare feet
 
-> Mexico, 1944. In the Yaqui Valley of Sonora, in the north, farmers hardly grew wheat any more.
+> Jaipur, India, in the 1960s. At the city's hospital, the Sawai Man Singh, people came in who had lost a leg.
 >
-> Stem rust, a fungus that chokes the plant, could ruin a whole field of wheat at once.
+> The hospital could fit them with an artificial foot, made to a design from abroad.
 >
-> One field there that year was expected to give only ten bushels an acre: a poor harvest for a season's work.
+> It had to be worn in a shoe. But many of them walked barefoot, in fields that were often under water.
 >
-> For a farmer, a ruined field meant a year's work and seed lost, and Mexico bought wheat from abroad for its bread.
+> And it was heavy and stiff: on it, nobody could squat, or sit on the floor, as people did to eat, to talk and to work.
 >
-> And breeding a wheat that resisted the rust was slow: one generation a year, and many years before it reached a farm.
+> So people who lived barefoot gave it up, and with it, the work a foot would have let them do.
 >
-> Farmers couldn't wait a decade for every new wheat.
+> They needed a foot for the life they lived, not for a shoe.
 >
-> From 1945, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug, tried another way.
+> Pramod Karan Sethi, the head of orthopaedics, worked with Ram Chandra Sharma, a craftsman who shaped aluminium.
 >
-> They grew two generations a year: one in summer, in the highlands near Mexico City, and one in winter, in Sonora, far to the north.
+> Sharma made feet of wood and rubber, cured like a tyre, and Sethi fitted them on patients.
 >
-> Each season, they crossed plants, tested them in the field, kept the few that did best, and sowed those in the other place.
+> Each patient walked on it, squatted, sat on the floor, and said where it hurt. Then they changed it, and tried again.
 >
-> Many breeders said a wheat should be bred only where it would grow. The team tried it anyway, and measured.
+> By the end of the 1960s, they had a foot that looked and bent like a bare one.
 >
-> It cut the time to breed a new wheat in half, and the new wheats grew well in both places, and far beyond.
+> On it, people walked barefoot, squatted, sat cross-legged, worked in wet fields, and even climbed trees.
 >
-> By 1956, Mexico grew all the wheat it needed. In the program's first twenty years, its harvest tripled.
+> It could be made in about an hour, for far less than a foot from abroad.
 >
-> And the testing never stopped: the rust kept changing, so the wheat had to change too.
+> From 1975, a society in Jaipur has fitted it free: more than 700,000 limbs so far, in India and in forty-four other countries.
+>
+> And the foot kept changing: plastics took over from wood and aluminium, while the first question stayed: how does this person live?
 >
 > Data platforms change too, every month. What lasts is the ideas, and a quick, honest way to test what's new.
 
-### 2 · What the module showed · 2:03–3:16
+### 2 · What the topic showed · 2:03–3:16
 
-> This module walked the university's platform, from where data is born to who reads it.
+> This topic walked the university's platform, from where data is born to who reads it.
 >
 > In Data that moves, moving data was easy, and agreeing what each field means was the work.
 >
@@ -172,62 +173,58 @@ Each line is said as written; the voice reads the numbers in words. *On screen* 
 
 ### 5 · Keep the method · 5:59–6:47
 
-> The wheats of the 1950s are long gone from the fields. The method, two places and two seasons, is still used by wheat breeders today.
+> The rubber feet of the 1960s are long gone. The method, start from how people live and try it on them, is still how the foot is made.
 >
 > So keep the ideas, and test the features: small, soon, and on a real need.
 >
-> That closes this module: moving data, running the platform, serving it to people and agents, and reading documents.
+> That closes this topic: moving data, running the platform, serving it to people and agents, and reading documents.
 >
 > Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means.
 >
 > Start from the official docs. Investigate, adapt, implement, iterate, and keep going.
 ## Sound
 
-A new palette, checked on 11 November 2026 against every score on main and on this branch: two theremins and scythe blades, both made in `tools/score.py`. The theremin, Leon Theremin's instrument of 1920, played without touching it, glides from one note to the next; here it's played still, with no vibrato, each note placed and moved to the next: a measuring instrument made into music, a phrase tried, adjusted and tried again. Scythe blades, hung by the heel and struck softly with felt, as a farmer tests one for a crack by its ring: a clear note that dies within a second, for the field and its seasons. B minor for the problem and D major for the answer, every note a whole-number ratio of D, so nothing beats. The mark: a short line that rises, glides back a step and settles, with a blade under its last note, over the title and end cards. Music under the opening story; after it, only at a turn or under a moment on screen: the module's series as each is named, the ideas older than their tools, the official docs, the loop's ring, the 188 that match, the ticket closed, two days not a year, the harvest and the method. Wind in the wheat is one soft texture, never a crackle of stalks. Nothing of Mexico's own music for the 1940s story. `quiet.py` passes: after the opening, music 20% of the time, coming in once every 13.6 seconds, its loud moments at -28.6 dB and the effects' at -46.2 dB; the mix is at -16 LUFS.
+A new palette, checked on 11 November 2026 against every score on main and on this branch: two theremins and scythe blades, both made in `tools/score.py`. The theremin, Leon Theremin's instrument of 1920, played without touching it, glides from one note to the next; here it's played still, with no vibrato, each note placed and moved to the next: a measuring instrument made into music, a phrase tried, adjusted and tried again. Scythe blades, hung by the heel and struck softly with felt, as a smith tests one for a crack by its ring: a clear note that dies within a second, for the workshop and its trials. B minor for the problem and D major for the answer, every note a whole-number ratio of D, so nothing beats. The mark: a short line that rises, glides back a step and settles, with a blade under its last note, over the title and end cards. Music under the opening story; after it, only at a turn or under a moment on screen: the module's series as each is named, the ideas older than their tools, the official docs, the loop's ring, the 188 that match, the ticket closed, two days not a year, the workshop and the method. The workshop's still air is one soft texture under the opening, and each trial a single soft tap. Nothing of India's own music for the 1960s story (24 November 2026: the opening's cues moved to the Jaipur story; the instruments are unchanged). `quiet.py` passes: after the opening, music 20% of the time, coming in once every 13.6 seconds, its loud moments at -28.6 dB and the effects' at -46.2 dB; the mix is at -16 LUFS.
 
 ## Pacing report
 
-`tools/pace.py`, 11 November 2026: 6:47 in all, 886 words, 131 words a minute, the voice 72% of the time.
+`tools/pace.py`, 24 November 2026: 6:51 in all, 908 words, 133 words a minute, the voice 72% of the time.
 
 | Chapter | Length | Words a minute | Voice |
 |---|---|---|---|
-| Two harvests a year | 122.6 s | 133 | 73% |
-| What the module showed | 73.5 s | 131 | 73% |
+| A foot for bare feet | 125.7 s | 137 | 73% |
+| What the topic showed | 73.3 s | 132 | 73% |
 | Why the films stay light | 52.3 s | 132 | 69% |
-| Test what's new | 111.0 s | 132 | 72% |
-| Keep the method | 47.9 s | 118 | 70% |
+| Test what's new | 112.1 s | 133 | 73% |
+| Keep the method | 47.6 s | 122 | 70% |
 
 ## Pause and think
 
-Three stops, at the end of *What the module showed*, *Why the films stay light* and *Test what's new* (`site/assets/ideas-that-last/think.en.js` and `think.es.js`): why each idea is older than its tools (the right answer third; the near miss, "no tool is needed", misses that the tools still help); what to take from the films on another platform (first; the near miss moves to Databricks because a film showed it); and the first trial of a new feature (second; the near miss builds it for every invoice at once, skipping the small trial).
+Three stops, at the end of *What the topic showed*, *Why the films stay light* and *Test what's new* (`site/assets/ideas-that-last/think.en.js` and `think.es.js`): why each idea is older than its tools (the right answer third; the near miss, "no tool is needed", misses that the tools still help); what to take from the films on another platform (first; the near miss moves to Databricks because a film showed it); and the first trial of a new feature (second; the near miss builds it for every invoice at once, skipping the small trial).
 
 ## Rigour to check before recording
 
-- **Wheat in Sonora, 1944.** The University of Minnesota's Borlaug pages: wheat was seldom grown in the Yaqui Valley in 1944, and one field was projected to yield ten bushels an acre. The film says "hardly grew wheat any more" and "expected to give only ten bushels an acre".
-- **Stem rust.** A fungus (*Puccinia graminis*) that attacks the stem and can destroy a field's harvest; the film says "chokes the plant", plainly.
-- **Imports.** Mexico imported much of its wheat before the program (the Rockefeller Archive Center; FAO). No share is given, so the film gives none.
-- **The program.** The Office of Special Studies, inside Mexico's Ministry of Agriculture, with the Rockefeller Foundation, from 1943; Borlaug joined in 1944, and shuttle breeding began in 1945. The film says "From 1945, a wheat program of Mexico's Ministry of Agriculture, with the plant breeder Norman Borlaug": the program is Mexico's, and Borlaug one of its people, as the sources put it. It doesn't name the foundation, to keep the story on the work.
-- **Two generations a year.** Summer near Toluca, in the highlands near Mexico City, and winter in the Yaqui Valley, Sonora (Minnesota; Rockefeller Archive Center). Shown on the map at Toluca and Ciudad Obregón, approximately.
-- **The dogma.** That a wheat should be bred where it will be grown was the common view; the team defied it (Minnesota). The film: "Many breeders said … The team tried it anyway, and measured."
-- **Half the time.** Shuttle breeding cut the time to develop a new variety in half (Rockefeller Archive Center). The new wheats were insensitive to day length, so they grew well in both places and far beyond (Minnesota; Nobel Prize pages).
-- **1956 and tripled.** By 1956 Mexico was self-sufficient in wheat (Nobel Prize pages; Minnesota). The program tripled Mexico's wheat production in its first twenty years (Rockefeller Archive Center).
-- **Testing never stopped.** Stem rust keeps changing, so breeding for resistance goes on; shuttle breeding is still the centrepiece of CIMMYT's wheat programme (FAO; CIMMYT). The film: "still used by wheat breeders today".
-- **What the film leaves out.** The Green Revolution's later debates (fertiliser, water, who gained) are beyond a film on testing quickly; the opening says only what the sources count.
+- **The place and the people.** The Jaipur foot was designed at Sawai Man Singh Medical College and its hospital, Jaipur, where Pramod Karan Sethi led the orthopaedics department, with the craftsman Ram Chandra Sharma (Wikipedia, *Jaipur foot* and *P. K. Sethi*; BMVSS, *Genesis*). Bhargava (2019) calls Sharma "Master Ram Chanderji", who taught students at the local School of Art and Craft to make decoration pieces of aluminium: the film says "a craftsman who shaped aluminium". The workshop's room is imagined, and the script says so.
+- **The 1960s.** Sources give 1968 (Wikipedia, *Jaipur foot*) and 1969 (Wikipedia, *P. K. Sethi*) for the foot; the film says "in the 1960s" and "by the end of the 1960s", which both fit.
+- **The foot from abroad.** The imported foot (the SACH foot) needed a shoe, so countries with a barefoot culture rejected it; fields were full of water; it was heavy, and it interfered with sitting on the floor, and the wearer could not squat (Bhargava 2019; Wikipedia: earlier feet "did not allow users to go barefoot, squat or sit crosslegged, or work in muddy fields"). "To eat, to talk and to work" is the film's plain gloss on a floor-sitting life. "Gave it up" stands for "rejected it"; no share of people is given, so the film gives none.
+- **How it was made and tried.** A wooden core in rubber, vulcanised (cured) as tyres are, with tyre cord, on an aluminium shank (Wikipedia; Bhargava 2019). Fitting patients, hearing where it hurt and adjusting is how Bhargava describes the work in the hospital and its camps; the film says it once, plainly, as the way the foot was made. The story that Sharma thought of it while mending a bicycle tyre is weakly sourced, so the film leaves it out.
+- **What it let people do.** Walk, squat, sit cross-legged, work in muddy and wet fields and climb trees (Arya and Klenerman, *JBJS Br* 2008, abstract; BMVSS). "Made in one hour" (Arya and Klenerman). "For far less than a foot from abroad": imported parts were "very costly and only imported" (Bhargava); no price is given, as the sources disagree.
+- **From 1975, free.** Bhagwan Mahaveer Viklang Sahayata Samiti, founded in Jaipur by D. R. Mehta and registered on 29 March 1975, fits limbs free of charge (BMVSS, *Genesis* and FAQ). Its home page counts 724,503 limbs among 2.2 million aids, and 111 camps in 44 countries outside India: the film says "more than 700,000 limbs so far, in India and in forty-four other countries".
+- **It kept changing.** High-density polyethylene replaced the aluminium and later parts, and lighter polyurethane versions followed (Wikipedia; Bhargava 2019): "plastics took over from wood and aluminium". It was never patented or standardised, and quality varies (Bhargava cites an ISPO review); beyond a film on testing quickly, so in the sources, not the film.
+- **Respect.** The people are drawn as people of their time and place, the surgeon and the craftsman in the clothes the sources' photographs show for a 1960s Indian hospital; no music or visual style is borrowed from India for the story.
 - **The data story.** Invented, in the module's world: Rohan Desai's team, Jun Park, the 200 invoices, 188 matched, the 12 mostly poor scans, the dropped cost-centre trial. The monthly reasons (72, 31, 14, 9) are *Files as data and as context*'s October counts, shown as bars. The recap's lines each match what a film of the module says.
 - **Release status.** Not said or shown, by the rule of 5 November 2026. The functions that read documents (`ai_parse_document`, `ai_extract`) are not named in this film; their maturity is in *Files as data and as context*'s sources.
 
 ### Sources
 
-All checked on 11 November 2026.
+The opening's sources checked on 24 November 2026; the rest on 11 November 2026.
 
-- University of Minnesota, *Norman Borlaug: the man and his work* (borlaug.cfans.umn.edu): the Yaqui Valley in 1944, the ten-bushel field, two generations a year, the dogma, day-length insensitivity, 1956.
-- Rockefeller Archive Center, *The Mexican Agricultural Program* (rockarch.org): the Office of Special Studies in the Ministry of Agriculture, shuttle breeding halving the time to a new variety, production tripled in twenty years, over 550 Mexican graduates trained.
-- The Nobel Prize, *Norman Borlaug, facts* and the 1970 award speech (nobelprize.org): self-sufficiency in wheat by 1956.
-- FAO, on shuttle breeding and wheat rusts (fao.org): shuttle breeding still central; rust pathogens keep evolving.
-- CIMMYT, on its wheat programme (cimmyt.org): shuttle breeding between Ciudad Obregón and Toluca today.
+- Wikipedia, *Jaipur foot* and *P. K. Sethi* (en.wikipedia.org), checked 24 November 2026.
+- Bhagwan Mahaveer Viklang Sahayata Samiti, home, *Genesis* and FAQ (jaipurfoot.org), checked 24 November 2026: 1975, free fitting, 724,503 limbs, 111 camps in 44 countries.
+- S. K. Bhargava, history of the Jaipur foot, *Indian Journal of Orthopaedics* 2019 (PMC6394196), checked 24 November 2026: the SACH foot and its shoe, the floor-sitting culture, Master Ram Chanderji and aluminium, HDPE.
+- V. P. Arya and L. Klenerman, *The Jaipur foot*, *Journal of Bone and Joint Surgery (Br)* 90-B(11), 2008, abstract (doi 10.1302/0301-620X.90B11.21131), checked 24 November 2026: made in one hour; wet fields; climbing trees.
 - Eric Ries, *The Lean Startup* (2011): build, measure, learn.
 - Databricks documentation, release notes and training; dbt documentation and dbt Learn; Microsoft Fabric documentation (the page's links, each opened on 11 November 2026).
-- Natural Earth, 1:110m land (public domain): the map of Mexico; the border drawn from its main points.
 
 ## What the example project has
 

@@ -11,7 +11,7 @@ const NARR={
  {"id":"two","gap":0.8,"text":"Planning's census report, the university's official count, said two, and nobody could say which was right."},
  {"id":"offered","gap":0.8,"text":"So the faculty offered one place, and a learner a unit from finishing would have waited a semester."},
  {"id":"inbox","gap":0.8,"text":"And the copy stayed in his inbox: a code for every learner, which can lead back to their name, sent with nobody's yes, and no end date."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Faculties needed one trusted product to ask for, and a yes from its owner."},
  {"id":"now","gap":0.8,"text":"Now the university's data products sit in one catalogue, like a shop window, each with its promise and its owner."},
  {"id":"find","gap":0.8,"text":"You find what you need, read what it promises, and ask its owner, saying why, and until when."},
  {"id":"morning","gap":0.8,"text":"This morning, Anil found Planning's product in a minute, and asked."},

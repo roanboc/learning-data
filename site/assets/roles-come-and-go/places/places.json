@@ -1,5 +1,5 @@
 {
- "player": "4edf01c212eee4f9",
+ "player": "e0c5cdd71fa70fba",
  "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
  "places": {
   "place:forum": {
@@ -34,7 +34,7 @@
      235.0
     ],
     [
-     298.75,
+     299.0,
      322.75
     ]
    ]
@@ -46,7 +46,7 @@
    "shows": [
     [
      234.0,
-     260.25
+     260.5
     ]
    ]
   },
@@ -57,7 +57,7 @@
    "shows": [
     [
      259.25,
-     299.0
+     299.25
     ]
    ]
   }

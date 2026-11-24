@@ -271,7 +271,7 @@ scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,T=mr_once(sc,"T",()=>({
       mr_list(cx,100,520,780,"What it may read",[[["Ask Genie One","EXECUTE"],MD.pass,"tick",ag_in(tt,T.may-0.2,0.4),MD.soft],[["Read the measure","SELECT"],MD.pass,"tick",ag_in(tt,T.measure-0.2,0.4),MD.soft],
         [["Read the claims","no"],MD.personal,"lock",ag_in(tt,T.cant-0.2,0.4),MD.soft]],{a:ag_in(tt,T.may-0.5,0.5),edge:MD.flow,kickCol:MD.flow});
       const na=ag_in(tt,c.alone+0.2,0.5),sent=ag_in(tt,T.sendsW,0.4);mr_note(cx,1060,250,760,{a:na,edge:sent>0.5?MD.pass:null});
-      md_pill(cx,1710,250,sent>0.5?"Sent":"Draft",{col:sent>0.5?MD.pass:MD.wait,size:28,a:na,k:sent>0?mr_k(tt,T.sendsW):null});
+      md_pill(cx,1710,250,sent>0.5?"Sent":"Draft",{col:sent>0.5?MD.pass:MD.wait,size:28,a:na});
       const ra=ag_in(tt,T.checks-0.3,0.5);if(ra>0){mr_who(cx,1100,640,MD.wait,ra);md_T(cx,"Rohan checks it",1146,650,{w:700,size:28,col:MD.wait,a:ra});}}},
     // later: the rule
     {later:true,at:c.rule-0.6,place:"map",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{

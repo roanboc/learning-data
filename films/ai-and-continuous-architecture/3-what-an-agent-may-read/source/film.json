@@ -16,6 +16,8 @@
     ["\\bEtemenanki\\b", "Eh-teh-meh-nahn-kee"],
     ["\\bUruk\\b", "Oo-rook"],
     ["\\bBorsippa\\b", "Bor-sippa"],
-    ["\\bDatabricks'\\b", "Data-bricks's"]
+    ["\\bDatabricks'\\b", "Data-bricks's"],
+    ["\\bFarah\\b", "Fah-rah"],
+    ["\\bAma\\b", "Ah-mah"]
   ]
 }

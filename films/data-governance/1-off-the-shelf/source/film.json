@@ -20,6 +20,7 @@
     [
       "\\bYusuf\\b",
       "Yoosoof"
-    ]
+    ],
+    ["\\bJun\\b", "Joon"]
   ]
 }

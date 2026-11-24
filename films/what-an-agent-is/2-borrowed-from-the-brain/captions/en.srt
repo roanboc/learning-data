@@ -95,369 +95,369 @@ When a stroke cuts off the blood to part of someone's brain, it can take away th
 Doctors can't tell what it has broken, or whether it will heal.
 
 25
-00:02:17,312 --> 00:02:18,752
-Something has to change.
+00:02:17,312 --> 00:02:21,740
+To understand the brain, scientists first need to see its cells one by one.
 
 26
-00:02:20,252 --> 00:02:25,315
+00:02:23,240 --> 00:02:28,303
 Golgi himself had found a stain that turns a few cells black, and leaves the rest clear.
 
 27
-00:02:26,015 --> 00:02:30,506
+00:02:29,003 --> 00:02:33,494
 Which few, it seems to pick at random. Nobody knows why, even today.
 
 28
-00:02:31,806 --> 00:02:37,415
+00:02:34,794 --> 00:02:40,403
 Cajal makes it work reliably, and uses the brains of young birds, where the thicket is thinner.
 
 29
-00:02:38,515 --> 00:02:41,628
+00:02:41,503 --> 00:02:44,616
 Each black cell stands out whole, like a tree in winter.
 
 30
-00:02:43,528 --> 00:02:49,548
+00:02:46,516 --> 00:02:52,536
 He draws what he sees: separate cells, their branches reaching close to other cells, but never joined.
 
 31
-00:02:50,848 --> 00:02:56,977
+00:02:53,836 --> 00:02:59,965
 And he argues that a message travels one way: in through the branches, and out along one long fibre.
 
 32
-00:02:58,477 --> 00:03:04,206
+00:03:01,465 --> 00:03:07,194
 In Berlin, in 1889, the leading anatomists look down his microscopes, and agree.
 
 33
-00:03:05,306 --> 00:03:11,094
+00:03:08,294 --> 00:03:14,082
 In 1906, he and Golgi share the Nobel Prize, though Golgi still defends his net.
 
 34
-00:03:12,394 --> 00:03:16,976
+00:03:15,382 --> 00:03:19,964
 The separate nerve cell, the neuron, became the starting point of brain science.
 
 35
-00:03:17,876 --> 00:03:21,163
+00:03:20,864 --> 00:03:24,151
 Today, many medicines for the brain work at the gaps he drew.
 
 36
-00:03:22,663 --> 00:03:28,530
+00:03:25,651 --> 00:03:31,518
 Machines had the same problem: without a picture of how a brain is wired, there was nothing to copy.
 
 37
-00:03:29,230 --> 00:03:35,773
+00:03:32,218 --> 00:03:38,761
 His picture gave them a design: many simple cells, each listening to many others, passing one message on.
 
 38
-00:03:37,073 --> 00:03:39,078
+00:03:40,061 --> 00:03:42,066
 Today's models are still built from it.
 
 39
-00:03:45,978 --> 00:03:48,631
+00:03:48,966 --> 00:03:51,619
 A neuron is a cell that carries messages.
 
 40
-00:03:49,331 --> 00:03:52,746
+00:03:52,319 --> 00:03:55,734
 Its branches take in signals from thousands of other cells.
 
 41
-00:03:53,846 --> 00:03:59,250
+00:03:56,834 --> 00:04:02,238
 When enough arrive together, it fires: a pulse of electricity runs down its long fibre.
 
 42
-00:04:00,550 --> 00:04:03,600
+00:04:03,538 --> 00:04:06,588
 The pulse is always the same size: all or nothing.
 
 43
-00:04:05,100 --> 00:04:11,063
+00:04:08,088 --> 00:04:14,051
 At the end, it almost touches the next cell, and chemical messengers carry the signal across the gap.
 
 44
-00:04:12,363 --> 00:04:15,749
+00:04:15,351 --> 00:04:18,737
 Some connections excite the next cell; others hold it back.
 
 45
-00:04:17,049 --> 00:04:18,368
+00:04:20,037 --> 00:04:21,356
 And connections change.
 
 46
-00:04:19,068 --> 00:04:27,189
+00:04:22,056 --> 00:04:30,177
 In 1949, the psychologist Donald Hebb proposed that when two cells fire together, the link between them grows stronger.
 
 47
-00:04:28,289 --> 00:04:33,390
+00:04:31,277 --> 00:04:36,378
 In 1973, experiments on rabbits showed links growing stronger with use.
 
 48
-00:04:34,490 --> 00:04:37,850
+00:04:37,478 --> 00:04:40,838
 That's learning, inside a brain: connections that change.
 
 49
-00:04:40,350 --> 00:04:44,495
+00:04:43,338 --> 00:04:47,483
 Nature has tried out nerve cells for more than six hundred million years.
 
 50
-00:04:46,195 --> 00:04:51,519
+00:04:49,183 --> 00:04:54,507
 A jellyfish has no brain: just a net of nerve cells, enough to swim and catch food.
 
 51
-00:04:53,419 --> 00:04:57,650
+00:04:56,407 --> 00:05:00,638
 A sea slug has about twenty thousand nerve cells, some big enough to see.
 
 52
-00:04:59,350 --> 00:05:02,906
+00:05:02,338 --> 00:05:05,894
 Eric Kandel showed that when it learns, its connections change.
 
 53
-00:05:04,806 --> 00:05:08,973
+00:05:07,794 --> 00:05:11,961
 A honeybee has about a million, in a brain smaller than a sesame seed.
 
 54
-00:05:10,873 --> 00:05:15,926
+00:05:13,861 --> 00:05:18,914
 Bees learn colours, scents and the way home, and dance to tell each other where food is.
 
 55
-00:05:17,826 --> 00:05:23,934
+00:05:20,814 --> 00:05:26,922
 An octopus has about half a billion, two thirds of them in its arms: each arm can taste on its own.
 
 56
-00:05:26,034 --> 00:05:30,241
+00:05:29,022 --> 00:05:33,229
 A young zebra finch learns its song from its father, practising for weeks.
 
 57
-00:05:32,141 --> 00:05:38,090
+00:05:35,129 --> 00:05:41,078
 And a human brain has about 86 billion, joined by more than a hundred trillion connections.
 
 58
-00:05:39,790 --> 00:05:43,350
+00:05:42,778 --> 00:05:46,338
 It runs on about 20 watts, the power of a dim light bulb.
 
 59
-00:05:46,250 --> 00:05:50,155
+00:05:49,238 --> 00:05:53,143
 A brain doesn't take in everything: it fills gaps with what's likely.
 
 60
-00:05:51,655 --> 00:05:56,127
+00:05:54,643 --> 00:05:59,115
 Where the nerve leaves each eye, there are no cells to catch light: a blind spot.
 
 61
-00:05:58,227 --> 00:06:02,023
+00:06:01,215 --> 00:06:05,011
 You never see a hole there. Your brain fills it in, from what's around it.
 
 62
-00:06:05,523 --> 00:06:10,474
+00:06:08,511 --> 00:06:13,462
 Many scientists now think a brain fills in all the time, not just in one spot.
 
 63
-00:06:12,174 --> 00:06:17,493
+00:06:15,162 --> 00:06:20,481
 It guesses what comes next, a moment ahead, and checks the guess against what the senses bring.
 
 64
-00:06:19,393 --> 00:06:25,726
+00:06:22,381 --> 00:06:28,714
 A dragonfly doesn't chase a midge: it flies to where the midge will be, and catches about nine in ten.
 
 65
-00:06:28,026 --> 00:06:33,233
+00:06:31,014 --> 00:06:36,221
 Step onto an escalator that has stopped, and you stumble: your legs were ready for it to move.
 
 66
-00:06:35,433 --> 00:06:41,534
+00:06:38,421 --> 00:06:44,522
 What a brain expected, it barely notices. What it didn't, it notices at once: a prediction error.
 
 67
-00:06:43,734 --> 00:06:51,286
+00:06:46,722 --> 00:06:54,274
 In the 1990s, Wolfram Schultz listened to cells deep in monkeys' brains: a light came on, then a drop of juice.
 
 68
-00:06:53,486 --> 00:07:00,438
+00:06:56,474 --> 00:07:03,426
 At first, the cells fired at the juice. Once the monkeys learned that the light came first, they fired at the light instead.
 
 69
-00:07:02,738 --> 00:07:07,772
+00:07:05,726 --> 00:07:10,760
 And when the light came but the juice didn't, their firing dipped, just when the juice was due.
 
 70
-00:07:10,072 --> 00:07:15,757
+00:07:13,060 --> 00:07:18,745
 Guess, check, learn from the miss: that's how an animal on the move finds food, and stays out of reach.
 
 71
-00:07:19,057 --> 00:07:25,341
+00:07:22,045 --> 00:07:28,329
 In 1943, Warren McCulloch and Walter Pitts drew Cajal's nerve cell as a simple unit.
 
 72
-00:07:26,441 --> 00:07:30,577
+00:07:29,429 --> 00:07:33,565
 It adds up its inputs, and fires if the total passes a set level.
 
 73
-00:07:32,077 --> 00:07:39,118
+00:07:35,065 --> 00:07:42,106
 Rosenblatt's perceptron gave each connection a weight, a number nudged up or down as it learns, like Hebb's links.
 
 74
-00:07:40,618 --> 00:07:48,283
+00:07:43,606 --> 00:07:51,271
 In 1959, David Hubel and Torsten Wiesel found cells in a cat's brain that fire for edges at one angle.
 
 75
-00:07:49,383 --> 00:07:51,636
+00:07:52,371 --> 00:07:54,624
 They feed cells that respond to shapes.
 
 76
-00:07:52,936 --> 00:07:55,853
+00:07:55,924 --> 00:07:58,841
 Networks that read pictures borrowed those layers.
 
 77
-00:07:57,353 --> 00:08:02,509
+00:08:00,341 --> 00:08:05,497
 Today's models still add up weighted inputs, with billions of weights set by training.
 
 78
-00:08:03,609 --> 00:08:05,858
+00:08:06,597 --> 00:08:08,846
 But they borrowed an idea, not a brain.
 
 79
-00:08:07,158 --> 00:08:14,889
+00:08:10,146 --> 00:08:17,877
 A real nerve cell is far more complex: in 2021, it took a network of five to eight layers to mimic just one.
 
 80
-00:08:16,389 --> 00:08:21,106
+00:08:19,377 --> 00:08:24,094
 A child can learn a new word from a few examples; a model needs a great many.
 
 81
-00:08:22,406 --> 00:08:25,530
+00:08:25,394 --> 00:08:28,518
 Like a plane, which borrowed the wing, but not the flapping.
 
 82
-00:08:28,030 --> 00:08:30,053
+00:08:31,018 --> 00:08:33,041
 A model writes one word at a time.
 
 83
-00:08:31,553 --> 00:08:34,616
+00:08:34,541 --> 00:08:37,604
 For the next word, it gives every word it knows a chance.
 
 84
-00:08:36,316 --> 00:08:43,577
+00:08:39,304 --> 00:08:46,565
 After "A bee tells the hive where food is by", "dancing" might get 70 chances in a hundred, and "buzzing" 12.
 
 85
-00:08:45,477 --> 00:08:50,733
+00:08:48,465 --> 00:08:53,721
 Then it draws one, like spinning a wheel: big slices win most often, but not always.
 
 86
-00:08:52,833 --> 00:08:58,859
+00:08:55,821 --> 00:09:01,847
 So the same question can bring a different answer: one word changes early on, and the rest follows.
 
 87
-00:09:00,559 --> 00:09:03,191
+00:09:03,547 --> 00:09:06,179
 A setting called temperature changes the slices.
 
 88
-00:09:04,891 --> 00:09:10,944
+00:09:07,879 --> 00:09:13,932
 Turned down, the biggest slice almost always wins, and answers stick to the patterns the model saw most.
 
 89
-00:09:12,844 --> 00:09:18,703
+00:09:15,832 --> 00:09:21,691
 Turned up, small slices grow: answers vary more, sometimes in new ways, and more often go wrong.
 
 90
-00:09:20,603 --> 00:09:23,221
+00:09:23,591 --> 00:09:26,209
 Even turned right down, a little chance stays.
 
 91
-00:09:24,521 --> 00:09:30,552
+00:09:27,509 --> 00:09:33,540
 When a model answers many people at once, its sums can come out a hair different, and tip a close choice.
 
 92
-00:09:33,052 --> 00:09:36,553
+00:09:36,040 --> 00:09:39,541
 And when the fact isn't there, the model still writes likely words.
 
 93
-00:09:38,253 --> 00:09:45,651
+00:09:41,241 --> 00:09:48,639
 In a 2025 study, a model asked three times for a researcher's birthday gave three different dates, all wrong.
 
 94
-00:09:47,751 --> 00:09:52,667
+00:09:50,739 --> 00:09:55,655
 A birthday is a fact a model may have seen once, or never: there's no pattern to learn.
 
 95
-00:09:54,567 --> 00:10:01,185
+00:09:57,555 --> 00:10:04,173
 And the tests models are trained to pass reward a guess over "I don't know": a guess might score; a blank never will.
 
 96
-00:10:03,385 --> 00:10:06,688
+00:10:06,373 --> 00:10:09,676
 Brains fill gaps too, with what's likely, and just as surely.
 
 97
-00:10:08,788 --> 00:10:10,961
+00:10:11,776 --> 00:10:13,949
 So a fluent answer isn't a checked one.
 
 98
-00:10:13,861 --> 00:10:16,493
+00:10:16,849 --> 00:10:19,481
 Cajal's picture held because others could check it.
 
 99
-00:10:17,593 --> 00:10:24,512
+00:10:20,581 --> 00:10:27,500
 In the 1950s, electron microscopes showed the gap he had drawn, about twenty millionths of a millimetre wide.
 
 100
-00:10:26,012 --> 00:10:30,424
+00:10:29,000 --> 00:10:33,412
 Models are built on that picture: simple units, and connections that change.
 
 101
-00:10:31,724 --> 00:10:35,909
+00:10:34,712 --> 00:10:38,897
 Like brains, they fill gaps with what's likely, a little differently each time.
 
 102
-00:10:37,209 --> 00:10:42,695
+00:10:40,197 --> 00:10:45,683
 Knowing that, you know when to check them: against the evidence, as Cajal's drawings were checked.
 
 103
-00:10:45,195 --> 00:10:48,801
+00:10:48,183 --> 00:10:51,789
 So what does a brain that guesses ahead mean for work with data?
 
 104
-00:10:50,101 --> 00:10:56,435
+00:10:53,089 --> 00:10:59,423
 A lot of data work runs like a reflex: a trigger comes, a script runs the same steps, and stops.
 
 105
-00:10:57,735 --> 00:11:04,123
+00:11:00,723 --> 00:11:07,111
 Every night, a script loads the day's course registrations, and checks one rule: the table isn't empty.
 
 106
-00:11:05,823 --> 00:11:11,110
+00:11:08,811 --> 00:11:14,098
 One Monday, only half the rows arrive. The rule passes, and the reports go out wrong.
 
 107
-00:11:13,010 --> 00:11:17,475
+00:11:15,998 --> 00:11:20,463
 An agent can work more like a brain: before it looks, it says what it expects.
 
 108
-00:11:18,775 --> 00:11:23,551
+00:11:21,763 --> 00:11:26,539
 About 4,100 rows, as on most Mondays, from three campuses.
 
 109
-00:11:25,051 --> 00:11:29,789
+00:11:28,039 --> 00:11:32,777
 Then it looks, and measures the gap: 2,030 rows. A prediction error.
 
 110
-00:11:31,689 --> 00:11:37,301
+00:11:34,677 --> 00:11:40,289
 So it goes looking, as a forager would: it counts each campus, and finds that one sent nothing.
 
 111
-00:11:39,201 --> 00:11:47,835
+00:11:42,189 --> 00:11:50,823
 When an assumption fails, a column renamed or a field left empty, it doesn't crash: it changes its plan, and writes down what changed.
 
 112
-00:11:49,735 --> 00:11:54,721
+00:11:52,723 --> 00:11:57,709
 And it doesn't fix the reports on its own: it shows a person the gap, with its evidence.
 
 113
-00:11:56,421 --> 00:12:02,031
+00:11:59,409 --> 00:12:05,019
 Where nothing surprises, a plain script is still the right tool: cheaper, and the same every time.
 
 114
-00:12:03,531 --> 00:12:08,244
+00:12:06,519 --> 00:12:11,232
 Expect, act, check, and adapt: the loop that kept moving animals alive.
 
 115
-00:12:09,544 --> 00:12:11,770
+00:12:12,532 --> 00:12:14,758
 Agents borrowed the loop, not the brain.
 
 116
-00:12:13,470 --> 00:12:17,696
+00:12:16,458 --> 00:12:20,684
 Next, what an agent is: a model that reasons, with hands, in a loop.

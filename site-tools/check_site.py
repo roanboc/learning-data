@@ -288,8 +288,8 @@ BEATS_BEFORE = {"analytics-engineering": range(1, 11), "enterprise-architecture"
 # says the stock "Something had to change" (or "has to", "Algo tenía que cambiar"); the reviewed films that still do are left as they are
 STOCK_TURN = re.compile(r"\bsomething\s+(?:had|has|have|must|needs?|needed)\s+to\s+change\b|\bsomething\s+must\s+change\b"
                         r"|\balgo\s+(?:tiene|ten[ií]a|tendr[ií]a|deb[ei]a?|necesitaba)\s+(?:que\s+)?cambiar\b", re.I)
-STOCK_BEFORE = {"agents-at-work-on-data": (1, 2, 3, 4, 6), "data-governance": (1, 6, 7), "governance-in-practice": (2, 3, 4, 5, 6),
-                "governance-on-the-map": (2, 3), "what-an-agent-is": (1, 2, 3, 4, 5, 8, 9, 10)}
+# (every one of them was voiced again with its own line on 24 November 2026, so the list is empty and every film is held to it)
+STOCK_BEFORE = {}
 
 # a feature's release status changes, so no film says it (AGENTS.md, Sources and names on the day; the author, 5 November 2026):
 # "preview", "beta", "generally available" (or GA), in English or in Spanish. The script's sources keep it, with its date.

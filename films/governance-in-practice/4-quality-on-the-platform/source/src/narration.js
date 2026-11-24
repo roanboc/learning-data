@@ -9,7 +9,7 @@ const NARR={
  {"id":"year","gap":0.8,"text":"A warning that emails were typed with spaces and capitals had run for a year, and nobody owned it."},
  {"id":"survey","gap":0.8,"text":"And data quality was a survey: people rated their data, 3.9 out of 5.","say":"And data quality was a survey: people rated their data, three point nine out of five."},
  {"id":"broken","gap":0.8,"text":"So a broken night could change a number on its way to the government, and nobody knew whose it was to fix."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Each check needed an owner who would hear when it failed."},
  {"id":"now","gap":0.8,"text":"Now every check names its owner, the kind of quality it checks, and the level its owner chose."},
  {"id":"watch","gap":0.8,"text":"Monitoring watches for what no rule names."},
  {"id":"morning","gap":0.8,"text":"And each morning, every result goes into one scorecard, with an issue for each owner."},

@@ -14,8 +14,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la segunda, con parteras, cerca de una de cada treinta.",
 "Women in labour beg not to be sent to the first clinic.":
 "Las parturientas ruegan que no las manden a la primera clínica.",
-"Nobody can explain the difference. Something has to change.":
-"Nadie puede explicar la diferencia. Algo tiene que cambiar.",
+"Nobody can explain the difference, and until someone can, mothers will keep dying.":
+"Nadie puede explicar la diferencia, y mientras nadie pueda, las madres seguirán muriendo.",
 "Ignaz Semmelweis, a young doctor in the first clinic, looks for what's different.":
 "Ignaz Semmelweis, un médico joven de la primera clínica, busca qué es distinto.",
 "The doctors and students come to the ward from the autopsy room, with traces of the dead on their hands. The midwives don't.":

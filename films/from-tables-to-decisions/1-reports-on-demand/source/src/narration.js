@@ -74,7 +74,7 @@ const NARR={
  {"id":"every","gap":0.8,"text":"Every other question is answered when it's asked, from good models and their context, built once."},
  {"id":"budget","gap":0.8,"text":"And Health's casual teaching budget was set from this year's numbers, in a morning, not a week."},
  {"id":"old","gap":0.8,"text":"None of these ideas is new; the tools now make them easier."},
- {"id":"docs","gap":0.8,"text":"So don't reinvent the wheel: investigate, adapt, implement and iterate, starting from the official docs, linked on this page."},
+ {"id":"docs","gap":0.8,"text":"So start from what exists: investigate, adapt, implement and iterate, starting from the official docs, linked on this page."},
  {"id":"takeaway","gap":0.8,"text":"Ask for the answer; keep dashboards for the questions that come back."},
  {"id":"nextfilm","gap":0.8,"text":"Next: casual teaching cost, defined in the open, so every reader counts it the same way."}]}
 };

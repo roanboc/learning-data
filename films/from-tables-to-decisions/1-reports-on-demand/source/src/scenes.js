@@ -196,7 +196,7 @@ scene("back",(ctx,S,t,sc)=>{
 /* ---------------------------------------------------------------- 5 · Asked when it's needed */
 scene("close",(ctx,S,t,sc)=>{
   const T={tThen:wAt(sc,"then","In nineteen"),tAny:wAt(sc,"then","anyone could"),tUni:wAt(sc,"uni","At the university"),tOne:wAt(sc,"uni","one dashboard"),tEvery:wAt(sc,"every","Every other"),tGood:wAt(sc,"every","good models"),
-    tBudget:wAt(sc,"budget","And Health's"),tMorning:wAt(sc,"budget","in a morning"),tOld:wAt(sc,"old","None"),tEasier:wAt(sc,"old","easier"),tDocs:wAt(sc,"docs","So don't"),tInv:wAt(sc,"docs","investigate"),
+    tBudget:wAt(sc,"budget","And Health's"),tMorning:wAt(sc,"budget","in a morning"),tOld:wAt(sc,"old","None"),tEasier:wAt(sc,"old","easier"),tDocs:wAt(sc,"docs","So start"),tInv:wAt(sc,"docs","investigate"),
     tAdapt:wAt(sc,"docs","adapt"),tImpl:wAt(sc,"docs","implement"),tIter:wAt(sc,"docs","iterate"),tOff:wAt(sc,"docs","the official docs"),tTake:wAt(sc,"takeaway","Ask for"),tKeep:wAt(sc,"takeaway","keep dashboards"),
     tNext:wAt(sc,"nextfilm","Next"),tDefined:wAt(sc,"nextfilm","defined in the open")};
   ag_shots(ctx,S,t,sc.dur,[

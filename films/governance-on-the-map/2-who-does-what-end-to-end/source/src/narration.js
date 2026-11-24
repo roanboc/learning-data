@@ -9,7 +9,7 @@ const NARR={
  {"id":"wrong","gap":0.8,"text":"People look in the dictionary to see if a word is right, so words left out count as wrong."},
  {"id":"millions","gap":0.8,"text":"And the millions who use them have no way in."},
  {"id":"later","gap":0.8,"text":"Seventeen years later, Palma is still asking a friend in Madrid what became of ‘to budget’."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Speakers across the Americas need a say in their own language's dictionary."},
  {"id":"y1951","gap":0.8,"text":"In 1951, the academies of the Americas form an association, and Spain's academy soon joins their work.","say":"In nineteen fifty-one, the academies of the Americas form an association, and Spain's academy soon joins their work."},
  {"id":"today","gap":0.8,"text":"Today, they make the dictionary together."},
  {"id":"propose","gap":0.8,"text":"Members of each academy propose words from where they live."},

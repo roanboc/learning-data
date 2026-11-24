@@ -51,7 +51,7 @@ scene("approach",(ctx,S,t,sc)=>{
     crew:wAt(sc,"crew","To the crew",-0.4),down:wAt(sc,"crew","go down"),ft:wAt(sc,"crew","eighteen"),ctrl:wAt(sc,"ctrl","controllers"),
     ridge:wAt(sc,"ridge","ridge"),struck:wAt(sc,"died","struck"),
     before:wAt(sc,"before","Six weeks",-0.4),same:wAt(sc,"before","same words"),missed:wAt(sc,"before","narrowly missed"),
-    warned:wAt(sc,"warned","warned"),share:wAt(sc,"warned","share"),pilot:wAt(sc,"punish","pilot"),punished:wAt(sc,"punish","punished"),change:wAt(sc,"punish","Something had to change"),
+    warned:wAt(sc,"warned","warned"),share:wAt(sc,"warned","share"),pilot:wAt(sc,"punish","pilot"),punished:wAt(sc,"punish","punished"),change:wAt(sc,"punish","Pilots needed"),
     y76:wAt(sc,"y1976","In nineteen",-0.3),every:wAt(sc,"y1976","every pilot"),ctl:wAt(sc,"y1976","controller"),mech:wAt(sc,"y1976","mechanic"),
     confide:wAt(sc,"confide","in confidence"),honest:wAt(sc,"confide","honest mistake"),
     nasa:wAt(sc,"nasa","NASA",-0.4),power:wAt(sc,"nasa","no power to punish"),read:wAt(sc,"nasa","read every report"),names:wAt(sc,"nasa","took out the names"),

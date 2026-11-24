@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/how-it-goes-wrong/soundtrack.mp3",
-      "size": 6318854,
-      "sha256": "39a8fae24d90d4f8157742238f14ce3e7b48b9d6542a138b77aefce585c2b742",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/39a8fae24d90d4f8157742238f14ce3e7b48b9d6542a138b77aefce585c2b742.mp3"
+      "size": 6338237,
+      "sha256": "a0e4444b30d252eeb927b43abde08a439180221c4710c4a2d9ad9cfdd102a68c",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-how-it-goes-wrong-a379db5d661897fe11da/a0e4444b30d252eeb927b43abde08a439180221c4710c4a2d9ad9cfdd102a68c.mp3"
     }
   ]
 }

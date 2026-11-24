@@ -154,72 +154,56 @@ def strike(s, sec=0.4, g=0.007, pan=0.0):
 def air(s, sec=0.8, g=0.010, pan=0.0, lo=150, hi=900):
     """a breath of air: wind over the field, something sliding across"""
     s_air(s, sec, g * FX, pan, lo, hi)
-def wheat(s, sec=3.0, g=0.007, pan=0.0):
-    """wind through standing wheat: one soft, dry texture that swells and fades, never a crackle of separate stalks"""
-    x = tt(sec); X(filt(filt(noise(sec), 'band', (300, 1400))[:len(x)], 'low', 1800) * np.sin(np.pi * x / sec) ** 2 * (0.75 + 0.25 * np.sin(2 * np.pi * x / sec * 1.5)), s, g * FX, pan)
-
 # =============================================================================================================================
-# 1. Two harvests a year: the opening, with music. Sonora, 1944: the wheat in the wind, and D major, low and open, as the valley is
-#    named; the rust spreads, and the music turns to B minor and stays there through the poor harvest, what it cost and how slow a cure
-#    was; the ten years, a blade for the first and a theremin line counting slowly down; then nothing for "Farmers couldn't wait a
-#    decade". From 1945, the program: a theremin rises; the map, the two places, a blade each, and the seed carried between them in a
-#    glide; each season's plots, crossed, tested, the best kept; the breeders who said no, a theremin held low; half the time, D major;
-#    1956, all the wheat, the harvest tripled, D major again, higher; the rust kept changing, and the testing never stopped; the
-#    platform's changes, with no music, then the ideas and the quick, honest test held. The title: the mark
-sw = lambda lid, word, off=0: W('seasons', lid, word, off)
-scq = lambda lid, off=0: G('seasons', lid, off)
-wheat(0.3, 4.2, 0.008, px(960))
-duo(DMAJ_LO, 0.6, sw('place', 'hardly grew wheat', 1.2), 0.85, att=1.6, rel=1.3)
-flick(sw('place', 'Yaqui Valley', -0.3), 0.006, px(300))
-flick(sw('place', 'hardly grew wheat', -0.2), 0.006, px(300))
-air(sw('rust', 'Stem rust', -0.6), 1.4, 0.008, px(1240), 160, 800)            # the camera moves in on the rust
-duo(BMIN, sw('rust', 'Stem rust', -0.3), sw('field', 'a poor harvest', 1.0), 0.8, att=1.2, rel=1.0)
-flick(sw('rust', 'a fungus', -0.3), 0.006, px(1240))
-flick(sw('rust', 'chokes the plant', -0.2), 0.006, px(1240))
-wheat(sw('rust', 'a whole field', -0.4), 2.6, 0.006, px(1400))               # the stalks bow
-paper(sw('field', 'One field', -0.3), 0.011, px(1500))
-knock(sw('field', 'ten bushels', -0.1), 0.010, px(1500), 180)
-blade(B3, sw('field', 'ten bushels', -0.05), 0.75, px(1500))
-for i, w_ in enumerate(("a year's work", 'seed lost', 'from abroad')):
-    flick(sw('lost', w_, -0.25), 0.007 - 0.001 * i, px(1400))
-note(FS4, sw('lost', 'For a farmer', 0.0), END('seasons', 'lost') + 0.3, 0.6, att=0.9, rel=1.0)
-paper(scq('slow', -0.2), 0.010, px(1450))
-blade(D4, sw('slow', 'one generation a year', 0.0), 0.6, px(1130))
-line(sw('slow', 'one generation a year', 0.5), (FS4, E4, D4, CS4, B3), step=0.62, hold=0.55, g=0.75, pan=px(1450), last=0.8)
-flick(sw('slow', 'reached a farm', -0.3), 0.006, px(1450))
-# the program, from 1945: its people in the field; then the map, two places, the seed carried between them
+# 1. A foot for bare feet: the opening, with music. Jaipur, the 1960s: the workshop's still air, and D major, low and open, as the
+#    hospital is named; the foot from abroad, a blade, and the music turns to B minor and stays there through the shoe, the floor it
+#    can't sit on, and the foot given up; then nothing for "They needed a foot for the life they lived". The two of them: a theremin
+#    rises; the feet made and fitted, a tap each; each trial, walked, squatted, sat, where it hurt, changed; the bare foot, D major; what
+#    people could do on it, ticked one by one; an hour, far less; from 1975, free, and the count, D major again, higher; the foot kept
+#    changing, and the question stayed; the platform's changes, with no music, then the ideas and the quick, honest test held. The title: the mark
+sw = lambda lid, word, off=0: W('foot', lid, word, off)
+scq = lambda lid, off=0: G('foot', lid, off)
+air(0.3, 3.6, 0.007, px(420), 160, 800)                                      # the window's light, still air in the room
+duo(DMAJ_LO, 0.6, sw('place', 'lost a leg', 1.0), 0.85, att=1.6, rel=1.3)
+flick(sw('place', 'Jaipur', -0.3), 0.006, px(300))
+flick(sw('place', 'Sawai Man Singh', -0.2), 0.006, px(300))
+paper(sw('abroad', 'an artificial foot', -0.3), 0.010, px(1180))
+blade(B3, sw('abroad', 'from abroad', -0.05), 0.75, px(1180))
+duo(BMIN, sw('abroad', 'from abroad', 0.1), sw('gave', 'gave it up', 1.0), 0.8, att=1.2, rel=1.0)
+flick(sw('shoe', 'in a shoe', -0.2), 0.006, px(1180))
+flick(sw('shoe', 'barefoot', -0.2), 0.006, px(760))
+flick(sw('shoe', 'under water', -0.2), 0.006, px(760))
+knock(sw('squat', 'heavy and stiff', -0.1), 0.009, px(1180), 180)
+for i, w_ in enumerate(('squat', 'sit on the floor')):
+    strike(sw('squat', w_, 0.1), 0.35, 0.006, px(820 + 260 * i))
+note(FS4, sw('gave', 'gave it up', 0.0), END('foot', 'gave') + 0.3, 0.6, att=0.9, rel=1.0)
+# the surgeon and the craftsman; the feet made, fitted and tried, again and again
 air(scq('team', -0.4), 1.0, 0.007, px(960), 160, 800)
-paper(sw('team', 'Ministry of Agriculture', -0.4), 0.010, px(960))
-line(sw('team', 'Norman Borlaug', -0.2), (D4, FS4, A4), step=0.5, hold=0.46, g=0.75, pan=px(420), last=1.4)
-air(sw('two', 'two generations a year', -1.0), 1.2, 0.007, px(920), 160, 800)  # the map comes in
-flick(sw('two', 'two generations a year', -0.2), 0.006, px(300))
-blade(A3, sw('two', 'in summer', -0.25), 0.8, px(1150))
-blade(D4, sw('two', 'in winter', -0.25), 0.75, px(560))
-th(((A4, sw('two', 'in summer', 0.4), sw('two', 'in summer', 1.6)), (D5, sw('two', 'in summer', 1.65), sw('two', 'in summer', 2.4))),
-   0.6, 0.3, 0.8, px(860), 0.25, glide=0.6)                                    # the seed carried north: a long glide
-paper(scq('each', -0.4), 0.010, px(1540))
-for i, w_ in enumerate(('crossed plants', 'tested them', 'kept the few')):
-    tuck(sw('each', w_, -0.2), 0.008 - 0.001 * i, px(1270 + 186 * i))
-duo((D4, A4), sw('each', 'kept the few', -0.1), sw('each', 'sowed those', 1.2), 0.65, att=0.5, rel=0.9, pan=px(1540))
-th(((D5, sw('each', 'sowed those', 0.2), sw('each', 'sowed those', 1.2)), (A4, sw('each', 'sowed those', 1.25), sw('each', 'sowed those', 2.0))),
-   0.5, 0.3, 0.8, px(860), 0.25, glide=0.6)                                    # and back south
-# the breeders who said it couldn't work; the team measured
-paper(sw('dogma', 'Many breeders said', -0.3), 0.010, px(1540))
-note(B3, sw('dogma', 'Many breeders said', 0.0), sw('dogma', 'tried it anyway', 0.0), 0.55, att=0.8, rel=0.6)
-tuck(sw('dogma', 'measured', -0.4), 0.008, px(1300))
-# half the time: the bar halves, D major; grew well in both places
-knock(sw('half', 'in half', -0.2), 0.010, px(1400), 260)
-duo(DMAJ, sw('half', 'in half', -0.1), END('seasons', 'half') + 0.6, 0.75, att=0.6, rel=1.1)
-flick(sw('half', 'both places', -0.3), 0.006, px(1510))
-# 1956: all the wheat Mexico needed; the harvest tripled
-paper(sw('enough', 'nineteen fifty-six', -0.3), 0.010, px(1500))
-blade(FS3, sw('enough', 'all the wheat it needed', -0.1), 0.75, px(1500))
-knock(sw('enough', 'tripled', -0.2), 0.010, px(1560), 260)
-duo((FS4, A4, D5), sw('enough', 'tripled', -0.1), END('seasons', 'enough') + 0.8, 0.7, att=0.5, rel=1.1)
-# the rust kept changing; the testing never stopped
-flick(sw('kept', 'never stopped', -0.3), 0.006, px(1240))
-flick(sw('kept', 'the rust kept changing', -0.3), 0.006, px(1240))
-note(B3, sw('kept', 'the rust kept changing', 0.0), sw('kept', 'change too', 1.0), 0.5, att=0.7, rel=0.9)
+line(sw('team', 'Pramod Karan Sethi', -0.2), (D4, FS4, A4), step=0.5, hold=0.46, g=0.75, pan=px(420), last=1.4)
+tap(sw('made', 'wood and rubber', -0.1), 0.007, px(960))
+tap(sw('made', 'cured like a tyre', -0.1), 0.006, px(960))
+tuck(sw('made', 'fitted them', -0.2), 0.008, px(960))
+paper(scq('tried', -0.3), 0.010, px(960))
+for i, w_ in enumerate(('walked on it', 'squatted', 'sat on the floor')):
+    tuck(sw('tried', w_, -0.2), 0.008 - 0.001 * i, px(700 + 260 * i))
+blade(A3, sw('tried', 'where it hurt', -0.05), 0.6, px(960))
+th(((A4, sw('tried', 'changed it', 0.0), sw('tried', 'changed it', 1.0)), (D5, sw('tried', 'changed it', 1.05), sw('tried', 'tried again', 0.9))),
+   0.5, 0.3, 0.8, px(960), 0.25, glide=0.5)                                    # changed, and tried again: a glide up
+# the bare foot: D major; what people could do on it
+knock(sw('foot', 'looked and bent', -0.2), 0.010, px(960), 260)
+duo(DMAJ, sw('foot', 'looked and bent', -0.1), END('foot', 'foot') + 0.6, 0.75, att=0.6, rel=1.1)
+for i, w_ in enumerate(('walked barefoot', 'sat cross-legged', 'climbed trees')):
+    flick(sw('could', w_, -0.25), 0.007 - 0.001 * i, px(760 + 200 * i))
+paper(sw('hour', 'about an hour', -0.3), 0.010, px(960))
+# from 1975, free; the count
+paper(sw('free', 'nineteen seventy-five', -0.3), 0.010, px(960))
+blade(FS3, sw('free', 'fitted it free', -0.1), 0.75, px(960))
+knock(sw('free', 'seven hundred thousand', -0.2), 0.010, px(960), 260)
+duo((FS4, A4, D5), sw('free', 'seven hundred thousand', -0.1), END('foot', 'free') + 0.8, 0.7, att=0.5, rel=1.1)
+# the foot kept changing; the question stayed
+flick(sw('kept', 'kept changing', -0.3), 0.006, px(1240))
+flick(sw('kept', 'the first question', -0.3), 0.006, px(1240))
+note(B3, sw('kept', 'the first question', 0.0), END('foot', 'kept') + 0.6, 0.5, att=0.7, rel=0.9)
 # today: the platform's changes come and go, no music; then the ideas and the test
 air(sw('same', 'Data platforms', -0.9), 1.0, 0.007, px(960), 160, 800)
 for i in range(3):
@@ -285,10 +269,10 @@ th(((D4, ow('loop', 'small and quick', -0.1), ow('loop', 'small and quick', 0.6)
 for i, (w_, m, x_) in enumerate((('investigate', A3, 400), ('adapt', CS4, 610), ('implement', E4, 400), ('iterate', A4, 190))):
     blade(m, ow('loop', w_, -0.2), 0.5 - 0.04 * i, px(x_))
 paper(oc('shorter', -0.3), 0.010, px(1390))
-air(ow('shorter', 'two seasons', -0.1), 0.9, 0.006, px(1500), 200, 900)
+air(ow('shorter', 'the workshop in Jaipur', -0.1), 0.9, 0.006, px(1500), 200, 900)
 for i in range(3):
-    tap(ow('shorter', 'the shorter the loop', 0.35 * i + 0.4), 0.007 - 0.0012 * i, px(1380 + 120 * i))
-tuck(ow('shorter', 'the more you learn', -0.2), 0.008, px(988))
+    tap(ow('shorter', 'the sooner you try it', 0.35 * i + 0.4), 0.007 - 0.0012 * i, px(1380 + 120 * i))
+tuck(ow('shorter', 'where it hurts', -0.2), 0.008, px(988))
 # investigate: Finance's ticket; the official docs
 air(oc('need', -0.4), 0.8, 0.006, px(1640), 180, 900)                       # Jun comes in
 paper(ow('need', 'typed every invoice', -0.5), 0.011, px(1020))
@@ -331,11 +315,11 @@ duo((A3, CS4, E4), ow('cost', 'two days', -0.2), END('loop', 'cost') + 1.0, 0.6,
 #    from the docs, the loop. The end card: the mark
 cw = lambda lid, word, off=0: W('close', lid, word, off)
 cc = lambda lid, off=0: G('close', lid, off)
-wheat(0.0 + S0('close'), 4.0, 0.007, px(960))
-paper(cw('wheats', 'long gone', -0.4), 0.010, px(1500))
-paper(cw('wheats', 'The method', -0.3), 0.010, px(1500))
-blade(A3, cw('wheats', 'two places', -0.1), 0.6, px(1500))
-duo(DMAJ_LO, cw('wheats', 'two places', 0.1), END('close', 'wheats') + 0.6, 0.6, att=0.8, rel=1.0)
+air(0.0 + S0('close'), 3.6, 0.007, px(420), 160, 800)
+paper(cw('feet', 'long gone', -0.4), 0.010, px(1500))
+paper(cw('feet', 'The method', -0.3), 0.010, px(1500))
+blade(A3, cw('feet', 'how people live', -0.1), 0.6, px(1500))
+duo(DMAJ_LO, cw('feet', 'how people live', 0.1), END('close', 'feet') + 0.6, 0.6, att=0.8, rel=1.0)
 air(cc('keep', -1.0), 1.0, 0.007, px(960), 160, 800)                         # back to the map
 knock(cw('keep', 'keep the ideas', -0.3), 0.009, px(960), 260)
 knock(cw('keep', 'test the features', -0.3), 0.009, px(960), 300)

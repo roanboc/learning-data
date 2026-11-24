@@ -29,7 +29,8 @@
     [
       "\\bregistrar-loader\\b",
       "registrar loader"
-    ]
+    ],
+    ["\\bOkafor\\b", "Oh-kah-for"]
   ],
   "story": [
     "page"

@@ -91,117 +91,117 @@ Then in February, the claims moved into the claims app, and the spreadsheets it 
 One copy, no history of why, and no test to say if a change broke it: nobody could change it safely.
 
 24
-00:02:58,752 --> 00:03:04,043
+00:02:58,752 --> 00:03:04,247
 Sam Okafor, who runs the platform, and Jun Park moved it into the data project.
 
 25
-00:03:05,343 --> 00:03:10,460
+00:03:05,547 --> 00:03:10,664
 First into Git, beside the models, where every change is kept, with who made it and why.
 
 26
-00:03:12,160 --> 00:03:18,968
+00:03:12,364 --> 00:03:19,172
 Its sums became a model in dbt, and the rule is written once, on HR's calendar of pay days.
 
 27
-00:03:20,668 --> 00:03:27,358
+00:03:20,872 --> 00:03:27,562
 Ingrid Holm in HR confirmed the rule; a change to the pay days now starts with a ticket from HR.
 
 28
-00:03:28,958 --> 00:03:38,955
+00:03:29,162 --> 00:03:39,159
 Jun wrote the tests first, at the rule's edge: approved at 11:59 on the Monday, a claim is paid that Thursday; at 12:01, two weeks later.
 
 29
-00:03:40,855 --> 00:03:47,357
+00:03:41,059 --> 00:03:47,561
 In the weeds of data crafting shows how, in Declare it, then build it, Promises and proofs, and Built in layers.
 
 30
-00:03:48,957 --> 00:03:55,585
+00:03:49,161 --> 00:03:55,789
 Each change goes on a branch, and comes back as a pull request, with checks that build it and run every test.
 
 31
-00:03:59,485 --> 00:04:03,135
+00:03:59,689 --> 00:04:03,339
 Then someone else on the data team, not its author, reviews it.
 
 32
-00:04:04,235 --> 00:04:09,207
+00:04:04,439 --> 00:04:09,411
 Jun wrote the model, so Sam reviewed it; Sam wrote the job, so Jun reviewed that.
 
 33
-00:04:10,707 --> 00:04:14,017
+00:04:10,911 --> 00:04:14,221
 Nothing merges without that review, and every check green.
 
 34
-00:04:15,317 --> 00:04:22,858
+00:04:15,521 --> 00:04:23,062
 Finance and HR don't review the code: Rohan asked for the move in a ticket, linked to its branch and pull requests.
 
 35
-00:04:23,558 --> 00:04:28,017
+00:04:23,762 --> 00:04:28,221
 Change without surprises shows how a change reaches the people it touches.
 
 36
-00:04:29,317 --> 00:04:34,753
+00:04:29,521 --> 00:04:34,957
 And it holds when an agent writes the change: the agent proposes, and a person approves.
 
 37
-00:04:38,653 --> 00:04:45,544
+00:04:38,857 --> 00:04:45,748
 How it runs is a file too: a Declarative Automation Bundle lists the project's jobs, and where each one runs.
 
 38
-00:04:46,844 --> 00:04:52,203
+00:04:47,048 --> 00:04:52,407
 Payroll's export runs at six every Thursday, and builds and tests everything it reads.
 
 39
-00:04:53,503 --> 00:04:59,355
+00:04:53,707 --> 00:04:59,559
 Once a change is merged, the same files are deployed to test, and the job runs there first.
 
 40
-00:05:00,855 --> 00:05:07,083
+00:05:01,059 --> 00:05:07,287
 Rohan checks its figures in test against his own, and his ticket stays open until he says they're right.
 
 41
-00:05:07,783 --> 00:05:13,959
+00:05:07,987 --> 00:05:14,163
 Then the release waits for Noor, the data architect. When she approves, the same files go to production.
 
 42
-00:05:15,659 --> 00:05:21,314
+00:05:15,863 --> 00:05:21,518
 It runs as the platform's own account, never a person's: nobody deploys from a laptop.
 
 43
-00:05:22,614 --> 00:05:28,012
+00:05:22,818 --> 00:05:28,216
 The same files, the same steps, every time, so test and production can't drift apart.
 
 44
-00:05:29,512 --> 00:05:36,516
+00:05:29,716 --> 00:05:36,720
 This morning at six, it ran for the eighteenth time, and 856 casual staff are paid today.
 
 45
-00:05:40,416 --> 00:05:48,137
+00:05:40,620 --> 00:05:48,341
 None of this is new: software has been built this way for decades, and data work took it up, as bridges took up the wind tunnel.
 
 46
-00:05:49,437 --> 00:05:56,576
+00:05:49,641 --> 00:05:56,780
 So keep data work as software: in Git, tested, reviewed by someone else, and deployed the same way every time.
 
 47
-00:05:58,076 --> 00:06:02,835
+00:05:58,280 --> 00:06:03,039
 The next film, A platform that watches itself, follows a night when a job fails.
 
 48
-00:06:04,135 --> 00:06:07,420
-There are already standards for this, so don't reinvent the wheel.
+00:06:04,339 --> 00:06:08,544
+There are already standards for this: start from them, not from a blank page.
 
 49
-00:06:08,720 --> 00:06:13,418
+00:06:09,844 --> 00:06:14,542
 Investigate, adapt, implement and iterate, starting from the official docs.
 
 50
-00:06:17,318 --> 00:06:21,830
+00:06:18,442 --> 00:06:22,954
 The bridge of 1950 was tested before it was built, and it still stands.
 
 51
-00:06:23,330 --> 00:06:28,697
+00:06:24,454 --> 00:06:29,821
 Payroll's export is tested before every change, and pay day is just another Thursday.
 
 52
-00:06:30,197 --> 00:06:31,590
+00:06:31,321 --> 00:06:32,714
 Data work is software.

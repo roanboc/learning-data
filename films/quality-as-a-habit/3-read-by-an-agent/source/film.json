@@ -33,7 +33,8 @@
     [
       "\\bFonoti\\b",
       "Fo-no-tee"
-    ]
+    ],
+    ["\\bNoor\\b", "Nuur"]
   ],
   "story": [
     "cupertino"

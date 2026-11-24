@@ -266,7 +266,7 @@ const OC_ADVICE=[[110,250,"1 · One copy","Keep one copy where you can","move da
   [980,550,"4 · One platform","One copy serves a whole platform","as Both at once did for one database","store",MD.flow]];
 scene("choose",(ctx,S,t,sc)=>{
   const T=oc_once(sc,"T",()=>({tKeep:sc.cues.keep,tDecide:sc.cues.decide,tBought:sc.cues.bought,tBoth:sc.cues.both,tHere:wAt(sc,"both","Here"),
-    tWheel:sc.cues.wheel,tStd:wAt(sc,"wheel","standards"),tReinv:wAt(sc,"wheel","reinvent"),tDocs:sc.cues.docs,tInv:wAt(sc,"docs","Investigate"),tAd:wAt(sc,"docs","adapt"),
+    tWheel:sc.cues.wheel,tStd:wAt(sc,"wheel","standards"),tReinv:wAt(sc,"wheel","start from them"),tDocs:sc.cues.docs,tInv:wAt(sc,"docs","Investigate"),tAd:wAt(sc,"docs","adapt"),
     tImp:wAt(sc,"docs","implement"),tIt:wAt(sc,"docs","iterate"),tOff:wAt(sc,"docs","official docs")}));
   const at=[T.tKeep,T.tDecide,T.tBought,T.tBoth];
   ag_shots(ctx,S,t,sc.dur,[
@@ -274,7 +274,7 @@ scene("choose",(ctx,S,t,sc)=>{
       oc_scr(c,S,()=>{oc_kick(c,S,"5","What to choose",ag_in(tt,0.2,0.6));const out=1-ag_in(tt,T.tWheel-0.3,0.5);
         if(out>0)withA(c,out,()=>OC_ADVICE.forEach(([x,y,kick,title,sub,icon,edge],i)=>oc_cardAt(c,x,y,830,{kick,title,sub},tt,at[i]-0.2,null,{edge,icon})));
         // standards already exist: the module's wheel draws itself; then the four steps, starting from the official docs
-        const wa=ag_in(tt,T.tWheel-0.1,0.5);if(wa>0){md_mark(c,960,330,96,(tt-T.tWheel)/1.8,wa);md_T(c,"Don't reinvent the wheel",960,520,{w:800,size:40,align:"center",a:ag_in(tt,T.tReinv-0.2,0.5)});}
+        const wa=ag_in(tt,T.tWheel-0.1,0.5);if(wa>0){md_mark(c,960,330,96,(tt-T.tWheel)/1.8,wa);md_T(c,"Start from the standards",960,520,{w:800,size:40,align:"center",a:ag_in(tt,T.tReinv-0.2,0.5)});}
         [["Investigate",T.tInv],["Adapt",T.tAd],["Implement",T.tImp],["Iterate",T.tIt]].forEach(([s,t0],i)=>oc_pillAt(c,330+i*420,630,s,tt,t0-0.1,null,{col:i===3?MD.pass:MD.flow,size:30}));
         const da=ag_in(tt,T.tOff-0.2,0.5);if(da>0)md_window(c,560,700,800,150,{logo:"databricks",product:"Databricks",title:"the official docs",edge:MD.flow,a:da,k:Math.min(1,ag_spr(tt,T.tOff-0.2,0.5)),
           draw:(c2,b)=>md_T(c2,"docs.databricks.com",b.x+20,b.y+44,{w:500,size:28,f:"mono",col:MD.flow})});});}}

@@ -45,131 +45,131 @@ Lo que dice depende de lo que lee.
 00:01:40.369 --> 00:01:45.981
 Como la tablilla del escriba, lo que lee debería venir del original, comprobado, y decir quién puede leerlo.
 
-00:01:53.781 --> 00:01:58.210
+00:01:53.781 --> 00:01:58.332
 Farah, la defensora de los clientes, le trae a Tomás dos quejas sobre el chat.
 
-00:01:59.510 --> 00:02:03.529
+00:01:59.632 --> 00:02:03.651
 A un hogar le dieron el precio del año pasado, y planeó su invierno con él.
 
-00:02:05.129 --> 00:02:11.373
+00:02:05.251 --> 00:02:11.495
 Y a alguien que llamó sin ser el titular de la cuenta le dijeron que en esa casa alguien necesita luz para un equipo médico.
 
-00:02:13.173 --> 00:02:15.957
+00:02:13.295 --> 00:02:16.079
 La primera versión del chat leía todo lo que alcanzaba.
 
-00:02:17.357 --> 00:02:23.721
+00:02:17.479 --> 00:02:23.843
 Sus precios salían de una exportación en una carpeta compartida: una copia de una copia, que nadie actualizaba.
 
-00:02:25.321 --> 00:02:29.849
+00:02:25.443 --> 00:02:29.971
 Y leía las notas del centro de atención, donde se anotan las necesidades médicas de las personas.
 
-00:02:31.449 --> 00:02:40.656
+00:02:31.571 --> 00:02:40.850
 Una familia planeó con un precio ya cambiado; las necesidades médicas de otra llegaron a un extraño, y Ama, responsable regulatoria, reportó una brecha.
 
-00:02:42.656 --> 00:02:48.382
+00:02:42.850 --> 00:02:48.576
 Un agente que responde al público tiene que leer las cifras oficiales, y solo lo que le toca leer.
 
-00:02:51.682 --> 00:02:56.168
+00:02:51.876 --> 00:02:56.362
 Inés Duarte, la nueva arquitecta de datos de la empresa, lo asume con Tomás.
 
-00:02:57.468 --> 00:03:03.412
+00:02:57.662 --> 00:03:03.606
 Toma el contexto del chat, lo que lee para responder, de la práctica de datos en el mapa de Tomás.
 
-00:03:05.012 --> 00:03:11.954
+00:03:05.206 --> 00:03:12.148
 El mapa muestra los productos de datos que necesita: tarifas, trabajos programados por calle, páginas de ayuda y la cuenta de un hogar.
 
-00:03:13.754 --> 00:03:19.482
+00:03:13.948 --> 00:03:19.676
 Cada uno lo lleva su propio equipo, con un contrato: qué contiene, qué tan al día está y quién responde por él.
 
-00:03:21.082 --> 00:03:27.167
+00:03:21.276 --> 00:03:27.361
 Y los términos del glosario vienen con ellos: «titular de la cuenta» significa para el chat lo mismo que para la empresa.
 
-00:03:28.767 --> 00:03:33.894
+00:03:28.961 --> 00:03:34.088
 El chat lee esos productos, y nada más: ni exportaciones, ni copias de copias.
 
-00:03:35.494 --> 00:03:40.768
+00:03:35.688 --> 00:03:40.962
 Cuando cambian los precios, el producto de tarifas cambia ese día, y también la respuesta del chat.
 
-00:03:44.068 --> 00:03:49.954
+00:03:44.262 --> 00:03:50.148
 Cada producto del mapa tiene además un nivel: público, interno, confidencial o restringido.
 
-00:03:51.754 --> 00:03:54.150
+00:03:51.948 --> 00:03:54.344
 El chat puede leer los públicos y los internos.
 
-00:03:55.550 --> 00:03:59.396
+00:03:55.744 --> 00:03:59.590
 Los restringidos, como las necesidades médicas, nunca los lee.
 
-00:04:00.996 --> 00:04:06.077
+00:04:01.190 --> 00:04:06.271
 Inés no los deja a su alcance tras una máscara, donde una regla equivocada los dejaría pasar.
 
-00:04:07.677 --> 00:04:13.868
+00:04:07.871 --> 00:04:14.062
 Le da al chat un lugar propio, que solo tiene lo que puede leer: lo que no puede leer ni siquiera está ahí.
 
-00:04:15.668 --> 00:04:19.396
+00:04:15.862 --> 00:04:19.590
 Y la identidad propia del chat puede llegar a ese lugar, y a nada más.
 
-00:04:20.996 --> 00:04:24.547
+00:04:21.190 --> 00:04:24.741
 La cuenta de un hogar es confidencial, así que tampoco está ahí.
 
-00:04:25.947 --> 00:04:32.333
+00:04:26.141 --> 00:04:32.527
 El chat lee una solo cuando su titular inicia sesión, como hace el sitio web: la suya, y la de nadie más.
 
-00:04:35.633 --> 00:04:40.579
+00:04:35.827 --> 00:04:40.773
 Si un trabajo programado cortará la luz de una calle, algunos hogares deben saberlo antes por una persona.
 
-00:04:42.379 --> 00:04:45.847
+00:04:42.573 --> 00:04:46.041
 El chat no puede saber cuáles: eso sería leer necesidades médicas.
 
-00:04:47.647 --> 00:04:55.978
+00:04:47.841 --> 00:04:56.172
 Así que el equipo de la lista le ofrece una pequeña herramienta: dado un hogar que inició sesión, solo responde «pásalo a una persona ya», o no.
 
-00:04:57.978 --> 00:05:03.246
+00:04:58.172 --> 00:05:03.440
 Nunca el porqué: la persona que les devuelve la llamada ve el porqué, y primero comprueba con quién habla.
 
-00:05:05.246 --> 00:05:09.170
+00:05:05.440 --> 00:05:09.364
 El chat lo pasa, y le dice al hogar que una persona llamará ese mismo día.
 
-00:05:12.670 --> 00:05:17.033
+00:05:12.864 --> 00:05:17.227
 Quien dirige comercialización, que responde por el chat, pide el cambio en un ticket.
 
-00:05:18.533 --> 00:05:26.243
+00:05:18.727 --> 00:05:26.437
 En el ticket, cada responsable acepta, como con todo lector nuevo: Grace por los trabajos programados, comercialización por tarifas y cuentas.
 
-00:05:28.043 --> 00:05:32.566
+00:05:28.237 --> 00:05:32.760
 El equipo de datos construye el lugar del chat, y revisa el cambio en un pull request.
 
-00:05:34.166 --> 00:05:39.716
+00:05:34.360 --> 00:05:39.937
 Antes de que se cierre el ticket, Ama comprueba, en pruebas, que no haya nada restringido en el lugar del chat.
 
-00:05:43.016 --> 00:05:48.129
+00:05:43.237 --> 00:05:48.350
 En Databricks, el chat funciona como una app con su propia identidad, una entidad de servicio.
 
-00:05:49.929 --> 00:05:55.954
+00:05:50.150 --> 00:05:56.175
 Su lugar es un esquema en Unity Catalog: puede consultar los productos que hay ahí, y nada más.
 
-00:05:57.854 --> 00:06:00.709
+00:05:58.075 --> 00:06:00.930
 Sus páginas de ayuda, en un índice de búsqueda que puede leer.
 
-00:06:02.409 --> 00:06:11.427
+00:06:02.630 --> 00:06:11.648
 La pequeña herramienta es una función de Unity Catalog que el chat puede ejecutar. Solo lee la lista de hogares a derivar a una persona, y responde sí o no.
 
-00:06:13.327 --> 00:06:19.250
+00:06:13.548 --> 00:06:19.471
 Databricks aconseja lo mismo: una identidad para cada agente, con permiso solo para lo que necesita.
 
-00:06:22.750 --> 00:06:28.078
+00:06:22.971 --> 00:06:28.299
 En Uruk, el escriba copió del original, cotejó su copia, y escribió quién puede leerla.
 
-00:06:29.478 --> 00:06:36.852
+00:06:29.699 --> 00:06:37.073
 En la empresa, el chat lee los productos oficiales, al día por sus contratos, y solo lo que le toca leer.
 
-00:06:38.452 --> 00:06:45.432
+00:06:38.673 --> 00:06:45.653
 En los tres meses desde entonces, ha respondido 41,000 preguntas sobre precios, todas con las tarifas de este año.
 
-00:06:47.032 --> 00:06:50.023
+00:06:47.253 --> 00:06:50.244
 Y nadie que llamó ha sabido de otro hogar que no sea el suyo.
 
-00:06:55.723 --> 00:07:04.481
+00:06:55.944 --> 00:07:04.702
 El contexto de un agente va en el mapa: los productos que puede leer, con contratos y términos, en un lugar propio, con su propia identidad.
 
-00:07:06.381 --> 00:07:12.233
+00:07:06.602 --> 00:07:12.454
 Los agentes están en el mapa. Quién decide sobre los datos que leen es donde empieza Gobernanza de datos.

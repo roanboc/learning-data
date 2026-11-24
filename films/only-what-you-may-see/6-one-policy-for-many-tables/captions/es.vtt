@@ -81,170 +81,170 @@ Una máscara puesta a mano llega después, si llega,
 00:02:38.665 --> 00:02:41.950
 y hasta entonces, todos en el estante leen cada nombre.
 
-00:02:43.650 --> 00:02:49.712
+00:02:43.650 --> 00:02:49.886
 Así que Sam Okafor, que lleva la plataforma, escribe una política por clase, en todo el catálogo.
 
-00:02:53.812 --> 00:02:55.446
+00:02:53.986 --> 00:02:55.620
 Una política tiene cuatro partes.
 
-00:02:56.346 --> 00:03:02.523
+00:02:56.520 --> 00:03:02.697
 Dónde está: en el catálogo de registro, cubre cada estante y cada tabla, ahora y después.
 
-00:03:03.823 --> 00:03:07.077
+00:03:03.997 --> 00:03:07.251
 A quién cubre: a todos, salvo los grupos que deja pasar.
 
-00:03:08.177 --> 00:03:12.855
+00:03:08.351 --> 00:03:13.029
 Qué encuentra: cada columna de clase directa, por su etiqueta, en cualquier tabla.
 
-00:03:14.155 --> 00:03:15.918
+00:03:14.329 --> 00:03:16.092
 Y qué hace: enmascararla entera.
 
-00:03:17.818 --> 00:03:20.592
+00:03:17.992 --> 00:03:20.766
 Gobernanza en Unity Catalog escribió una así.
 
-00:03:21.492 --> 00:03:27.018
+00:03:21.666 --> 00:03:27.192
 Sam escribe una por cada clase que se oculta: especial, directa, seudónima e indirecta.
 
-00:03:28.618 --> 00:03:34.379
+00:03:28.792 --> 00:03:34.553
 Otra más decide filas, no valores: el estudio ve solo a los estudiantes de la Facultad de Salud.
 
-00:03:35.879 --> 00:03:41.710
+00:03:36.053 --> 00:03:41.884
 Está en el estante que lee el estudio, core, y halla la columna de facultad de cada tabla por su etiqueta.
 
-00:03:43.210 --> 00:03:48.301
+00:03:43.384 --> 00:03:48.475
 Un filtro necesita su columna, así que cada tabla con estudiantes lleva su facultad:
 
-00:03:48.501 --> 00:03:50.834
+00:03:48.675 --> 00:03:51.008
 una sin ella le mostraría al estudio a todos.
 
-00:03:53.934 --> 00:03:58.842
+00:03:54.108 --> 00:03:59.016
 Cada forma es una pequeña función, escrita una vez, en el estante de políticas del catálogo.
 
-00:04:00.342 --> 00:04:04.902
+00:04:00.516 --> 00:04:05.076
 Enmascararlo entero: las palabras se vuelven tres asteriscos, y lo demás queda vacío.
 
-00:04:06.802 --> 00:04:11.572
+00:04:06.976 --> 00:04:11.746
 Enmascararlo en parte, para la mesa de ayuda: los dos últimos dígitos, y la primera letra del correo.
 
-00:04:13.472 --> 00:04:17.813
+00:04:13.646 --> 00:04:17.987
 Generalizar: una fecha de nacimiento se vuelve el primero de enero de su año.
 
-00:04:19.713 --> 00:04:24.847
+00:04:19.887 --> 00:04:25.021
 Una máscara devuelve el tipo de la columna: una fecha sigue siendo fecha, o la consulta falla.
 
-00:04:26.947 --> 00:04:32.183
+00:04:27.121 --> 00:04:32.357
 Filtrar filas: un sí o un no por fila: ¿este estudiante es de la Facultad de Salud?
 
-00:04:34.283 --> 00:04:35.861
+00:04:34.457 --> 00:04:36.035
 Las otras formas no son máscaras.
 
-00:04:37.161 --> 00:04:41.579
+00:04:37.335 --> 00:04:41.753
 El código del estudiante se hace en el origen, con una clave que guarda la oficina de registro.
 
-00:04:43.479 --> 00:04:47.650
+00:04:43.653 --> 00:04:47.824
 Y el apoyo en exámenes se deja fuera: el estudio no tiene permiso en su estante.
 
-00:04:51.150 --> 00:04:54.352
+00:04:51.324 --> 00:04:54.526
 Una política cubre a todos menos a los grupos que deja pasar:
 
-00:04:54.552 --> 00:04:57.780
+00:04:54.726 --> 00:04:57.954
 ser dueño de una tabla no basta, ni una cuenta de administración.
 
-00:04:59.480 --> 00:05:04.161
+00:04:59.654 --> 00:05:04.335
 Quién está en cada lista lo decide Mei: su oficina ve entera la tabla de estudiantes.
 
-00:05:05.861 --> 00:05:11.473
+00:05:06.035 --> 00:05:11.647
 Quien construye, registrar-loader, también pasa, o cada tabla que construyera tendría asteriscos.
 
-00:05:13.373 --> 00:05:16.818
+00:05:13.547 --> 00:05:16.992
 La mesa de ayuda pasa la política que enmascara los nombres enteros,
 
-00:05:17.018 --> 00:05:19.103
+00:05:17.192 --> 00:05:19.277
 y recibe la que los enmascara en parte.
 
-00:05:20.803 --> 00:05:23.256
+00:05:20.977 --> 00:05:23.430
 Cada lector recibe una máscara por columna:
 
-00:05:23.456 --> 00:05:27.319
+00:05:23.630 --> 00:05:27.493
 dos máscaras distintas para una persona detienen la consulta con un error.
 
-00:05:29.219 --> 00:05:32.205
+00:05:29.393 --> 00:05:32.379
 El estudio pasa la política del código del estudiante:
 
-00:05:32.405 --> 00:05:35.623
+00:05:32.579 --> 00:05:35.797
 su acuerdo permite un código en lugar de quiénes son.
 
-00:05:37.323 --> 00:05:44.177
+00:05:37.497 --> 00:05:44.351
 Un agente nunca está en una lista: lee con los derechos de su rol, como muestra Agentes de IA en el trabajo con datos.
 
-00:05:45.877 --> 00:05:53.872
+00:05:46.051 --> 00:05:54.046
 Solo el cómputo que aplica políticas puede leer estas tablas: serverless, o Databricks Runtime 16.4 o superior.
 
-00:05:55.172 --> 00:05:56.960
+00:05:55.346 --> 00:05:57.134
 El cómputo más antiguo se rechaza.
 
-00:06:00.260 --> 00:06:07.744
+00:06:00.434 --> 00:06:07.918
 El miércoles 21 de octubre, el nuevo modelo de Jun se construye por primera vez: el avance de cada estudiante, año a año.
 
-00:06:09.444 --> 00:06:13.909
+00:06:09.618 --> 00:06:14.083
 Sus columnas traen sus clases de sus fuentes, como mostró Etiquetas que viajan,
 
-00:06:14.109 --> 00:06:15.776
+00:06:14.283 --> 00:06:15.950
 y el nivel de Mei viene con él.
 
-00:06:17.276 --> 00:06:20.313
+00:06:17.450 --> 00:06:20.487
 Es la tabla 39, y nadie escribe una máscara.
 
-00:06:22.413 --> 00:06:27.711
+00:06:22.587 --> 00:06:27.885
 Desde su primer minuto, la mesa de ayuda ve parte de cada número de estudiante, y Planificación ve asteriscos.
 
-00:06:29.411 --> 00:06:32.862
+00:06:29.585 --> 00:06:33.036
 Y el estudio ve solo a los estudiantes de Salud, cada uno por su código.
 
-00:06:34.762 --> 00:06:40.234
+00:06:34.936 --> 00:06:40.408
 En la carretera, una carga que nadie puede nombrar recibe la Guía 111, que supone todos los peligros.
 
-00:06:42.134 --> 00:06:47.212
+00:06:42.308 --> 00:06:47.386
 Aquí, una tabla que llega sin su nivel no muestra filas a nadie más que a quien la construye,
 
-00:06:47.412 --> 00:06:49.022
+00:06:47.586 --> 00:06:49.196
 hasta que su dueña le da uno.
 
-00:06:51.122 --> 00:06:53.568
+00:06:51.296 --> 00:06:53.742
 Pero una política solo oculta lo que tiene etiqueta.
 
-00:06:55.068 --> 00:07:00.393
+00:06:55.242 --> 00:07:00.567
 Una columna sin clase se ve tal cual, hasta que la revisión matutina de Prueba de que se cumplió la encuentra.
 
-00:07:03.893 --> 00:07:08.219
+00:07:04.067 --> 00:07:08.393
 Las políticas son código, guardadas junto a los permisos, en el paquete de registro.
 
-00:07:09.319 --> 00:07:14.416
+00:07:09.493 --> 00:07:14.590
 Un cambio es un pull request que revisa el equipo de datos, y a Mei le avisan qué toca.
 
-00:07:15.716 --> 00:07:22.080
+00:07:15.890 --> 00:07:22.254
 Corre en pruebas y luego en producción tras quien aprueba la entrega, como registrar-loader, nunca una persona.
 
-00:07:23.380 --> 00:07:28.557
+00:07:23.554 --> 00:07:28.731
 Cada archivo reemplaza su política entera: lo que dice el repositorio es lo que corre.
 
-00:07:29.857 --> 00:07:35.347
+00:07:30.031 --> 00:07:35.521
 El 14 de octubre, las políticas entraron esa mañana, y el permiso del estudio esa tarde:
 
-00:07:35.547 --> 00:07:37.177
+00:07:35.721 --> 00:07:37.351
 primero las reglas, luego la puerta.
 
-00:07:38.877 --> 00:07:43.475
+00:07:39.051 --> 00:07:43.649
 En la carretera, una guía se escribe una vez, y una sustancia nueva solo necesita una línea.
 
-00:07:44.575 --> 00:07:49.046
+00:07:44.749 --> 00:07:49.220
 Aquí, una política se escribe una vez, y una tabla nueva solo necesita sus etiquetas.
 
-00:07:50.346 --> 00:07:56.503
+00:07:50.520 --> 00:07:56.677
 Así, el nombre de un estudiante sigue oculto llegue a donde llegue, y el estudio ve solo a los de su facultad.
 
-00:07:57.803 --> 00:08:02.254
+00:07:57.977 --> 00:08:02.428
 La política sigue a la etiqueta: las tablas nuevas quedan protegidas el día en que aparecen.
 
-00:08:04.354 --> 00:08:06.393
+00:08:04.528 --> 00:08:06.567
 Siguiente: Copias que mantienen las reglas.

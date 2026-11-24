@@ -38,8 +38,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Cuando un derrame corta la sangre a una parte del cerebro de alguien, puede quitarle el habla.",
 "Doctors can't tell what it has broken, or whether it will heal.":
 "Los médicos no pueden saber qué ha dañado, ni si sanará.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"To understand the brain, scientists first need to see its cells one by one.":
+"Para entender el cerebro, los científicos primero necesitan ver sus células una por una.",
 "Golgi himself had found a stain that turns a few cells black, and leaves the rest clear.":
 "El propio Golgi había hallado una tinción que vuelve negras unas pocas células y deja claras las demás.",
 "Which few, it seems to pick at random. Nobody knows why, even today.":

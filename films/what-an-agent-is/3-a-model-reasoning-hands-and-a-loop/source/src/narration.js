@@ -8,7 +8,7 @@ const NARR={
  {"id":"gust","gap":0.8,"text":"When a gust tips a wing, the pilot has to level it again, at once, all through the flight."},
  {"id":"ache","gap":0.8,"text":"On a long flight, his arms and back ache."},
  {"id":"fall","gap":0.8,"text":"And if he's tired, or slow, a tipped aeroplane can slip sideways, and fall."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"Pilots need something that levels the wings for them."},
  {"id":"box","gap":0.8,"text":"Sperry's answer is a box of four gyroscopes: wheels that spin so fast they keep pointing the same way, however the aeroplane moves."},
  {"id":"feels","gap":0.8,"text":"Each time the aeroplane tips, the box feels it, and pistons driven by air level it again."},
  {"id":"hands","gap":0.8,"text":"Over the river, Sperry lets go, and raises his hands."},

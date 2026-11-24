@@ -14,8 +14,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En 1424, la biblioteca de la Universidad de Cambridge tenía 122 libros.",
 "And every new copy can add new mistakes.":
 "Y cada copia nueva puede sumar errores nuevos.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"People need books made faster, and copies that stay the same.":
+"La gente necesita libros hechos más rápido, y copias que no cambien.",
 "The idea that will change it is already four hundred years old.":
 "La idea que lo cambiará ya tiene cuatrocientos años.",
 "In China, in the 1040s, Bi Sheng made a piece of baked clay for each character.":

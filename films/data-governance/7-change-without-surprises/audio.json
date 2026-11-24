@@ -3,9 +3,9 @@
   "files": [
     {
       "path": "site/assets/change-without-surprises/soundtrack.mp3",
-      "size": 5610100,
-      "sha256": "58c38c09d75fa082dcbfdf27ad1320be60edc5bb59f48b2f8583a9740deaa4ba",
-      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/58c38c09d75fa082dcbfdf27ad1320be60edc5bb59f48b2f8583a9740deaa4ba.mp3"
+      "size": 5633140,
+      "sha256": "92bc26d9e71b6f75ee9e61ecc3e9ea9202c4a8f70d7d16ed9616bf9b88f3c643",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-change-without-surprises-7bbf6067ece64da968d6/92bc26d9e71b6f75ee9e61ecc3e9ea9202c4a8f70d7d16ed9616bf9b88f3c643.mp3"
     }
   ]
 }

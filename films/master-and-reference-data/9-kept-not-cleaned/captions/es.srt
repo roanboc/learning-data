@@ -139,65 +139,65 @@ La oficina de admisiones, responsable de la lista, lo revisó y aprobó.
 El agente propone. El responsable decide.
 
 36
-00:03:26,698 --> 00:03:33,190
+00:03:26,698 --> 00:03:33,225
 Yusuf, que dirige la gobernanza de datos, lee los mismos indicadores en su cuadro de mando, junto a los de los demás dominios.
 
 37
-00:03:34,690 --> 00:03:39,047
+00:03:34,725 --> 00:03:39,082
 Responsables, límites y una forma de cambiarlos: la persona ya tiene los tres.
 
 38
-00:03:41,547 --> 00:03:49,688
+00:03:41,582 --> 00:03:49,723
 Toda industria conoce esta imagen. Un banco limpia sus registros de clientes cada tres años, y los duplicados vuelven cada vez.
 
 39
-00:03:50,988 --> 00:03:53,098
+00:03:51,023 --> 00:03:53,133
 Un control al ingreso rompe el ciclo.
 
 40
-00:03:55,798 --> 00:04:02,144
+00:03:55,833 --> 00:04:02,179
 Febrero de 2027. Linh empieza su doctorado: un rol nuevo, sobre la persona que ya es.
 
 41
-00:04:03,744 --> 00:04:07,636
+00:04:03,779 --> 00:04:07,671
 Esa admisión dejó treinta y ocho duplicados nuevos. Ella no es uno de ellos.
 
 42
-00:04:09,136 --> 00:04:14,085
+00:04:09,171 --> 00:04:14,120
 Y en Dujiangyan, cada primavera, cuando terminan las reparaciones, se deja volver el agua.
 
 43
-00:04:15,685 --> 00:04:18,752
+00:04:15,720 --> 00:04:18,787
 Límpialo una vez, y se deteriora. Mantenlo, y perdura.
 
 44
-00:04:24,452 --> 00:04:29,529
+00:04:24,487 --> 00:04:29,564
 Nueve películas siguieron a Linh, hasta que la universidad la reconoció como la misma, en todas partes.
 
 45
-00:04:30,829 --> 00:04:36,083
+00:04:30,864 --> 00:04:36,118
 Quién es alguien: decide cada coincidencia una vez, con un motivo, y declara qué valor gana.
 
 46
-00:04:37,083 --> 00:04:42,624
+00:04:37,118 --> 00:04:42,659
 Roles y listas: da a cada rol un inicio y un fin, y a cada lista un responsable y un solo hogar.
 
 47
-00:04:43,624 --> 00:04:50,332
+00:04:43,659 --> 00:04:50,367
 Compartirlo con seguridad: usa los datos de cada rol solo para su propósito, y comparte a la persona de la forma más liviana que sirva.
 
 48
-00:04:51,332 --> 00:04:57,267
+00:04:51,367 --> 00:04:57,302
 Mantenerlo bien: haz que cada cambio se pueda explicar y deshacer, y detén los duplicados en la puerta.
 
 49
-00:04:59,767 --> 00:05:03,491
+00:04:59,802 --> 00:05:03,526
 Los datos maestros son una de las cosas que cuida la gobernanza de datos.
 
 50
-00:05:05,091 --> 00:05:12,713
+00:05:05,126 --> 00:05:12,748
 Y necesitan el resto de la gobernanza: alguien que decida, un significado para cada palabra, acceso con un propósito y reglas que se ejecuten.
 
 51
-00:05:14,313 --> 00:05:20,166
+00:05:14,348 --> 00:05:20,149
 La próxima serie sigue a Yusuf mientras pone en marcha cada una, para todos los datos de la universidad.

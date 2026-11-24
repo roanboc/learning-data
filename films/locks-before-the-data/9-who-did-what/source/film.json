@@ -21,7 +21,8 @@
     [
       "\\bHR\\b",
       "H R"
-    ]
+    ],
+    ["\\bOkafor\\b", "Oh-kah-for"]
   ],
   "story": [
     "box",

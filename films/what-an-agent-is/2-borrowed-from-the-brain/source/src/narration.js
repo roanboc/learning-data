@@ -27,7 +27,7 @@ const NARR={
  {"id":"nobody","gap":0.8,"text":"If they are, nobody can say where a message starts, or how a brain learns."},
  {"id":"stroke","gap":0.8,"text":"When a stroke cuts off the blood to part of someone's brain, it can take away their speech."},
  {"id":"doctors","gap":0.8,"text":"Doctors can't tell what it has broken, or whether it will heal."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"To understand the brain, scientists first need to see its cells one by one."},
  {"id":"stain","gap":0.8,"text":"Golgi himself had found a stain that turns a few cells black, and leaves the rest clear."},
  {"id":"random","gap":0.8,"text":"Which few, it seems to pick at random. Nobody knows why, even today."},
  {"id":"young","gap":0.8,"text":"Cajal makes it work reliably, and uses the brains of young birds, where the thicket is thinner."},

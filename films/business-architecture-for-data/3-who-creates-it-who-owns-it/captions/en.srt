@@ -63,165 +63,165 @@ Some seventy families held the rest, and every share had a named owner.
 At the utility, each concept needs the same: an owner who decides, and someone to look after it every day.
 
 17
-00:01:54,671 --> 00:01:58,922
+00:01:54,671 --> 00:01:58,872
 Tomás's next note asks who creates each concept, and who owns it.
 
 18
-00:02:00,222 --> 00:02:04,639
+00:02:00,172 --> 00:02:04,589
 On his map, each concept already sits beneath the capabilities that use it.
 
 19
-00:02:06,139 --> 00:02:10,294
+00:02:06,089 --> 00:02:10,244
 Now he needs to know exactly what each capability does with each one.
 
 20
-00:02:13,594 --> 00:02:18,819
+00:02:13,544 --> 00:02:18,769
 He draws a matrix: the capabilities down one side, the concepts across the top.
 
 21
-00:02:20,319 --> 00:02:26,929
+00:02:20,269 --> 00:02:26,879
 In each square goes what the capability does with the concept: creates it, reads it, updates it, or deletes it.
 
 22
-00:02:28,629 --> 00:02:31,994
+00:02:28,579 --> 00:02:31,944
 Architects call it a CRUD matrix, after those four letters.
 
 23
-00:02:33,294 --> 00:02:38,175
+00:02:33,244 --> 00:02:38,125
 He fills it in with the people who run each capability, not from what the systems say.
 
 24
-00:02:39,675 --> 00:02:44,883
+00:02:39,625 --> 00:02:44,833
 Then he reads down each column: each concept should be created by one capability.
 
 25
-00:02:46,583 --> 00:02:49,303
+00:02:46,533 --> 00:02:49,253
 And its owner is the owner of that capability.
 
 26
-00:02:50,803 --> 00:02:55,602
+00:02:50,753 --> 00:02:55,552
 Connecting customers creates the connection point, so the connection point is Grace's.
 
 27
-00:02:58,902 --> 00:03:00,638
+00:02:58,852 --> 00:03:00,588
 But the account's column has two.
 
 28
-00:03:02,138 --> 00:03:05,636
+00:03:02,088 --> 00:03:05,586
 Serving customers opens an account when someone signs up.
 
 29
-00:03:06,936 --> 00:03:12,488
+00:03:06,886 --> 00:03:12,438
 And connecting customers opens one when a new home is switched on, so its first bill can go out.
 
 30
-00:03:13,988 --> 00:03:17,262
+00:03:13,938 --> 00:03:17,212
 So a family moving into a new home could end up with two.
 
 31
-00:03:18,762 --> 00:03:25,144
+00:03:18,712 --> 00:03:25,094
 Last year, twelve hundred new homes had two accounts, and three hundred and forty families got two first bills.
 
 32
-00:03:26,844 --> 00:03:32,358
+00:03:26,794 --> 00:03:32,308
 Farah, who speaks for the utility's customers, had been asking why. The matrix shows it.
 
 33
-00:03:33,858 --> 00:03:39,277
+00:03:33,808 --> 00:03:39,226
 Which capability should create the account isn't for Tomás or the data team to decide.
 
 34
-00:03:42,577 --> 00:03:48,969
+00:03:42,526 --> 00:03:48,918
 Grace runs connecting customers, and the head of retail runs serving customers. They decide it together.
 
 35
-00:03:50,469 --> 00:03:57,662
+00:03:50,418 --> 00:03:57,611
 Serving customers creates the account. Connecting customers creates the connection point, and only reads the account.
 
 36
-00:03:59,362 --> 00:04:03,979
+00:03:59,311 --> 00:04:03,928
 When a new home is switched on, it tells retail, and retail opens the account.
 
 37
-00:04:05,479 --> 00:04:10,365
+00:04:05,428 --> 00:04:10,314
 So the account's owner is the head of retail, who runs the capability that creates it.
 
 38
-00:04:12,065 --> 00:04:16,331
+00:04:12,014 --> 00:04:16,280
 The decision goes on the map with its date, so nobody has to settle it again.
 
 39
-00:04:17,831 --> 00:04:21,582
+00:04:17,780 --> 00:04:21,531
 Since then, each new home gets one account, and one first bill.
 
 40
-00:04:27,282 --> 00:04:33,107
+00:04:27,231 --> 00:04:33,056
 An owner decides what a concept means, who creates it, the rules on it, and how good it must be.
 
 41
-00:04:34,807 --> 00:04:40,093
+00:04:34,756 --> 00:04:40,042
 But the head of retail can't look after three hundred and ten thousand accounts, day to day.
 
 42
-00:04:41,793 --> 00:04:46,108
+00:04:41,742 --> 00:04:46,057
 So each owner names a steward: someone who works with the concept every day.
 
 43
-00:04:48,008 --> 00:04:55,750
+00:04:47,957 --> 00:04:55,699
 For accounts, it's retail's billing lead, who keeps the definition, answers questions about it, and follows up when something's wrong.
 
 44
-00:04:57,850 --> 00:05:01,943
+00:04:57,799 --> 00:05:01,892
 Like the mirab, a steward looks after it for its owner, and doesn't own it.
 
 45
-00:05:03,943 --> 00:05:10,144
+00:05:03,892 --> 00:05:10,093
 And the data team builds and runs what holds it, as diggers keep a qanat's tunnel, and owns none of it.
 
 46
-00:05:13,844 --> 00:05:16,613
+00:05:13,793 --> 00:05:16,562
 Some concepts have no owner written down anywhere.
 
 47
-00:05:17,713 --> 00:05:25,425
+00:05:17,662 --> 00:05:25,474
 An outage table, built in 2019, holds every outage, and Ama's yearly report to the regulator counts them from it.
 
 48
-00:05:26,925 --> 00:05:30,405
+00:05:26,974 --> 00:05:30,454
 Whoever built it has left, and nobody knows who owns what's in it.
 
 49
-00:05:31,905 --> 00:05:37,964
+00:05:31,954 --> 00:05:38,013
 Tomás doesn't ask which system the table came from. He asks which capability creates outages.
 
 50
-00:05:39,664 --> 00:05:45,807
+00:05:39,713 --> 00:05:45,856
 Operating the network does, so outages are Grace's, and her outage desk lead becomes their steward.
 
 51
-00:05:47,507 --> 00:05:52,816
+00:05:47,556 --> 00:05:52,865
 Owners are found by capability, not by system, even where nothing was written down.
 
 52
-00:05:56,316 --> 00:06:01,392
+00:05:56,365 --> 00:06:01,441
 On the data practice's map, two roles join: the data owner and the data steward.
 
 53
-00:06:03,092 --> 00:06:09,884
+00:06:03,141 --> 00:06:09,933
 Each domain's owner holds the owner's role: Grace for the network's concepts, and the head of retail for retail's.
 
 54
-00:06:11,584 --> 00:06:15,919
+00:06:11,633 --> 00:06:15,968
 And each owner names the stewards who look after their concepts, day to day.
 
 55
-00:06:19,419 --> 00:06:25,613
+00:06:19,468 --> 00:06:25,662
 On a qanat, every share has a named owner: the owners decide, and the mirab looks after the water.
 
 56
-00:06:27,313 --> 00:06:35,285
+00:06:27,362 --> 00:06:35,334
 At the utility, every concept now has one capability that creates it, an owner who decides, and a steward who looks after it.
 
 57
-00:06:36,985 --> 00:06:42,330
+00:06:37,034 --> 00:06:42,372
 Tomás's next note asks where each one is born: in which process, and at which step.

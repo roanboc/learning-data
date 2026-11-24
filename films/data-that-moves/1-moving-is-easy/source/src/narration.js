@@ -62,7 +62,7 @@ const NARR={
  {"id":"ours","gap":0.8,"text":"Now HR's contracts reach Rohan in Fabric the day they're made, meaning just what HR means, and nobody spends two days on them."},
  {"id":"standards","gap":0.8,"text":"There are already standards for this."},
  {"id":"two","gap":0.8,"text":"Enterprise Integration Patterns for how data moves, and the Open Data Contract Standard for what it means."},
- {"id":"wheel","gap":0.8,"text":"Don't reinvent the wheel. Investigate, adapt, implement and iterate, starting from the official docs."},
+ {"id":"wheel","gap":0.8,"text":"Start from them, not from scratch. Investigate, adapt, implement and iterate, starting from the official docs."},
  {"id":"struggle","gap":0.8,"text":"If these basics are still a struggle where you work, look first at your governance or your tooling: other modules here show both."},
  {"id":"takeaway","gap":0.8,"text":"Let the tools move it; spend your time on the contract."}]}
 };

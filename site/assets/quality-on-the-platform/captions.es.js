@@ -22,8 +22,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y la calidad de datos era una encuesta: cada quien calificaba sus datos, 3.9 de 5.",
 "So a broken night could change a number on its way to the government, and nobody knew whose it was to fix.":
 "Así, una noche rota podía cambiar un número camino al gobierno, y nadie sabía a quién le tocaba arreglarlo.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Each check needed an owner who would hear when it failed.":
+"Cada comprobación necesitaba un dueño que se enterara cuando fallara.",
 "Now every check names its owner, the kind of quality it checks, and the level its owner chose.":
 "Ahora cada control nombra a su dueño, el tipo de calidad que verifica y el nivel que eligió su dueño.",
 "Monitoring watches for what no rule names.":

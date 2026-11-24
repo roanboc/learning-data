@@ -482,12 +482,12 @@ const NARR={
  {"id":"write","gap":0.8,"text":"If we write it, we write it as data, in a standard structure such as JSON or YAML, with its metadata.","say":"If we write it, we write it as data, in a standard structure such as Jason or YAML, with its metadata."},
  {"id":"official","gap":0.8,"text":"If it's official, we keep it as it is, its metadata beside it."},
  {"id":"read","gap":0.8,"text":"If it's written for people, we read it, with the platform's functions or a scraper, only where a use case needs it, and keep the file."},
- {"id":"docs","gap":0.8,"text":"Every organisation's documents differ, and the standards are there already: don't reinvent the wheel."},
+ {"id":"docs","gap":0.8,"text":"Every organisation's documents differ, and the standards are there already: start from them."},
  {"id":"iterate","gap":0.8,"text":"Start from the official docs. Investigate, adapt, implement, iterate."},
  {"id":"data","gap":0.8,"text":"In short: read documents where a use case needs it, keep the file and its metadata, and write what's yours as data."}]}
 };
 
-const VODUR={"logs/place": 7.821, "logs/logbook": 6.164, "logs/unread": 5.276, "logs/habit": 4.557, "logs/weeks": 8.237, "logs/change": 3.486, "logs/read": 6.892, "logs/charts": 7.168, "logs/brussels": 9.203, "logs/saved": 10.917, "logs/shared": 3.862, "logs/same": 4.459, "logs/answer": 6.386, "invoices/three": 7.344, "invoices/october": 10.005, "invoices/check": 7.509, "invoices/typed": 5.992, "invoices/volume": 6.29, "invoices/parse": 6.66, "invoices/extract": 5.465, "invoices/path": 4.757, "invoices/model": 6.87, "invoices/checks": 6.159, "invoices/rules": 6.134, "invoices/passed": 7.351, "invoices/person": 5.481, "invoices/decides": 5.867, "contracts/official": 4.954, "contracts/beside": 9.144, "contracts/writes": 6.037, "contracts/linh": 10.669, "contracts/week": 5.95, "contracts/alike": 3.428, "contracts/ends": 8.485, "contracts/context": 7.475, "contracts/who": 7.934, "written/best": 3.046, "written/before": 5.764, "written/json": 5.73, "written/meta": 5.116, "written/yaml": 6.596, "written/log": 6.519, "close/kept": 7.598, "close/again": 3.958, "close/rule": 4.737, "close/write": 6.139, "close/official": 3.506, "close/read": 7.55, "close/docs": 5.914, "close/iterate": 4.546, "close/data": 7.254};
+const VODUR={"logs/place": 7.821, "logs/logbook": 6.164, "logs/unread": 5.276, "logs/habit": 4.557, "logs/weeks": 8.237, "logs/change": 3.486, "logs/read": 6.892, "logs/charts": 7.168, "logs/brussels": 9.203, "logs/saved": 10.917, "logs/shared": 3.862, "logs/same": 4.459, "logs/answer": 6.386, "invoices/three": 7.344, "invoices/october": 10.005, "invoices/check": 7.509, "invoices/typed": 5.992, "invoices/volume": 6.29, "invoices/parse": 6.66, "invoices/extract": 5.465, "invoices/path": 4.757, "invoices/model": 6.87, "invoices/checks": 6.159, "invoices/rules": 6.134, "invoices/passed": 7.351, "invoices/person": 5.481, "invoices/decides": 5.867, "contracts/official": 4.954, "contracts/beside": 9.144, "contracts/writes": 6.037, "contracts/linh": 10.669, "contracts/week": 5.95, "contracts/alike": 3.428, "contracts/ends": 8.485, "contracts/context": 7.475, "contracts/who": 7.934, "written/best": 3.046, "written/before": 5.764, "written/json": 5.73, "written/meta": 5.116, "written/yaml": 6.596, "written/log": 6.519, "close/kept": 7.598, "close/again": 3.958, "close/rule": 4.737, "close/write": 6.139, "close/official": 3.506, "close/read": 7.55, "close/docs": 5.338, "close/iterate": 4.546, "close/data": 7.254};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2537,7 +2537,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
     keep:wAt(sc,"again","Keep the file"),better:wAt(sc,"again","better readers"),
     noor:wAt(sc,"rule","Noor Rahman"),three:wAt(sc,"rule","one of three answers"),
     ifw:wAt(sc,"write","If we write it"),ifo:wAt(sc,"official","If it's official"),ifr:wAt(sc,"read","If it's written for people"),
-    differ:wAt(sc,"docs","documents differ"),standards:wAt(sc,"docs","the standards"),wheel:wAt(sc,"docs","reinvent the wheel"),
+    differ:wAt(sc,"docs","documents differ"),standards:wAt(sc,"docs","the standards"),wheel:wAt(sc,"docs","start from them"),
     offDocs:wAt(sc,"iterate","the official docs"),inv:wAt(sc,"iterate","Investigate"),adapt:wAt(sc,"iterate","adapt"),impl:wAt(sc,"iterate","implement"),iter:wAt(sc,"iterate","iterate"),
     readThem:wAt(sc,"data","read documents"),keepIt:wAt(sc,"data","keep the file"),writeYours:wAt(sc,"data","write what's yours")}));
   const map0=T.noor-1.4;
@@ -2559,14 +2559,14 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
       const rA=1-ag_in(tt,c.docs-0.6,0.5);
       fd_case(cx,"Every document · one of three answers",ag_in(tt,T.three-0.3,0.6)*rA,MD.ink);
       FD_THREEWAYS.forEach(([k,ti,sub,ic,ed],i)=>md_textCard(cx,760,250+i*200,1060,{kick:k,title:ti,sub},{icon:ic,edge:ed,a:rA*ag_in(tt,[T.ifw,T.ifo,T.ifr][i]-0.3,0.5),k:fd_k(tt,[T.ifw,T.ifo,T.ifr][i]-0.3)}));
-      // every organisation's documents differ, and the standards are there already: don't reinvent the wheel
+      // every organisation's documents differ, and the standards are there already: start from them
       const dA=ag_in(tt,c.docs-0.3,0.5)*(1-ag_in(tt,c.iterate-0.6,0.5));
       if(dA>0){fd_invoice(cx,800,262,240,2,{a:dA*ag_in(tt,T.differ-0.5,0.5),rot:-0.06});fd_contract(cx,910,246,240,{a:dA*ag_in(tt,T.differ-0.3,0.5),rot:0.02,kind:"offer"});
         fd_sheet(cx,1000,340,300,2,{a:dA*ag_in(tt,T.differ-0.1,0.5),rot:0.07});
         let x=800;[["PDF","doc"],["JSON","table"],["YAML","contract"],["Open Data Contract Standard","contract"]].forEach(([s,ic],i)=>{const r=i<3?660:740;if(i===3)x=800;
           const b=md_tag(cx,x,r,s,{col:MD.agreed,icon:ic,a:dA*ag_in(tt,T.standards-0.2+i*0.15,0.4)});x+=b.w+20;});}
       const wh=ag_in(tt,T.wheel-0.6,0.5)*(1-ag_in(tt,c.iterate-0.7,0.5)),cy_=lerp(450,470,ag_sine((tt-c.iterate+0.6)/1.0));
-      if(wh>0){md_mark(cx,1560,cy_,100,(tt-T.wheel+0.6)/1.4,wh);md_T(cx,"Don't reinvent the wheel",1560,cy_+160,{w:700,size:30,align:"center",a:wh*(1-ag_in(tt,c.iterate-0.6,0.5))});}
+      if(wh>0){md_mark(cx,1560,cy_,100,(tt-T.wheel+0.6)/1.4,wh);md_T(cx,"Start from the standards",1560,cy_+160,{w:700,size:30,align:"center",a:wh*(1-ag_in(tt,c.iterate-0.6,0.5))});}
       // start from the official docs: investigate, adapt, implement, iterate
       const iA=ag_in(tt,c.iterate-0.4,0.5)*(1-ag_in(tt,c.data-0.7,0.5));
       if(iA>0){md_textCard(cx,760,400,460,{kick:"Start from",title:"The official docs"},{icon:"doc",edge:MD.flow,a:iA*ag_in(tt,T.offDocs-0.3,0.5),k:fd_k(tt,T.offDocs-0.3)});

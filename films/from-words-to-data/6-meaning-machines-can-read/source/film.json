@@ -8,5 +8,5 @@
     "scenes.js"
   ],
   "poster": ["before", "linn", 7.7],
-  "say": []
+  "say": [["\\bNoor\\b", "Nuur"]]
 }

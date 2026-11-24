@@ -8,7 +8,7 @@ const NARR={
  {"id":"desks","gap":0.8,"text":"By 1556, even the desks are sold.","say":"By fifteen fifty-six, even the desks are sold."},
  {"id":"byhand","gap":0.8,"text":"Each had been copied by hand, and some had no other copy: once gone, gone for good."},
  {"id":"nolib","gap":0.8,"text":"For half a century, the university has no library."},
- {"id":"reach","gap":0.8,"text":"A library is only as safe as the hands that can reach it. Something has to change."},
+ {"id":"reach","gap":0.8,"text":"A library is only as safe as the hands that can reach it. The next one needs a rule that keeps every book in the room."},
  {"id":"bodley","gap":0.8,"text":"In 1598, Thomas Bodley, a retired diplomat, offers to restore it at his own cost, with seats, and shelves, and desks.","say":"In fifteen ninety-eight, Thomas Bodley, a retired diplomat, offers to restore it at his own cost, with seats, and shelves, and desks."},
  {"id":"opens","gap":0.8,"text":"It opens on the 8th of November, 1602, on one rule.","say":"It opens on the eighth of November, sixteen oh two, on one rule."},
  {"id":"rule1","gap":0.8,"text":"Read here. Take no book away."},

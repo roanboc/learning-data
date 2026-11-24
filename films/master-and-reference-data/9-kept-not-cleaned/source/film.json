@@ -17,6 +17,7 @@
     ["\\bSichuan\\b", "Sitchwahn"],
     ["\\bChengdu\\b", "Cheng doo"],
     ["\\bLi Bing\\b", "Lee Bing"],
-    ["\\bDujiangyan\\b", "Doo-jyang-yen"]
+    ["\\bDujiangyan\\b", "Doo-jyang-yen"],
+    ["\\bYusuf\\b", "Yoosoof"]
   ]
 }

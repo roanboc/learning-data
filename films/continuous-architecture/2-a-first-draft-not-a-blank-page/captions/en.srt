@@ -63,173 +63,173 @@ So many roofs there have solar panels that at noon, the streets can't take all t
 The voltage climbs, and the panels turn themselves down: on sunny days, 2,400 homes lose power they could have used.
 
 17
-00:02:15,266 --> 00:02:18,840
+00:02:15,266 --> 00:02:18,876
 Farah, the customer advocate, hears it from them every summer.
 
 18
-00:02:20,440 --> 00:02:28,364
+00:02:20,476 --> 00:02:28,400
 A community battery is one large battery on the street, shared by the homes around it: it stores their noon power for the evening.
 
 19
-00:02:29,964 --> 00:02:38,367
+00:02:30,000 --> 00:02:38,403
 A new service needs a design: what the utility must be able to do, the steps from sign-up to credit, who does each, and what each must know.
 
 20
-00:02:40,167 --> 00:02:48,508
+00:02:40,203 --> 00:02:48,544
 The last new service, a night tariff for charging cars, began with workshops that asked every team: what do you do, and how do you work?
 
 21
-00:02:50,108 --> 00:02:57,611
+00:02:50,144 --> 00:02:57,647
 Asked to describe everything from nothing, the workshops ran for eight months, and households with electric cars waited a year.
 
 22
-00:02:59,411 --> 00:03:05,004
+00:02:59,447 --> 00:03:05,040
 Twelve weeks leaves no room for that. People need something to react to, not a blank page.
 
 23
-00:03:08,304 --> 00:03:11,847
+00:03:08,340 --> 00:03:11,884
 This time, Tomás asks the map agent for a first draft.
 
 24
-00:03:13,147 --> 00:03:22,049
+00:03:13,184 --> 00:03:22,086
 It reads the industry's reference models: CIM, the IEC's list of what a distribution utility does, and Europe's market role model.
 
 25
-00:03:23,649 --> 00:03:31,324
+00:03:23,686 --> 00:03:31,361
 And the utility's own documents: the government's request, the network's procedures, retail's product rules, and the map itself.
 
 26
-00:03:32,924 --> 00:03:41,702
+00:03:32,961 --> 00:03:41,739
 In two days, it drafts the design: the capabilities, a value stream from sign-up to credit, the processes, and the information each uses.
 
 27
-00:03:43,502 --> 00:03:47,561
+00:03:43,539 --> 00:03:47,598
 Fifty-eight elements, each one a draft until its owner confirms it.
 
 28
-00:03:49,161 --> 00:03:57,161
+00:03:49,198 --> 00:03:57,198
 Reacting to a draft is faster than describing everything from nothing, and people answer a proposal better than an open question.
 
 29
-00:03:58,761 --> 00:04:00,629
+00:03:58,798 --> 00:04:00,666
 So the workshops start from the draft.
 
 30
-00:04:03,729 --> 00:04:05,647
+00:04:03,766 --> 00:04:05,684
 Every element says where it came from.
 
 31
-00:04:06,947 --> 00:04:14,647
+00:04:06,984 --> 00:04:14,684
 Running the battery comes under operating the network, from the IEC's list; the battery, as information, from CIM.
 
 32
-00:04:16,247 --> 00:04:19,253
+00:04:16,284 --> 00:04:19,290
 Crediting each bill comes from retail's product rules.
 
 33
-00:04:20,653 --> 00:04:27,845
+00:04:20,690 --> 00:04:27,882
 Where no source says it, the draft says so: who decides when the battery charges is the agent's own guess, marked as a guess.
 
 34
-00:04:29,645 --> 00:04:37,019
+00:04:29,682 --> 00:04:37,155
 And every element names who must confirm it: Grace for the network's, the head of retail for retail's, Ama for the rules.
 
 35
-00:04:38,619 --> 00:04:42,013
+00:04:38,755 --> 00:04:42,149
 So each owner can check every line against what it came from.
 
 36
-00:04:45,113 --> 00:04:50,155
+00:04:45,249 --> 00:04:50,291
 A tidy draft has a risk: people tend to nod through anything that looks confident.
 
 37
-00:04:51,855 --> 00:04:57,198
+00:04:51,991 --> 00:04:57,334
 So Tomás doesn't ask the owners whether it's right. He asks what's missing, and what's wrong.
 
 38
-00:04:58,798 --> 00:05:06,212
+00:04:58,934 --> 00:05:06,474
 Ama finds what's wrong. To invite households, the draft has retail use the network's list of homes with solar panels.
 
 39
-00:05:07,812 --> 00:05:15,392
+00:05:08,074 --> 00:05:15,654
 That list is the network's. Customer information stays where it was collected, and the network must treat every retailer the same.
 
 40
-00:05:17,192 --> 00:05:21,289
+00:05:17,454 --> 00:05:21,551
 Each source was right on its own. The step that joined them crossed the wall.
 
 41
-00:05:23,089 --> 00:05:30,245
+00:05:23,351 --> 00:05:30,507
 So the network offers the battery to every retailer on the same terms, and each retailer invites its own customers.
 
 42
-00:05:31,845 --> 00:05:38,520
+00:05:32,107 --> 00:05:38,782
 Grace finds what's missing. Before a crew works on a line, every source that could feed it is switched off and locked.
 
 43
-00:05:40,120 --> 00:05:44,355
+00:05:40,382 --> 00:05:44,617
 A battery on the street is a new source, and the draft never switches it off.
 
 44
-00:05:45,955 --> 00:05:52,948
+00:05:46,217 --> 00:05:53,210
 No document said so: the network's procedures were written before batteries stood on streets. Grace adds the step.
 
 45
-00:05:56,248 --> 00:06:01,775
+00:05:56,510 --> 00:06:02,037
 Each owner confirms their part, and each element they confirm carries their name and the date.
 
 46
-00:06:03,475 --> 00:06:05,860
+00:06:03,737 --> 00:06:06,122
 The agent drafts. It never confirms.
 
 47
-00:06:07,460 --> 00:06:13,139
+00:06:07,722 --> 00:06:13,401
 What an owner corrects, it drafts again, for them to confirm. What they strike out leaves the map.
 
 48
-00:06:14,739 --> 00:06:22,481
+00:06:15,001 --> 00:06:22,743
 In five weeks, the design is confirmed: 41 elements as drafted, 9 corrected, 8 struck out, and 4 added.
 
 49
-00:06:24,281 --> 00:06:27,182
+00:06:24,543 --> 00:06:27,444
 Only what the owners confirmed becomes the model.
 
 50
-00:06:28,582 --> 00:06:31,270
+00:06:28,844 --> 00:06:31,532
 The plan reaches the government in week eleven.
 
 51
-00:06:34,370 --> 00:06:42,308
+00:06:34,632 --> 00:06:42,570
 In Babylon, the builders started from a form a thousand years old and the foundation in the ground, and built once the place was confirmed.
 
 52
-00:06:44,008 --> 00:06:49,061
+00:06:44,270 --> 00:06:49,323
 Nabopolassar called himself "the one who examines the old foundation of Babylon".
 
 53
-00:06:50,661 --> 00:06:58,684
+00:06:50,923 --> 00:06:58,946
 At the utility, the plan started from the industry's models and its own documents, and only what the owners confirmed became the model.
 
 54
-00:07:00,284 --> 00:07:03,204
+00:07:00,546 --> 00:07:03,466
 Five weeks, where the last new service took eight months.
 
 55
-00:07:04,604 --> 00:07:08,452
+00:07:04,866 --> 00:07:08,714
 Next summer, the first battery's homes start storing their noon power.
 
 56
-00:07:09,852 --> 00:07:13,146
+00:07:10,114 --> 00:07:13,408
 And not one household's details crossed the wall to get there.
 
 57
-00:07:18,846 --> 00:07:24,949
+00:07:19,108 --> 00:07:25,211
 Start from a first draft, drawn from your industry's models and your own documents, with every source shown.
 
 58
-00:07:26,349 --> 00:07:30,511
+00:07:26,611 --> 00:07:30,773
 Ask what's missing and what's wrong, and keep only what the owners confirm.
 
 59
-00:07:32,411 --> 00:07:34,083
+00:07:32,673 --> 00:07:34,345
 Next: every change, checked.

@@ -19,7 +19,8 @@
     ["\\bHR\\b", "H R"],
     ["\\bJun\\b", "Joon"],
     ["\\bNoor\\b", "Nuur"],
-    ["\\bA I\\b", "AI"]
+    ["\\bA I\\b", "AI"],
+    ["\\bYusuf\\b", "Yoosoof"]
   ],
   "story": [
     "depots"

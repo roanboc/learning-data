@@ -27,245 +27,245 @@ One slip, and a widow or a child could get less than the law gives them.
 And two reckoners could reach two answers for one estate.
 
 8
-00:00:41,277 --> 00:00:42,665
-Something had to change.
+00:00:41,277 --> 00:00:45,249
+People needed one method that gave every reckoner the same answer.
 
 9
-00:00:44,365 --> 00:00:50,363
+00:00:46,949 --> 00:00:52,947
 Encouraged by the caliph, Muhammad al-Khwarizmi, a scholar of the House of Wisdom, writes a short book.
 
 10
-00:00:51,063 --> 00:00:54,488
+00:00:53,647 --> 00:00:57,072
 It teaches what people, in his words, constantly require.
 
 11
-00:00:55,988 --> 00:01:00,598
+00:00:58,572 --> 00:01:03,182
 Two moves, completion and balancing, bring any problem to one of six forms.
 
 12
-00:01:02,698 --> 00:01:07,769
+00:01:05,282 --> 00:01:10,353
 Each form has its own steps, worked through on an example, and proved with a drawn square.
 
 13
-00:01:09,069 --> 00:01:11,200
+00:01:11,653 --> 00:01:13,784
 A square and ten roots make thirty-nine.
 
 14
-00:01:12,500 --> 00:01:21,975
+00:01:15,084 --> 00:01:24,559
 Halve the ten: five. Multiply it by itself: twenty-five. Add the thirty-nine: sixty-four. Take its root: eight. Take away the five: three.
 
 15
-00:01:24,075 --> 00:01:27,767
+00:01:26,659 --> 00:01:30,351
 Then come pages of real cases, legacies most of all.
 
 16
-00:01:29,267 --> 00:01:35,010
+00:01:31,851 --> 00:01:37,594
 Now anyone who follows the steps can solve a problem they've never seen, the same way every time.
 
 17
-00:01:36,510 --> 00:01:40,991
+00:01:39,094 --> 00:01:43,575
 The book was copied for centuries, and put into Latin in 1145.
 
 18
-00:01:42,291 --> 00:01:47,658
+00:01:44,875 --> 00:01:50,242
 Its first move, al-jabr, gave us the word algebra; his own name gave us algorithm.
 
 19
-00:01:49,358 --> 00:01:55,919
+00:01:51,942 --> 00:01:58,503
 Data teams have the same problem: a job solved in one chat is solved again in the next, from nothing.
 
 20
-00:01:57,219 --> 00:02:01,014
+00:01:59,803 --> 00:02:03,598
 Solve it once, write it down, and every agent can reuse it.
 
 21
-00:02:08,114 --> 00:02:18,831
+00:02:10,698 --> 00:02:21,415
 Today, at the university, Jun's team keeps the census-day count right: 18,412 students, the number the university reports to the government.
 
 22
-00:02:20,331 --> 00:02:24,474
+00:02:22,915 --> 00:02:27,058
 Each time the count's code or its sources change, someone reconciles it.
 
 23
-00:02:25,174 --> 00:02:29,933
+00:02:27,758 --> 00:02:32,517
 They check that it still matches the census report, the university's official count.
 
 24
-00:02:31,433 --> 00:02:34,096
+00:02:34,017 --> 00:02:36,680
 When the two differ, someone has to find out why.
 
 25
-00:02:35,396 --> 00:02:37,222
+00:02:37,980 --> 00:02:39,806
 The same few causes come back.
 
 26
-00:02:37,922 --> 00:02:45,405
+00:02:40,506 --> 00:02:47,989
 Students who withdrew after census day, and still count; a new degree that no faculty holds; a student counted twice.
 
 27
-00:02:47,305 --> 00:02:51,835
+00:02:49,889 --> 00:02:54,419
 Each was found before, by a person or an agent, and settled by a person.
 
 28
-00:02:53,135 --> 00:02:57,642
+00:02:55,719 --> 00:03:00,226
 But the answer stayed where it was found: in one chat, one note, one email.
 
 29
-00:02:59,342 --> 00:03:05,600
+00:03:01,926 --> 00:03:08,184
 So each time, the agent starts from nothing, and spends an afternoon finding what the team already knew.
 
 30
-00:03:07,300 --> 00:03:11,809
+00:03:09,884 --> 00:03:14,393
 And it may settle a cause another way than last time: two answers for one count.
 
 31
-00:03:14,509 --> 00:03:19,437
+00:03:17,093 --> 00:03:22,021
 So Jun does the job once more, by hand, and writes down each step as he goes.
 
 32
-00:03:21,337 --> 00:03:26,887
+00:03:23,921 --> 00:03:29,471
 It becomes a skill: a file in the project, with a name, and a line that says when to use it.
 
 33
-00:03:28,787 --> 00:03:32,989
+00:03:31,371 --> 00:03:35,573
 Then its steps: build the count, and compare it with the census report.
 
 34
-00:03:33,689 --> 00:03:38,050
+00:03:36,273 --> 00:03:40,634
 Find the students behind any difference, and report each cause with its query.
 
 35
-00:03:40,150 --> 00:03:45,112
+00:03:42,734 --> 00:03:47,696
 And then every cause met so far: how it shows, what settled it, and who decided.
 
 36
-00:03:47,012 --> 00:03:54,823
+00:03:49,596 --> 00:03:57,407
 The agent doesn't read every skill all the time: just each one's name and line. It loads the steps only when a job needs them.
 
 37
-00:03:56,723 --> 00:04:01,069
+00:03:59,307 --> 00:04:03,653
 When a new case turns up, it gets a line too. Nothing is solved twice.
 
 38
-00:04:02,969 --> 00:04:07,803
+00:04:05,553 --> 00:04:10,387
 It's al-Khwarizmi's book again: each form's steps, earned on real cases.
 
 39
-00:04:11,303 --> 00:04:15,472
+00:04:13,887 --> 00:04:18,056
 The project has seven skills, one for each job agents do most here.
 
 40
-00:04:16,972 --> 00:04:18,584
+00:04:19,556 --> 00:04:21,168
 So which one does a job need?
 
 41
-00:04:20,084 --> 00:04:23,720
+00:04:22,668 --> 00:04:26,304
 A router decides: a skill whose only job is to choose.
 
 42
-00:04:25,020 --> 00:04:29,958
+00:04:27,604 --> 00:04:32,542
 It reads the job, compares it with each skill's line, and loads the one that fits.
 
 43
-00:04:31,458 --> 00:04:35,550
+00:04:34,042 --> 00:04:38,134
 Check Jun's change before Noor signs it off: reconcile and diff.
 
 44
-00:04:37,450 --> 00:04:41,590
+00:04:40,034 --> 00:04:44,174
 When no skill fits, it doesn't guess: it says so, and asks a person.
 
 45
-00:04:43,290 --> 00:04:46,830
+00:04:45,874 --> 00:04:49,414
 That job is done by hand first, and may become the next skill.
 
 46
-00:04:48,330 --> 00:04:54,492
+00:04:50,914 --> 00:04:57,076
 Completion and balancing did the same: they brought each problem to the one form whose steps would solve it.
 
 47
-00:04:57,592 --> 00:05:02,995
+00:05:00,176 --> 00:05:05,579
 Some work needs no choosing. Every night, the count is built again from the day's records.
 
 48
-00:05:04,495 --> 00:05:08,537
+00:05:07,079 --> 00:05:11,121
 A workflow runs it: fixed steps, in order, the same way every time.
 
 49
-00:05:09,837 --> 00:05:14,900
+00:05:12,421 --> 00:05:17,484
 Build. Count as on census day. Run the tests. Compare with the census report.
 
 50
-00:05:16,800 --> 00:05:20,278
+00:05:19,384 --> 00:05:22,862
 When they agree, that's the whole job, and no agent is needed.
 
 51
-00:05:21,778 --> 00:05:26,019
+00:05:24,362 --> 00:05:28,603
 Automate what's known with plain steps first; keep the agent for what isn't.
 
 52
-00:05:27,719 --> 00:05:34,274
+00:05:30,303 --> 00:05:36,858
 Only when the numbers don't agree does the workflow call the agent, as one more step, with the reconcile skill.
 
 53
-00:05:35,774 --> 00:05:38,751
+00:05:38,358 --> 00:05:41,335
 The agent finds out why. A person decides.
 
 54
-00:05:40,451 --> 00:05:46,419
+00:05:43,035 --> 00:05:49,003
 In the book, too, a form's steps never change. The thinking is in bringing each problem to its form.
 
 55
-00:05:49,119 --> 00:05:57,139
+00:05:51,703 --> 00:05:59,723
 One night in October, the numbers don't agree: 18,426 against 18,412.
 
 56
-00:05:58,639 --> 00:06:01,484
+00:06:01,223 --> 00:06:04,068
 The tests pass, so the workflow calls the agent.
 
 57
-00:06:02,584 --> 00:06:08,399
+00:06:05,168 --> 00:06:10,983
 It loads the reconcile skill, and checks the causes met so far, one by one. None fits.
 
 58
-00:06:10,099 --> 00:06:16,835
+00:06:12,683 --> 00:06:19,419
 So it finds the records behind the difference: fourteen, all made last week, and all dated back to February.
 
 59
-00:06:18,335 --> 00:06:24,917
+00:06:20,919 --> 00:06:27,501
 In its sandbox, it drafts a report: the cause, the query that shows it, and a question. Are these students?
 
 60
-00:06:26,617 --> 00:06:34,326
+00:06:29,201 --> 00:06:36,910
 In the morning, Mei, in the registrar's office, decides: they're test records, made to try a new screen, and test records never count.
 
 61
-00:06:35,826 --> 00:06:42,618
+00:06:38,410 --> 00:06:45,202
 Jun adds the cause to the skill, with Mei's answer, and turns the rule into one more fixed step, with a test.
 
 62
-00:06:44,118 --> 00:06:46,420
+00:06:46,702 --> 00:06:49,004
 Noor approves the change before it runs.
 
 63
-00:06:47,720 --> 00:06:52,597
+00:06:50,304 --> 00:06:55,181
 The next night, the workflow leaves the fourteen out by itself, and calls no agent.
 
 64
-00:06:56,097 --> 00:07:03,756
+00:06:58,681 --> 00:07:06,340
 In Baghdad, al-Khwarizmi solved each kind of problem once, wrote it down, and people followed his steps for centuries.
 
 65
-00:07:05,256 --> 00:07:14,304
+00:07:07,840 --> 00:07:16,888
 At the university, a job done once by hand became a skill. A router finds it. A workflow runs what's known, the same way every night.
 
 66
-00:07:15,804 --> 00:07:20,106
+00:07:18,388 --> 00:07:22,690
 The agent is called only where thinking is needed, and a person decides.
 
 67
-00:07:21,406 --> 00:07:24,810
+00:07:23,990 --> 00:07:27,394
 Each new case is written down, so it's never solved twice.
 
 68
-00:07:26,310 --> 00:07:28,603
+00:07:28,894 --> 00:07:31,187
 Solve it once, write it down, reuse it.

@@ -361,7 +361,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
     keep:wAt(sc,"again","Keep the file"),better:wAt(sc,"again","better readers"),
     noor:wAt(sc,"rule","Noor Rahman"),three:wAt(sc,"rule","one of three answers"),
     ifw:wAt(sc,"write","If we write it"),ifo:wAt(sc,"official","If it's official"),ifr:wAt(sc,"read","If it's written for people"),
-    differ:wAt(sc,"docs","documents differ"),standards:wAt(sc,"docs","the standards"),wheel:wAt(sc,"docs","reinvent the wheel"),
+    differ:wAt(sc,"docs","documents differ"),standards:wAt(sc,"docs","the standards"),wheel:wAt(sc,"docs","start from them"),
     offDocs:wAt(sc,"iterate","the official docs"),inv:wAt(sc,"iterate","Investigate"),adapt:wAt(sc,"iterate","adapt"),impl:wAt(sc,"iterate","implement"),iter:wAt(sc,"iterate","iterate"),
     readThem:wAt(sc,"data","read documents"),keepIt:wAt(sc,"data","keep the file"),writeYours:wAt(sc,"data","write what's yours")}));
   const map0=T.noor-1.4;
@@ -383,14 +383,14 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
       const rA=1-ag_in(tt,c.docs-0.6,0.5);
       fd_case(cx,"Every document · one of three answers",ag_in(tt,T.three-0.3,0.6)*rA,MD.ink);
       FD_THREEWAYS.forEach(([k,ti,sub,ic,ed],i)=>md_textCard(cx,760,250+i*200,1060,{kick:k,title:ti,sub},{icon:ic,edge:ed,a:rA*ag_in(tt,[T.ifw,T.ifo,T.ifr][i]-0.3,0.5),k:fd_k(tt,[T.ifw,T.ifo,T.ifr][i]-0.3)}));
-      // every organisation's documents differ, and the standards are there already: don't reinvent the wheel
+      // every organisation's documents differ, and the standards are there already: start from them
       const dA=ag_in(tt,c.docs-0.3,0.5)*(1-ag_in(tt,c.iterate-0.6,0.5));
       if(dA>0){fd_invoice(cx,800,262,240,2,{a:dA*ag_in(tt,T.differ-0.5,0.5),rot:-0.06});fd_contract(cx,910,246,240,{a:dA*ag_in(tt,T.differ-0.3,0.5),rot:0.02,kind:"offer"});
         fd_sheet(cx,1000,340,300,2,{a:dA*ag_in(tt,T.differ-0.1,0.5),rot:0.07});
         let x=800;[["PDF","doc"],["JSON","table"],["YAML","contract"],["Open Data Contract Standard","contract"]].forEach(([s,ic],i)=>{const r=i<3?660:740;if(i===3)x=800;
           const b=md_tag(cx,x,r,s,{col:MD.agreed,icon:ic,a:dA*ag_in(tt,T.standards-0.2+i*0.15,0.4)});x+=b.w+20;});}
       const wh=ag_in(tt,T.wheel-0.6,0.5)*(1-ag_in(tt,c.iterate-0.7,0.5)),cy_=lerp(450,470,ag_sine((tt-c.iterate+0.6)/1.0));
-      if(wh>0){md_mark(cx,1560,cy_,100,(tt-T.wheel+0.6)/1.4,wh);md_T(cx,"Don't reinvent the wheel",1560,cy_+160,{w:700,size:30,align:"center",a:wh*(1-ag_in(tt,c.iterate-0.6,0.5))});}
+      if(wh>0){md_mark(cx,1560,cy_,100,(tt-T.wheel+0.6)/1.4,wh);md_T(cx,"Start from the standards",1560,cy_+160,{w:700,size:30,align:"center",a:wh*(1-ag_in(tt,c.iterate-0.6,0.5))});}
       // start from the official docs: investigate, adapt, implement, iterate
       const iA=ag_in(tt,c.iterate-0.4,0.5)*(1-ag_in(tt,c.data-0.7,0.5));
       if(iA>0){md_textCard(cx,760,400,460,{kick:"Start from",title:"The official docs"},{icon:"doc",edge:MD.flow,a:iA*ag_in(tt,T.offDocs-0.3,0.5),k:fd_k(tt,T.offDocs-0.3)});

@@ -11,7 +11,7 @@ const NARR={
  {"id":"died","gap":0.8,"text":"The jet struck it. All 92 people on board died.","say":"The jet struck it. All ninety-two people on board died."},
  {"id":"before","gap":0.8,"text":"Six weeks before, another airline's crew had taken the same words the same way, and narrowly missed the same ridge."},
  {"id":"warned","gap":0.8,"text":"Their airline warned its own pilots. But there was no way to share it with other airlines."},
- {"id":"punish","gap":0.8,"text":"And a pilot who reported a mistake could be punished for it. Something had to change."},
+ {"id":"punish","gap":0.8,"text":"And a pilot who reported a mistake could be punished for it. Pilots needed a way to warn each other without fear."},
  {"id":"y1976","gap":0.8,"text":"In 1976, a reporting system opened to every pilot, controller and mechanic in the United States.","say":"In nineteen seventy-six, a reporting system opened to every pilot, controller and mechanic in the United States."},
  {"id":"confide","gap":0.8,"text":"They could tell what went wrong in confidence, without being punished for an honest mistake."},
  {"id":"nasa","gap":0.8,"text":"NASA, the space agency, which has no power to punish, read every report and took out the names."},

@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En un vuelo largo, le duelen los brazos y la espalda.",
 "And if he's tired, or slow, a tipped aeroplane can slip sideways, and fall.":
 "Y si está cansado, o es lento, un avión inclinado puede resbalar de lado, y caer.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Pilots need something that levels the wings for them.":
+"Los pilotos necesitan algo que nivele las alas por ellos.",
 "Sperry's answer is a box of four gyroscopes: wheels that spin so fast they keep pointing the same way, however the aeroplane moves.":
 "La respuesta de Sperry: una caja de cuatro giroscopios, ruedas que giran tan rápido que apuntan siempre igual, aunque el avión se mueva.",
 "Each time the aeroplane tips, the box feels it, and pistons driven by air level it again.":

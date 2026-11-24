@@ -6,7 +6,7 @@ const NARR={
  {"id":"steps","gap":0.8,"text":"Check it's the right patient. Give the antibiotic before the first cut. Count every sponge before closing."},
  {"id":"skipped","gap":0.8,"text":"The steps were written in guidelines, but in a busy operating room, they were often skipped."},
  {"id":"paid","gap":0.8,"text":"Patients paid for it: infections, mistakes, and deaths that could have been avoided."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Patients needed the steps done every time, not only when someone remembered."},
  {"id":"y2008","gap":0.8,"text":"In 2008, a study in eight hospitals, in eight countries, tried one change.","say":"In two thousand eight, a study in eight hospitals, in eight countries, tried one change."},
  {"id":"pause","gap":0.8,"text":"Three times in every operation, the team paused, and a nurse read a short checklist out loud."},
  {"id":"hold","gap":0.8,"text":"Each step was confirmed, and the nurse could hold the team until it was done."},

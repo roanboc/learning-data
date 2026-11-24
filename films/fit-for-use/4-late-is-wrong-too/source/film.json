@@ -41,7 +41,8 @@
     [
       "\\bPe(ñ|n)aloza\\b",
       "Pen-yah-lo-sah"
-    ]
+    ],
+    ["\\bOkafor\\b", "Oh-kah-for"]
   ],
   "story": [
     "story"

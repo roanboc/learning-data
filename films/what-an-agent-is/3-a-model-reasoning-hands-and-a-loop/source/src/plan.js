@@ -105,7 +105,7 @@ function ml_byHand(ctx,t,k,o){o=o||{};const a=o.a==null?1:o.a,x0=o.x||560,y0=o.y
   out.forEach((b,i)=>{const ki=clamp(k[i]||0,0,1);if(ki<=0)return;const sp=ag_spr(ki,0,1),cx=lerp(b.x+b.w/2,to[0]+(i-2)*14,into),cy=lerp(b.y+h/2,to[1],into),
       s=lerp(1,0.3,into)*lerp(0.6,1,clamp(sp,0,1.2)),fa=ki*(1-sstep(0.7,1,into));if(fa<=0.01)return;
     ctx.save();ctx.translate(cx,cy);ctx.scale(s,s);ag_box(ctx,-b.w/2,-h/2,b.w,h,16,{a:fa,edge:i===4&&L>0?AG.amber:null,edgeA:0.6});
-    ag_T(ctx,b.s,0,10,{w:700,size:28,align:"center",a:fa});ctx.restore();});
+    ag_T(ctx,b.s,0,10,{w:700,size:28,align:"center",a:fa*(1-sstep(0,0.06,into))});ctx.restore();});   // the words leave before the card shrinks below 28 px
   ctx.restore();return out;}
 
 /* ---------------------------------------------------------------- a clock on a card: hour (1 to 5 through the afternoon), a label under the face */

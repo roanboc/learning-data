@@ -39,149 +39,149 @@ Debajo de cada uno hay lo mismo: un modelo para responder, herramientas para act
 00:01:46.222 --> 00:01:51.956
 Como el ladrillo cocido, eso puede hacerse una vez y compartirse; para qué sirve cada agente sigue siendo suyo.
 
-00:01:59.556 --> 00:02:02.955
+00:01:59.556 --> 00:02:02.950
 Ravi Menon, líder de la plataforma, le trae una nota a Tomás.
 
-00:02:04.355 --> 00:02:07.171
+00:02:04.350 --> 00:02:07.166
 ¿Qué deben compartir nuestros agentes, y qué es de cada uno?
 
-00:02:08.771 --> 00:02:14.559
+00:02:08.766 --> 00:02:14.554
 Juntos, siguen a cada agente hasta el modelo que responde por él, y encuentran un camino distinto cada vez.
 
-00:02:16.359 --> 00:02:21.153
+00:02:16.354 --> 00:02:21.148
 El chat del sitio web usa el modelo de su proveedor, en el software del centro de contacto.
 
-00:02:22.253 --> 00:02:26.314
+00:02:22.248 --> 00:02:26.309
 El planificador de cuadrillas llama directo a un proveedor, con una clave en un script.
 
-00:02:27.414 --> 00:02:30.933
+00:02:27.409 --> 00:02:30.928
 El agente del mapa usa un modelo de la propia herramienta del mapa.
 
-00:02:32.433 --> 00:02:34.810
+00:02:32.428 --> 00:02:34.805
 Los otros tres encontraron cada uno su propio camino.
 
-00:02:36.210 --> 00:02:40.613
+00:02:36.205 --> 00:02:40.608
 Así que nadie sabe qué modelo le respondió a un cliente, ni cuánto cuesta todo.
 
-00:02:44.113 --> 00:02:52.790
+00:02:44.108 --> 00:02:52.785
 Luego, un proveedor retira el modelo al que llama el planificador de cuadrillas. El aviso le llega al analista que configuró la clave, que ya se pasó a otro equipo.
 
-00:02:54.390 --> 00:02:58.928
+00:02:54.385 --> 00:02:58.923
 Tres meses después, un lunes por la mañana, el planificador deja de redactar los turnos.
 
-00:03:00.528 --> 00:03:05.315
+00:03:00.523 --> 00:03:05.310
 Los despachadores arman a mano los turnos de la semana, y catorce trabajos previstos se atrasan.
 
-00:03:06.715 --> 00:03:12.511
+00:03:06.710 --> 00:03:12.506
 A 310 hogares, avisados de cuándo se cortaría la luz por esos trabajos, hay que volver a avisarles.
 
-00:03:14.511 --> 00:03:18.525
+00:03:14.506 --> 00:03:18.569
 Ravi pregunta qué otros agentes llaman a ese modelo. Nadie lo sabe.
 
-00:03:22.025 --> 00:03:27.298
+00:03:22.069 --> 00:03:27.436
 Ravi ordena lo que usan los agentes con la prueba de Arquitectura de plataforma y de soluciones.
 
-00:03:28.498 --> 00:03:31.836
+00:03:28.636 --> 00:03:31.974
 Un propósito, con su lógica incorporada: una aplicación.
 
-00:03:33.436 --> 00:03:37.600
+00:03:33.574 --> 00:03:37.738
 Capacidades compartidas, donde muchos responsables hacen lo suyo: una plataforma.
 
-00:03:39.400 --> 00:03:46.777
+00:03:39.538 --> 00:03:46.915
 Un modelo, que escribe las respuestas de un agente, no sirve a un solo propósito: el chat y el planificador podrían usar el mismo.
 
-00:03:48.177 --> 00:03:52.614
+00:03:48.315 --> 00:03:52.752
 Lo mismo pasa con las herramientas, que dejan a un agente consultar o hacer algo.
 
-00:03:53.414 --> 00:04:02.048
+00:03:53.552 --> 00:04:02.186
 Y para la memoria, que guarda lo que un agente necesita de un paso al siguiente, y la búsqueda, que encuentra la página justa en los documentos de la empresa.
 
-00:04:03.448 --> 00:04:06.163
+00:04:03.586 --> 00:04:06.301
 Son capacidades compartidas, así que son de la plataforma.
 
-00:04:07.763 --> 00:04:17.069
+00:04:07.901 --> 00:04:17.207
 Para qué sirve cada agente es suyo: su propósito, sus instrucciones y la lógica de sus tareas. Eso es una aplicación, y su responsable responde por ella.
 
-00:04:20.569 --> 00:04:30.332
+00:04:20.707 --> 00:04:30.470
 En el mapa de Tomás, las capacidades de la plataforma van al pie, como servicios para cada agente: llegar a un modelo, llamar a una herramienta, recordar y buscar.
 
-00:04:32.132 --> 00:04:39.050
+00:04:32.270 --> 00:04:39.188
 Los agentes siguen en la capa de aplicaciones, cada uno en su propio rol, con alguien que responde, y cada uno usando esos servicios.
 
-00:04:40.450 --> 00:04:45.138
+00:04:40.588 --> 00:04:45.276
 Dibujada una vez, debajo de todos, la plataforma muestra sobre qué se apoya cada agente.
 
-00:04:46.738 --> 00:04:51.290
+00:04:46.876 --> 00:04:51.606
 Y el mapa puede responder parte de la pregunta de Ravi: qué agentes usan qué servicio.
 
-00:04:54.590 --> 00:05:01.534
+00:04:54.906 --> 00:05:02.044
 Luego, el equipo de Ravi pone una puerta de enlace ante cada modelo: una sola puerta por la que pasa cada llamada de cada agente.
 
-00:05:03.834 --> 00:05:08.966
+00:05:04.344 --> 00:05:09.476
 Cada llamada entra con la identidad propia del agente, la que le da su lugar en el mapa.
 
-00:05:11.166 --> 00:05:16.354
+00:05:11.676 --> 00:05:16.864
 La puerta de enlace anota cada llamada: qué agente, qué modelo, cuándo y cuánto costó.
 
-00:05:18.654 --> 00:05:24.405
+00:05:19.164 --> 00:05:24.915
 Pone límites a cada agente, para que uno atascado en un bucle no dispare la cuenta ni desplace al resto.
 
-00:05:26.605 --> 00:05:34.038
+00:05:27.115 --> 00:05:34.548
 Y solo llega a modelos con los que la empresa tiene condiciones: dónde se guardan sus datos, y que no se usen para entrenar el modelo de nadie.
 
-00:05:36.338 --> 00:05:40.094
+00:05:36.848 --> 00:05:40.604
 Hasta el chat del proveedor se configura para pasar por la puerta de enlace.
 
-00:05:43.994 --> 00:05:46.958
+00:05:44.504 --> 00:05:47.468
 Meses después, otro proveedor retira un modelo.
 
-00:05:48.158 --> 00:05:52.135
+00:05:48.668 --> 00:05:52.645
 Esta vez, el registro de la puerta de enlace muestra qué agentes lo llaman: tres.
 
-00:05:53.735 --> 00:06:00.228
+00:05:54.245 --> 00:06:00.975
 El equipo de Ravi prueba el reemplazo con los controles de cada agente, y el responsable de cada uno revisa los resultados.
 
-00:06:01.628 --> 00:06:05.539
+00:06:02.375 --> 00:06:06.286
 Con el acuerdo de los responsables, los tres pasan al nuevo modelo en una tarde.
 
-00:06:07.139 --> 00:06:10.496
+00:06:07.886 --> 00:06:11.243
 Ningún turno se atrasa, y ningún hogar recibe dos avisos.
 
-00:06:14.196 --> 00:06:20.984
+00:06:14.943 --> 00:06:21.931
 La plataforma también tiene su responsable: el equipo de Ravi la opera, fija sus límites y tiene los contratos con los proveedores.
 
-00:06:22.584 --> 00:06:28.911
+00:06:23.531 --> 00:06:29.858
 El responsable de cada agente sigue respondiendo por él: quien dirige comercialización por el chat, Grace por el planificador.
 
-00:06:30.511 --> 00:06:34.676
+00:06:31.458 --> 00:06:35.623
 Y cada mes, ese registro le muestra a cada equipo cuánto cuestan sus agentes.
 
-00:06:37.976 --> 00:06:42.495
+00:06:38.923 --> 00:06:43.442
 En Databricks, esa puerta de enlace es Unity Gateway, sobre Unity Catalog.
 
-00:06:43.895 --> 00:06:51.397
+00:06:44.842 --> 00:06:52.344
 En un solo lugar, fija qué modelos puede usar cada equipo y los límites de cada uno, y lleva la cuenta de cada llamada y su costo.
 
-00:06:52.997 --> 00:06:58.712
+00:06:53.944 --> 00:06:59.659
 Puede repartir las llamadas entre dos modelos, para probar uno nuevo, y pasar a otro si uno falla.
 
-00:07:00.112 --> 00:07:06.873
+00:07:01.059 --> 00:07:07.820
 Las funciones que usan los agentes como herramientas también viven en Unity Catalog, con los mismos permisos que los datos.
 
-00:07:08.273 --> 00:07:12.357
+00:07:09.220 --> 00:07:13.304
 Los modelos propios de Databricks y los de otros proveedores usan la misma puerta.
 
-00:07:15.657 --> 00:07:21.381
+00:07:16.604 --> 00:07:22.328
 En Babilonia, el mismo ladrillo cocido y el mismo betún fueron al dique del río y a la torre-templo.
 
-00:07:22.781 --> 00:07:28.191
+00:07:23.728 --> 00:07:29.138
 Para qué servía cada uno, contener un río o alzar la casa de un dios, era de quien lo construía.
 
-00:07:29.991 --> 00:07:35.377
+00:07:30.938 --> 00:07:36.324
 En la empresa, cada agente se apoya ahora en una plataforma, y cada uno conserva su propósito.
 
-00:07:41.077 --> 00:07:51.014
+00:07:42.024 --> 00:07:52.123
 La nota de Ravi tiene respuesta: los agentes comparten modelos, puerta de enlace, herramientas, memoria y búsqueda; cada uno conserva su propósito, instrucciones y lógica.
 
-00:07:52.914 --> 00:07:54.777
+00:07:54.023 --> 00:07:55.886
 Luego: qué puede leer un agente.

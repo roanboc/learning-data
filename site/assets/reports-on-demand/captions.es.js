@@ -143,8 +143,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y el presupuesto de docencia ocasional de Salud se fijó con las cifras de este año, en una mañana, no en una semana.",
 "None of these ideas is new; the tools now make them easier.":
 "Ninguna de estas ideas es nueva; las herramientas ahora las hacen más fáciles.",
-"So don't reinvent the wheel: investigate, adapt, implement and iterate, starting from the official docs, linked on this page.":
-"Así que no reinventes la rueda: investiga, adapta, implementa e itera, empezando por la documentación oficial, enlazada en esta página.",
+"So start from what exists: investigate, adapt, implement and iterate, starting from the official docs, linked on this page.":
+"Así que parte de lo que ya existe: investiga, adapta, implementa e itera, empezando por la documentación oficial, enlazada en esta página.",
 "Ask for the answer; keep dashboards for the questions that come back.":
 "Pide la respuesta; deja los tableros para las preguntas que se repiten.",
 "Next: casual teaching cost, defined in the open, so every reader counts it the same way.":

@@ -91,205 +91,205 @@ This series follows four ideas for leading a team: minimalism, kaizen, Ubuntu, a
 It begins with minimalism: keeping only what does a job, so that what's left is done well.
 
 24
-00:02:58,248 --> 00:03:03,110
+00:02:58,248 --> 00:03:03,238
 At the university, a year from now, Helena Novak leads a data team of eight.
 
 25
-00:03:04,410 --> 00:03:08,776
+00:03:04,538 --> 00:03:08,904
 On Tuesday 4 May, they put everything they run and attend on one wall.
 
 26
-00:03:10,276 --> 00:03:16,449
+00:03:10,404 --> 00:03:16,577
 There are 38 old reports, and the warehouse's logs show that 17 haven't been opened in a year.
 
 27
-00:03:18,349 --> 00:03:21,891
+00:03:18,477 --> 00:03:22,019
 Each person spends about eight hours a week in standing meetings.
 
 28
-00:03:23,591 --> 00:03:27,877
+00:03:23,719 --> 00:03:28,005
 And the platform sends about 60 alerts a week. Most of them need nothing.
 
 29
-00:03:29,577 --> 00:03:34,632
+00:03:29,705 --> 00:03:34,760
 Each was added for a good reason: a request, a project, a night when something broke.
 
 30
-00:03:36,532 --> 00:03:43,353
+00:03:36,660 --> 00:03:43,481
 In 2021, a study in Nature found that when people set out to make something better, they mostly add to it.
 
 31
-00:03:44,653 --> 00:03:46,786
+00:03:44,781 --> 00:03:46,914
 They rarely think of taking anything away.
 
 32
-00:03:48,486 --> 00:03:54,334
+00:03:48,614 --> 00:03:54,462
 When a university's new president asked for ideas, only about one in ten took something away.
 
 33
-00:03:56,234 --> 00:04:00,543
+00:03:56,362 --> 00:04:00,671
 So Helena asks the team to choose, together, what to keep and what to stop.
 
 34
-00:04:03,243 --> 00:04:06,771
+00:04:03,371 --> 00:04:06,899
 For each thing on the wall, they ask: who uses it, and for what?
 
 35
-00:04:08,471 --> 00:04:17,698
+00:04:08,599 --> 00:04:17,826
 For the reports, the logs answer: 21 are read by about 260 people. The other 17, by nobody, for a year or more.
 
 36
-00:04:19,798 --> 00:04:23,327
+00:04:19,926 --> 00:04:23,455
 Before they stop anything, they agree what each kind of thing is for.
 
 37
-00:04:24,827 --> 00:04:31,560
+00:04:24,955 --> 00:04:31,688
 A meeting is for deciding together, or helping someone. Not for reading out what the team's board already shows.
 
 38
-00:04:33,260 --> 00:04:35,594
+00:04:33,388 --> 00:04:35,722
 An alert is for someone who must act now.
 
 39
-00:04:37,094 --> 00:04:39,497
+00:04:37,222 --> 00:04:39,625
 A report is for a decision someone makes.
 
 40
-00:04:41,197 --> 00:04:46,954
+00:04:41,325 --> 00:04:47,082
 Then they design the week they want: a 15-minute stand-up each morning, and planning on Monday.
 
 41
-00:04:48,254 --> 00:04:52,962
+00:04:48,382 --> 00:04:53,090
 A review with the people who asked, every second Thursday, and a half-hour one-to-one.
 
 42
-00:04:54,862 --> 00:04:57,469
+00:04:54,990 --> 00:04:57,597
 About three hours a week each, instead of eight.
 
 43
-00:05:00,169 --> 00:05:07,815
+00:05:00,297 --> 00:05:07,943
 From Monday 10 May, that's the week. The other standing meetings stop, like the weekly round of updates the board now shows.
 
 44
-00:05:09,515 --> 00:05:15,810
+00:05:09,643 --> 00:05:15,938
 For each of the 17 reports, the team first writes to its last readers, and to whoever asked for it.
 
 45
-00:05:17,510 --> 00:05:22,228
+00:05:17,638 --> 00:05:22,356
 Most have moved on. One reader needs last year's figures, and gets a copy.
 
 46
-00:05:24,328 --> 00:05:33,987
+00:05:24,456 --> 00:05:34,115
 On Tuesday 25 May, the data council approves the plan: the 21 reports people read will move to the platform, and the 17 won't.
 
 47
-00:05:35,687 --> 00:05:40,060
+00:05:35,815 --> 00:05:40,188
 On Monday 31 May, the 17 are switched off, not deleted.
 
 48
-00:05:42,160 --> 00:05:47,194
+00:05:42,288 --> 00:05:47,322
 Until the old warehouse closes in December, any of them can be switched back on within a day.
 
 49
-00:05:49,094 --> 00:05:56,045
+00:05:49,222 --> 00:05:56,173
 GOV.UK did the same with its old pages: it didn't move them, it archived them, where they could still be found.
 
 50
-00:05:57,945 --> 00:06:06,576
+00:05:58,073 --> 00:06:06,704
 Sam, who answers the platform's alerts, goes through them with Noor and Jun, one kind at a time, asking: when this fires, what do we do?
 
 51
-00:06:08,476 --> 00:06:13,260
+00:06:08,604 --> 00:06:13,388
 Where the answer is nothing, the alert becomes a line in a summary each Monday morning.
 
 52
-00:06:15,160 --> 00:06:23,333
+00:06:15,288 --> 00:06:23,461
 By Monday 7 June, about 12 alerts a week reach Sam, and each one needs someone to act, with a note that says what to do.
 
 53
-00:06:25,433 --> 00:06:28,582
+00:06:25,561 --> 00:06:28,710
 The team chooses every cut, and any cut can be undone.
 
 54
-00:06:31,282 --> 00:06:39,559
+00:06:31,410 --> 00:06:39,687
 The word minimalism comes from art. In the United States in the 1960s, it named work pared down to its simplest forms.
 
 55
-00:06:41,259 --> 00:06:44,248
+00:06:41,387 --> 00:06:44,376
 For a team, two ideas from Japan come closer.
 
 56
-00:06:45,548 --> 00:06:50,369
+00:06:45,676 --> 00:06:50,497
 In Japanese aesthetics, kanso means simplicity: plain, with nothing extra.
 
 57
-00:06:52,269 --> 00:06:58,211
+00:06:52,397 --> 00:06:58,339
 And lean, which grew out of Japan's car factories, calls work that adds no value muda: waste.
 
 58
-00:07:00,111 --> 00:07:06,838
+00:07:00,239 --> 00:07:06,966
 But the team never calls anyone's work waste. Every report on that wall once answered someone's real question.
 
 59
-00:07:08,938 --> 00:07:13,083
+00:07:09,066 --> 00:07:13,211
 The designer Dieter Rams put the aim in three words: less, but better.
 
 60
-00:07:15,183 --> 00:07:19,795
+00:07:15,311 --> 00:07:19,923
 Less isn't the point. Better is: what stays gets the time, and gets better.
 
 61
-00:07:22,495 --> 00:07:24,904
+00:07:22,623 --> 00:07:25,032
 In June, the team measures what came back.
 
 62
-00:07:26,204 --> 00:07:34,157
+00:07:26,332 --> 00:07:34,285
 Each person has about five hours a week back from meetings. Across eight people, that's about one person's whole week, every week.
 
 63
-00:07:36,257 --> 00:07:38,709
+00:07:36,385 --> 00:07:38,837
 And every alert that reaches Sam now matters.
 
 64
-00:07:40,409 --> 00:07:47,385
+00:07:40,537 --> 00:07:47,513
 The time goes to the work people use: rebuilding on the platform the 21 reports they read, each with an owner.
 
 65
-00:07:49,085 --> 00:07:54,743
+00:07:49,213 --> 00:07:54,871
 To keep that time, they agree one rule: anything new needs a reader, a reason and an owner.
 
 66
-00:07:56,643 --> 00:08:00,012
+00:07:56,771 --> 00:08:00,140
 And at each quarterly review, everything goes back on the wall.
 
 67
-00:08:02,712 --> 00:08:09,152
+00:08:02,840 --> 00:08:09,280
 GOV.UK didn't try to fix every old page. It found what people needed, did less, and did it well.
 
 68
-00:08:10,852 --> 00:08:16,703
+00:08:10,980 --> 00:08:16,831
 Helena's team did the same. It kept what people use, and got a person's week back, every week.
 
 69
-00:08:18,403 --> 00:08:21,512
+00:08:18,531 --> 00:08:21,640
 On Monday, list everything your team runs and attends.
 
 70
-00:08:23,012 --> 00:08:25,106
+00:08:23,140 --> 00:08:25,234
 Ask who uses each thing, and for what.
 
 71
-00:08:26,606 --> 00:08:30,716
+00:08:26,734 --> 00:08:30,844
 Stop the rest together, and openly: switch it off, wait, then delete.
 
 72
-00:08:32,216 --> 00:08:34,576
+00:08:32,344 --> 00:08:34,704
 Measure the time you get back, and protect it.
 
 73
-00:08:36,076 --> 00:08:40,424
+00:08:36,204 --> 00:08:40,552
 The next film, One small change at a time, shows how to improve what you keep.
 
 74
-00:08:41,924 --> 00:08:44,690
+00:08:42,052 --> 00:08:44,818
 Keep what people use; stop the rest, together.

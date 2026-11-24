@@ -26,8 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Guido escribió que apenas un cantor coincidía con otro, y que había tantos libros de canto como maestros: el de Leo, o el de Albert.",
 "Learning the chants takes about ten years, and even then, a singer knows them imperfectly.":
 "Aprender los cantos lleva unos diez años, y aun así, un cantor los sabe de forma imperfecta.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Singers need a way to read a chant they have never heard.":
+"Los cantores necesitan una forma de leer un canto que nunca han oído.",
 "Guido's answer is lines across the page: each line, and each space between, one note.":
 "La respuesta de Guido son líneas a lo ancho de la página: cada línea, y cada espacio entre ellas, una nota.",
 "Two of the lines are coloured, red for F and yellow for C, so a singer always knows where he is.":

@@ -286,7 +286,7 @@ const SB_KEEP=[["In Git",null,"github",MD.ink],["Tested","tick",null,MD.pass],["
 scene("choose",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
     softW:wAt(sc,"decades","software"),took:wAt(sc,"decades","data work took"),asB:wAt(sc,"decades","as bridges"),
     inGit:wAt(sc,"keep","in Git"),tested:wAt(sc,"keep","tested"),reviewed:wAt(sc,"keep","reviewed"),deployed:wAt(sc,"keep","deployed"),
-    nextF:wAt(sc,"night","next film"),fails:wAt(sc,"night","a job fails"),std:wAt(sc,"wheel","standards"),wheelW:wAt(sc,"wheel","reinvent the wheel"),
+    nextF:wAt(sc,"night","next film"),fails:wAt(sc,"night","a job fails"),std:wAt(sc,"wheel","standards"),wheelW:wAt(sc,"wheel","start from them"),
     inv:wAt(sc,"docs","Investigate"),adapt:wAt(sc,"docs","adapt"),impl:wAt(sc,"docs","implement"),iter:wAt(sc,"docs","iterate"),off:wAt(sc,"docs","official docs")}));
   const keepAt=c.keep-0.5,nightAt=c.night-0.5,wheelAt=c.wheel-0.5,end=sc.dur-1.6;
   ag_shots(ctx,S,t,sc.dur,[
@@ -306,7 +306,7 @@ scene("choose",(ctx,S,t,sc)=>{const c=sc.cues,T=sb_once(sc,"T",()=>({
     {later:true,at:wheelAt,place:"map",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{const go=1-ag_in(tt,end,0.8);cx.save();cx.globalAlpha*=go;
       const ma=ag_in(tt,wheelAt+0.5,0.5)*(1-ag_in(tt,T.inv-0.6,0.5));md_mark(cx,960,340,92,(tt-wheelAt-0.5)/1.8,ma);
       md_T(cx,"Standards already exist",960,540,{w:800,size:44,align:"center",a:ag_in(tt,T.std-0.2,0.5)*(1-ag_in(tt,T.inv-0.6,0.5))});
-      md_T(cx,"Don't reinvent the wheel",960,604,{w:600,size:36,align:"center",col:MD.soft,a:ag_in(tt,T.wheelW-0.2,0.5)*(1-ag_in(tt,T.inv-0.6,0.5))});
+      md_T(cx,"Start from the standards",960,604,{w:600,size:36,align:"center",col:MD.soft,a:ag_in(tt,T.wheelW-0.2,0.5)*(1-ag_in(tt,T.inv-0.6,0.5))});
       [["databricks","Databricks","Declarative Automation Bundles"],["dbt","dbt","Data tests and unit tests"],["github","GitHub","Protected branches and environments"]].forEach(([lg,pr,ti],i)=>
         sb_doc(cx,96+i*586,250,556,{logo:lg,product:pr,title:ti,a:ag_in(tt,T.off-0.5+i*0.15,0.5),k:sb_k(tt,T.off-0.5+i*0.15)}));
       const steps=[["Investigate",T.inv],["Adapt",T.adapt],["Implement",T.impl],["Iterate",T.iter]];let x=96;

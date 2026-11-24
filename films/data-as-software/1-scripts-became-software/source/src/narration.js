@@ -54,7 +54,7 @@ const NARR={
  {"id":"decades","gap":0.8,"text":"None of this is new: software has been built this way for decades, and data work took it up, as bridges took up the wind tunnel."},
  {"id":"keep","gap":0.8,"text":"So keep data work as software: in Git, tested, reviewed by someone else, and deployed the same way every time."},
  {"id":"night","gap":0.8,"text":"The next film, A platform that watches itself, follows a night when a job fails."},
- {"id":"wheel","gap":0.8,"text":"There are already standards for this, so don't reinvent the wheel."},
+ {"id":"wheel","gap":0.8,"text":"There are already standards for this: start from them, not from a blank page."},
  {"id":"docs","gap":0.8,"text":"Investigate, adapt, implement and iterate, starting from the official docs."}]},
 "stands":{"name":"Still standing","lead":1.2,"tail":1.0,"vo":[
  {"id":"bridge","gap":0.8,"text":"The bridge of 1950 was tested before it was built, and it still stands.","say":"The bridge of nineteen fifty was tested before it was built, and it still stands."},

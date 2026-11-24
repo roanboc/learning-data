@@ -163,65 +163,65 @@ Ivy, the newest, reads hers: the old extracts take whole tables, personal fields
 Now R3 has a cause, and an early sign: an extract carrying personal fields its report never shows.
 
 42
-00:04:54,940 --> 00:05:02,307
+00:04:54,940 --> 00:05:02,242
 Yusuf, its owner, writes the response that afternoon: before an extract moves, it's checked against the protection rules.
 
 43
-00:05:03,607 --> 00:05:05,915
+00:05:03,542 --> 00:05:05,850
 Whatever no report needs stays behind.
 
 44
-00:05:08,815 --> 00:05:15,722
+00:05:08,750 --> 00:05:15,657
 Wednesday 16 June, the move's third week. Next is Facilities' report of who holds an access card.
 
 45
-00:05:17,422 --> 00:05:22,514
+00:05:17,357 --> 00:05:22,449
 Its old extract brings 42 columns of the staff list. The report shows five.
 
 46
-00:05:24,414 --> 00:05:31,087
+00:05:24,349 --> 00:05:31,022
 The check reads the catalog's tags: home address and date of birth are personal, and no report uses them.
 
 47
-00:05:32,787 --> 00:05:37,945
+00:05:32,722 --> 00:05:37,880
 So the extract stays behind, and the report is rebuilt from the one governed staff list.
 
 48
-00:05:39,845 --> 00:05:46,689
+00:05:39,780 --> 00:05:46,624
 Had those fields moved, R3 would have become an issue: no longer something that might happen, but something that had.
 
 49
-00:05:48,589 --> 00:05:53,022
+00:05:48,524 --> 00:05:52,957
 Tags like these, and the locks behind them, are taught in Locks before the data.
 
 50
-00:05:55,922 --> 00:06:02,141
+00:05:55,857 --> 00:06:02,076
 Tuesday 29 June. The data council's one page for the month has room for three risks.
 
 51
-00:06:03,641 --> 00:06:12,436
+00:06:03,576 --> 00:06:12,371
 R1, the licence. R4, a team stretched between the move and new requests. And R3: its sign has shown, so it's now likely.
 
 52
-00:06:14,336 --> 00:06:20,053
+00:06:14,271 --> 00:06:19,988
 R8 is closed: payroll's export has run from the project every pay day for over a year.
 
 53
-00:06:21,553 --> 00:06:27,439
+00:06:21,488 --> 00:06:27,374
 R7, an agent with more rights than its job, stays watched, as How it goes wrong explains.
 
 54
-00:06:28,939 --> 00:06:32,309
+00:06:28,874 --> 00:06:32,244
 Said early, a risk builds trust. Hidden, it spends it.
 
 55
-00:06:34,409 --> 00:06:38,725
+00:06:34,344 --> 00:06:38,660
 Amundsen's flags were early signs too, set where they'd be crossed in time.
 
 56
-00:06:40,425 --> 00:06:46,711
+00:06:40,360 --> 00:06:46,646
 On Monday, take your three biggest risks, and write each in one sentence, with an owner and an early sign.
 
 57
-00:06:48,411 --> 00:06:51,510
+00:06:48,346 --> 00:06:51,445
 Name each risk, give it an owner, watch its early sign.

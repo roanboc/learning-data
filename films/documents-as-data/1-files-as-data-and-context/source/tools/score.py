@@ -407,8 +407,8 @@ for i in range(3):
     paper(kw('docs', 'documents differ', -0.5 + 0.2 * i), 0.009 - 0.0015 * i, px(920 + 110 * i), 0.3)
 for i in range(2):
     flick(kw('docs', 'the standards', -0.2 + 0.15 * i), 0.006 - 0.001 * i, px(900 + 150 * i))
-air(kw('docs', 'reinvent the wheel', -0.6), 1.4, 0.007, px(1560), 200, 900)
-held(AMAJ_HI, kw('docs', 'reinvent the wheel', -0.5), END('close', 'docs') + 1.0, 0.6, att=0.9, rel=1.0, pan=px(1560) * 0.5)
+air(kw('docs', 'start from them', -0.6), 1.4, 0.007, px(1560), 200, 900)
+held(AMAJ_HI, kw('docs', 'start from them', -0.5), END('close', 'docs') + 1.0, 0.6, att=0.9, rel=1.0, pan=px(1560) * 0.5)
 paper(kw('iterate', 'the official docs', -0.3), 0.010, px(990))
 for i, (w_, m, x_) in enumerate((('Investigate', A2, 1560), ('adapt', CS3, 1750), ('implement', E3, 1560), ('iterate', A3, 1370))):
     tube(m, kw('iterate', w_, -0.2), 0.75 - 0.05 * i, px(x_))

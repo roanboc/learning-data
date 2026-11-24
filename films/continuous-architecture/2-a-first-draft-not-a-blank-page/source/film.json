@@ -19,6 +19,8 @@
     ["\\bsocle\\b", "soh-kul"],
     ["\\bCIM\\b", "C I M"],
     ["\\bIEC's\\b", "I E C's"],
-    ["\\bIEC\\b", "I E C"]
+    ["\\bIEC\\b", "I E C"],
+    ["\\bFarah\\b", "Fah-rah"],
+    ["\\bAma\\b", "Ah-mah"]
   ]
 }

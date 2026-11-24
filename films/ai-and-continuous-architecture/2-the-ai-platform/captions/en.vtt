@@ -39,149 +39,149 @@ Under every one are the same few things: a model to answer with, tools to act wi
 00:01:46.222 --> 00:01:51.956
 Like the fired brick, those can be made once and shared, while what each agent is for stays its own.
 
-00:01:59.556 --> 00:02:02.955
+00:01:59.556 --> 00:02:02.950
 Ravi Menon, the platform lead, brings Tomás a note.
 
-00:02:04.355 --> 00:02:07.171
+00:02:04.350 --> 00:02:07.166
 What should our agents share, and what is each one's own?
 
-00:02:08.771 --> 00:02:14.559
+00:02:08.766 --> 00:02:14.554
 Together, they follow each agent to the model that answers for it, and find a different way every time.
 
-00:02:16.359 --> 00:02:21.153
+00:02:16.354 --> 00:02:21.148
 The website chat uses its vendor's model, inside the contact centre's software.
 
-00:02:22.253 --> 00:02:26.314
+00:02:22.248 --> 00:02:26.309
 The crew planner calls a provider directly, with a key kept in a script.
 
-00:02:27.414 --> 00:02:30.933
+00:02:27.409 --> 00:02:30.928
 The map agent uses a model built into the map's own tool.
 
-00:02:32.433 --> 00:02:34.810
+00:02:32.428 --> 00:02:34.805
 The other three each found a way of their own.
 
-00:02:36.210 --> 00:02:40.613
+00:02:36.205 --> 00:02:40.608
 So nobody can say which model answered a customer, or what all of it costs.
 
-00:02:44.113 --> 00:02:52.790
+00:02:44.108 --> 00:02:52.785
 Then a provider retires the model the crew planner calls. Its notice goes to the analyst who set up the key, who has since moved to another team.
 
-00:02:54.390 --> 00:02:58.928
+00:02:54.385 --> 00:02:58.923
 Three months later, on a Monday morning, the crew planner stops drafting rosters.
 
-00:03:00.528 --> 00:03:05.315
+00:03:00.523 --> 00:03:05.310
 The dispatchers build the week's rosters by hand, and fourteen planned jobs slip.
 
-00:03:06.715 --> 00:03:12.511
+00:03:06.710 --> 00:03:12.506
 310 households, told when their power would be off for that work, have to be told again.
 
-00:03:14.511 --> 00:03:18.525
+00:03:14.506 --> 00:03:18.569
 Ravi asks which other agents call that model. Nobody can say.
 
-00:03:22.025 --> 00:03:27.298
+00:03:22.069 --> 00:03:27.436
 Ravi sorts what the agents use with the test from Platform and solution architecture.
 
-00:03:28.498 --> 00:03:31.836
+00:03:28.636 --> 00:03:31.974
 One purpose, with its logic built in: an application.
 
-00:03:33.436 --> 00:03:37.600
+00:03:33.574 --> 00:03:37.738
 Shared capabilities, on which many owners build their own: a platform.
 
-00:03:39.400 --> 00:03:46.777
+00:03:39.538 --> 00:03:46.915
 A model, which writes an agent's answers, serves no single purpose: the chat and the crew planner could use the same one.
 
-00:03:48.177 --> 00:03:52.614
+00:03:48.315 --> 00:03:52.752
 The same goes for tools, which let an agent look something up or do something.
 
-00:03:53.414 --> 00:04:02.048
+00:03:53.552 --> 00:04:02.186
 And for memory, which keeps what an agent needs from one step to the next, and search, which finds the right page in the utility's documents.
 
-00:04:03.448 --> 00:04:06.163
+00:04:03.586 --> 00:04:06.301
 They're shared capabilities, so they're the platform's.
 
-00:04:07.763 --> 00:04:17.069
+00:04:07.901 --> 00:04:17.207
 What each agent is for is its own: its purpose, its instructions, and the logic of its tasks. That's an application, and its owner answers for it.
 
-00:04:20.569 --> 00:04:30.332
+00:04:20.707 --> 00:04:30.470
 On Tomás's map, the platform's capabilities go at the foot, as services it offers every agent: reach a model, call a tool, remember, and search.
 
-00:04:32.132 --> 00:04:39.050
+00:04:32.270 --> 00:04:39.188
 The agents stay in the application layer, each in its own role, with someone who answers, and each using those services.
 
-00:04:40.450 --> 00:04:45.138
+00:04:40.588 --> 00:04:45.276
 Drawn once, under all of them, the platform shows what every agent stands on.
 
-00:04:46.738 --> 00:04:51.290
+00:04:46.876 --> 00:04:51.606
 And the map can answer part of Ravi's question: which agents use which service.
 
-00:04:54.590 --> 00:05:01.534
+00:04:54.906 --> 00:05:02.044
 Then Ravi's team puts a gateway in front of every model: one door that every call, from every agent, goes through.
 
-00:05:03.834 --> 00:05:08.966
+00:05:04.344 --> 00:05:09.476
 Each call comes in under the agent's own identity, the one its place on the map gives it.
 
-00:05:11.166 --> 00:05:16.354
+00:05:11.676 --> 00:05:16.864
 The gateway writes every call down: which agent, which model, when, and what it cost.
 
-00:05:18.654 --> 00:05:24.405
+00:05:19.164 --> 00:05:24.915
 It keeps each agent within limits, so one stuck in a loop can't run up the bill, or crowd out the rest.
 
-00:05:26.605 --> 00:05:34.038
+00:05:27.115 --> 00:05:34.548
 And it reaches only models the utility has terms with: where its data is kept, and that it isn't used to train anyone's model.
 
-00:05:36.338 --> 00:05:40.094
+00:05:36.848 --> 00:05:40.604
 Even the vendor's chat is set to reach its model through the gateway.
 
-00:05:43.994 --> 00:05:46.958
+00:05:44.504 --> 00:05:47.468
 Months later, another provider retires a model.
 
-00:05:48.158 --> 00:05:52.135
+00:05:48.668 --> 00:05:52.645
 This time, the gateway's log shows which agents call it: three of them.
 
-00:05:53.735 --> 00:06:00.228
+00:05:54.245 --> 00:06:00.975
 Ravi's team tries the replacement on each agent's own checks, and each agent's owner looks at the results.
 
-00:06:01.628 --> 00:06:05.539
+00:06:02.375 --> 00:06:06.286
 Once the owners agree, all three move to the new model in an afternoon.
 
-00:06:07.139 --> 00:06:10.496
+00:06:07.886 --> 00:06:11.243
 No roster is late, and no household is told twice.
 
-00:06:14.196 --> 00:06:20.984
+00:06:14.943 --> 00:06:21.931
 The platform has its owner too: Ravi's team runs it, sets its limits, and holds the contracts with the providers.
 
-00:06:22.584 --> 00:06:28.911
+00:06:23.531 --> 00:06:29.858
 Each agent's owner still answers for what it does: the head of retail for the chat, Grace for the crew planner.
 
-00:06:30.511 --> 00:06:34.676
+00:06:31.458 --> 00:06:35.623
 And every month, the gateway's log shows each team what its agents cost.
 
-00:06:37.976 --> 00:06:42.495
+00:06:38.923 --> 00:06:43.442
 On Databricks, that gateway is Unity Gateway, built on Unity Catalog.
 
-00:06:43.895 --> 00:06:51.397
+00:06:44.842 --> 00:06:52.344
 In one place, it sets which models each team may use and the limits on each, and keeps track of every call and what it costs.
 
-00:06:52.997 --> 00:06:58.712
+00:06:53.944 --> 00:06:59.659
 It can split calls between two models, to try a new one, and fall back to another if one fails.
 
-00:07:00.112 --> 00:07:06.873
+00:07:01.059 --> 00:07:07.820
 The functions agents use as tools are kept in Unity Catalog too, under the same permissions as the data.
 
-00:07:08.273 --> 00:07:12.357
+00:07:09.220 --> 00:07:13.304
 Databricks' own models and other providers' go through the same gateway.
 
-00:07:15.657 --> 00:07:21.381
+00:07:16.604 --> 00:07:22.328
 In Babylon, the same baked brick and the same bitumen went into the river wall and the temple-tower.
 
-00:07:22.781 --> 00:07:28.191
+00:07:23.728 --> 00:07:29.138
 What each was for, holding back a river or raising the house of a god, was its builder's.
 
-00:07:29.991 --> 00:07:35.377
+00:07:30.938 --> 00:07:36.324
 At the utility, every agent now stands on one platform, and each keeps its own purpose.
 
-00:07:41.077 --> 00:07:51.014
+00:07:42.024 --> 00:07:52.123
 Ravi's note has its answer: agents share the platform's models, gateway, tools, memory and search; each keeps its own purpose, instructions and logic.
 
-00:07:52.914 --> 00:07:54.777
+00:07:54.023 --> 00:07:55.886
 Next: what an agent may read.

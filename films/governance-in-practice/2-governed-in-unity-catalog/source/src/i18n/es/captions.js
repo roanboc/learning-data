@@ -23,8 +23,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Sam encuentra cuarenta y una personas que pueden leerla.",
 "Nine have moved to other jobs, and still see every learner's name and email.":
 "Nueve cambiaron de puesto, y todavía ven el nombre y el correo de cada estudiante.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Names and emails had to be hidden from anyone whose job doesn't need them.":
+"Los nombres y los correos tenían que ocultarse a quien no los necesita para su trabajo.",
 "Now each build tells the platform which columns identify a person, from the classes in the project.":
 "Ahora cada construcción le dice a la plataforma qué columnas identifican a una persona, según las clases del proyecto.",
 "One policy shows stars in those columns to everyone outside the registrar's office, on every table, even tables not built yet.":

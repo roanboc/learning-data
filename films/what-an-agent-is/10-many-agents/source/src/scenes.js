@@ -16,7 +16,7 @@ function ma_cardAt(ctx,x,y,w,words,t,t0,t1,o){o=o||{};const a=ag_in(t,t0,0.4)*(t
 scene("breathes",(ctx,S,t,sc)=>{
   const tPearce=wAt(sc,"place","Mick",-0.5),tShops=wAt(sc,"place","offices and shops");
   const tAC=wAt(sc,"cooled","air conditioning"),tImp=wAt(sc,"cooled","imported"),tExp=wAt(sc,"cooled","expensive"),tAll=wAt(sc,"cooled","running all day");
-  const tBills=wAt(sc,"bills","high bills"),tRents=wAt(sc,"bills","high rents"),tChange=wAt(sc,"change","Something"),tOwners=wAt(sc,"change","The owners");
+  const tBills=wAt(sc,"bills","high bills"),tRents=wAt(sc,"bills","high rents"),tChange=wAt(sc,"change","lower bills"),tOwners=wAt(sc,"change","The owners");
   const tMound=wAt(sc,"mounds","termite",-0.4),tCut=wAt(sc,"mounds","breathe like",-0.4),tWarm=wAt(sc,"rising","warm air"),tFresh=wAt(sc,"rising","fresh air");
   const tEG=wAt(sc,"built","Eastgate",-0.3),tParts=wAt(sc,"built","many simple"),tNight=wAt(sc,"nights","cool nights",-0.8),tFans=wAt(sc,"nights","fans pull"),tConc=wAt(sc,"nights","concrete");
   const tDay=wAt(sc,"day","By day",-0.4),tWarmD=wAt(sc,"day","warm air"),t48=wAt(sc,"day","forty-eight");

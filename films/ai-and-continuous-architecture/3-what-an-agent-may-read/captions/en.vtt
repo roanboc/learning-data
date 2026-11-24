@@ -45,131 +45,131 @@ What it says depends on what it reads.
 00:01:40.369 --> 00:01:45.981
 Like the scribe's tablet, what it reads should come from the original, checked, and say who may read it.
 
-00:01:53.781 --> 00:01:58.210
+00:01:53.781 --> 00:01:58.332
 Farah, the customer advocate, brings Tomás two complaints about the chat.
 
-00:01:59.510 --> 00:02:03.529
+00:01:59.632 --> 00:02:03.651
 A household was quoted last year's price, and planned its winter by it.
 
-00:02:05.129 --> 00:02:11.373
+00:02:05.251 --> 00:02:11.495
 And a caller who wasn't the account holder was told that someone in the home needs power for medical equipment.
 
-00:02:13.173 --> 00:02:15.957
+00:02:13.295 --> 00:02:16.079
 The chat's first version read whatever it could reach.
 
-00:02:17.357 --> 00:02:23.721
+00:02:17.479 --> 00:02:23.843
 Its prices came from an export on a shared drive: a copy of a copy, which nobody kept up to date.
 
-00:02:25.321 --> 00:02:29.849
+00:02:25.443 --> 00:02:29.971
 And it read the contact centre's notes, where people's medical needs are written down.
 
-00:02:31.449 --> 00:02:40.656
+00:02:31.571 --> 00:02:40.850
 One family planned on a price that had changed; another's medical needs reached a stranger, and Ama, the regulatory lead, reported a breach.
 
-00:02:42.656 --> 00:02:48.382
+00:02:42.850 --> 00:02:48.576
 An agent that answers the public has to read the official figures, and only what it's meant to read.
 
-00:02:51.682 --> 00:02:56.168
+00:02:51.876 --> 00:02:56.362
 Inés Duarte, the utility's new data architect, takes it on with Tomás.
 
-00:02:57.468 --> 00:03:03.412
+00:02:57.662 --> 00:03:03.606
 She draws the chat's context, what it reads to answer, from the data practice on Tomás's map.
 
-00:03:05.012 --> 00:03:11.954
+00:03:05.206 --> 00:03:12.148
 The map shows the data products it needs: tariffs, planned work by street, help pages, and a household's account.
 
-00:03:13.754 --> 00:03:19.482
+00:03:13.948 --> 00:03:19.676
 Each is kept by its own team, with a contract: what it holds, how fresh it is, and who owns it.
 
-00:03:21.082 --> 00:03:27.167
+00:03:21.276 --> 00:03:27.361
 And the glossary's terms come with them, so "account holder" means to the chat what it means to the utility.
 
-00:03:28.767 --> 00:03:33.894
+00:03:28.961 --> 00:03:34.088
 The chat reads those products, and nothing else: no exports, no copies of copies.
 
-00:03:35.494 --> 00:03:40.768
+00:03:35.688 --> 00:03:40.962
 When prices change, the tariffs product changes that day, and so does the chat's answer.
 
-00:03:44.068 --> 00:03:49.954
+00:03:44.262 --> 00:03:50.148
 Each product on the map also has a level: public, internal, confidential or restricted.
 
-00:03:51.754 --> 00:03:54.150
+00:03:51.948 --> 00:03:54.344
 The chat may read public and internal ones.
 
-00:03:55.550 --> 00:03:59.396
+00:03:55.744 --> 00:03:59.590
 Restricted ones, like people's medical needs, it never reads.
 
-00:04:00.996 --> 00:04:06.077
+00:04:01.190 --> 00:04:06.271
 Inés doesn't leave them in reach behind a mask, where one wrong rule would let them through.
 
-00:04:07.677 --> 00:04:13.868
+00:04:07.871 --> 00:04:14.062
 She gives the chat a place of its own, holding only what it may read: what it may not read isn't there at all.
 
-00:04:15.668 --> 00:04:19.396
+00:04:15.862 --> 00:04:19.590
 And the chat's own identity can reach that place, and nothing else.
 
-00:04:20.996 --> 00:04:24.547
+00:04:21.190 --> 00:04:24.741
 A household's account is confidential, so it isn't there either.
 
-00:04:25.947 --> 00:04:32.333
+00:04:26.141 --> 00:04:32.527
 The chat reads one only on its holder's own sign-in, as the website does: theirs, and no one else's.
 
-00:04:35.633 --> 00:04:40.579
+00:04:35.827 --> 00:04:40.773
 When planned work will cut a street's power, some homes must hear it from a person first.
 
-00:04:42.379 --> 00:04:45.847
+00:04:42.573 --> 00:04:46.041
 The chat can't tell which: that would mean reading medical needs.
 
-00:04:47.647 --> 00:04:55.978
+00:04:47.841 --> 00:04:56.172
 So the team that keeps the list offers it a small tool: given a signed-in household, it answers only "hand this to a person now", or not.
 
-00:04:57.978 --> 00:05:03.246
+00:04:58.172 --> 00:05:03.440
 Never why: the person who calls them back sees why, and first checks who they're speaking to.
 
-00:05:05.246 --> 00:05:09.170
+00:05:05.440 --> 00:05:09.364
 The chat hands over, and tells the household a person will call that day.
 
-00:05:12.670 --> 00:05:17.033
+00:05:12.864 --> 00:05:17.227
 The head of retail, who answers for the chat, asks for the change in a ticket.
 
-00:05:18.533 --> 00:05:26.243
+00:05:18.727 --> 00:05:26.437
 In the ticket, each product's owner agrees, as for any new reader: Grace for planned work, retail for tariffs and accounts.
 
-00:05:28.043 --> 00:05:32.566
+00:05:28.237 --> 00:05:32.760
 The data team builds the chat's place, and reviews the change in a pull request.
 
-00:05:34.166 --> 00:05:39.716
+00:05:34.360 --> 00:05:39.937
 Before the ticket closes, Ama checks, in test, that nothing restricted is in the chat's place.
 
-00:05:43.016 --> 00:05:48.129
+00:05:43.237 --> 00:05:48.350
 On Databricks, the chat runs as an app with its own identity, a service principal.
 
-00:05:49.929 --> 00:05:55.954
+00:05:50.150 --> 00:05:56.175
 Its place is one schema in Unity Catalog: it may select from the products there, and nothing else.
 
-00:05:57.854 --> 00:06:00.709
+00:05:58.075 --> 00:06:00.930
 Its help pages are in a search index it may read.
 
-00:06:02.409 --> 00:06:11.427
+00:06:02.630 --> 00:06:11.648
 The small tool is a Unity Catalog function the chat may run. It reads only the list of homes to hand to a person, and answers yes or no.
 
-00:06:13.327 --> 00:06:19.250
+00:06:13.548 --> 00:06:19.471
 Databricks advises the same: one identity for each agent, granted only what it needs.
 
-00:06:22.750 --> 00:06:28.078
+00:06:22.971 --> 00:06:28.299
 In Uruk, the scribe copied from the original, checked his copy, and wrote who may read it.
 
-00:06:29.478 --> 00:06:36.852
+00:06:29.699 --> 00:06:37.073
 At the utility, the chat reads the official products, kept up to date by their contracts, and only what it's meant to read.
 
-00:06:38.452 --> 00:06:45.432
+00:06:38.673 --> 00:06:45.653
 In the three months since, it has answered 41,000 questions about prices, every one from this year's tariffs.
 
-00:06:47.032 --> 00:06:50.023
+00:06:47.253 --> 00:06:50.244
 And no caller has heard about any household but their own.
 
-00:06:55.723 --> 00:07:04.481
+00:06:55.944 --> 00:07:04.702
 An agent's context belongs on the map: the products it may read, with contracts and terms, in a place of its own, under its own identity.
 
-00:07:06.381 --> 00:07:12.233
+00:07:06.602 --> 00:07:12.454
 The agents are on the map. Who decides about the data they read is where Data governance begins.

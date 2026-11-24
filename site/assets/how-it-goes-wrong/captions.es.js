@@ -29,8 +29,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y la tierra volvería a temblar.",
 "Rebuilt the old way, it would fall the same way.":
 "Reconstruida a la antigua, caería de la misma forma.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Lisbon needed a town that could take the next shake.":
+"Lisboa necesitaba una ciudad que resistiera el próximo temblor.",
 "So the king's engineers rebuilt the lower town for each way it had failed.":
 "Así que los ingenieros del rey reconstruyeron la ciudad baja para cada forma en que había fallado.",
 "Inside the walls, a cage of timber, braced with crosses, that bends instead of breaking.":

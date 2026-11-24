@@ -12,7 +12,7 @@ const NARR={
  {"id":"ways","gap":0.8,"text":"walls that broke, fire that leapt from house to house, and narrow, crowded lanes."},
  {"id":"again","gap":0.8,"text":"And the ground would shake again."},
  {"id":"oldway","gap":0.8,"text":"Rebuilt the old way, it would fall the same way."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Lisbon needed a town that could take the next shake."},
  {"id":"engineers","gap":0.8,"text":"So the king's engineers rebuilt the lower town for each way it had failed."},
  {"id":"cage","gap":0.8,"text":"Inside the walls, a cage of timber, braced with crosses, that bends instead of breaking."},
  {"id":"firewall","gap":0.8,"text":"Between the houses, stone walls raised above the roofs, so fire can't leap across."},

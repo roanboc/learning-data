@@ -174,22 +174,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Por último, las llaves.",
 "The files were always encrypted, with a key the cloud provider kept for the university.":
 "Los archivos siempre estuvieron cifrados, con una llave que el proveedor de la nube guardaba para la universidad.",
-"Now the key is the university's own, kept by its security team in a vault of its own.":
-"Ahora la llave es de la universidad, y la guarda su equipo de seguridad en una bóveda propia.",
-"The storage may use the key, never take it out.":
-"El almacenamiento puede usar la llave, nunca sacarla.",
-"The people who run the platform can't delete it or turn it off, and every use is recorded.":
-"Quienes llevan la plataforma no pueden borrarla ni desactivarla, y cada uso queda registrado.",
+"Now the key is the university's own, in a vault of its own, with the rules Walls, doors and keys set out.":
+"Ahora la llave es de la universidad, en una bóveda propia, con las reglas que fijó Muros, puertas y llaves.",
 "The vault makes a new version every year, and the storage picks it up within a day.":
 "La bóveda crea una versión nueva cada año, y el almacenamiento la toma en menos de un día.",
-"A deleted key is kept ninety days, and nobody can cut that short.":
-"Una llave borrada se guarda noventa días, y nadie puede acortar ese plazo.",
 "The workspace's notebooks, queries and disks use a key from the same vault.":
 "Los notebooks, las consultas y los discos del espacio de trabajo usan una llave de la misma bóveda.",
-"And the security team can take the key back:":
-"Y el equipo de seguridad puede retirar la llave:",
-"then nobody can read the files, the cloud provider included.":
-"entonces nadie puede leer los archivos, ni siquiera el proveedor de la nube.",
 "In Rome, water was drawn only at the tank, through a stamped nozzle, and the gangs' work was written down.":
 "En Roma, el agua se sacaba solo en el depósito, por una boquilla marcada, y el trabajo de las cuadrillas se anotaba.",
 "At the university, the files are reached only through the catalog,":

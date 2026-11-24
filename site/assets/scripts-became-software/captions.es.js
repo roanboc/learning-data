@@ -101,8 +101,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que trata el trabajo con datos como software: en Git, probado, revisado por otra persona y desplegado siempre igual.",
 "The next film, A platform that watches itself, follows a night when a job fails.":
 "La próxima película, «A platform that watches itself», sigue una noche en la que falla un trabajo.",
-"There are already standards for this, so don't reinvent the wheel.":
-"Ya hay estándares para esto, así que no reinventes la rueda.",
+"There are already standards for this: start from them, not from a blank page.":
+"Ya hay estándares para esto: parte de ellos, no de una página en blanco.",
 "Investigate, adapt, implement and iterate, starting from the official docs.":
 "Investiga, adapta, implementa e itera, a partir de la documentación oficial.",
 "The bridge of 1950 was tested before it was built, and it still stands.":

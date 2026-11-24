@@ -18,6 +18,7 @@
     ["\\bCTE\\b", "see tee ee"],
     ["\\bDuckDB\\b", "duck dee bee"],
     ["\\bAuguste\\b", "oh-goost"],
-    ["\\bEscoffier\\b", "ess-coff-ee-ay"]
+    ["\\bEscoffier\\b", "ess-coff-ee-ay"],
+    ["\\bNoor\\b", "Nuur"]
   ]
 }

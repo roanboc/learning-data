@@ -243,5 +243,5 @@ Rohan sets Health's budget for next year on the cost, with every tutorial's tuto
 Like the kilogram, each measure is one definition, written where anyone can read it, and held by no single tool.
 
 62
-00:07:57,410 --> 00:08:05,473
-The standards already exist, so don't reinvent them: investigate, adapt, implement, iterate, starting from the official docs.
+00:07:57,410 --> 00:08:04,940
+The standards already exist, so build on them: investigate, adapt, implement, iterate, starting from the official docs.

@@ -21,6 +21,8 @@
     [
       "\\bOntos\\b",
       "Ontoss"
-    ]
+    ],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bJun\\b", "Joon"]
   ]
 }

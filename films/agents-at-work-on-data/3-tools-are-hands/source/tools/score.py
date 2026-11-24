@@ -270,7 +270,7 @@ note(F4, gone, good - gone + 0.8, 0.8, rel=0.9)
 rk(Bb1, rc('nolib', -0.2), rc('nolib', 1.8), 0.9, rel=0.6)
 rk(F2, rc('nolib', 2.0), rc('nolib', 3.9), 0.85, rel=0.8)
 # a library is only as safe as the hands that can reach it: the empty chain, swinging under its desk, at the end of its swing
-something = rw('reach', 'Something')
+something = rw('reach', 'The next one')
 chain(rc('reach', -0.2), 0.0035, px(980)); chain(38.56, 0.003, px(1010))
 hg([(Db4, 1.2), (F4, 1.0), (Ab4, 2.2)], rc('reach', 0.3), 0.85)
 rk(Bb1, rc('reach', 0.4), rc('reach', 3.6), 0.8)

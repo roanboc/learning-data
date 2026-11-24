@@ -21,8 +21,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así, dos informes contaban títulos de dos maneras: el del censo de Planificación decía 4,812; el borrador de la entrega al gobierno, 4,867.",
 "The university could have sent the government a number it couldn't explain.":
 "La universidad pudo haber enviado al gobierno una cifra que no sabía explicar.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"Award needed one meaning, kept in one place.":
+"Título necesitaba un solo significado, guardado en un solo lugar.",
 "Now award has one page, on the platform, and every copy is checked against it each night.":
 "Ahora título tiene una sola página, en la plataforma, y cada copia se compara con ella cada noche.",
 "The 6 credit points are kept once, as a setting.":

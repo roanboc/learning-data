@@ -99,169 +99,169 @@ Luego la solicitud espera, como todas: en promedio, 41 días hábiles de la soli
 El martes 30 de marzo, el equipo la toma de la nueva manera, como lo fijó el plan de noventa días de Helena.
 
 26
-00:02:51,790 --> 00:02:56,791
+00:02:51,790 --> 00:02:56,865
 Ivy Reyes, la nueva analista del equipo, ya dibujó todo su recorrido en una página.
 
 27
-00:02:58,091 --> 00:03:02,891
+00:02:58,165 --> 00:03:02,965
 Están las 186 aulas, incluidas las 14 que tenían dos nombres.
 
 28
-00:03:04,591 --> 00:03:10,935
+00:03:04,665 --> 00:03:11,009
 Así que el prototipo parte de datos reales: trece semanas de reservas y conteos de personas de los sensores de las aulas.
 
 29
-00:03:12,635 --> 00:03:16,797
+00:03:12,709 --> 00:03:16,871
 Gobernados desde el primer día: conteos por aula y por hora, nunca una persona.
 
 30
-00:03:20,697 --> 00:03:28,215
+00:03:20,771 --> 00:03:28,289
 En 2001, el Manifiesto Ágil lo dijo claro: software funcionando sobre documentación extensiva.
 
 31
-00:03:30,115 --> 00:03:35,527
+00:03:30,189 --> 00:03:35,601
 La primera ronda pregunta una sola cosa: ¿cuándo se reservan las aulas y cuándo se usan, hora por hora?
 
 32
-00:03:37,227 --> 00:03:42,319
+00:03:37,301 --> 00:03:42,393
 El miércoles 7 de abril, el agente del equipo redacta un primer modelo en un minuto.
 
 33
-00:03:43,619 --> 00:03:45,707
+00:03:43,693 --> 00:03:45,781
 Cuenta las horas reservadas como horas usadas.
 
 34
-00:03:47,407 --> 00:03:53,727
+00:03:47,481 --> 00:03:53,801
 Ivy lo detecta ella misma: lee las notas del agente hasta el final y contrasta el borrador con los sensores.
 
 35
-00:03:55,427 --> 00:04:01,450
+00:03:55,501 --> 00:04:01,524
 El uso de aulas, tal como lo entiende Graham, entra al glosario: personas en el aula. El modelo se construye a partir de él.
 
 36
-00:04:02,950 --> 00:04:05,770
+00:04:03,024 --> 00:04:05,844
 Luego Jun revisa el cambio de Ivy, el mismo día.
 
 37
-00:04:07,270 --> 00:04:13,120
+00:04:07,344 --> 00:04:13,194
 Rápido no es descuidado. El agente propone, las personas revisan y nadie aprueba su propio trabajo.
 
 38
-00:04:15,020 --> 00:04:20,134
+00:04:15,094 --> 00:04:20,208
 El viernes 9 de abril, diez días después del inicio, Graham ve el prototipo.
 
 39
-00:04:21,434 --> 00:04:24,576
+00:04:21,508 --> 00:04:24,650
 Un mapa de calor de la semana, en un tablero de Databricks.
 
 40
-00:04:26,676 --> 00:04:31,734
+00:04:26,750 --> 00:04:31,808
 Helena le hace una pregunta, y se la hará en cada ronda: ¿qué le haría cambiar de opinión?
 
 41
-00:04:33,634 --> 00:04:38,960
+00:04:33,708 --> 00:04:39,034
 Su respuesta: si las aulas están llenas toda la semana, pedirá el edificio. Si no lo están, no.
 
 42
-00:04:42,860 --> 00:04:49,300
+00:04:42,934 --> 00:04:49,374
 El trabajo avanza en rondas de una semana; cada una termina un viernes, con quien decide y lo real delante.
 
 43
-00:04:51,000 --> 00:04:55,890
+00:04:51,074 --> 00:04:55,964
 Scrum lo llama revisión del sprint. Aquí es media hora con Graham, frente a una pantalla.
 
 44
-00:04:57,590 --> 00:05:04,557
+00:04:57,664 --> 00:05:04,631
 El miércoles 14 de abril, Graham lo usa él mismo, con su equipo: once días hábiles desde el inicio.
 
 45
-00:05:06,257 --> 00:05:10,677
+00:05:06,331 --> 00:05:10,751
 Había esperado unas siete semanas antes de que alguien empezara, como toda solicitud.
 
 46
-00:05:11,977 --> 00:05:15,388
+00:05:12,051 --> 00:05:15,462
 Después, la nueva manera tomó once días hábiles, contra cuarenta y uno.
 
 47
-00:05:17,288 --> 00:05:21,964
+00:05:17,362 --> 00:05:22,038
 Como en Curitiba, la conversación cambia cuando la gente puede usar algo real.
 
 48
-00:05:23,864 --> 00:05:25,846
+00:05:23,938 --> 00:05:25,920
 Y lo real sorprende a todos.
 
 49
-00:05:26,946 --> 00:05:33,421
+00:05:27,020 --> 00:05:33,495
 Las aulas están reservadas el 38% de la semana, pero el 93% de diez a dos, de martes a jueves.
 
 50
-00:05:35,521 --> 00:05:41,321
+00:05:35,595 --> 00:05:41,395
 En una de cada cinco horas reservadas no llega nadie. Cuando sí llegan, se ocupa cerca de la mitad de los asientos.
 
 51
-00:05:43,221 --> 00:05:48,978
+00:05:43,295 --> 00:05:49,052
 Todos tenían razón sobre lo que veían. El promedio ocultaba tanto el pico lleno como las aulas vacías.
 
 52
-00:05:50,878 --> 00:05:57,991
+00:05:50,952 --> 00:05:58,065
 En la segunda revisión, su respuesta cambia: muéstrenme que funciona en 2030, cuando Planificación espera 6% más de estudiantes.
 
 53
-00:06:01,691 --> 00:06:08,280
+00:06:01,765 --> 00:06:08,354
 Viernes 23 de abril, la tercera ronda. La respuesta es clara: faltan aulas solo en el pico.
 
 54
-00:06:10,180 --> 00:06:15,485
+00:06:10,254 --> 00:06:15,559
 Mover cerca de una de cada seis clases del pico a otras horas, y liberar las reservas que nadie usa.
 
 55
-00:06:16,785 --> 00:06:20,132
+00:06:16,859 --> 00:06:20,206
 Eso cubre la proyección hasta 2030 sin un edificio nuevo.
 
 56
-00:06:22,032 --> 00:06:26,308
+00:06:22,106 --> 00:06:26,382
 La decisión ya tiene lo que necesita, así que las rondas paran. Una cuarta solo la puliría.
 
 57
-00:06:28,208 --> 00:06:33,105
+00:06:28,282 --> 00:06:33,179
 Lo que enseñó el prototipo se queda en el producto: la definición y el modelo revisado.
 
 58
-00:06:34,605 --> 00:06:38,941
+00:06:34,679 --> 00:06:39,015
 Y el tablero se vuelve un producto propio, del que Ivy es dueña desde julio.
 
 59
-00:06:40,641 --> 00:06:44,284
+00:06:40,715 --> 00:06:44,358
 En junio, Graham lleva una página al Consejo Universitario.
 
 60
-00:06:45,584 --> 00:06:49,889
+00:06:45,658 --> 00:06:49,963
 Posterga el edificio dos años y pide que cambien los horarios.
 
 61
-00:06:53,789 --> 00:06:58,875
+00:06:53,863 --> 00:06:58,949
 En Curitiba, una calle hecha en un fin de semana resolvió lo que los planes en papel no pudieron.
 
 62
-00:07:00,575 --> 00:07:07,000
+00:07:00,649 --> 00:07:07,074
 El equipo de Helena lo hizo en tres semanas: datos reales frente a quien decide, una ronda a la vez.
 
 63
-00:07:08,700 --> 00:07:13,477
+00:07:08,774 --> 00:07:13,551
 El lunes, pon algo real frente a quien decide, en menos de dos semanas.
 
 64
-00:07:14,577 --> 00:07:17,192
+00:07:14,651 --> 00:07:17,266
 Usa datos reales desde el inicio, y gobiérnalos.
 
 65
-00:07:18,292 --> 00:07:20,895
+00:07:18,366 --> 00:07:20,969
 Pregunta en cada ronda: ¿qué le haría cambiar de opinión?
 
 66
-00:07:21,995 --> 00:07:28,028
+00:07:22,069 --> 00:07:28,102
 Haz rondas cortas y fijas, para cuando la decisión tenga lo que necesita, y deja lo aprendido en el producto.
 
 67
-00:07:29,528 --> 00:07:33,099
+00:07:29,602 --> 00:07:33,173
 Algo real frente a ellos en dos semanas; aprende; repite.

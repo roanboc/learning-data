@@ -24,8 +24,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y los millones que las usan no tienen por dónde entrar.",
 "Seventeen years later, Palma is still asking a friend in Madrid what became of ‘to budget’.":
 "Diecisiete años después, Palma aún le pregunta a un amigo en Madrid qué pasó con ‘presupuestar’.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"Speakers across the Americas need a say in their own language's dictionary.":
+"Los hablantes de las Américas necesitan voz en el diccionario de su propia lengua.",
 "In 1951, the academies of the Americas form an association, and Spain's academy soon joins their work.":
 "En 1951, las academias de América forman una asociación, y la de España pronto se suma a su trabajo.",
 "Today, they make the dictionary together.":

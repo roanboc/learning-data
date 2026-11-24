@@ -10,7 +10,7 @@ const NARR={
  {"id":"path","gap":0.8,"text":"a form, an emailed approval, and three weeks later, the whole table, to one person, with no end date."},
  {"id":"forty","gap":0.8,"text":"Sam finds forty-one people who can read it."},
  {"id":"nine","gap":0.8,"text":"Nine have moved to other jobs, and still see every learner's name and email."},
- {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"change","gap":0.8,"text":"Names and emails had to be hidden from anyone whose job doesn't need them."},
  {"id":"now","gap":0.8,"text":"Now each build tells the platform which columns identify a person, from the classes in the project."},
  {"id":"policy","gap":0.8,"text":"One policy shows stars in those columns to everyone outside the registrar's office, on every table, even tables not built yet."},
  {"id":"groups","gap":0.8,"text":"And access goes to groups, until a date."},

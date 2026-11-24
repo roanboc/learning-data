@@ -22,8 +22,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Solo queda la copia de Jeonju.",
 "If it burns too, 175 years of the kingdom's memory are gone: what was decided, by whom, and why.":
 "Si también arde, se pierden 175 años de la memoria del reino: qué se decidió, quién lo decidió y por qué.",
-"Something has to change.":
-"Algo tiene que cambiar.",
+"That last copy has to be kept safe, whatever the war does.":
+"Esa última copia tiene que quedar a salvo, haga lo que haga la guerra.",
 "Two local scholars carry it into the mountains, and guard it, in turns, for more than a year.":
 "Dos eruditos del lugar la llevan a las montañas, y la cuidan, por turnos, durante más de un año.",
 "After the war, the court prints the annals again, from that one copy.":

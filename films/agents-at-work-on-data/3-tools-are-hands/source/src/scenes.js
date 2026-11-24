@@ -27,7 +27,7 @@ function tl_file(c,x,y,w,file,title,sub,o){o=o||{};const a=o.a==null?1:o.a;if(a<
 /* ---------------------------------------------------------------- 1 · The Bodleian's rule */
 scene("rule",(ctx,S,t,sc)=>{const c=sc.cues,P=th_once(sc,"P",()=>({gives:wAt(sc,"duke","gives"),scholars:wAt(sc,"duke","scholars"),longroom:wAt(sc,"duke","long room"),
     y1550:wAt(sc,"taken","fifteen fifty"),away:wAt(sc,"taken","taken away"),even:wAt(sc,"desks","even the desks"),noCopy:wAt(sc,"byhand","no other copy"),
-    gone:wAt(sc,"byhand","once gone"),good:wAt(sc,"byhand","for good"),something:wAt(sc,"reach","Something"),offers:wAt(sc,"bodley","offers"),
+    gone:wAt(sc,"byhand","once gone"),good:wAt(sc,"byhand","for good"),something:wAt(sc,"reach","The next one"),offers:wAt(sc,"bodley","offers"),
     seats:wAt(sc,"bodley","seats"),shelves:wAt(sc,"bodley","shelves"),desks:wAt(sc,"bodley","desks"),takeNo:wAt(sc,"rule1","Take"),notes:wAt(sc,"rule2","your notes"),
     flame:wAt(sc,"rule2","flame"),keep:wAt(sc,"promise","keep it"),chained:wAt(sc,"promise","chained"),readAt:wAt(sc,"promise","read at"),nowhere:wAt(sc,"promise","nowhere else"),
     asks:wAt(sc,"king","asks to borrow"),showsRule:wAt(sc,"shows","shows him the rule"),agrees:wAt(sc,"shows","agrees"),stays:wAt(sc,"shows","the book stays"),

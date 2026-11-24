@@ -126,20 +126,20 @@ Si un sistema comprado guarda su copia, acuerda el contrato en esa interfaz, com
 00:04:51.275 --> 00:04:57.457
 «Las dos cosas a la vez» mostró una base de datos que escribe y lee. Aquí, una sola copia sirve a toda una plataforma.
 
-00:04:58.957 --> 00:05:02.242
-Ya hay estándares para esto, así que no reinventes la rueda.
+00:04:58.957 --> 00:05:01.676
+Ya hay estándares para esto: parte de ellos.
 
-00:05:02.942 --> 00:05:07.640
+00:05:02.376 --> 00:05:07.074
 Investiga, adapta, implementa e itera, partiendo de la documentación oficial.
 
-00:05:11.540 --> 00:05:18.169
+00:05:10.974 --> 00:05:17.603
 En Ámsterdam, un pago pasó a ser una línea movida en un solo libro, y el mismo libro mostraba lo que tenía cada uno.
 
-00:05:19.669 --> 00:05:27.615
+00:05:19.103 --> 00:05:27.049
 En la universidad, la declaración de Linh es una fila: ella la escribe, su coordinación la aprueba, Nómina la paga y Finanzas la cuenta.
 
-00:05:29.115 --> 00:05:36.902
+00:05:28.549 --> 00:05:36.336
 Hoy cobran 856 personas con contrato ocasional, desde filas como la suya, y ningún equipo tuvo que copiar una declaración.
 
-00:05:38.602 --> 00:05:40.643
+00:05:38.036 --> 00:05:40.077
 Guarda una copia, gobernada una vez.

@@ -24,7 +24,8 @@
     ["\\bNoor\\b", "Nuur"],
     ["\\bJun's\\b", "Joon's"],
     ["\\bJun\\b", "Joon"],
-    ["\\bA I\\b", "AI"]
+    ["\\bA I\\b", "AI"],
+    ["\\bYusuf\\b", "Yoosoof"]
   ],
   "story": [
     "clock"

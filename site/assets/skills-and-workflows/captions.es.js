@@ -22,8 +22,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un error, y una viuda o un hijo podían recibir menos de lo que les da la ley.",
 "And two reckoners could reach two answers for one estate.":
 "Y dos calculistas podían llegar a dos respuestas para una misma herencia.",
-"Something had to change.":
-"Algo tenía que cambiar.",
+"People needed one method that gave every reckoner the same answer.":
+"Hacía falta un solo método que diera a cada calculista la misma respuesta.",
 "Encouraged by the caliph, Muhammad al-Khwarizmi, a scholar of the House of Wisdom, writes a short book.":
 "Animado por el califa, Muhammad al-Juarismi, un sabio de la Casa de la Sabiduría, escribe un libro breve.",
 "It teaches what people, in his words, constantly require.":

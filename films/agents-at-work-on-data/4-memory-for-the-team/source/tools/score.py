@@ -211,7 +211,7 @@ tWarn = aw('warned', 'warned')
 pin(tWarn + 0.3, 0.016, px(495))
 breath([(oDs5, 0.55), (oCs5, 0.55), (oB4, 0.42)], tWarn + 0.2, 0.9, px(500))
 # a pilot who reported a mistake could be punished: the form raised; the viola, low, under it, then a pause before 1976
-viola(Gs3, aw('punish', 'pilot', -0.4), aw('punish', 'Something had to change', -0.2), 0.7, att=0.9, rel=1.0)
+viola(Gs3, aw('punish', 'pilot', -0.4), aw('punish', 'Pilots needed', -0.2), 0.7, att=0.9, rel=1.0)
 # 1976: B major; the strings beneath answer for the first time, and more as each of pilot, controller and mechanic is named
 t76 = aw('y1976', 'In nineteen', -0.3)
 viola(B3, t76 + 0.2, aw('y1976', 'every pilot', -0.1), 0.8, att=0.7, rel=0.9, ring=0.7, ringsec=2.6)

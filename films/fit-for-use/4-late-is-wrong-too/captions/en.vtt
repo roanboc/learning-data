@@ -93,146 +93,146 @@ Each check looks at what's there. None can see what hasn't arrived.
 00:03:14.591 --> 00:03:18.585
 Thursday, 8 am. The list is due at the printer at five.
 
-00:03:19.685 --> 00:03:26.438
+00:03:19.685 --> 00:03:26.546
 Sam Okafor, who runs the platform, sees in Databricks' monitoring that the student system's tables are late.
 
-00:03:27.138 --> 00:03:32.706
+00:03:27.246 --> 00:03:32.814
 dbt's freshness check says how late: the student system's data is thirty hours old.
 
-00:03:34.006 --> 00:03:40.222
+00:03:34.114 --> 00:03:40.330
 There was a level, a warning after a day: set by the builders, agreed with nobody, and never run at night.
 
-00:03:40.922 --> 00:03:45.159
+00:03:41.030 --> 00:03:45.267
 A level its users never agreed is a signal nobody understands.
 
-00:03:46.659 --> 00:03:53.424
+00:03:46.767 --> 00:03:53.532
 Sam calls the student system team, and Malia Fonoti, who sends the list. Malia holds the send.
 
-00:03:54.524 --> 00:04:01.721
+00:03:54.632 --> 00:04:01.829
 At 11:40 the file arrives; at 12:10 the list is built again, with 712 graduates.
 
-00:04:02.421 --> 00:04:07.263
+00:04:02.529 --> 00:04:07.371
 Malia's team checks the 23 new names, and at 3:20 the list goes.
 
-00:04:08.763 --> 00:04:15.727
+00:04:08.871 --> 00:04:15.835
 The December before, six graduates were left off, and nobody saw. Their certificates were printed late, and posted.
 
-00:04:18.627 --> 00:04:22.579
+00:04:18.735 --> 00:04:22.687
 On Monday, Malia and Sam meet Mei Tanaka, who owns the list.
 
-00:04:24.079 --> 00:04:29.567
+00:04:24.187 --> 00:04:29.675
 The platform can see that a table is late. Only its users can say when late is too late.
 
-00:04:31.467 --> 00:04:36.689
+00:04:31.575 --> 00:04:36.797
 The certificates can't wait: they need yesterday's awards on the list when it goes to the printer.
 
-00:04:38.389 --> 00:04:43.216
+00:04:38.497 --> 00:04:43.324
 Seating the Great Hall can: it's counted a week before, from a list a few days old.
 
-00:04:44.916 --> 00:04:49.196
+00:04:45.024 --> 00:04:49.304
 Planning's count for the government comes after the year's end: weeks are fine.
 
-00:04:50.896 --> 00:04:56.079
+00:04:51.004 --> 00:04:56.187
 One list, three clocks. The strictest sets the level: a day old at most, at the send.
 
-00:04:57.779 --> 00:05:03.192
+00:04:57.887 --> 00:05:03.300
 A nightly file meets it. For fresher data, Hot, warm, cold shows how it moves.
 
-00:05:04.892 --> 00:05:10.252
+00:05:05.000 --> 00:05:10.360
 Malia agrees it, Mei owns it, and it goes beside the list's columns, in dbt.
 
-00:05:11.952 --> 00:05:17.068
+00:05:12.060 --> 00:05:17.176
 Rules that run left timeliness in pencil, with no checks. This is its first rule.
 
-00:05:19.968 --> 00:05:22.375
+00:05:20.076 --> 00:05:22.483
 From now on, the list says how old it is.
 
-00:05:23.675 --> 00:05:26.924
+00:05:23.783 --> 00:05:27.032
 Old, counted from when? Every record has three dates.
 
-00:05:28.424 --> 00:05:31.612
+00:05:28.532 --> 00:05:31.720
 When it happened: the board approved this award on Wednesday.
 
-00:05:32.912 --> 00:05:35.497
+00:05:33.020 --> 00:05:35.605
 When the student system saved it: that afternoon.
 
-00:05:36.797 --> 00:05:40.101
+00:05:36.905 --> 00:05:40.209
 And when its file arrived: Thursday, at 11:40.
 
-00:05:41.601 --> 00:05:48.563
+00:05:41.709 --> 00:05:48.671
 The first is the one that matters. But each table says it in its own way, and when no board meets, there's none to read.
 
-00:05:50.263 --> 00:05:57.440
+00:05:50.371 --> 00:05:57.548
 The last is the easiest, and says the least: for December's list, a file came on time, full of the day before's records.
 
-00:05:59.140 --> 00:06:03.983
+00:05:59.248 --> 00:06:04.091
 So the list goes by the second: the date every load already uses to find what's new.
 
-00:06:05.883 --> 00:06:10.358
+00:06:05.991 --> 00:06:10.466
 Every row carries its sources' age: the newest record each one had saved.
 
-00:06:11.858 --> 00:06:19.572
+00:06:11.966 --> 00:06:19.680
 Each source has its own. That Thursday, it would have said: student system, Wednesday, before two; portal, Thursday, before two.
 
-00:06:21.272 --> 00:06:24.809
+00:06:21.380 --> 00:06:24.917
 It's shown wherever the list is, first of all in the printer's file.
 
-00:06:26.109 --> 00:06:29.783
+00:06:26.217 --> 00:06:29.891
 Like the volunteers' flags, it's a signal everyone can read.
 
-00:06:31.283 --> 00:06:37.806
+00:06:31.391 --> 00:06:37.914
 Too good to be true labelled a number from the night before. Here, every list says its age, on good nights too.
 
-00:06:39.306 --> 00:06:42.320
+00:06:39.414 --> 00:06:42.428
 Data that says its age can be trusted to be old.
 
-00:06:43.620 --> 00:06:45.038
+00:06:43.728 --> 00:06:45.146
 Data that doesn't, can't.
 
-00:06:48.138 --> 00:06:51.450
+00:06:48.246 --> 00:06:51.558
 Then Sam checks the age where it starts: at each source.
 
-00:06:52.950 --> 00:06:59.380
+00:06:53.058 --> 00:06:59.488
 dbt reads the same date there: the newest record each source saved, not when its file arrived.
 
-00:07:01.080 --> 00:07:04.944
+00:07:01.188 --> 00:07:05.052
 One level on each: older than twenty-four hours, the check fails.
 
-00:07:06.444 --> 00:07:11.536
+00:07:06.552 --> 00:07:11.644
 But old records can't say why: did no file come, or did the file bring nothing new?
 
-00:07:13.436 --> 00:07:20.241
+00:07:13.544 --> 00:07:20.349
 So the file's arrival is still checked, as a second alarm: no file tonight means the source has gone silent.
 
-00:07:22.541 --> 00:07:24.993
+00:07:22.649 --> 00:07:25.101
 Each night, the update runs both checks first.
 
-00:07:26.293 --> 00:07:31.616
+00:07:26.401 --> 00:07:31.724
 If either fails, Sam and Malia hear at once, and the list is still built, saying its age.
 
-00:07:33.116 --> 00:07:36.895
+00:07:33.224 --> 00:07:37.003
 That's the warning: nothing stops, and the people who need to know, know.
 
-00:07:38.795 --> 00:07:42.720
+00:07:38.903 --> 00:07:42.828
 The send to the printer is a job too. It checks the list's own age.
 
-00:07:44.220 --> 00:07:49.724
+00:07:44.328 --> 00:07:49.832
 It sends only if the check passes; if not, the list waits, and Malia is told why.
 
-00:07:51.424 --> 00:07:53.694
+00:07:51.532 --> 00:07:53.802
 The data isn't stopped. The send is.
 
-00:07:56.594 --> 00:08:03.138
+00:07:56.702 --> 00:08:03.246
 The volunteers can't stop a storm. They make sure the warning arrives in time, in words people understand.
 
-00:08:04.438 --> 00:08:10.651
+00:08:04.546 --> 00:08:10.759
 A list can't make a late file come. It can say how old it is, and the send can wait until it's fresh.
 
-00:08:11.951 --> 00:08:15.855
+00:08:12.059 --> 00:08:15.963
 Since June, no graduate has been left off a list by late data.
 
-00:08:17.355 --> 00:08:20.869
+00:08:17.463 --> 00:08:20.977
 Agree how fresh it must be, and always say how old it is.
 
-00:08:22.969 --> 00:08:28.889
+00:08:23.077 --> 00:08:28.997
 Fit for use ends here: a use, a measure, a reference and a clock. Next, Quality as a habit.

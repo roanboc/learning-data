@@ -19,6 +19,7 @@
     ["\\bMarduk\\b", "Mar-dook"],
     ["\\bBabel\\b", "Bay-bel"],
     ["\\bNIST's\\b", "Nist's"],
-    ["\\bIT\\b", "I T"]
+    ["\\bIT\\b", "I T"],
+    ["\\bFarah\\b", "Fah-rah"]
   ]
 }

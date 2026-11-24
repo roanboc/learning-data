@@ -5,7 +5,7 @@ const NARR={
  {"id":"place","gap":0.8,"text":"Harare, Zimbabwe, 1992. A property company asked the architect Mick Pearce for offices and shops in the heart of the city.","say":"Harare, Zimbabwe, nineteen ninety-two. A property company asked the architect Mick Pearce for offices and shops in the heart of the city."},
  {"id":"cooled","gap":0.8,"text":"Buildings that size were usually cooled by air conditioning: imported, expensive, and running all day."},
  {"id":"bills","gap":0.8,"text":"That meant high bills, and high rents for the shops and offices inside."},
- {"id":"change","gap":0.8,"text":"Something had to change. The owners asked for a building that would cool itself."},
+ {"id":"change","gap":0.8,"text":"The owners wanted lower bills, and asked for a building that would cool itself."},
  {"id":"mounds","gap":0.3,"text":"Pearce looked to termite mounds, which were thought then to breathe like chimneys,"},
  {"id":"rising","gap":0.8,"text":"warm air rising out of the top and drawing fresh air in below."},
  {"id":"built","gap":0.8,"text":"So he built Eastgate to breathe that way, with many simple parts instead of one big machine."},

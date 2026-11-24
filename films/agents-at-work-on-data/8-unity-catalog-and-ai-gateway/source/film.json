@@ -29,7 +29,8 @@
     [
       "\\bA I\\b",
       "AI"
-    ]
+    ],
+    ["\\bOkafor\\b", "Oh-kah-for"]
   ],
   "story": [
     "reads"

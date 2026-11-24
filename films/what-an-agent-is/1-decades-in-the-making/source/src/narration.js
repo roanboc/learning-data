@@ -6,7 +6,7 @@ const NARR={
  {"id":"rare","gap":0.8,"text":"So books are slow to make, and rare."},
  {"id":"cambridge","gap":0.8,"text":"In 1424, the University of Cambridge's library held 122 books.","say":"In fourteen twenty-four, the University of Cambridge's library held a hundred and twenty-two books."},
  {"id":"mistakes","gap":0.8,"text":"And every new copy can add new mistakes."},
- {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"change","gap":0.8,"text":"People need books made faster, and copies that stay the same."},
  {"id":"old","gap":0.8,"text":"The idea that will change it is already four hundred years old."},
  {"id":"clay","gap":0.8,"text":"In China, in the 1040s, Bi Sheng made a piece of baked clay for each character.","say":"In China, in the ten-forties, Bee Shung made a piece of baked clay for each character."},
  {"id":"frame","gap":0.8,"text":"He set them in an iron frame, printed a page, and used them again."},

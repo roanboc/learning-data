@@ -13,7 +13,7 @@ const NARR={
  {"id":"thirteen","gap":0.8,"text":"Thirteen experts came to judge, and found no trick."},
  {"id":"think","gap":0.8,"text":"Many took that to mean Hans could think."},
  {"id":"knew","gap":0.8,"text":"But in every test, someone there knew the answer."},
- {"id":"change","gap":0.8,"text":"Something had to change: not the horse, but the way he was tested."},
+ {"id":"change","gap":0.8,"text":"The horse didn't need changing; the way he was tested did."},
  {"id":"pfungst","gap":0.8,"text":"That autumn, a young psychologist, Oskar Pfungst, tested Hans as a horse, not as a pupil."},
  {"id":"nobody","gap":0.8,"text":"When nobody there knew the answer, Hans failed."},
  {"id":"blinkers","gap":0.8,"text":"With large blinkers on, so he couldn't see the one asking, he got 6 in every 100 right.","say":"With large blinkers on, so he couldn't see the one asking, he got six in every hundred right."},

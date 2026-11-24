@@ -20,6 +20,7 @@
     ["\\bmirab\\b", "mee-rahb"],
     ["\\bVakilabad\\b", "Vah-keel-ah-bahd"],
     ["\\bCRUD\\b", "crud"],
-    ["\\bFarah\\b", "Fah-rah"]
+    ["\\bFarah\\b", "Fah-rah"],
+    ["\\bAma\\b", "Ah-mah"]
   ]
 }

@@ -71,277 +71,277 @@ Sin ella, cuando algo sale mal, el equipo solo puede suponer qué se tocó, y la
 Con ella, pueden ver quién hizo qué, cerrar la entrada y demostrar lo que no pasó.
 
 19
-00:02:02,128 --> 00:02:08,293
+00:02:02,128 --> 00:02:08,467
 En la universidad, Sam Okafor ha cerrado los accesos, las puertas, el poder y los cambios de la plataforma.
 
 20
-00:02:09,793 --> 00:02:15,865
+00:02:09,967 --> 00:02:16,039
 Ahora la revisión de seguridad le pide demostrar que aguantaron, con tres preguntas sobre los últimos 90 días.
 
 21
-00:02:17,365 --> 00:02:18,982
+00:02:17,539 --> 00:02:19,156
 ¿Quién entró, y desde dónde?
 
 22
-00:02:20,282 --> 00:02:23,407
+00:02:20,456 --> 00:02:23,581
 ¿Quién encendió el poder de administrador, y qué hizo con él?
 
 23
-00:02:24,707 --> 00:02:27,047
+00:02:24,881 --> 00:02:27,221
 ¿Qué cambió producción, y quién lo aprobó?
 
 24
-00:02:28,747 --> 00:02:32,182
+00:02:28,921 --> 00:02:32,356
 Las respuestas están en cuatro registros, y cada uno guarda su propio tiempo.
 
 25
-00:02:33,882 --> 00:02:36,020
+00:02:34,056 --> 00:02:36,194
 La tabla de auditoría de la plataforma guarda un año.
 
 26
-00:02:37,520 --> 00:02:42,590
+00:02:37,694 --> 00:02:42,764
 El registro de auditoría de GitHub guarda seis meses, pero quién subió o copió código, solo una semana.
 
 27
-00:02:44,290 --> 00:02:48,376
+00:02:44,464 --> 00:02:48,550
 El directorio guarda sus accesos, y cada encendido de poder, un mes.
 
 28
-00:02:50,076 --> 00:02:53,514
+00:02:50,250 --> 00:02:53,688
 Y el almacenamiento guarda un registro solo donde alguien se lo pidió.
 
 29
-00:02:55,214 --> 00:02:58,769
+00:02:55,388 --> 00:02:58,943
 Así que, para dos de las preguntas, parte de la respuesta ya no está.
 
 30
-00:03:02,269 --> 00:03:08,157
+00:03:02,443 --> 00:03:08,331
 Así que ahora cada registro se envía, al escribirse, a un almacén aparte, que guarda el equipo de seguridad.
 
 31
-00:03:10,457 --> 00:03:16,673
+00:03:10,631 --> 00:03:16,847
 Una copia bloqueada se guarda un año: hasta entonces, nadie puede cambiarla ni borrarla, ni siquiera un administrador.
 
 32
-00:03:18,973 --> 00:03:24,370
+00:03:19,147 --> 00:03:24,544
 Apagar un registro también queda registrado, y si uno se queda en silencio, se avisa a alguien al instante.
 
 33
-00:03:26,670 --> 00:03:32,692
+00:03:26,844 --> 00:03:32,866
 Todos están en él con su nombre, también los agentes, como muestra Agentes de IA en el trabajo con datos.
 
 34
-00:03:34,792 --> 00:03:42,051
+00:03:34,966 --> 00:03:42,225
 El registro trata de personas, así que se guarda como datos personales: lo leen pocos, con un motivo, y cada búsqueda queda registrada.
 
 35
-00:03:44,151 --> 00:03:46,583
+00:03:44,325 --> 00:03:46,757
 Los pilotos de Warren temían un espía en la cabina.
 
 36
-00:03:48,283 --> 00:03:53,265
+00:03:48,457 --> 00:03:53,439
 Un registro de quién hizo qué se lee para saber qué pasó, no para vigilar a quienes aparecen en él.
 
 37
-00:03:56,565 --> 00:04:00,159
+00:03:56,739 --> 00:04:00,333
 Algunos momentos hacen sonar una alarma al instante, y alguien siempre responde.
 
 38
-00:04:01,659 --> 00:04:02,888
+00:04:01,833 --> 00:04:03,062
 El primero es el poder.
 
 39
-00:04:04,188 --> 00:04:10,151
+00:04:04,362 --> 00:04:10,325
 Una mañana, la carga de anoche salió mal, y Jun tiene que dejar la tabla de estudiantes como estaba.
 
 40
-00:04:11,851 --> 00:04:18,239
+00:04:12,025 --> 00:04:18,413
 Enciende el poder de su cuenta de administrador para restaurar una tabla, por una hora, con un motivo, y Sam lo aprueba.
 
 41
-00:04:20,139 --> 00:04:24,560
+00:04:20,313 --> 00:04:24,734
 El equipo de la plataforma recibe la alerta al instante y ve que coincide con una tarea conocida.
 
 42
-00:04:26,260 --> 00:04:33,695
+00:04:26,434 --> 00:04:33,869
 El registro guarda el resto: el encendido, la restauración con su cuenta de administrador y el apagado, veinte minutos después.
 
 43
-00:04:35,795 --> 00:04:41,254
+00:04:35,969 --> 00:04:41,428
 Las otras alarmas: un acceso de riesgo, una cuenta de emergencia usada, un registro en silencio.
 
 44
-00:04:43,154 --> 00:04:45,060
+00:04:43,328 --> 00:04:45,234
 Pocas alarmas, así que ninguna se ignora.
 
 45
-00:04:47,960 --> 00:04:51,964
+00:04:48,134 --> 00:04:52,138
 Una noche, a las diez menos veinte, suena la alarma por un acceso de riesgo.
 
 46
-00:04:53,664 --> 00:04:57,968
+00:04:53,838 --> 00:04:58,142
 La sesión de Jun se está usando desde otro país, a una hora en que él nunca trabaja.
 
 47
-00:04:59,468 --> 00:05:02,904
+00:04:59,642 --> 00:05:03,078
 Jun está en casa, y su laptop está cerrada desde las seis.
 
 48
-00:05:04,604 --> 00:05:10,406
+00:05:04,778 --> 00:05:10,580
 Una extensión del navegador que usaba desde hacía un año había cambiado de dueño, y su última actualización copió sus accesos.
 
 49
-00:05:12,306 --> 00:05:15,966
+00:05:12,480 --> 00:05:16,140
 Quien tenga una sesión copiada es Jun, hasta que la sesión termine.
 
 50
-00:05:17,666 --> 00:05:19,330
+00:05:17,840 --> 00:05:19,504
 Así que el primer paso es terminarla.
 
 51
-00:05:20,630 --> 00:05:28,629
+00:05:20,804 --> 00:05:28,803
 La guardia del equipo de seguridad apaga su cuenta y termina todas sus sesiones: en el directorio, en GitHub y en la plataforma.
 
 52
-00:05:30,729 --> 00:05:34,456
+00:05:30,903 --> 00:05:34,630
 Doce minutos después de la alarma, GitHub y la plataforma la rechazan.
 
 53
-00:05:37,556 --> 00:05:40,373
+00:05:37,730 --> 00:05:40,547
 Luego leen en el almacén qué hizo la copia.
 
 54
-00:05:41,873 --> 00:05:45,212
+00:05:42,047 --> 00:05:45,386
 En GitHub, descargó el código de la plataforma como un archivo.
 
 55
-00:05:46,912 --> 00:05:49,725
+00:05:47,086 --> 00:05:49,899
 Ningún push, ningún cambio de regla, ninguna aprobación.
 
 56
-00:05:51,425 --> 00:05:55,238
+00:05:51,599 --> 00:05:55,412
 En la plataforma, nada: no tiene ninguna puerta abierta a internet.
 
 57
-00:05:56,938 --> 00:05:59,898
+00:05:57,112 --> 00:06:00,072
 El código no guarda ningún secreto ni datos de estudiantes.
 
 58
-00:06:01,398 --> 00:06:07,986
+00:06:01,572 --> 00:06:08,160
 Esa noche, la extensión se quita de todos los navegadores; a la mañana siguiente, Jun vuelve al trabajo con una laptop limpia.
 
 59
-00:06:09,886 --> 00:06:14,679
+00:06:10,060 --> 00:06:14,853
 No se cambió nada, así que no hay nada que restaurar: lo saben por el registro.
 
 60
-00:06:16,579 --> 00:06:20,854
+00:06:16,753 --> 00:06:21,028
 Al día siguiente, una revisión sin culpas pregunta qué lo hizo posible, no quién.
 
 61
-00:06:22,554 --> 00:06:30,082
+00:06:22,728 --> 00:06:30,256
 Ahora los navegadores aceptan solo extensiones que aprueba la universidad, y GitHub solo acepta peticiones desde su red.
 
 62
-00:06:31,982 --> 00:06:36,348
+00:06:32,156 --> 00:06:36,522
 Un secreto filtrado sigue los mismos pasos: primero terminarlo, luego leer qué hizo.
 
 63
-00:06:39,448 --> 00:06:44,053
+00:06:39,622 --> 00:06:44,227
 Aquí, todo poder de administrador se enciende para una tarea, y lo aprueba otra persona.
 
 64
-00:06:45,553 --> 00:06:50,193
+00:06:45,727 --> 00:06:50,367
 ¿Y si falla el servicio de acceso, o una regla errónea deja fuera a todos los administradores?
 
 65
-00:06:51,893 --> 00:06:54,909
+00:06:52,067 --> 00:06:55,083
 Para eso, el directorio tiene dos cuentas de emergencia.
 
 66
-00:06:56,409 --> 00:06:59,458
+00:06:56,583 --> 00:06:59,632
 No son de nadie, y su poder siempre está encendido.
 
 67
-00:07:01,158 --> 00:07:05,997
+00:07:01,332 --> 00:07:06,171
 Por eso solo entran con llaves de seguridad, guardadas en dos cajas fuertes, en dos edificios.
 
 68
-00:07:07,697 --> 00:07:12,866
+00:07:07,871 --> 00:07:13,040
 No se les aplica ninguna regla que pudiera dejar fuera a todos, y cualquier acceso hace sonar todas las alarmas.
 
 69
-00:07:14,766 --> 00:07:20,223
+00:07:14,940 --> 00:07:20,397
 Cada 90 días, dos personas abren una caja fuerte, entran, comprueban que funciona y vuelven a guardar la llave.
 
 70
-00:07:21,923 --> 00:07:25,159
+00:07:22,097 --> 00:07:25,333
 La alarma también suena entonces, y todos saben que es la prueba.
 
 71
-00:07:28,059 --> 00:07:30,249
+00:07:28,233 --> 00:07:30,423
 La última cerradura está en los datos mismos.
 
 72
-00:07:31,749 --> 00:07:35,650
+00:07:31,923 --> 00:07:35,824
 El historial de una tabla deshace casi cualquier error, durante siete días.
 
 73
-00:07:37,350 --> 00:07:41,992
+00:07:37,524 --> 00:07:42,166
 ¿Pero y si un error se descubre demasiado tarde, o alguien borra una tabla y su historial?
 
 74
-00:07:43,692 --> 00:07:50,065
+00:07:43,866 --> 00:07:50,239
 Cada noche, tras la carga, una copia de los datos de producción va a un lugar aparte, con sus propios administradores.
 
 75
-00:07:51,965 --> 00:07:56,227
+00:07:52,139 --> 00:07:56,401
 Durante 30 días, nadie puede cambiarla ni borrarla, ni siquiera un administrador.
 
 76
-00:07:57,927 --> 00:08:02,452
+00:07:58,101 --> 00:08:02,626
 Una vez al mes, el equipo restaura una junto a la tabla real, y comprueba que coinciden.
 
 77
-00:08:04,152 --> 00:08:09,330
+00:08:04,326 --> 00:08:09,504
 Como dice Muros, puertas y llaves, una copia que nadie ha restaurado es solo una esperanza.
 
 78
-00:08:12,430 --> 00:08:15,688
+00:08:12,604 --> 00:08:15,862
 Tres meses después, la revisión vuelve a hacer sus tres preguntas.
 
 79
-00:08:17,188 --> 00:08:20,132
+00:08:17,362 --> 00:08:20,306
 Sam las responde en una tarde, desde un solo lugar.
 
 80
-00:08:21,632 --> 00:08:26,289
+00:08:21,806 --> 00:08:26,463
 De todos los accesos, uno estuvo mal: una sesión copiada, detenida en doce minutos.
 
 81
-00:08:27,989 --> 00:08:34,483
+00:08:28,163 --> 00:08:34,657
 El poder de administrador se encendió 23 veces, cada una con un motivo, una aprobación y un registro de lo que se hizo.
 
 82
-00:08:36,183 --> 00:08:41,315
+00:08:36,357 --> 00:08:41,489
 Producción cambió 11 veces, cada cambio revisado y cada versión aprobada.
 
 83
-00:08:43,015 --> 00:08:46,190
+00:08:43,189 --> 00:08:46,364
 Y cada noche a las dos, el proceso entró con su propio nombre.
 
 84
-00:08:48,090 --> 00:08:50,503
+00:08:48,264 --> 00:08:50,677
 La caja de Warren no mantiene un avión en el aire.
 
 85
-00:08:51,803 --> 00:08:54,170
+00:08:51,977 --> 00:08:54,344
 Hace que nadie tenga que suponer qué pasó.
 
 86
-00:08:55,670 --> 00:08:57,890
+00:08:55,844 --> 00:08:58,064
 El registro hace lo mismo por la plataforma.
 
 87
-00:08:59,390 --> 00:09:01,984
+00:08:59,564 --> 00:09:02,158
 Si no puedes verlo, no puedes decir que está protegido.

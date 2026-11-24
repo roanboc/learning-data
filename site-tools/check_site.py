@@ -1608,6 +1608,53 @@ def main():
             s["fails"].append(f"{pg.file}: a {kind} page's hero has its one main button, Continue (p.cont)")
     s["notes"].append(", ".join(f"{n} {k} pages" for k, n in sorted(counted.items())))
 
+    # -- a series' labs page and evaluation page (docs/page-templates.md): a short hero with one line and the practice as icons,
+    # then the app alone, which leads on by itself; what assets/learn/practice.js lays out is checked in the browser (smoke.py)
+    s = rep.check("Page templates: a series' labs and evaluation pages have the short hero (title, one line, the practice as icons, a link to the other page), "
+                  "no course bar and no list of films, and give practice.js what it lays out")
+    P_H1 = {"labs": ("Labs", "Labs"), "scenarios": ("Evaluation", "Evaluación")}
+    seen_pr = 0
+    for pg in normal:
+        parts = (pg.key[3:] if pg.es else pg.key).split("/")[:-1]
+        app = pg.dom.first("div", id="series-labs") or pg.dom.first("div", id="series-quiz")
+        if app is None or len(parts) != 2 or parts[0] not in T_SLUG or parts[1] not in P_H1:
+            continue
+        seen_pr += 1
+        which, li = parts[1], 1 if pg.es else 0
+        main = pg.dom.first("main")
+        hero = pg.dom.first("section", cls="pr-head")
+        if "pr" not in main.cls or hero is None:
+            s["fails"].append(f"{pg.file}: not on its template (main.pr with a section.pr-head)")
+            continue
+        h1, lead, strip = hero.first("h1"), hero.first("p", cls="lead"), hero.first("div", cls="pr-strip")
+        if h1 is None or h1.text() != P_H1[which][li]:
+            s["fails"].append(f"{pg.file}: the title reads \"{h1.text() if h1 else ''}\", expected \"{P_H1[which][li]}\"")
+        if lead is None or not 20 <= len(lead.text()) <= 170:
+            s["fails"].append(f"{pg.file}: the hero's lead is one line, of 20 to 170 characters ({len(lead.text()) if lead else 0})")
+        go = strip.first("a", cls="pr-go") if strip else None
+        other = "../scenarios/" if which == "labs" else "../labs/"
+        if strip is None or strip.first("ul", cls="pmx") is None or go is None or go.attrs.get("href") != other:
+            s["fails"].append(f"{pg.file}: the hero's strip has the practice as icons (ul.pmx) and one link to {other} (a.pr-go)")
+        if hero.first("p", cls="crumbs") is None:
+            s["fails"].append(f"{pg.file}: the hero opens with the breadcrumb")
+        for tag, c, what in (("nav", "course", "the course bar"), ("section", "next-step", "a card under the app"), ("ol", "series-list", "a list of films")):
+            if pg.dom.first(tag, cls=c) is not None:
+                s["fails"].append(f"{pg.file}: {what} is not on this template")
+        try:
+            d = json.loads(app.attrs.get("data-practice-page", ""))
+            SLx = build_series.series_learn(T_SLUG[parts[0]])
+            n = SLx["labs"] if which == "labs" else SLx["quiz"]
+            if len(d["map"]) != n or len(d["next"]) != 2 or not d["text"]:
+                s["fails"].append(f"{pg.file}: data-practice-page maps {len(d['map'])} of {n} {'labs' if which == 'labs' else 'situations'}, or lacks its words or where it leads")
+            elif not d["next"][0].endswith("/"):
+                s["fails"].append(f"{pg.file}: the result leads to {d['next'][0]!r}, not a page")
+        except (ValueError, KeyError, TypeError) as e:
+            s["fails"].append(f"{pg.file}: data-practice-page is not what practice.js reads ({e})")
+        for f in ("assets/learn/practice.css", "assets/learn/practice.js"):
+            if f + "?" not in pg.src and f + '"' not in pg.src:
+                s["fails"].append(f"{pg.file}: doesn't load {f}")
+    s["notes"].append(f"{seen_pr} labs and evaluation pages")
+
     # -- numbering and lengths
     s = rep.check("No film numbering anywhere on the site (only allowlisted code comments)")
     t = rep.check("No stale film lengths (7½, 8, 5½, 5½ and 6 min; the journey says \"short film\")")

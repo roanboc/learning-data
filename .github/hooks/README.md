@@ -8,7 +8,7 @@ pushes. This repository's own rules are in [`local.py`](local.py). `guard.py` is
 | When | What it does | Why |
 |---|---|---|
 | Before a shell command | Refuses force-push, a push to main, a commit with Co-authored-by, Claude-Session or "Generated with Claude Code" lines, `gh pr merge` without a squash and an explicit message, a release workflow run, `rm -rf` on `/`, `~`, `.git`, `..` or `*` | Main's history is roanboc's alone, one squash per pull request; the release runs only when Rodrigo starts it |
-| | Refuses film renders, `media.py untrack`, removing an MP3 by hand | Films render in the release workflow; audio untracks itself once its release copy verifies |
+| | Refuses film renders, removing an MP3 by hand | Films render in the release workflow; `media.py untrack` takes a soundtrack out of a branch once its release copy verifies (Rodrigo, 25 Nov 2026) |
 | | Refuses runs over about ten minutes (`affected.py --all --run`, `smoke.py` without `--pages`, `twice.py --all`) and says to use the pull request's checks | Long runs go to GitHub (Rodrigo, 19 Nov 2026) |
 | | Refuses `cat` of a file over 300 KB | Tokens: grep it or read a part |
 | | Pipes noisy checks (`affected.py --run`, `check_site.py`, `unittest`, `smoke.py`, a film's `tools/check.py` and others) through `guard.py trim`: short output as it is; long output keeps the failures with a few lines around them and the last 25 lines, and saves the whole log, whose path it prints | Tokens: a passing run's thousand lines aren't read |

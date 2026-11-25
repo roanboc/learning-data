@@ -15,10 +15,9 @@ BASH_RULES = [
     (r"tools/render\.py|review_copy\.py",
      "Films aren't rendered in sessions (Rodrigo, 28 Oct and 10 Nov 2026): open the pull request and merge on green; he renders "
      "with the release workflow."),
-    (r"media\.py\s+untrack",
-     "Audio is untracked only once its release copies verify, and the audio workflow does that: commit the MP3 beside its audio.json."),
     (r"git\s+rm\b[^;&|]*\.mp3",
-     "Don't remove a published soundtrack by hand: the audio workflow untracks it once its release copy verifies."),
+     "Don't remove a soundtrack by hand: once the pull request's audio check has published its release, run "
+     "`python site-tools/media.py untrack`, which verifies every copy before it removes anything."),
 ]
 
 # Runs over about ten minutes: they go to GitHub's checks

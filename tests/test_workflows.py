@@ -39,7 +39,7 @@ class WorkflowTests(unittest.TestCase):
         workflow = (ROOT / ".github/workflows/audio.yml").read_text(encoding="utf-8")
         tag = workflow.split("      tag:\n", 1)[1].split("      film:\n", 1)[0]
         self.assertIn("required: false", tag)
-        script = textwrap.dedent(workflow.split("        run: |\n", 1)[1])
+        script = textwrap.dedent(workflow.split("        run: |\n", 1)[1].split("      - name:", 1)[0])
         script = script.replace("python site-tools/media.py publish", "printf '%s|'")
         cases = {("", ""): "", ("audio-v1", ""): "--tag|audio-v1|",
                  ("", "one-en"): "--film|one-en|", ("audio-x", "one-en"): "--tag|audio-x|--film|one-en|"}
@@ -60,8 +60,21 @@ class WorkflowTests(unittest.TestCase):
         self.assertRegex(triggers, r"  schedule:\n    - cron: '[0-9*/,-]+( [0-9*/,-]+){4}'\n")
         self.assertIn("  workflow_dispatch:\n", triggers)
         # A push or a scheduled run has no inputs: it publishes everything missing, in the blank run's queue.
-        self.assertIn("group: audio-release-${{ inputs.tag || 'all' }}\n", workflow)
+        self.assertIn("group: audio-release-${{ inputs.tag || 'all' }}${{ github.event.pull_request.number", workflow)
         self.assertIn("cancel-in-progress: false\n", workflow)
+
+    def test_audio_workflow_publishes_from_the_pull_request_and_keeps_mp3s_out_of_main(self):
+        # 25 Nov 2026: soundtracks kept landing in main and needed `untrack` by hand afterwards.
+        workflow = (ROOT / ".github/workflows/audio.yml").read_text(encoding="utf-8")
+        triggers = workflow.split("\non:\n", 1)[1].split("\npermissions:\n", 1)[0]
+        pull = triggers.split("  pull_request:\n", 1)[1].split("  push:\n", 1)[0]
+        for path in ("films/**/audio.json", "site/assets/**/*.mp3", "site-tools/media.py", ".github/workflows/audio.yml"):
+            self.assertIn(f"      - '{path}'\n", pull)
+        self.assertIn("github.event.pull_request.head.repo.full_name == github.repository", workflow)
+        last = workflow.split("      - name: Soundtracks leave the branch before it merges\n", 1)[1]
+        self.assertIn("if: github.event_name == 'pull_request'", last)
+        self.assertIn("git ls-files 'site/assets/**/*.mp3'", last)
+        self.assertIn("media.py untrack", last)
 
 
     def test_pushes_to_main_are_never_cancelled_and_publish_queues(self):

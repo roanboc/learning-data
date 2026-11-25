@@ -50,7 +50,7 @@ GitHub Pages serves the assembled audio; visitors do not fetch it from GitHub Re
 
 The initial pointers target `audio-v1`. Tracked audio stays in place until the remote copies are published and verified.
 
-Done on 24 November 2026: `media.py untrack` verified every release copy and took the 194 soundtracks (about 1.2 GB) out of Git's index. The only MP3s still tracked are *The Inner Life of Data*'s voice lines in its `source/`, which have no pointers.
+Done on 24 November 2026: `media.py untrack` verified every release copy and took the 194 soundtracks (about 1.2 GB) out of Git's index. On 25 November 2026 it took out the 67 soundtracks that #574 had voiced again. The only MP3s still tracked are *The Inner Life of Data*'s voice lines in its `source/`, which have no pointers.
 
 1. Merge this change, then run **Actions → Store audio outside Git → Run workflow**, tag `audio-v1`. It stages the 85 current MP3s, checks their hashes and uploads an audio prerelease. It does not render videos. The prerelease cannot take over the site's latest-video download links.
 2. Once the workflow succeeds, run `python site-tools/media.py untrack`. It downloads and verifies **every** remote replacement before removing any path from Git's index. Local audio stays on disk and is ignored. Commit the staged audio removals in a separate change. If verification fails, nothing is untracked.
